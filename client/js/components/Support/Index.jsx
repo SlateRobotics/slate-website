@@ -31,43 +31,13 @@ var Component = React.createClass({
             </h4>
             <div style={Style.buttonContainer}>
               <ButtonPrimary
-                label={"Learn more"}
-                onClick={this.handleClick_LearnMore} />
-              <span style={{marginLeft:"20px"}} />
-              <ButtonPrimary
-                label={"Pre-order"}
+                label={"Pre-order the TR1"}
                 onClick={this.handleClick_PreOrder} />
             </div>
           </div>
         </div>
-        <div className="row" style={{
-            padding:"150px 0px"
-          }}>
-          <div className="col-xs-12">
-            <h1 style={{fontSize:"64px"}}>
-              Pre-orders begin in November
-            </h1>
-            <h4 style={{fontSize:"28px"}}>
-              {"Follow us on "}
-              <a href="https://www.facebook.com/SlateRobotics">Facebook</a>
-              {", "}
-              <a href="https://www.twitter.com/SlateRobotics">Twitter</a>
-              {" or "}
-              <a href="https://www.instagram.com/SlateRobotics">Instagram</a>
-              {" to stay informed"}
-            </h4>
-          </div>
-        </div>
       </div>
     );
-  },
-
-  handleClick_LearnMore: function () {
-    BrowserHistory.push("/tr1");
-  },
-
-  handleClick_PreOrder: function () {
-    BrowserHistory.push("/shop/tr1");
   },
 });
 

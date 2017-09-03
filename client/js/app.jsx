@@ -10,10 +10,13 @@ var IndexRoute = require('react-router').IndexRoute;
 var Footer = require('./components/Footer/Index.jsx');
 var Header = require('./components/Header/Index.jsx');
 var Home = require('./components/Home/Index.jsx');
+var tr1 = require('./components/tr1/Index.jsx');
+var tr1Shop = require('./components/shop-tr1/Index.jsx');
+var Support = require('./components/Support/Index.jsx');
 
 function handleRouterUpdate () {
 	$("#menu-sub").slideUp("fast");
-	$("#menu-button").text(". . .");
+	$("#menu-button").attr("src","data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAqCAYAAADmmJiOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OTM4RTVFOUM2NUQ5MTFFNjhBMzQ4QURCNTJEMjA3NkYiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OTM4RTVFOUQ2NUQ5MTFFNjhBMzQ4QURCNTJEMjA3NkYiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5MzhFNUU5QTY1RDkxMUU2OEEzNDhBREI1MkQyMDc2RiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5MzhFNUU5QjY1RDkxMUU2OEEzNDhBREI1MkQyMDc2RiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsiImz8AAABWSURBVHja7NfRCQAgCAVACzdy/9mqLQS7Bw5w6Icvq+rE4OwYHkBAwN7km2WDgICAgICAgICATb+oRg8ICAio0TtRQEBAQEBAQECN3gYBAQF/Al4BBgB18gP3kpoSZwAAAABJRU5ErkJggg==");
 }
 
 var App = React.createClass({
@@ -31,6 +34,9 @@ var App = React.createClass({
 var Routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
+		<Route path="/tr1" component={tr1} />
+		<Route path="/support" component={Support} />
+		<Route path="/shop/tr1" component={tr1Shop} />
   </Route>
 );
 

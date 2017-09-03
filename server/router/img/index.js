@@ -21,6 +21,10 @@ router.get('/slate-tr1-1', function (req, res, next) {
 });
 
 router.get('/slate-tr1-2', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/slate-tr1-2.png'));
+});
+
+router.get('/slate-tr1-2', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/slate-tr1-2.jpg'));
 });
 

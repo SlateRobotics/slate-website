@@ -7,7 +7,8 @@ var Menu = React.createClass({
 	render: function () {
 		return (
   		<ul id="menu" style={Style.menu}>
-				<MenuListItem label={"Sign up"} to={"/sign-up"} className="hidden-xs" />
+				<MenuListItem label={"TR1"} to={"/tr1"} />
+				<MenuListItem label={"Support"} to={"/support"} />
   		</ul>
 		);
 	},

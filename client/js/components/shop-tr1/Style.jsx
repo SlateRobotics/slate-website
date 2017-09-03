@@ -13,7 +13,7 @@ module.exports = {
     marginBottom:"40px"
   },
   text: {
-    fontFamily: "'Rokkitt', serif",
+    fontFamily: "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
   },
   img: {
     maxWidth: "100%",

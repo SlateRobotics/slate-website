@@ -36,6 +36,9 @@ var SubMenuListItem = React.createClass({
 	},
 
   handleClick_Li: function () {
+    if (this.props.onClick) {
+      this.props.onClick();
+    }
     browserHistory.push(this.props.to);
   },
 
