@@ -14,14 +14,14 @@ var Component = React.createClass({
       <div className="container-fluid" style={Style.container}>
         <div className="row" className="hidden-xs" style={Style.menu}>
           <span style={{fontSize:"24px"}}>TR1</span>
-          {" - "}
+          {" ― "}
           <span style={{color:"#666",cursor:"default"}}>Overview</span>
           {" | "}
           <Link to="/shop/tr1">Pre-order</Link>
         </div>
         <div className="row" className="hidden-lg hidden-md hidden-sm" style={Style.menuMobile}>
           <span style={{fontSize:"24px"}}>TR1</span>
-          {" - "}
+          {" ― "}
           <span style={{color:"#666",cursor:"default"}}>Overview</span>
           {" | "}
           <Link to="/shop/tr1">Pre-order</Link>
@@ -68,7 +68,7 @@ var Component = React.createClass({
             backgroundPosition: "center top",
           }}>
           <div className="col-xs-12" style={{backgroundColor:"rgba(34,34,34,0.3)"}}>
-            <h1 style={{fontSize:"72px"}}>Arms designed for doing</h1>
+            <h1 style={{fontSize:"72px"}}>Arms Designed for Action</h1>
             <div className="col-lg-8 col-sm-10 hidden-xs col-centered" style={{fontSize:"22px"}}>
               <div className="col-xs-4">
                 <div style={{height:"80px",fontSize:"60px"}}>7</div>
@@ -76,11 +76,11 @@ var Component = React.createClass({
               </div>
               <div className="col-xs-4">
                 <div style={{height:"80px",fontSize:"60px"}}>10lb</div>
-                <div>Payload (4.5 kg)</div>
+                <div>Payload</div>
               </div>
               <div className="col-xs-4">
                 <div style={{height:"80px",fontSize:"60px"}}>3.3ft</div>
-                <div>Fully Exteneded (1 m)</div>
+                <div>Fully Exteneded</div>
               </div>
             </div>
             <div className="hidden-lg hidden-md hidden-sm col-xs-12 col-centered" style={{fontSize:"18px"}}>
@@ -90,11 +90,11 @@ var Component = React.createClass({
               </div>
               <div className="col-xs-4">
                 <div style={{height:"55px",fontSize:"40px"}}>10lb</div>
-                <div>Payload (4.5 kg)</div>
+                <div>Payload</div>
               </div>
               <div className="col-xs-4">
                 <div style={{height:"55px",fontSize:"40px"}}>3.3ft</div>
-                <div>Fully Exteneded (1 m)</div>
+                <div>Fully Exteneded</div>
               </div>
             </div>
           </div>

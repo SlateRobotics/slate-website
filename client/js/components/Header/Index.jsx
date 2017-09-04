@@ -33,8 +33,13 @@ var Header = React.createClass({
 							<img style={Style.logo} src="/img/logo-icon" onClick={this.handleClick_Logo} />
 						</Link>
 						<div style={{float:"left",padding:"10px 5px"}}>
-							<Link to="/" style={Style.title}>{"Slate Robotics"}</Link>
-							<span style={{display:"block"}}>Human-sized robots for hackers</span>
+							<Link to="/" style={Style.titleMobile}>
+								<span>
+									Slate
+									<br/>
+									Robotics
+								</span>
+							</Link>
 						</div>
 						<div style={Style.menuContainer}>
 							<MenuNavButton />
