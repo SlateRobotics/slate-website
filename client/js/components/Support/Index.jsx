@@ -22,7 +22,7 @@ var Component = React.createClass({
             <h4 style={{fontSize:"32px"}}>
               For any questions regarding the support of our products,
               please call us at
-              {" "}<a href="tel:+14718493612">(417) 849-3612</a>{" "}
+              {" "}<a href="tel:+14178493612">(417) 849-3612</a>{" "}
               or email at
               {" "}<a href="mailto:zach@slaterobots.com">zach@slaterobots.com</a>{" "}
             </h4>
