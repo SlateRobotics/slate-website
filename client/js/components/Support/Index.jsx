@@ -14,26 +14,18 @@ var Component = React.createClass({
         <div className="row" style={{
             paddingTop:"140px",
             paddingBottom:"150px",
-            color:"white",
-            backgroundImage:"url('/img/slate-tr1-1')",
-            backgroundSize:"cover",
-            backgroundPosition: "center top",
           }}>
-          <div className="col-xs-12" style={{backgroundColor:"rgba(34,34,34,0.3)"}}>
-            <h1 style={{fontSize:"95px"}} className="hidden-xs">
-              Slate TR1
-            </h1>
-            <h1 style={{fontSize:"72px"}} className="hidden-lg hidden-md hidden-sm">
-              Slate TR1
+          <div className="col-md-8 col-xs-12 col-centered">
+            <h1 style={{fontSize:"95px"}}>
+              Support
             </h1>
             <h4 style={{fontSize:"32px"}}>
-              The first, human-sized robot for hackers
+              For any questions regarding the support of our products,
+              please call us at
+              {" "}<a href="tel:+14718493612">(417) 849-3612</a>{" "}
+              or email at
+              {" "}<a href="mailto:zach@slaterobots.com">zach@slaterobots.com</a>{" "}
             </h4>
-            <div style={Style.buttonContainer}>
-              <ButtonPrimary
-                label={"Pre-order the TR1"}
-                onClick={this.handleClick_PreOrder} />
-            </div>
           </div>
         </div>
       </div>
