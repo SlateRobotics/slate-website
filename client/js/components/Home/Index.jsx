@@ -94,7 +94,7 @@ var Component = React.createClass({
           }}>
           <div className="col-xs-12">
             <h1 style={{fontSize:"64px"}}>
-              Pre-orders open November
+              Pre-orders opening soon
             </h1>
             <h4 style={{fontSize:"28px"}}>
               {"Follow us on "}
