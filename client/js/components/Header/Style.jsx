@@ -48,7 +48,7 @@ module.exports = {
     fontWeight: "700",
     display: "inline-block",
     cursor: "pointer",
-    fontSize: "32px",
+    fontSize: "34px",
   },
   titleMobile: {
     textDecoration: "none",

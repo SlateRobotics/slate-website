@@ -17,9 +17,9 @@ var Header = React.createClass({
 						<Link to="/">
 							<img style={Style.logo} src="/img/logo-icon" onClick={this.handleClick_Logo} />
 						</Link>
-						<div style={{float:"left",padding:"10px 5px"}}>
+						<div style={{float:"left",padding:"0px 5px"}}>
 							<Link to="/" style={Style.title}>{"Slate Robotics"}</Link>
-							<span style={{display:"block"}}>Human-sized robots for hackers</span>
+							<span style={{display:"block",fontSize:"22px"}}>Human-sized robots for hackers</span>
 						</div>
 						<div style={Style.menuContainer}>
 							<Menu />
@@ -32,7 +32,7 @@ var Header = React.createClass({
 						<Link to="/">
 							<img style={Style.logo} src="/img/logo-icon" onClick={this.handleClick_Logo} />
 						</Link>
-						<div style={{float:"left",padding:"10px 5px"}}>
+						<div style={{float:"left",padding:"3px 5px"}}>
 							<Link to="/" style={Style.titleMobile}>
 								<span>
 									Slate

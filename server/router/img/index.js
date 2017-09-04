@@ -24,8 +24,16 @@ router.get('/slate-tr1-2', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/slate-tr1-2.png'));
 });
 
-router.get('/slate-tr1-2', function (req, res, next) {
-	res.sendFile(path.join(__dirname, _root, '/slate-tr1-2.jpg'));
+router.get('/slate-tr1-3', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/slate-tr1-3.png'));
+});
+
+router.get('/slate-tr1-4', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/slate-tr1-4.png'));
+});
+
+router.get('/slate-tr1-5', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/slate-tr1-5.png'));
 });
 
 module.exports = router;

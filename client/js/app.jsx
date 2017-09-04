@@ -11,6 +11,7 @@ var Footer = require('./components/Footer/Index.jsx');
 var Header = require('./components/Header/Index.jsx');
 var Home = require('./components/Home/Index.jsx');
 var tr1 = require('./components/tr1/Index.jsx');
+var tr1Specs = require('./components/tr1-specs/Index.jsx');
 var tr1Shop = require('./components/shop-tr1/Index.jsx');
 var Support = require('./components/Support/Index.jsx');
 
@@ -35,6 +36,7 @@ var Routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
 		<Route path="/tr1" component={tr1} />
+		<Route path="/tr1/specs" component={tr1Specs} />
 		<Route path="/support" component={Support} />
 		<Route path="/shop/tr1" component={tr1Shop} />
   </Route>
