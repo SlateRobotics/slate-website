@@ -29,11 +29,20 @@ var Component = React.createClass({
             <h4 style={{fontSize:"32px"}}>
               The first, human-sized robot for hackers
             </h4>
-            <div style={Style.buttonContainer}>
+            <div style={Style.buttonContainer} className="hidden-xs">
               <ButtonPrimary
                 label={"Learn more"}
                 onClick={this.handleClick_LearnMore} />
               <span style={{marginLeft:"20px"}} />
+              <ButtonPrimary
+                label={"Pre-order"}
+                onClick={this.handleClick_PreOrder} />
+            </div>
+            <div style={Style.buttonContainer} className="hidden-lg hidden-md hidden-sm">
+              <ButtonPrimary
+                label={"Learn more"}
+                onClick={this.handleClick_LearnMore} />
+              <div style={{marginTop:"15px"}} />
               <ButtonPrimary
                 label={"Pre-order"}
                 onClick={this.handleClick_PreOrder} />
@@ -44,7 +53,7 @@ var Component = React.createClass({
             padding:"150px 0px",
             borderBottom: "1px solid #90B2BB",
           }}>
-          <div className="col-xs-8 col-centered">
+          <div className="col-md-8 col-xs-12 col-centered">
             <h1 style={{fontSize:"64px",paddingBottom:"25px"}}>
               What is the TR1?
             </h1>

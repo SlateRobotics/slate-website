@@ -19,6 +19,14 @@ var MenuNavButton = React.createClass({
     });
   },
 
+  componentDidMount: function () {
+    $("#menu-button").on("load", this.handleChange_MenuButton);
+  },
+
+  componentWillUnmount: function () {
+    $("#menu-button").off("load", this.handleChange_MenuButton);
+  },
+
   componentWillReceiveProps: function (props) {
     if (props.mode) {
       var state = this.state;
@@ -73,6 +81,17 @@ var MenuNavButton = React.createClass({
       isHovered: false,
       mode: this.state.mode,
     });
+  },
+
+  handleChange_MenuButton: function () {
+    var mode = 1;
+    if ($("#menu-button").attr("src").endsWith("==")) {
+      mode = 0;
+    }
+
+    var state = this.state;
+    state.mode = mode;
+    this.setState(state);
   },
 });
 
