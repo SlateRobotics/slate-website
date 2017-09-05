@@ -36,11 +36,53 @@ var Component = React.createClass({
         <div className="row" style={{textAlign:"left"}}>
           <div className="col-md-10 col-xs-12 col-centered">
             <div className="row" style={{paddingTop:"15px",paddingBottom:"30px",borderBottom:"1px solid #90B2BB"}}>
-              <div className="col-md-2 col-sm-6 col-xs-12">
+              <div className="col-xs-12" style={{paddingBottom:"15px"}}>
                 <h3>Arms</h3>
               </div>
-              <div className="col-md-10 col-sm-6 col-xs-12">
-                <div style={{paddingTop:"18px"}}>Details</div>
+              <div className="col-md-6 col-xs-12">
+                <img style={{width:"100%"}} src="/img/slate-tr1-specs-1" />
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <div className="row" style={{paddingBottom:"10px"}}>
+                  <div className="col-sm-4 col-xs-6">
+                    <b>15 lbs</b>
+                  </div>
+                  <div className="col-sm-8 col-xs-6">
+                    Assembly Weight
+                  </div>
+                </div>
+                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
+                  <div className="col-sm-4 col-xs-6">
+                    <b>7</b>
+                  </div>
+                  <div className="col-sm-8 col-xs-6">
+                    Degrees of Freedom
+                  </div>
+                </div>
+                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
+                  <div className="col-sm-4 col-xs-6">
+                    <b>4 in</b>
+                  </div>
+                  <div className="col-sm-8 col-xs-6">
+                    Maximum Gripper Width
+                  </div>
+                </div>
+                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
+                  <div className="col-sm-4 col-xs-6">
+                    <b>3.3 ft</b>
+                  </div>
+                  <div className="col-sm-8 col-xs-6">
+                    Maximum Operating Distance Range
+                  </div>
+                </div>
+                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
+                  <div className="col-sm-4 col-xs-6">
+                    <b>10 lbs</b>
+                  </div>
+                  <div className="col-sm-8 col-xs-6">
+                    Maximum Payload
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -48,11 +90,37 @@ var Component = React.createClass({
         <div className="row" style={{textAlign:"left"}}>
           <div className="col-md-10 col-xs-12 col-centered">
             <div className="row" style={{paddingTop:"15px",paddingBottom:"30px",borderBottom:"1px solid #90B2BB"}}>
-              <div className="col-md-2 col-sm-6 col-xs-12">
+              <div className="col-xs-12" style={{paddingBottom:"15px"}}>
                 <h3>Body</h3>
               </div>
-              <div className="col-md-10 col-sm-6 col-xs-12">
-                <div style={{paddingTop:"18px"}}>Details</div>
+              <div className="col-md-6 col-xs-12">
+                <img style={{width:"100%"}} src="/img/slate-tr1-specs-2" />
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <div className="row" style={{paddingBottom:"10px"}}>
+                  <div className="col-sm-4 col-xs-6">
+                    <b>35 lbs</b>
+                  </div>
+                  <div className="col-sm-8 col-xs-6">
+                    Assembly Weight
+                  </div>
+                </div>
+                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
+                  <div className="col-sm-4 col-xs-6">
+                    <b>5.1 ft</b>
+                  </div>
+                  <div className="col-sm-8 col-xs-6">
+                    Maximum Height
+                  </div>
+                </div>
+                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
+                  <div className="col-sm-4 col-xs-6">
+                    <b>4.1 ft</b>
+                  </div>
+                  <div className="col-sm-8 col-xs-6">
+                    Minimum Height
+                  </div>
+                </div>
               </div>
             </div>
           </div>
