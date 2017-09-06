@@ -13,14 +13,14 @@ var Component = React.createClass({
           {" | "}
           <Link to="/tr1/specs">Specs</Link>
           {" | "}
-          <Link to="/shop/tr1">Pre-order</Link>
+          <Link to="/shop/tr1">Buy</Link>
         </div>
         <div className="row" className="hidden-lg hidden-md hidden-sm" style={Style.menuMobile}>
           <span style={{color:"#666",cursor:"default"}}>Overview</span>
           {" | "}
           <Link to="/tr1/specs">Specs</Link>
           {" | "}
-          <Link to="/shop/tr1">Pre-order</Link>
+          <Link to="/shop/tr1">Buy</Link>
         </div>
       </div>
     );

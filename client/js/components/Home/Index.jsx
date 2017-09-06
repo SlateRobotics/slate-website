@@ -35,8 +35,8 @@ var Component = React.createClass({
                 onClick={this.handleClick_LearnMore} />
               <span style={{marginLeft:"20px"}} />
               <ButtonPrimary
-                label={"Pre-order"}
-                onClick={this.handleClick_PreOrder} />
+                label={"Buy"}
+                onClick={this.handleClick_Buy} />
             </div>
             <div style={Style.buttonContainer} className="hidden-lg hidden-md hidden-sm">
               <ButtonPrimary
@@ -44,8 +44,8 @@ var Component = React.createClass({
                 onClick={this.handleClick_LearnMore} />
               <div style={{marginTop:"15px"}} />
               <ButtonPrimary
-                label={"Pre-order"}
-                onClick={this.handleClick_PreOrder} />
+                label={"Buy"}
+                onClick={this.handleClick_Buy} />
             </div>
           </div>
         </div>
@@ -115,7 +115,7 @@ var Component = React.createClass({
     BrowserHistory.push("/tr1");
   },
 
-  handleClick_PreOrder: function () {
+  handleClick_Buy: function () {
     BrowserHistory.push("/shop/tr1");
   },
 });
