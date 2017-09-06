@@ -50,17 +50,21 @@ var Component = React.createClass({
             <div className="row" style={{paddingBottom:"30px"}}>
               <div className="col-xs-12" style={{padding:"5px 0px",color:"#da383c"}}>
                 <b>
-                  NOTE: TR1 begins shipment November 15, 2017
+                  NOTE: TR1 begins shipment 11/15/2017
                   <br />
                   Current, estimated delivery is 12/20/2017
                 </b>
               </div>
             </div>
             <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <img src="/img/slate-tr1-specs-2" style={{height:"400px"}} />
+              <div className="col-md-6 col-sm-12 hidden-xs">
+                <img src="/img/slate-tr1-specs-2" style={{height:"400px",maxWidth:"100%"}} />
                 <div className="hidden-lg hidden-md" style={{paddingBottom:"15px"}} />
               </div>
+                <div className="hidden-lg hidden-md hidden-sm col-xs-12">
+                  <img src="/img/slate-tr1-specs-2" style={{minHeight:"300px",maxHeight:"400px",maxWidth:"100%"}} />
+                  <div style={{paddingBottom:"15px"}} />
+                </div>
               <div className="col-md-6 col-xs-12" style={{textAlign:"left"}}>
                 <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
                   <h1 style={{marginTop:"0px"}}>TR1.config</h1>
