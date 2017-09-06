@@ -7,18 +7,27 @@ var Component = React.createClass({
       <div className="row">
         <div className="col-xs-12" style={{backgroundColor:"#fff"}}>
           <h1>Full-featured Arms</h1>
-          <div className="col-lg-8 col-md-10 col-xs-12 col-centered" style={{fontSize:"22px"}}>
-            <div className="col-xs-4">
+          <div className="col-lg-8 col-md-10 hidden-xs col-centered" style={{fontSize:"22px"}}>
+            <div className="col-sm-4">
               <h2>7</h2>
               <div>DOF</div>
             </div>
-            <div className="col-xs-4">
+            <div className="col-sm-4">
               <h2>10lb</h2>
               <div>Payload</div>
             </div>
-            <div className="col-xs-4">
+            <div className="col-sm-4">
               <h2>3.3ft</h2>
               <div>Max Range</div>
+            </div>
+          </div>
+        </div>
+        <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{backgroundColor:"#fff",paddingBottom:"15px"}}>
+          <div className="row">
+            <div className="col-xs-12">
+              <div>7 DOF</div>
+              <div>10lb Payload</div>
+              <div>3.3ft Max Range</div>
             </div>
           </div>
         </div>
