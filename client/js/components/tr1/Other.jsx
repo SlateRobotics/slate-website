@@ -8,29 +8,61 @@ var Component = React.createClass({
           paddingTop:"50px",
           paddingBottom:"35px",
         }}>
-        <div className="col-md-3 col-sm-6 col-xs-12" style={{paddingBottom:"15px"}}>
-          <img
-            src="https://d30y9cdsu7xlg0.cloudfront.net/png/636353-200.png"
-            style={{height:"150px"}} />
-          <h3>NVIDIA Jetson embedded development system</h3>
-        </div>
-        <div className="col-md-3 col-sm-6 col-xs-12" style={{paddingBottom:"15px"}}>
-          <img
-            src="https://image.flaticon.com/icons/svg/81/81270.svg"
-            style={{height:"150px"}} />
-          <h3>Ubuntu 14.04 pre-installed</h3>
-        </div>
-        <div className="col-md-3 col-sm-6 col-xs-12" style={{paddingBottom:"15px"}}>
-          <img
-            src="https://image.flaticon.com/icons/svg/53/53096.svg"
-            style={{height:"150px"}} />
-          <h3>8 to 12 hour battery life</h3>
-        </div>
-        <div className="col-md-3 col-sm-6 col-xs-12" style={{paddingBottom:"15px"}}>
-          <img
-            src="https://i.stack.imgur.com/zUdvS.png"
-            style={{height:"150px"}} />
-          <h3>Wifi + Bluetooth + Ethernet connectivity</h3>
+        <div className="col-lg-8 col-md-10 col-xs-12 col-centered">
+          <div className="row hidden-sm hidden-xs">
+            <div className="col-md-3" style={{paddingBottom:"15px"}}>
+              <img
+                src="/img/icon-gpu"
+                style={{height:"125px",width:"125px"}} />
+              <h4>NVIDIA Jetson embedded development system</h4>
+            </div>
+            <div className="col-md-3" style={{paddingBottom:"15px"}}>
+              <img
+                src="/img/icon-ubuntu"
+                style={{height:"125px",width:"125px"}} />
+              <h4>Ubuntu 14.04 pre-installed</h4>
+            </div>
+            <div className="col-md-3" style={{paddingBottom:"15px"}}>
+              <img
+                src="/img/icon-battery"
+                style={{height:"125px",width:"125px"}} />
+              <h4>8 to 12 hour battery life</h4>
+            </div>
+            <div className="col-md-3" style={{paddingBottom:"15px"}}>
+              <img
+                src="/img/icon-wifi"
+                style={{height:"125px",width:"125px"}} />
+              <h4>Wifi + Bluetooth + Ethernet connectivity</h4>
+            </div>
+          </div>
+          <div className="row hidden-lg hidden-md">
+            <div className="col-xs-6" style={{paddingBottom:"15px"}}>
+              <img
+                src="/img/icon-gpu"
+                style={{height:"125px",width:"125px"}} />
+              <h4>NVIDIA Jetson embedded development system</h4>
+            </div>
+            <div className="col-xs-6" style={{paddingBottom:"15px"}}>
+              <img
+                src="/img/icon-ubuntu"
+                style={{height:"125px",width:"125px"}} />
+              <h4>Ubuntu 14.04 pre-installed</h4>
+            </div>
+          </div>
+          <div className="row hidden-lg hidden-md">
+            <div className="col-xs-6" style={{paddingBottom:"15px"}}>
+              <img
+                src="/img/icon-battery"
+                style={{height:"125px",width:"125px"}} />
+              <h4>8 to 12 hour battery life</h4>
+            </div>
+            <div className="col-xs-6" style={{paddingBottom:"15px"}}>
+              <img
+                src="/img/icon-wifi"
+                style={{height:"125px",width:"125px"}} />
+              <h4>Wifi + Bluetooth + Ethernet connectivity</h4>
+            </div>
+          </div>
         </div>
       </div>
     );

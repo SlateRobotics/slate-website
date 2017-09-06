@@ -5,9 +5,9 @@ var Component = React.createClass({
   render: function() {
     return (
       <div className="row">
-        <div className="col-xs-12" style={{backgroundColor:"#fff"}}>
+        <div className="col-xs-12" style={{backgroundColor:"#2b4151",color:"#fff"}}>
           <h1>Actuated Torso</h1>
-          <div className="col-lg-8 col-sm-10 hidden-xs col-centered" style={{fontSize:"22px"}}>
+          <div className="col-lg-6 col-md-8 col-sm-10 hidden-xs col-centered" style={{fontSize:"22px"}}>
             <div className="col-sm-4">
               <h2>12in</h2>
               <div>Extension</div>
@@ -22,7 +22,7 @@ var Component = React.createClass({
             </div>
           </div>
         </div>
-        <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{backgroundColor:"#fff",paddingBottom:"15px"}}>
+        <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{backgroundColor:"#2b4151",color:"#fff",paddingBottom:"15px"}}>
           <div className="row">
             <div className="col-xs-12">
               <div>12in Extension</div>

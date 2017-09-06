@@ -5,6 +5,8 @@ var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ConfigItem = require('./ConfigItem.jsx');
 
+var CartStore = require('../../stores').cart;
+
 var basePrice = 2499;
 var computer = [0, 300, 400];
 var computerName = ["NVIDIA Jetson TK1", "NVIDIA Jetson TX1", "NVIDIA Jetson TX2"];
@@ -12,6 +14,8 @@ var linearActuator = [0, 50];
 var linearActuatorName = ["12in 5.7mm/s Linear Actuator", "12in 10mm/s Linear Actuator"];
 var battery = [0, 30];
 var batteryName = ["12V 8AH Lead-Acid Battery", "12V 20AH Lead-Acid Battery"];
+var shipping = [0, 125, 375, 550];
+var shippingName = ["Local Pickup - Springfield, MO", "UPS Ground", "UPS 3 Day Select®", "UPS 2nd Day Air®"];
 
 var Component = React.createClass({
   getInitialState: function () {
@@ -19,7 +23,21 @@ var Component = React.createClass({
       computer: 0,
       linearActuator: 0,
       battery: 0,
+      shipping: 1,
     }
+  },
+
+  componentWillMount: function () {
+    CartStore.getOne(0, function (doc) {
+      if (!doc) {
+        CartStore.insert({
+          id: 0,
+          config: this.state,
+        });
+      } else {
+        this.setState(doc.config);
+      }
+    }.bind(this));
   },
 
   componentDidMount: function () {
@@ -50,9 +68,8 @@ var Component = React.createClass({
             <div className="row" style={{paddingBottom:"30px"}}>
               <div className="col-xs-12" style={{padding:"5px 0px",color:"#da383c"}}>
                 <b>
-                  NOTE: TR1 begins shipment 11/15/2017
-                  <br />
-                  Current, estimated delivery is 12/20/2017
+                  NOTE: TR1 is on back-order. Orders placed today can
+                  be expected to ship by 12/15/2017
                 </b>
               </div>
             </div>
@@ -73,6 +90,7 @@ var Component = React.createClass({
                     <div>{this.getOverviewText(this.state.computer, computerName, computer)}</div>
                     <div>{this.getOverviewText(this.state.linearActuator, linearActuatorName, linearActuator)}</div>
                     <div>{this.getOverviewText(this.state.battery, batteryName, battery)}</div>
+                    <div>{this.getOverviewText(this.state.shipping, shippingName, shipping)}</div>
                   </div>
                   <div style={{paddingTop:"15px"}}>
                     <h4>{this.getTotalString()}</h4>
@@ -80,9 +98,18 @@ var Component = React.createClass({
                       label={"Checkout"}
                       onClick={this.handleClick_Checkout} />
                   </div>
+                  <div style={{paddingTop:"15px",fontStyle:"italic",fontSize:"14px"}}>
+                    Estimated Shipment Date: 12/15/2017
+                  </div>
                 </div>
                 <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
                   <h3>Computer</h3>
+                  <div style={{fontStyle:"italic"}}>
+                    Learn more about NVIDIA's
+                    {" "}<a target="_blank" href="http://elinux.org/Jetson_TK1">TK1</a>,
+                    {" "}<a target="_blank" href="http://elinux.org/Jetson_TX1">TX1</a>, and
+                    {" "}<a target="_blank" href="http://elinux.org/Jetson_TX2">TX2</a>
+                  </div>
                   <ConfigItem
                     label="NVIDIA Jetson TK1"
                     value={computer[0]}
@@ -139,11 +166,45 @@ var Component = React.createClass({
                     index={1}
                     onClick={this.handleClick_ConfigItem} />
                 </div>
-                <div style={{paddingBottom:"35px"}}>
+                <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
+                  <h3>Shipping</h3>
+                  <ConfigItem
+                    label={shippingName[0]}
+                    value={shipping[0]}
+                    isSelected={this.state.shipping == 0}
+                    category="shipping"
+                    index={0}
+                    onClick={this.handleClick_ConfigItem} />
+                  <ConfigItem
+                    label={shippingName[1]}
+                    value={shipping[1]}
+                    isSelected={this.state.shipping == 1}
+                    category="shipping"
+                    index={1}
+                    onClick={this.handleClick_ConfigItem} />
+                  <ConfigItem
+                    label={shippingName[2]}
+                    value={shipping[2]}
+                    isSelected={this.state.shipping == 2}
+                    category="shipping"
+                    index={2}
+                    onClick={this.handleClick_ConfigItem} />
+                  <ConfigItem
+                    label={shippingName[3]}
+                    value={shipping[3]}
+                    isSelected={this.state.shipping == 3}
+                    category="shipping"
+                    index={3}
+                    onClick={this.handleClick_ConfigItem} />
+                </div>
+                <div>
                   <h3>{this.getTotalString()}</h3>
                   <ButtonPrimary
                     label={"Checkout"}
                     onClick={this.handleClick_Checkout} />
+                </div>
+                <div style={{paddingTop:"15px",paddingBottom:"35px",fontStyle:"italic",fontSize:"14px"}}>
+                  Estimated Shipment Date: 12/15/2017
                 </div>
               </div>
             </div>
@@ -160,11 +221,16 @@ var Component = React.createClass({
   },
 
   handleClick_Checkout: function () {
-    alert("We're still building out the website, and payment processing is currently #1 on our to-do list. Please check back in one or two days!")
+    CartStore.getOne(0, function (doc) {
+      doc.config = this.state;
+      doc.total = this.getTotal();
+      CartStore.update(doc);
+    }.bind(this));
+    BrowserHistory.push("/checkout");
   },
 
   getOverviewText: function (index, arrayName, arrayPrice) {
-    if (index == 0) {
+    if (arrayPrice[index] == 0) {
       return (
         <span>{arrayName[index]}</span>
       )
@@ -180,7 +246,8 @@ var Component = React.createClass({
     return basePrice
       + computer[this.state.computer]
       + linearActuator[this.state.linearActuator]
-      + battery[this.state.battery];
+      + battery[this.state.battery]
+      + shipping[this.state.shipping];
   },
 
   getTotalString: function () {

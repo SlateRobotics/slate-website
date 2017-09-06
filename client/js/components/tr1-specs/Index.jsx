@@ -3,6 +3,7 @@ var BrowserHistory = require('react-router').browserHistory;
 var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
+var BottomMenu = require('./BottomMenu.jsx');
 
 var Component = React.createClass({
   componentDidMount: function () {
@@ -125,6 +126,7 @@ var Component = React.createClass({
             </div>
           </div>
         </div>
+        <BottomMenu />
       </div>
     );
   },

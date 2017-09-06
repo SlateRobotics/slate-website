@@ -7,7 +7,7 @@ var Component = React.createClass({
       <div className="row">
         <div className="col-xs-12" style={{backgroundColor:"#222",color:"#fff"}}>
           <h1>Omni-drive Base</h1>
-          <div className="col-lg-8 col-md-10 hidden-xs col-centered" style={{fontSize:"22px"}}>
+          <div className="col-lg-6 col-md-8 col-sm-10 hidden-xs col-centered" style={{fontSize:"22px"}}>
             <div className="col-sm-4">
               <h2>3</h2>
               <div>DOF</div>

@@ -52,4 +52,24 @@ router.get('/slate-tr1-specs-4', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/slate-tr1-specs-4.png'));
 });
 
+router.get('/icon-gpu', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-gpu.png'));
+});
+
+router.get('/icon-ubuntu', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-ubuntu.svg'));
+});
+
+router.get('/icon-battery', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-battery.svg'));
+});
+
+router.get('/icon-wifi', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-wifi.png'));
+});
+
+router.get('/powered-by-stripe', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/powered-by-stripe.png'));
+});
+
 module.exports = router;

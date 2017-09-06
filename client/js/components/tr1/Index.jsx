@@ -7,6 +7,7 @@ var Base = require('./Base.jsx');
 var Torso = require('./Torso.jsx');
 var Kinect = require('./Kinect.jsx');
 var OtherDetails = require('./Other.jsx');
+var BottomMenu = require('./BottomMenu.jsx');
 
 var Component = React.createClass({
   componentDidMount: function () {
@@ -23,6 +24,7 @@ var Component = React.createClass({
         <Torso />
         <Kinect />
         <OtherDetails />
+        <BottomMenu />
       </div>
     );
   },

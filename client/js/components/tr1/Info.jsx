@@ -19,7 +19,7 @@ var Component = React.createClass({
             <div>• Two, 7 DOF arms</div>
             <div>• Omni-drive mobile base</div>
             <div>• Actuated torso - extends up to 12in (300mm)</div>
-            <div>• 3 DOF Head w/ Kinect 2.0</div>
+            <div>• 3 DOF head w/ Kinect 2.0</div>
             <div>• NVIDIA Jetson embedded development system</div>
             <div>• 8 to 12 hour battery life</div>
           </div>
@@ -54,7 +54,7 @@ var Component = React.createClass({
             <div>• Two, 7 DOF arms</div>
             <div>• Omni-drive mobile base</div>
             <div>• Actuated torso - extends up to 12in (300mm)</div>
-            <div>• 3 DOF Head w/ Kinect 2.0</div>
+            <div>• 3 DOF head w/ Kinect 2.0</div>
             <div>• NVIDIA Jetson embedded development system</div>
             <div>• 8 to 12 hour battery life</div>
           </div>

@@ -10,6 +10,34 @@ var FormInput = React.createClass({
   },
 
   render: function() {
+    if (this.props.type == "checkbox") {
+      if (this.props.value == true) {
+        return (
+          <input
+            style={this.getStyle()}
+            type={this.props.type}
+            placeholder={this.props.placeholder}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            checked />
+        )
+      }
+      return (
+        <input
+          style={this.getStyle()}
+          type={this.props.type}
+          placeholder={this.props.placeholder}
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          onChange={this.handleChange}/>
+      )
+    }
+
     return (
       <input
         style={this.getStyle()}
@@ -20,7 +48,8 @@ var FormInput = React.createClass({
         onMouseLeave={this.handleMouseLeave}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        onChange={this.handleChange}/>
+        onChange={this.handleChange}
+        onKeyPress={this.handleKeyPress}/>
     )
   },
 
@@ -71,11 +100,25 @@ var FormInput = React.createClass({
   },
 
   handleChange: function (event) {
-    var value = event.target.value;
-    if (this.props.attribute) {
-      this.props.onChange(this.props.attribute, value);
-    } else {
-      this.props.onChange(value);
+    if (this.props.onChange) {
+      var value = event.target.value;
+      if (this.props.attribute) {
+        this.props.onChange(this.props.attribute, value);
+      } else {
+        this.props.onChange(value);
+      }
+    }
+  },
+
+  handleKeyPress: function (e) {
+    if (this.props.onKeyPress) {
+      if (!e) e = window.event;
+      var keyCode = e.keyCode || e.which;
+      if (this.props.attribute) {
+        this.props.onKeyPress(this.props.attribute, keyCode);
+      } else {
+        this.props.onKeyPress(keyCode);
+      }
     }
   },
 });

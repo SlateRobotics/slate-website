@@ -14,6 +14,9 @@ var tr1 = require('./components/tr1/Index.jsx');
 var tr1Specs = require('./components/tr1-specs/Index.jsx');
 var tr1Shop = require('./components/shop-tr1/Index.jsx');
 var Support = require('./components/Support/Index.jsx');
+var Checkout = require('./components/Checkout/Index.jsx');
+var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
+var CheckoutSuccess = require('./components/CheckoutSuccess/Index.jsx');
 
 function handleRouterUpdate () {
 	$("#menu-sub").slideUp("fast");
@@ -39,6 +42,9 @@ var Routes = (
 		<Route path="/tr1/specs" component={tr1Specs} />
 		<Route path="/support" component={Support} />
 		<Route path="/shop/tr1" component={tr1Shop} />
+		<Route path="/checkout" component={Checkout} />
+		<Route path="/checkout/review" component={CheckoutReview} />
+		<Route path="/checkout/success" component={CheckoutSuccess} />
   </Route>
 );
 
