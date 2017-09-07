@@ -6,6 +6,8 @@ router.use('/img', require('./img'));
 router.use('/js', require('./js'));
 router.use('/css', require('./css'));
 
+router.use('/placeOrder', require('./placeOrder'));
+
 router.use('/', require('./views'));
 
 module.exports = router;

@@ -1,30 +1,21 @@
 var React = require('react');
-var BrowserHistory = require('react-router').browserHistory;
-var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
-var ButtonPrimary = require('../Button/Index.jsx').Primary;
-var Form = require('../Form/Index.jsx');
 var CartStore = require('../../stores').cart;
 
 var Component = React.createClass({
   getInitialState: function () {
     return {
-      name: '',
-      number: '',
-      expiration: '',
-      cvc: '',
+      error: '',
     }
   },
 
-  componentWillMount: function () {
-    CartStore.getOne(0, function (doc) {
-      if (doc && doc.payment) {
-        this.setState(doc.payment);
-      } else {
-        doc.payment = this.state;
-        CartStore.update(doc);
-      }
-    }.bind(this));
+  componentDidMount: function () {
+    this.props.card.mount('#card-element');
+    this.props.card.addEventListener('change', this.handleChange_CardElement);
+  },
+
+  componentWillUnmount: function () {
+    this.props.card.removeEventListener('change', this.handleChange_CardElement);
   },
 
   render: function() {
@@ -34,41 +25,20 @@ var Component = React.createClass({
           <img
             src="/img/powered-by-stripe"
             className="hidden-xs"
-            style={{height:"75px",float:"right"}} />
+            style={{float:"right"}} />
+          <h2>Credit/Debit Card</h2>
           <img
             src="/img/powered-by-stripe"
             className="hidden-lg hidden-md hidden-sm"
-            style={{height:"75px",margin:"0px auto",display:"block",marginBottom:"35px"}} />
-          <h2>Credit/Debit Card</h2>
+            style={{paddingBottom:"15px"}} />
           <div className="row">
             <div className="col-xs-12">
-              <Form.Label label="Cardholder Name" isRequired />
-              <Form.Input
-                attribute="name"
-                value={this.state.name}
-                onChange={this.handleChange_Field} />
-            </div>
-            <div className="col-xs-12">
-              <Form.Label label="Credit Card Number" isRequired />
-              <Form.Input
-                attribute="number"
-                value={this.state.number}
-                onChange={this.handleChange_Field} />
-            </div>
-            <div className="col-md-6 col-xs-12">
-              <Form.Label label="Expiration" isRequired />
-              <Form.Input
-                attribute="expiration"
-                value={this.state.expiration}
-                placeholder="mm/yy"
-                onChange={this.handleChange_Field} />
-            </div>
-            <div className="col-md-6 col-xs-12">
-              <Form.Label label="CVC" isRequired />
-              <Form.Input
-                attribute="cvc"
-                value={this.state.cvc}
-                onChange={this.handleChange_Field} />
+              <div style={{backgroundColor:"#f9f9f9",height:"80px",border:"1px solid #ccc"}}>
+                <div id="card-element" style={{margin:"10px 15px",backgroundColor:"#fff",padding:"15px",border:"1px solid #eee"}}></div>
+              </div>
+              <div role="alert" style={{lineHeight:"35px"}}>
+                {this.state.error}
+              </div>
             </div>
           </div>
         </div>
@@ -76,19 +46,16 @@ var Component = React.createClass({
     );
   },
 
-  handleChange_Field: function (attribute, value) {
+  handleChange_CardElement: function (event) {
     var state = this.state;
-    state[attribute] = value;
-    this.setState(state);
 
-    CartStore.getOne(0, function (doc) {
-      doc.payment = this.state;
-      CartStore.update(doc);
-    }.bind(this));
-
-    if (this.props.onChange) {
-      this.props.onChange(state);
+    if (event.error) {
+      state.error = event.error.message;
+    } else {
+      state.error = "";
     }
+
+    this.setState(state);
   },
 });
 

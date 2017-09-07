@@ -47,7 +47,7 @@ var Store = assign({}, EventEmitter.prototype, {
   delete: function(doc, callback) {
     var index = -1;
     for (var i = 0; i < this.data.length; i++) {
-      if (this.data[i].id = doc.id) {
+      if (this.data[i].id == doc.id) {
         index = i;
       }
     }
@@ -59,6 +59,10 @@ var Store = assign({}, EventEmitter.prototype, {
     if (callback) {
       callback();
     }
+  },
+
+  clear: function () {
+    this.data = [];
   },
 
   emitChange: function() {

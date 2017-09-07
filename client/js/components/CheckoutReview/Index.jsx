@@ -4,6 +4,7 @@ var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var CartStore = require('../../stores').cart;
+var $ = require('jquery');
 
 var basePrice = 2499;
 var computer = [0, 300, 400];
@@ -18,6 +19,8 @@ var shippingName = ["Local Pickup - Springfield, MO", "UPS Ground", "UPS 3 Day S
 var Component = React.createClass({
   getInitialState: function () {
     return {
+      isLoading: false,
+      error: '',
       order: {
         id: 0,
         total: 0,
@@ -32,44 +35,7 @@ var Component = React.createClass({
   componentWillMount: function () {
     CartStore.getOne(0, function (doc) {
       if (!doc) {
-        //return BrowserHistory.push("/shop/tr1");
-        return this.setState({
-          order: {
-            id: 0,
-            total: 2624.00,
-            config: {
-              computer: 0,
-              linearActuator: 0,
-              battery: 0,
-              shipping: 1,
-            },
-            shipping: {
-              firstName: "Zachary",
-              lastName: "Allen",
-              address1: "4826 W Stanford St.",
-              address2: "",
-              city: "Springfield",
-              state: "MO",
-              zip: "65802",
-            },
-            billing: {
-              isSame: true,
-              firstName: "",
-              lastName: "",
-              address1: "",
-              address2: "",
-              city: "",
-              state: "",
-              zip: "",
-            },
-            payment: {
-              name: "Zachary H Allen",
-              number: "0000111122223333",
-              expiration:"08/22",
-              cvc: "656",
-            }
-          }
-        });
+        return BrowserHistory.push("/shop/tr1");
       }
 
       this.setState({order: doc});
@@ -86,6 +52,10 @@ var Component = React.createClass({
         <div className="row">
           <div className="col-lg-8 col-md-10 col-xs-12 col-centered">
             <h1>Order Review</h1>
+            <div style={{color:"#da383c"}}>
+              Your order has yet not been placed. Please review
+              the details below and click "Place Order".
+            </div>
           </div>
         </div>
         <div style={{marginTop:"25px"}} />
@@ -118,7 +88,7 @@ var Component = React.createClass({
               <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
                 <h2 style={{marginTop:"0px"}}>Payment Details</h2>
                 <div style={{lineHeight:"150%"}}>
-                  <div>Credit/Debit Card: **** {this.state.order.payment.number.substr(this.state.order.payment.number.length - 4)}</div>
+                  <div>Credit/Debit Card: **** {this.state.order.payment.token.card.last4}</div>
                 </div>
               </div>
             </div>
@@ -157,15 +127,7 @@ var Component = React.createClass({
                   Estimated Shipment Date: 12/15/2017
                 </div>
               </div>
-              <div>
-                <ButtonSecondary
-                  label="Edit Order"
-                  onClick={this.handleClick_Edit} />
-                <span style={{marginLeft:"15px"}} />
-                <ButtonPrimary
-                  label="Place Order"
-                  onClick={this.handleClick_Place} />
-              </div>
+              {this.getButtons()}
             </div>
           </div>
         </div>
@@ -179,7 +141,50 @@ var Component = React.createClass({
   },
 
   handleClick_Place: function () {
-    BrowserHistory.push("/checkout/success");
+    var state = this.state;
+    state.isLoading = true;
+    state.error = '';
+    this.setState(state);
+
+    var order = this.state.order;
+    if (order.billing.isSame) {
+      order.billing = order.shipping;
+      order.card = {
+        token: order.payment.token.id,
+        last4: order.payment.token.card.last4,
+      }
+      order.user = {
+        email: order.shipping.email,
+        phone: order.shipping.phone,
+      }
+      order.products = [{
+        productId: "tr1",
+        config: [
+          {name: "computer", value: order.config.computer},
+          {name: "linearActuator", value: order.config.linearActuator},
+          {name: "battery", value: order.config.battery},
+          {name: "shipping", value: order.config.shipping}
+        ],
+      }];
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "/placeOrder",
+      data: order,
+      success: function (result) {
+        if (result.success == true) {
+          CartStore.clear();
+          BrowserHistory.push("/checkout/success");
+        } else {
+          var state = this.state;
+          state.isLoading = false;
+          state.error = result.message;
+          this.setState(state);
+        }
+      }.bind(this),
+      dataType: "json"
+    });
   },
 
   getBillingDetails: function () {
@@ -204,6 +209,29 @@ var Component = React.createClass({
     }
   },
 
+  getButtons: function () {
+    if (this.state.isLoading == true) {
+      return (
+        <div>Processing...</div>
+      )
+    }
+
+    return (
+      <div>
+        <ButtonSecondary
+          label="Edit Order"
+          onClick={this.handleClick_Edit} />
+        <span style={{marginLeft:"15px"}} />
+        <ButtonPrimary
+          label="Place Order"
+          onClick={this.handleClick_Place} />
+        <div style={{marginTop:"10px", color:"#da383c"}}>
+          {this.state.error}
+        </div>
+      </div>
+    )
+  },
+
   getOverviewText: function (index, arrayName, arrayPrice) {
     if (arrayPrice[index] == 0) {
       return (
@@ -218,17 +246,26 @@ var Component = React.createClass({
   },
 
   getSubtotalString: function () {
-    var total = this.state.order.total;
-    return "$" + total.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
+    var subtotal = 0;
+    if (this.state.order && this.state.order.total) {
+      subtotal = this.state.order.total;
+    }
+    return "$" + subtotal.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
   },
 
   getTaxString: function () {
-    var total = this.state.order.total * 0.04225;
-    return "$" + total.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
+    var taxes = 0;
+    if (this.state.order && this.state.order.total) {
+      taxes = this.state.order.total * 0.04225;
+    }
+    return "$" + taxes.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
   },
 
   getTotalString: function () {
-    var total = this.state.order.total + (this.state.order.total * 0.04225);
+    var total = 0;
+    if (this.state.order && this.state.order.total) {
+      total = this.state.order.total + (this.state.order.total * 0.04225);
+    }
     return "$" + total.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
   },
 });

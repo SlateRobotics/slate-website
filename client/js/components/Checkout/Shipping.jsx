@@ -11,6 +11,8 @@ var Component = React.createClass({
     return {
       firstName: '',
       lastName: '',
+      email: '',
+      phone: '',
       address1: '',
       address2: '',
       city: '',
@@ -47,6 +49,20 @@ var Component = React.createClass({
                 value={this.state.lastName}
                 onChange={this.handleChange_Field} />
             </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Email" isRequired />
+                <Form.Input
+                  attribute="email"
+                  value={this.state.email}
+                  onChange={this.handleChange_Field} />
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Phone" isRequired />
+                <Form.Input
+                  attribute="phone"
+                  value={this.state.phone}
+                  onChange={this.handleChange_Field} />
+              </div>
             <div className="col-xs-12">
               <Form.Label label="Address" isRequired />
               <Form.Input

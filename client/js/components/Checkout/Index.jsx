@@ -1,23 +1,33 @@
 var React = require('react');
 var BrowserHistory = require('react-router').browserHistory;
 var Link = require('react-router').Link;
+
 var Style = require('./Style.jsx');
-var ButtonPrimary = require('../Button/Index.jsx').Primary;
-var ButtonSecondary = require('../Button/Index.jsx').Secondary;
-var Form = require('../Form/Index.jsx');
 var Billing = require('./Billing.jsx');
 var Shipping = require('./Shipping.jsx');
 var Payment = require('./Payment.jsx');
+var Form = require('../Form/Index.jsx');
+var ButtonPrimary = require('../Button/Index.jsx').Primary;
+var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var CartStore = require('../../stores').cart;
 
 var pages = [Shipping, Billing, Payment];
 var pagesNames = ["Shipping", "Billing", "Payment"];
+
+var cardStyle = {
+  base: {
+    fontSize: '16px',
+    lineHeight: '24px'
+  }
+};
+var card = elements.create('card', {style: cardStyle});
 
 var Component = React.createClass({
   getInitialState: function () {
     return {
       total: 0,
       page: 0,
+      isLoading: false,
       errors: [],
     }
   },
@@ -102,7 +112,7 @@ var Component = React.createClass({
 
   getPage: function () {
     var page = pages[this.state.page];
-    return React.createElement(page, {next: this.handleClick_Next});
+    return React.createElement(page, {next: this.handleClick_Next, card: card});
   },
 
   getErrorsMapped: function () {
@@ -126,6 +136,14 @@ var Component = React.createClass({
   },
 
   getNavigationButtons: function () {
+    if (this.state.isLoading == true) {
+      return (
+        <div>
+          Processing...
+        </div>
+      )
+    }
+
     if (this.state.page == 0) {
       return (
         <div>
@@ -191,12 +209,33 @@ var Component = React.createClass({
   },
 
   handleClick_Review: function () {
+    var state = this.state;
+    state.isLoading = true;
+    this.setState(state);
+
     this.validateData(false, function (errors) {
       if (!errors || errors.length == 0) {
-        BrowserHistory.push("/checkout/review");
+        CartStore.getOne(0, function (doc) {
+          stripe.createToken(card).then(function(result) {
+            if (result.error) {
+              var state = this.state;
+              state.isLoading = false;
+              state.errors = [result.error.message];
+              this.setState(state);
+            } else {
+              doc.payment = {token: result.token};
+              CartStore.update(doc, function () {
+                BrowserHistory.push("/checkout/review");
+              });
+            }
+          }.bind(this)).catch(function (error) {
+            console.log(error);
+          }.bind(this));
+        }.bind(this));
       } else {
         var state = this.state;
         state.errors = errors;
+        state.isLoading = false;
         this.setState(state);
       }
     }.bind(this));
@@ -217,6 +256,8 @@ var Component = React.createClass({
         } else {
           if (!doc.shipping.firstName) errors.push("Shipping: First Name field left blank");
           if (!doc.shipping.lastName) errors.push("Shipping: Last Name field left blank");
+          if (!doc.shipping.email) errors.push("Shipping: Email field left blank");
+          if (!doc.shipping.phone) errors.push("Shipping: Phone field left blank");
           if (!doc.shipping.address1) errors.push("Shipping: Address Line 1 field left blank");
           if (!doc.shipping.city) errors.push("Shipping: City field left blank");
           if (!doc.shipping.state) errors.push("Shipping: State field left blank");
@@ -239,24 +280,16 @@ var Component = React.createClass({
         }
       }
 
-      if (this.state.page == 2 || validateAllData == true) {
-        if (!doc.payment) {
-          errors.push("You must enter your payment information to continue");
-        } else {
-          if (!doc.payment.name) errors.push("Payment: Cardholder Name field left blank");
-          if (!doc.payment.number) errors.push("Payment: Cart Number field left blank");
-          if (!doc.payment.expiration) errors.push("Payment: Expiration field left blank");
-          if (!doc.payment.cvc) errors.push("Payment: CVC field left blank");
-        }
-      }
-
       callback(errors);
 
     }.bind(this));
   },
 
   getTotalString: function () {
-    var total = this.state.total;
+    var total = 0;
+    if (this.state.total) {
+      total = this.state.total;
+    }
     return "$" + total.toLocaleString('en-US', { minimumFractionDigits: 2 });
   },
 });

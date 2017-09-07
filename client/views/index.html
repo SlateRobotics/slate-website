@@ -6,9 +6,14 @@
 	<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
 	<link href="/css" rel="stylesheet" type="text/css" />
+	<script src="https://js.stripe.com/v3/"></script>
 	<title>Slate Robotics</title>
 </head>
 <body>
+	<script type="text/javascript">
+		var stripe = Stripe('pk_test_CsY0cjghmRENfY4wFOYRtBxD');
+		var elements = stripe.elements();
+	</script>
 	<div id="container" style="height: 100%;">
 		<div style="padding-top:215px;text-align:center;">
 			<img src="/img/wait" />
