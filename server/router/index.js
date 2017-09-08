@@ -7,6 +7,7 @@ router.use('/js', require('./js'));
 router.use('/css', require('./css'));
 
 router.use('/placeOrder', require('./placeOrder'));
+router.use('/stores', require('./stores'));
 
 router.use('/', require('./views'));
 

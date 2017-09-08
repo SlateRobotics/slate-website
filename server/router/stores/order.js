@@ -1,4 +1,4 @@
-var NeuralNetwork = require('../../models/neuralnetwork');
+var Order = require('../../models/order');
 var RestFilter = require('../../components/RestFilter');
 var UserSecurity = require('../security');
 
@@ -6,17 +6,48 @@ var readFilterSchema = {
   "title": "Order Schema",
   "type": "object",
   "properties": {
-    "name": { "type": "string" },
-    "description": { "type": "string" },
-    "authors": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "url": { "type": "string" },
-        }
-      },
+    "status": { "type": "string" },
+    "createdOn": { "type": "date" },
+    "subtotal": { "type": "string" },
+    "tax": { "type": "string" },
+    "total": { "type": "string" },
+    "user": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+      }
+    },
+    "shipping": {
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "address1": { "type": "string" },
+        "address2": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "zip": { "type": "string" },
+        "shippedOn": { "type": "string" },
+        "carrier": { "type": "string" },
+        "trackingNumber": { "type": "string" },
+      }
+    },
+    "billing": {
+      "type": "object",
+      "properties": {
+        "address1": { "type": "string" },
+        "address2": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "zip": { "type": "string" },
+      }
+    },
+    "card": {
+      "type": "object",
+      "properties": {
+        "last4": { "type": "string" },
+      }
     },
   }
 }
@@ -25,27 +56,56 @@ var writeFilterSchema = {
   "title": "Order Schema",
   "type": "object",
   "properties": {
-    "name": { "type": "string" },
-    "description": { "type": "string" },
-    "authors": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string" },
-          "url": { "type": "string" },
-        }
-      },
+    "status": { "type": "string" },
+    "createdOn": { "type": "date" },
+    "subtotal": { "type": "string" },
+    "tax": { "type": "string" },
+    "total": { "type": "string" },
+    "user": {
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+      }
+    },
+    "shipping": {
+      "type": "object",
+      "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "address1": { "type": "string" },
+        "address2": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "zip": { "type": "string" },
+        "shippedOn": { "type": "string" },
+        "carrier": { "type": "string" },
+        "trackingNumber": { "type": "string" },
+      }
+    },
+    "billing": {
+      "type": "object",
+      "properties": {
+        "address1": { "type": "string" },
+        "address2": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "zip": { "type": "string" },
+      }
+    },
+    "card": {
+      "type": "object",
+      "properties": {
+        "last4": { "type": "string" },
+      }
     },
   }
 }
 
 function findOne(user, id, callback) {
-  if (!user) return callback({});
   Order
     .findOne({
       "_id": id,
-      "user.id": user.id,
     })
     .exec(function(err, result) {
       return callback(result);
@@ -53,14 +113,14 @@ function findOne(user, id, callback) {
 }
 
 function findMany(user, callback) {
-  if (!user) return callback([]);
-  Order
-    .find({
-      "user.id": user.id,
-    })
-    .exec(function(err, result) {
-      return callback(result);
-    });
+  callback([]);
+  // Order
+  //   .find({
+  //     "user.id": user.id,
+  //   })
+  //   .exec(function(err, result) {
+  //     return callback(result);
+  //   });
 }
 
 module.exports = new RestFilter({
@@ -72,7 +132,7 @@ module.exports = new RestFilter({
   findMany: findMany,
   securityRoles: {
     create: UserSecurity.isNotAllowed,
-    read: UserSecurity.isActiveUser,
+    read: UserSecurity.isAllowed,
     update: UserSecurity.isNotAllowed,
     destroy: UserSecurity.isNotAllowed,
   }
