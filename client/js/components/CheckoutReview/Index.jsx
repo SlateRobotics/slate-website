@@ -88,7 +88,7 @@ var Component = React.createClass({
               <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
                 <h2 style={{marginTop:"0px"}}>Payment Details</h2>
                 <div style={{lineHeight:"150%"}}>
-                  <div>Credit/Debit Card: **** {this.state.order.payment.token.card.last4}</div>
+                  <div>Credit/Debit Card: **** {this.getLast4()}</div>
                 </div>
               </div>
             </div>
@@ -187,6 +187,14 @@ var Component = React.createClass({
     });
   },
 
+  getLast4: function () {
+    if (this.state.order.payment.token) {
+      if (this.state.order.payment.token.card) {
+        return this.state.order.payment.token.card.last4;
+      }
+    }
+  },
+
   getBillingDetails: function () {
     if (this.state.order.billing.isSame == true) {
       return (
@@ -238,7 +246,10 @@ var Component = React.createClass({
         <span>{arrayName[index]}</span>
       )
     } else {
-      var value = arrayPrice[index].toLocaleString('en-US', { minimumFractionDigits: 2 });
+      var value = 0;
+      if (arrayPrice[index]) {
+        value = arrayPrice[index].toLocaleString('en-US', { minimumFractionDigits: 2 });
+      }
       return (
         <b>{arrayName[index] + " (+$" + value + ")"}</b>
       )
@@ -253,18 +264,33 @@ var Component = React.createClass({
     return "$" + subtotal.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
   },
 
-  getTaxString: function () {
-    var taxes = 0;
-    if (this.state.order && this.state.order.total) {
-      taxes = this.state.order.total * 0.04225;
+  calculateTaxes: function () {
+    var mo = ["MO","MISSOURI"];
+    var moSalesTax = 0.04225;
+    var greeneCountySalesTax = 0.01250;
+    var springfieldSalesTax = 0.02125;
+    var salesTax = moSalesTax + greeneCountySalesTax + springfieldSalesTax;
+
+    if (this.state.order.shipping.state) {
+      if (mo.indexOf(this.state.order.shipping.state.toUpperCase()) > -1) {
+        return (this.state.order.total * salesTax);
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
     }
-    return "$" + taxes.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
+  },
+
+  getTaxString: function () {
+    return "$" + this.calculateTaxes().toFixed(2)
+      .toLocaleString('en-US', { minimumFractionDigits: 2 });
   },
 
   getTotalString: function () {
     var total = 0;
     if (this.state.order && this.state.order.total) {
-      total = this.state.order.total + (this.state.order.total * 0.04225);
+      total = this.state.order.total + this.calculateTaxes();
     }
     return "$" + total.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
   },
