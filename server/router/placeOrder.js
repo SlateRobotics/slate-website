@@ -3,6 +3,7 @@ var path = require('path');
 var express = require('express');
 var router = express.Router();
 var Order = require('../models/order');
+var EmailSender = require('../components/EmailSender');
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, "../../config.json"), "utf8"));
 var stripe = require('stripe')(config.stripe.secret);
@@ -15,8 +16,80 @@ var shipping = [0, 125, 375, 550];
 
 var errorOccurred = false;
 
-function OrderSuccess (res) {
+Number.prototype.formatMoney = function(c, d, t){
+var n = this,
+    c = isNaN(c = Math.abs(c)) ? 2 : c,
+    d = d == undefined ? "." : d,
+    t = t == undefined ? "," : t,
+    s = n < 0 ? "-" : "",
+    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+    j = (j = i.length) > 3 ? j % 3 : 0;
+   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+ };
+
+function getShippingAddressString (order) {
+  return order.shipping.address1
+    + ", " + order.shipping.city
+    + ", " + order.shipping.state
+    + " " + order.shipping.zip;
+}
+
+function getProductDetailString (order) {
+  var computerName = ["NVIDIA Jetson TK1", "NVIDIA Jetson TX1", "NVIDIA Jetson TX2"];
+  var linearActuatorName = ["12in 5.7mm/s Linear Actuator", "12in 10mm/s Linear Actuator"];
+  var batteryName = ["12V 8AH Lead-Acid Battery", "12V 20AH Lead-Acid Battery"];
+  var shippingName = ["Local Pickup - Springfield, MO", "UPS Ground", "UPS 3 Day Select®", "UPS 2nd Day Air®"];
+
+  var result = "";
+
+  for (var i = 0; i < order.products.length; i++) {
+    if (i == 0) {
+      result = result + order.products[i].productId.toUpperCase();
+    } else {
+      result = result + "<br/>" + order.products[i].productId.toUpperCase();
+    }
+
+    result = result + ": ";
+
+    for (var j = 0; j < order.products[i].config.length; j++) {
+      if (order.products[i].config[j].name == "computer") {
+        result = result + computerName[order.products[i].config[j].value];
+      } else if (order.products[i].config[j].name == "linearActuator") {
+        result = result + linearActuatorName[order.products[i].config[j].value];
+      } else if (order.products[i].config[j].name == "battery") {
+        result = result + batteryName[order.products[i].config[j].value];
+      } else if (order.products[i].config[j].name == "shipping") {
+        result = result + shippingName[order.products[i].config[j].value];
+      }
+
+      if (j < order.products[i].config.length - 1) {
+        result = result + ", ";
+      }
+    }
+
+    return result;
+  }
+
+}
+
+function OrderSuccess (res, order) {
   res.json({success: true, message: "Order placed successfuly"});
+
+  var html = EmailSender.Emails.OrderPlaced
+    .replace("__NAME__", order.shipping.firstName)
+    .replace("__PRODUCT__", getProductDetailString(order))
+    .replace("__ADDRESS__", getShippingAddressString(order))
+    .replace("__SUBTOTAL__", "$" + order.subtotal.formatMoney(2))
+    .replace("__TAX__", "$" + order.tax.formatMoney(2))
+    .replace("__TOTAL__", "$" + order.total.formatMoney(2));
+  var emailSender = new EmailSender({
+    from: "zach@slaterobots.com",
+    to: order.user.email,
+    bcc: "zach@slaterobots.com",
+    subject: "Slate Robotics Order Confirmation",
+    html: html,
+  });
+  emailSender.send();
 }
 
 function OrderError (res, message) {
@@ -121,8 +194,8 @@ router.post('/', function (req, res) {
     }
 
     order.subtotal = order.subtotal;
-    order.taxes = CalculateTaxes(order);
-    order.total = order.subtotal + order.taxes;
+    order.tax = CalculateTaxes(order);
+    order.total = order.subtotal + order.tax;
 
     var metadata = {};
     for (var i = 0; i < order.products.length; i++) {
@@ -148,7 +221,7 @@ router.post('/', function (req, res) {
             if (err) {
               OrderError(res, "An error occurred while saving the order details to our system:" + err);
             } else {
-              OrderSuccess(res);
+              OrderSuccess(res, order);
             }
           });
       }
