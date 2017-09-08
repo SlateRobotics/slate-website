@@ -196,6 +196,8 @@ router.post('/', function (req, res) {
     order.subtotal = order.subtotal;
     order.tax = CalculateTaxes(order);
     order.total = order.subtotal + order.tax;
+    order.createdOn = Date(new Date().getTime());
+    order.status = "placed";
 
     var metadata = {};
     for (var i = 0; i < order.products.length; i++) {
