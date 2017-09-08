@@ -23,6 +23,8 @@ var schema = new mongoose.Schema({
     phone: String,
   },
   shipping: {
+    firstName: String,
+    lastName: String,
     address1: String,
     address2: String,
     city: String,
