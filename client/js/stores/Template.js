@@ -11,18 +11,6 @@ module.exports = function(ApiService) {
 
   this._docs = [];
 
-  this.getParams = function (opts) {
-    if (opts.params) {
-      return opts.params;
-    }
-
-    if (opts.allAttributes === false) {
-      return "s=!layers"
-    } else {
-      return "";
-    }
-  }.bind(this);
-
   this.get = function(opts) {
     var params = this.getParams(opts);
     if (this._docs.length === 0 || opts.refresh === true) {
@@ -36,11 +24,40 @@ module.exports = function(ApiService) {
   }.bind(this);
 
   this.getOne = function(opts) {
-    var params = this.getParams(opts);
-    ApiService.getOne(opts.id, params, function (doc) {
+    var id = opts.id;
+    if (!id && opts.doc) {
+      id = opts.doc._id || opts.doc.id;
+    }
+
+    var success = function (doc) {
       this.replaceOne(doc);
-      opts.success(doc);
-    }.bind(this));
+      if (opts.success) {
+        opts.success(doc);
+      } else {
+        var message = ApiService.name + "store call succeeded, but no ";
+        message += "success function was defined in options";
+        console.warn(message);
+      }
+    }.bind(this);
+
+    var error = function (error) {
+      if (opts.error) {
+        opts.error(error);
+      } else {
+        var message = "An error occurred in the " + ApiService.name + "store";
+        message += ", but no error function was defined in options";
+        console.error(message);
+      }
+    }
+
+    if (!id) {
+      error({eror:"getOne method requires an ID via id or doc option"});
+      return;
+    }
+
+    var url = opts.id;
+    if (opts.params) { url += opts.params; }
+    ApiService.getOne(url, success, error);
   }.bind(this);
 
   this.findOne = function (id) {

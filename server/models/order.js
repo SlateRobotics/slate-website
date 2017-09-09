@@ -13,7 +13,8 @@ var productSchema = new mongoose.Schema({
 });
 
 var schema = new mongoose.Schema({
-  status: String, // placed, assembling, shipped
+  token: String,
+  status: String, // placed, assembling, assembled, shipped
   subtotal: Number,
   tax: Number,
   total: Number,
@@ -31,11 +32,12 @@ var schema = new mongoose.Schema({
     city: String,
     state: String,
     zip: String,
-    shippedOn: Date, // utc
     carrier: String,
     trackingNumber: String,
   },
   billing: {
+    firstName: String,
+    lastName: String,
     address1: String,
     address2: String,
     city: String,
@@ -47,6 +49,9 @@ var schema = new mongoose.Schema({
     last4: String,
   },
   createdOn: Date, // utc
+  shippedOn: Date, // utc
+  assembledOn: Date, //utc
+  expectedShipmentDate: Date, // utc
 });
 
 module.exports = restful.model('order', schema);

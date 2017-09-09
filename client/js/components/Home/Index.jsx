@@ -2,6 +2,7 @@ var React = require('react');
 var BrowserHistory = require('react-router').browserHistory;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
+var OrderStore = require('../../stores/order');
 
 var Component = React.createClass({
   componentDidMount: function () {

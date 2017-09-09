@@ -27,6 +27,14 @@ var n = this,
    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
  };
 
+ var rand = function() {
+    return Math.random().toString(36).substr(2); // remove `0.`
+};
+
+var token = function() {
+    return rand() + rand(); // to make it longer
+};
+
 function getShippingAddressString (order) {
   return order.shipping.address1
     + ", " + order.shipping.city
@@ -81,6 +89,10 @@ function OrderSuccess (res, order) {
     .replace("__ADDRESS__", getShippingAddressString(order))
     .replace("__SUBTOTAL__", "$" + order.subtotal.formatMoney(2))
     .replace("__TAX__", "$" + order.tax.formatMoney(2))
+    .replace("__ID__", order._id)
+    .replace("__TOKEN__", order.token)
+    .replace("__ID__", order._id)
+    .replace("__TOKEN__", order.token)
     .replace("__TOTAL__", "$" + order.total.formatMoney(2));
   var emailSender = new EmailSender({
     from: "zach@slaterobots.com",
@@ -118,6 +130,10 @@ function VerifyData (req, res) {
     OrderError(res, "Invalid shipping data in body of post request: null zip");
   } else if (!req.body.billing) {
     OrderError(res, "Invalid billing data in body of post request");
+  } else if (!req.body.billing.firstName) {
+    OrderError(res, "Invalid billing data in body of post request: null firstName");
+  } else if (!req.body.billing.lastName) {
+    OrderError(res, "Invalid billing data in body of post request: null lastName");
   } else if (!req.body.billing.address1) {
     OrderError(res, "Invalid billing data in body of post request: null address1");
   } else if (!req.body.billing.city) {
@@ -198,6 +214,8 @@ router.post('/', function (req, res) {
     order.total = order.subtotal + order.tax;
     order.createdOn = Date(new Date().getTime());
     order.status = "placed";
+    order.expectedShipmentDate = new Date("2017-12-15 12:00:00 UTC");
+    order.token = token();
 
     var metadata = {};
     for (var i = 0; i < order.products.length; i++) {
@@ -219,11 +237,11 @@ router.post('/', function (req, res) {
         OrderError(res, "An error occurred while processing your payment:" + err.message);
       } else {
           var orderDoc = new Order(order);
-          orderDoc.save(function (err, results) {
+          orderDoc.save(function (err, savedDoc) {
             if (err) {
               OrderError(res, "An error occurred while saving the order details to our system:" + err);
             } else {
-              OrderSuccess(res, order);
+              OrderSuccess(res, savedDoc);
             }
           });
       }

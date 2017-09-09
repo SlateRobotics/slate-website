@@ -8,9 +8,32 @@ var readFilterSchema = {
   "properties": {
     "status": { "type": "string" },
     "createdOn": { "type": "date" },
+    "shippedOn": { "type": "date" },
+    "assembledOn": { "type": "date" },
+    "expectedShipmentDate": { "type": "date" },
     "subtotal": { "type": "string" },
     "tax": { "type": "string" },
     "total": { "type": "string" },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "productId": { "type": "string" },
+          "subtotal": { "type": "number" },
+          "config": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "value": { "type": "number" },
+              }
+            },
+          }
+        }
+      }
+    },
     "user": {
       "type": "object",
       "properties": {
@@ -28,7 +51,6 @@ var readFilterSchema = {
         "city": { "type": "string" },
         "state": { "type": "string" },
         "zip": { "type": "string" },
-        "shippedOn": { "type": "string" },
         "carrier": { "type": "string" },
         "trackingNumber": { "type": "string" },
       }
@@ -36,6 +58,8 @@ var readFilterSchema = {
     "billing": {
       "type": "object",
       "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
         "address1": { "type": "string" },
         "address2": { "type": "string" },
         "city": { "type": "string" },
@@ -58,9 +82,32 @@ var writeFilterSchema = {
   "properties": {
     "status": { "type": "string" },
     "createdOn": { "type": "date" },
+    "shippedOn": { "type": "date" },
+    "assembledOn": { "type": "date" },
+    "expectedShipmentDate": { "type": "date" },
     "subtotal": { "type": "string" },
     "tax": { "type": "string" },
     "total": { "type": "string" },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "productId": { "type": "string" },
+          "subtotal": { "type": "number" },
+          "config": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "value": { "type": "number" },
+              }
+            },
+          }
+        }
+      }
+    },
     "user": {
       "type": "object",
       "properties": {
@@ -78,7 +125,6 @@ var writeFilterSchema = {
         "city": { "type": "string" },
         "state": { "type": "string" },
         "zip": { "type": "string" },
-        "shippedOn": { "type": "string" },
         "carrier": { "type": "string" },
         "trackingNumber": { "type": "string" },
       }
@@ -86,6 +132,8 @@ var writeFilterSchema = {
     "billing": {
       "type": "object",
       "properties": {
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
         "address1": { "type": "string" },
         "address2": { "type": "string" },
         "city": { "type": "string" },
@@ -102,10 +150,11 @@ var writeFilterSchema = {
   }
 }
 
-function findOne(user, id, callback) {
+function findOne(token, id, callback) {
   Order
     .findOne({
       "_id": id,
+      "token": token,
     })
     .exec(function(err, result) {
       return callback(result);

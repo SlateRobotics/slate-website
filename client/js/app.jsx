@@ -17,6 +17,7 @@ var Support = require('./components/Support/Index.jsx');
 var Checkout = require('./components/Checkout/Index.jsx');
 var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
 var CheckoutSuccess = require('./components/CheckoutSuccess/Index.jsx');
+var Order = require('./components/Order/Index.jsx');
 
 function handleRouterUpdate () {
 	$("#menu-sub").slideUp("fast");
@@ -45,6 +46,7 @@ var Routes = (
 		<Route path="/checkout" component={Checkout} />
 		<Route path="/checkout/review" component={CheckoutReview} />
 		<Route path="/checkout/success" component={CheckoutSuccess} />
+		<Route path="/order/:id" component={Order} />
   </Route>
 );
 
