@@ -15,8 +15,8 @@ var Component = React.createClass({
           <div className="col-md-8 col-xs-12 col-centered">
             <h1>About</h1>
             <h4>
-              We're dedicated to making the best robots in the world
-              at an affordable price.
+              Our mission is to get high performance robots into
+              the hands of hackers.
             </h4>
           </div>
         </div>

@@ -11,21 +11,42 @@ var Component = React.createClass({
   render: function() {
     return (
       <div className="container-fluid" style={Style.container}>
-        <div className="row" style={{
-            paddingTop:"140px",
-            paddingBottom:"150px",
-          }}>
+        <div className="row" style={{textAlign:"left"}}>
           <div className="col-md-8 col-xs-12 col-centered">
-            <h1 style={{fontSize:"95px"}}>
-              Support
-            </h1>
-            <h4 style={{fontSize:"32px"}}>
-              For any questions regarding the support of our products,
-              please call us at
-              {" "}<a href="tel:+14178493612">(417) 849-3612</a>{" "}
-              or email at
-              {" "}<a href="mailto:zach@slaterobots.com">zach@slaterobots.com</a>{" "}
-            </h4>
+            <h1>Product Support</h1>
+            <p>
+              To contact a support specialist for help with your
+              product, you have several options available:
+            </p>
+            <ul>
+              <li>
+                Click the chat icon in the bottom-right corner and start
+                a conversation with a representative immediately
+              </li>
+              <li>
+                <span>Call us at </span>
+                <a href="tel:+14178493612">
+                  (417) 849-3612
+                </a>
+              </li>
+              <li>
+                <span>Email us at </span>
+                <a href="mailto:zach@slaterobots.com">
+                  zach@slaterobots.com
+                </a>
+              </li>
+              <li>
+                <span>Tweet us at </span>
+                <a href="https://twitter.com/SlateRobotics/">
+                  @SlateRobotics
+                </a>
+              </li>
+            </ul>
+            <p>
+              We take your questions very seriously, and we will do
+              everything in our power to make your experience with
+              Slate Robotics as graceful and frictionless as possible.
+            </p>
           </div>
         </div>
       </div>
