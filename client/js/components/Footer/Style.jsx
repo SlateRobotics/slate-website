@@ -1,32 +1,27 @@
 module.exports = {
   container: {
-    fontFamily: "'Poiret One', cursive",
-    display: "flex",
-    width: "100%",
+    fontFamily: "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
     backgroundColor: "#222",
-    padding: "35px 10px",
-    color: "white"
+    fontSize: "12px",
+    color: "#fff"
   },
-  list: {
-    listStyleType: "none",
+  link: {
+    color:"#fff",
+    display: "block",
   },
-  listHeader: {
-    fontFamily: "'Poiret One', cursive",
-    fontSize: "22px",
+  logo: {
+    height: "80px",
+    float: "left",
+    paddingLeft: "10px",
+    paddingTop: "5px",
+    paddingRight: "5px"
+  },
+  title: {
+    textDecoration: "none",
+    color: "#fff",
     fontWeight: "700",
-  },
-  listItem: {
-    fontFamily: "'Rokkitt', serif",
+    display: "inline-block",
     cursor: "pointer",
-    color: "#b3b3b3",
-    fontSize: "18px",
-    paddingLeft: "5px",
+    fontSize: "34px",
   },
-  listItemHover: {
-    fontFamily: "'Rokkitt', serif",
-    cursor: "pointer",
-    color: "#f4f4f4",
-    fontSize: "18px",
-    paddingLeft: "5px",
-  }
 }

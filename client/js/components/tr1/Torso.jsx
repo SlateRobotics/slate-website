@@ -5,7 +5,7 @@ var Component = React.createClass({
   render: function() {
     return (
       <div className="row">
-        <div className="col-xs-12" style={{backgroundColor:"#2b4151",color:"#fff"}}>
+        <div className="col-xs-12" style={{backgroundColor:"#353c45",color:"#fff"}}>
           <h1>Actuated Torso</h1>
           <div className="col-lg-6 col-md-8 col-sm-10 hidden-xs col-centered" style={{fontSize:"22px"}}>
             <div className="col-sm-4">

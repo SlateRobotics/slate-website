@@ -16,6 +16,14 @@ router.get('/logo-icon', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/logo-icon.png'));
 });
 
+router.get('/icon-logo-grey', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-logo-grey.png'));
+});
+
+router.get('/icon-logo-white', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-logo-white.png'));
+});
+
 router.get('/slate-tr1-1', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/slate-tr1-1.jpg'));
 });
@@ -66,6 +74,26 @@ router.get('/icon-battery', function (req, res, next) {
 
 router.get('/icon-wifi', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/icon-wifi.png'));
+});
+
+router.get('/icon-facebook', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-facebook.svg'));
+});
+
+router.get('/icon-linkedin', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-linkedin.svg'));
+});
+
+router.get('/icon-twitter', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-twitter.svg'));
+});
+
+router.get('/zach', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/zach.jpg'));
+});
+
+router.get('/brian', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/brian.jpg'));
 });
 
 router.get('/powered-by-stripe', function (req, res, next) {

@@ -50,7 +50,7 @@ var Component = React.createClass({
     return (
       <div className="container-fluid" style={Style.container}>
         <div className="row">
-          <div className="col-lg-8 col-md-10 col-xs-12 col-centered">
+          <div className="col-md-10 col-xs-12 col-centered">
             <h1>Order Review</h1>
             <div style={{color:"#da383c"}}>
               Your order has yet not been placed. Please review
@@ -60,7 +60,7 @@ var Component = React.createClass({
         </div>
         <div style={{marginTop:"25px"}} />
         <div className="row">
-          <div className="col-lg-8 col-md-10 col-xs-12 col-centered">
+          <div className="col-md-10 col-xs-12 col-centered">
             <div className="row">
               <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
                 <h2 style={{marginTop:"0px"}}>Shipping Details</h2>
@@ -95,7 +95,7 @@ var Component = React.createClass({
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-8 col-md-10 col-xs-12 col-centered"
+          <div className="col-md-10 col-xs-12 col-centered"
             style={{borderTop:"1px solid #ccc",paddingTop:"15px"}}>
             <div style={{textAlign:"left"}}>
               <div className="row">

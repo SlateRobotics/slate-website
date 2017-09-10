@@ -18,6 +18,9 @@ var Checkout = require('./components/Checkout/Index.jsx');
 var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
 var CheckoutSuccess = require('./components/CheckoutSuccess/Index.jsx');
 var Order = require('./components/Order/Index.jsx');
+var About = require('./components/About/Index.jsx');
+var PrivacyPolicy = require('./components/PrivacyPolicy/Index.jsx');
+var TermsAndConditions = require('./components/TermsAndConditions/Index.jsx');
 
 function handleRouterUpdate () {
 	$("#menu-sub").slideUp("fast");
@@ -39,6 +42,9 @@ var App = React.createClass({
 var Routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
+		<Route path="/about" component={About} />
+		<Route path="/privacy-policy" component={PrivacyPolicy} />
+		<Route path="/terms-and-conditions" component={TermsAndConditions} />
 		<Route path="/tr1" component={tr1} />
 		<Route path="/tr1/specs" component={tr1Specs} />
 		<Route path="/support" component={Support} />

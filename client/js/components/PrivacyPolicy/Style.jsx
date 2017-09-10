@@ -6,5 +6,18 @@ module.exports = {
     textAlign: "center",
     fontSize: "16px",
     backgroundColor:"#fff",
+    paddingBottom:"25px",
+    textAlign:"left",
+  },
+  buttonContainer: {
+    fontSize:"24px",
+    marginTop:"20px",
+    marginBottom:"40px"
+  },
+  text: {
+    fontFamily: "'Rokkitt', serif",
+  },
+  img: {
+    maxWidth: "100%",
   },
 }

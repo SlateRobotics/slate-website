@@ -52,7 +52,6 @@ var Component = React.createClass({
         </div>
         <div className="row" style={{
             padding:"150px 0px",
-            borderBottom: "1px solid #90B2BB",
           }}>
           <div className="col-md-8 col-xs-12 col-centered">
             <h1 style={{fontSize:"64px",paddingBottom:"25px"}}>
@@ -88,24 +87,9 @@ var Component = React.createClass({
                 page.
               </p>
             </div>
-          </div>
-        </div>
-        <div className="row" style={{
-            padding:"150px 0px",
-          }}>
-          <div className="col-xs-12">
-            <h1 style={{fontSize:"64px"}}>
-              Pre-orders opening soon
-            </h1>
-            <h4 style={{fontSize:"28px"}}>
-              {"Follow us on "}
-              <a href="https://www.facebook.com/SlateRobotics">Facebook</a>
-              {", "}
-              <a href="https://www.twitter.com/SlateRobotics">Twitter</a>
-              {" or "}
-              <a href="https://www.instagram.com/SlateRobotics">Instagram</a>
-              {" to stay informed"}
-            </h4>
+            <ButtonPrimary
+              label={"Learn more"}
+              onClick={this.handleClick_LearnMore} />
           </div>
         </div>
       </div>

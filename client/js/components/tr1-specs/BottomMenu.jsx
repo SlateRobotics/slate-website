@@ -8,7 +8,7 @@ var Component = React.createClass({
       <div className="row">
         <div
           className="col-md-6 col-xs-12"
-          style={{backgroundColor:"#2b4151",color:"#fff",padding:"35px 0px",cursor:"pointer"}}
+          style={{backgroundColor:"#353c45",color:"#fff",padding:"35px 0px",cursor:"pointer"}}
           onClick={this.handleClick_Overview}>
           <h1>Overview</h1>
         </div>
