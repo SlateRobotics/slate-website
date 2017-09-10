@@ -31,7 +31,7 @@ var Component = React.createClass({
             <div className="col-md-3" style={{paddingBottom:"15px"}}>
               <img
                 src="/img/icon-wifi"
-                style={{height:"125px",width:"125px"}} />
+                style={{height:"95px",width:"125px",margin:"15px 0px"}} />
               <h4>Wifi + Bluetooth + Ethernet connectivity</h4>
             </div>
           </div>
@@ -59,7 +59,7 @@ var Component = React.createClass({
             <div className="col-xs-6" style={{paddingBottom:"15px"}}>
               <img
                 src="/img/icon-wifi"
-                style={{height:"125px",width:"125px"}} />
+                style={{height:"95px",width:"125px",margin:"15px 0px"}} />
               <h4>Wifi + Bluetooth + Ethernet connectivity</h4>
             </div>
           </div>
