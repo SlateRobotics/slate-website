@@ -22,7 +22,7 @@ var Component = React.createClass({
             </div>
           </div>
         </div>
-        <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{backgroundColor:"#2b4151",color:"#fff",paddingBottom:"15px"}}>
+        <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{backgroundColor:"#353c45",color:"#fff",paddingBottom:"15px"}}>
           <div className="row">
             <div className="col-xs-12">
               <div>7 DOF</div>
