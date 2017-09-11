@@ -26,6 +26,7 @@ var Footer = React.createClass({
                 <Link to="/tr1" style={Style.link}>Overview</Link>
                 <Link to="/tr1/specs" style={Style.link}>Specs</Link>
                 <Link to="/shop/tr1" style={Style.link}>Buy</Link>
+                <Link to="/support" style={Style.link}>Support</Link>
               </div>
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>ABOUT</h3>
