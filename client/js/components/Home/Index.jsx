@@ -16,19 +16,19 @@ var Component = React.createClass({
             color:"white",
             backgroundImage:"url('/img/slate-tr1-1')",
             backgroundPosition:"center top",
-            backgroundColor:"#222",
+            backgroundColor:"#262626",
             backgroundRepeat:"no-repeat",
           }}>
           <div className="col-xs-12" style={{overflowX:"hidden"}}>
             <img src="/img/slate-tr1-1" style={{visibility:"hidden"}} />
             <div style={{position:"absolute",top:"0",left:"0",right:"0",padding:"140px 0px",margin:"0px auto"}}>
-              <h1 style={{fontSize:"95px",textShadow:"5px 5px #222"}} className="hidden-xs">
+              <h1 style={{fontSize:"95px",textShadow:"3px 3px #222"}} className="hidden-xs">
                 Slate TR1
               </h1>
-              <h1 style={{fontSize:"72px",textShadow:"4px 4px #222"}} className="hidden-lg hidden-md hidden-sm">
+              <h1 style={{fontSize:"72px",textShadow:"3px 3px #222"}} className="hidden-lg hidden-md hidden-sm">
                 Slate TR1
               </h1>
-              <h4 style={{fontSize:"32px",textShadow:"3px 3px #222"}}>
+              <h4 style={{fontSize:"32px",textShadow:"2px 2px #222"}}>
                 A human-sized robot for hackers
               </h4>
               <div style={Style.buttonContainer} className="hidden-xs">
