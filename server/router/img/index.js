@@ -25,7 +25,7 @@ router.get('/icon-logo-white', function (req, res, next) {
 });
 
 router.get('/slate-tr1-1', function (req, res, next) {
-	res.sendFile(path.join(__dirname, _root, '/slate-tr1-1.jpg'));
+	res.sendFile(path.join(__dirname, _root, '/slate-tr1-1.png'));
 });
 
 router.get('/slate-tr1-2', function (req, res, next) {
@@ -42,6 +42,10 @@ router.get('/slate-tr1-4', function (req, res, next) {
 
 router.get('/slate-tr1-5', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/slate-tr1-5.png'));
+});
+
+router.get('/slate-tr1-6', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/slate-tr1-6.png'));
 });
 
 router.get('/slate-tr1-specs-1', function (req, res, next) {

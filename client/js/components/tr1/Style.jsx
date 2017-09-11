@@ -30,7 +30,6 @@ module.exports = {
     borderBottom:"1px solid #ccc",
   },
   buttonContainer: {
-    fontSize:"24px",
     marginTop:"20px",
     marginBottom:"40px"
   },
