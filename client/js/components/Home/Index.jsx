@@ -1,12 +1,16 @@
 var React = require('react');
+var $ = require('jquery');
 var BrowserHistory = require('react-router').browserHistory;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
+var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var OrderStore = require('../../stores/order');
 
 var Component = React.createClass({
   componentDidMount: function () {
     window.scrollTo(0,0);
+    $("#tr1-heading").fadeIn(500);
+    $("#tr1-footer").fadeIn(500);
   },
 
   render: function() {
@@ -19,36 +23,46 @@ var Component = React.createClass({
             backgroundColor:"#262626",
             backgroundRepeat:"no-repeat",
           }}>
-          <div className="col-xs-12" style={{overflowX:"hidden"}}>
+          <div className="col-xs-12" style={{overflowX:"hidden",height:"746px",position:"relative"}}>
             <img src="/img/slate-tr1-1" style={{visibility:"hidden"}} />
-            <div style={{position:"absolute",top:"0",left:"0",right:"0",padding:"140px 0px",margin:"0px auto"}}>
-              <h1 style={{fontSize:"95px",textShadow:"3px 3px #222"}} className="hidden-xs">
+            <div id="tr1-heading" style={{display:"none",position:"absolute",top:"0",left:"10px",textAlign:"left"}}>
+              <h1 style={{fontSize:"72px"}} className="hidden-sm hidden-xs">
                 Slate TR1
               </h1>
-              <h1 style={{fontSize:"72px",textShadow:"3px 3px #222"}} className="hidden-lg hidden-md hidden-sm">
+              <h1 style={{fontSize:"48px"}} className="hidden-lg hidden-md hidden-xs">
                 Slate TR1
               </h1>
-              <h4 style={{fontSize:"32px",textShadow:"2px 2px #222"}}>
-                A human-sized robot for hackers
+              <h1 className="hidden-lg hidden-md hidden-sm">
+                Slate
+                <br />
+                TR1
+              </h1>
+              <h3 className="hidden-sm hidden-xs">
+                Human-sized robot for hackers
+              </h3>
+              <h4 className="hidden-lg hidden-md hidden-xs">
+                Human-sized robot for hackers
               </h4>
-              <div style={Style.buttonContainer} className="hidden-xs">
-                <ButtonPrimary
-                  label={"Learn more"}
-                  onClick={this.handleClick_LearnMore} />
-                <span style={{marginLeft:"20px"}} />
-                <ButtonPrimary
-                  label={"Buy"}
-                  onClick={this.handleClick_Buy} />
-              </div>
-              <div style={Style.buttonContainer} className="hidden-lg hidden-md hidden-sm">
-                <ButtonPrimary
-                  label={"Learn more"}
-                  onClick={this.handleClick_LearnMore} />
-                <div style={{marginTop:"15px"}} />
-                <ButtonPrimary
-                  label={"Buy"}
-                  onClick={this.handleClick_Buy} />
-              </div>
+            </div>
+          </div>
+          <div id="tr1-footer" className="col-xs-12" style={{position:"relative",bottom:"0",left:"0",textAlign:"left"}}>
+            <div id="tr1-footer-details" style={{position:"absolute",right:"0",bottom:"0"}}>
+              <span className="hidden-xs" style={{fontStyle:"italic"}}>
+                Starting at $2,499
+              </span>
+              <span className="hidden-xs" style={{marginLeft:"20px"}} />
+              <ButtonPrimary
+                label={"Learn more"}
+                onClick={this.handleClick_LearnMore} />
+              <span style={{marginLeft:"20px"}} />
+              <ButtonPrimary
+                label={"Buy"}
+                onClick={this.handleClick_Buy} />
+            </div>
+            <div id="tr1-control-toggle" style={{position:"absolute",left:"0",bottom:"0"}}>
+              <ButtonSecondary
+                label={"Toggle View"}
+                onClick={this.handleClick_ToggleText} />
             </div>
           </div>
         </div>
@@ -104,6 +118,11 @@ var Component = React.createClass({
 
   handleClick_Buy: function () {
     BrowserHistory.push("/shop/tr1");
+  },
+
+  handleClick_ToggleText: function () {
+    $("#tr1-heading").fadeToggle(500);
+    $("#tr1-footer-details").fadeToggle(500);
   },
 });
 
