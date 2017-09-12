@@ -7,7 +7,7 @@ var Footer = React.createClass({
     var today = new Date(Date.now());
     return (
       <div className="container-fluid" style={Style.container}>
-        <div className="row" style={{marginTop:"15px", fontFamily: "'Poiret One', cursive",}}>
+        <div className="row" style={{marginTop:"15px"}}>
   				<div className="col-md-10 col-xs-12 col-centered">
             <Link to="/">
               <img style={Style.logo} src="/img/icon-logo-white" onClick={this.handleClick_Logo} />

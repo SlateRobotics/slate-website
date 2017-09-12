@@ -47,21 +47,31 @@ var Component = React.createClass({
   render: function() {
     return (
       <div className="container-fluid" style={Style.container}>
-        <div className="row" className="hidden-xs" style={Style.menu}>
-          <span style={{fontSize:"24px"}}>TR1</span>
-          {" ― "}
-          <Link to="/tr1">Overview</Link>
-          {" | "}
-          <Link to="/tr1/specs">Specs</Link>
-          {" | "}
-          <span style={{color:"#666",cursor:"default"}}>Buy</span>
-        </div>
-        <div className="row" className="hidden-lg hidden-md hidden-sm" style={Style.menuMobile}>
-          <Link to="/tr1">Overview</Link>
-          {" | "}
-          <Link to="/tr1/specs">Specs</Link>
-          {" | "}
-          <span style={{color:"#666",cursor:"default"}}>Buy</span>
+        <div>
+          <div className="row hidden-xs" style={Style.menu}>
+            <div className="col-lg-10 col-xs-12 col-centered">
+              <div style={{float:"left"}}>
+                <span style={{lineHeight:"34px"}}>Slate TR1</span>
+              </div>
+              <div style={{float:"right"}}>
+                <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
+                <span style={{marginLeft:"25px"}} />
+                  <Link to="/tr1/specs" style={{lineHeight:"34px",color:"#222"}}>Specs</Link>
+              </div>
+            </div>
+          </div>
+          <div className="row hidden-lg hidden-md hidden-sm" style={Style.menuMobile}>
+            <div className="col-xs-12">
+              <div style={{float:"left"}}>
+                <span style={{lineHeight:"34px"}}>TR1</span>
+              </div>
+              <div style={{float:"right"}}>
+                <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
+                <span style={{marginLeft:"25px"}} />
+                <Link to="/tr1/specs" style={{lineHeight:"34px",color:"#222"}}>Specs</Link>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="row" style={{marginTop:"34px"}}>
           <div className="col-md-10 col-xs-12 col-centered">

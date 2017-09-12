@@ -20,7 +20,7 @@ var SubMenuListItem = React.createClass({
 	render: function () {
     var style = Style.menuSubItem;
     if (this.state.isHovered) {
-      style = Style.menuSubItemHover;
+      //style = Style.menuSubItemHover;
     }
 
 		return (

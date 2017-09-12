@@ -18,16 +18,9 @@ var MenuListItem = React.createClass({
   },
 
 	render: function () {
-    var style = Style.menuItem;
+    var style = Style.menuItemButton;
     if (this.state.isHovered) {
-      style = Style.menuItemHover;
-    }
-
-    if (this.props.farRight == true) {
-      style = Style.menuItemFarRight;
-      if (this.state.isHovered) {
-        style = Style.menuItemFarRightHover;
-      }
+      style = Style.menuItemButtonHover;
     }
 
 		return (

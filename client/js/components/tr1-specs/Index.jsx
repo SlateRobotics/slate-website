@@ -4,6 +4,7 @@ var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var BottomMenu = require('./BottomMenu.jsx');
+var MenuButton = require('./MenuButton.jsx');
 
 var Component = React.createClass({
   componentDidMount: function () {
@@ -13,21 +14,33 @@ var Component = React.createClass({
   render: function() {
     return (
       <div className="container-fluid" style={Style.container}>
-        <div className="row" className="hidden-xs" style={Style.menu}>
-          <span style={{fontSize:"24px"}}>TR1</span>
-          {" ― "}
-          <Link to="/tr1">Overview</Link>
-          {" | "}
-          <span style={{color:"#666",cursor:"default"}}>Specs</span>
-          {" | "}
-          <Link to="/shop/tr1">Buy</Link>
-        </div>
-        <div className="row" className="hidden-lg hidden-md hidden-sm" style={Style.menuMobile}>
-          <Link to="/tr1">Overview</Link>
-          {" | "}
-          <span style={{color:"#666",cursor:"default"}}>Specs</span>
-          {" | "}
-          <Link to="/shop/tr1">Buy</Link>
+        <div>
+          <div className="row hidden-xs" style={Style.menu}>
+            <div className="col-lg-10 col-xs-12 col-centered">
+              <div style={{float:"left"}}>
+                <span style={{lineHeight:"34px"}}>Slate TR1</span>
+              </div>
+              <div style={{float:"right"}}>
+                <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
+                <span style={{marginLeft:"25px"}} />
+                <span style={{color:"#666",cursor:"default",lineHeight:"34px"}}>Specs</span>
+                <span style={{marginLeft:"25px"}} />
+                <MenuButton to="/shop/tr1" label="Buy" />
+              </div>
+            </div>
+          </div>
+          <div className="row hidden-lg hidden-md hidden-sm" style={Style.menuMobile}>
+            <div className="col-xs-12">
+              <div style={{float:"left"}}>
+                <span style={{lineHeight:"34px"}}>TR1</span>
+              </div>
+              <div style={{float:"right"}}>
+                <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
+                <span style={{marginLeft:"25px"}} />
+                <MenuButton to="/shop/tr1" label="Buy" />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="row" style={{marginTop:"34px"}}>
           <div className="col-md-10 col-xs-12 col-centered">

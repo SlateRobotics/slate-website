@@ -1,6 +1,7 @@
 var React = require('react');
 var $ = require('jquery');
 var BrowserHistory = require('react-router').browserHistory;
+var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
@@ -25,7 +26,9 @@ var Component = React.createClass({
             backgroundRepeat:"no-repeat",
             backgroundSize:"1122px 700px",
           }}>
-          <div className="col-xs-12" style={{
+          <div
+            className="col-lg-10 col-xs-12 col-centered"
+            style={{
               overflowX:"hidden",
               height:"700px",
               position:"relative",
@@ -54,34 +57,30 @@ var Component = React.createClass({
               <h4 className="hidden-lg hidden-md hidden-xs">
                 Human-sized robot for hackers
               </h4>
+              <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}} className="hidden-xs">Learn More {">"}</Link>
+              <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}} className="hidden-lg hidden-md hidden-sm">Details {">"}</Link>
+              <Link to="/shop/tr1" style={{color:"#fff"}} className="hidden-xs">Buy {">"}</Link>
             </div>
           </div>
           <div
             id="tr1-footer"
-            className="col-xs-12"
+            className="col-lg-10 col-xs-12 col-centered"
             style={{
               display:"none",
               position:"relative",
-              bottom:"0",left:"0",
+              bottom:"0",
+              left:"0",
               textAlign:"left"
             }}>
             <div id="tr1-footer-details" style={{
                 position:"absolute",
-                right:"0",
+                right:"6px",
                 display:"none",
                 bottom:"0"
               }}>
-              <span className="hidden-xs" style={{fontStyle:"italic"}}>
+              <span style={{fontStyle:"italic",lineHeight:"38px"}}>
                 Starting at $2,499
               </span>
-              <span className="hidden-xs" style={{marginLeft:"20px"}} />
-              <ButtonPrimary
-                label={"Buy"}
-                onClick={this.handleClick_Buy} />
-              <span style={{marginLeft:"20px"}} />
-              <ButtonPrimary
-                label={"Learn more"}
-                onClick={this.handleClick_LearnMore} />
             </div>
             <div id="tr1-control-toggle" style={{
                 position:"absolute",

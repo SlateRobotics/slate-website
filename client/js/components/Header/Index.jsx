@@ -10,38 +10,64 @@ var SubMenu = require('./SubMenu.jsx');
 var Header = React.createClass({
 	render: function () {
 		return (
-			<div style={Style.headerContainer}>
-				<div style={Style.navigation} className="hidden-xs">
-					<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-centered"
-						style={{padding:"0"}}>
-						<Link to="/">
-							<img style={Style.logo} src="/img/logo-icon" onClick={this.handleClick_Logo} />
+			<div className="container-fluid" style={Style.headerContainer}>
+				<div className="row hidden-xs" style={Style.navigation}>
+					<div className="col-lg-10 col-xs-12 col-centered">
+						<Link to="/" style={{
+								height:"44px",
+								display:"inline-block",
+								float:"left",
+							}}>
+							<img
+								style={Style.logo}
+								src="/img/logo-icon"
+								onClick={this.handleClick_Logo} />
 						</Link>
-						<div style={{float:"left",padding:"0px 5px"}}>
-							<Link to="/" style={Style.title}>{"Slate Robotics"}</Link>
-							<span style={{display:"block",fontSize:"22px"}}>Human-sized robots for hackers</span>
+						<div style={{
+								float:"left",
+								paddingLeft:"10px",
+								display:"inline-block",
+								lineHeight:"44px",
+							}}>
+							<Link to="/" style={Style.title}>
+								Slate Robotics
+							</Link>
 						</div>
 						<div style={Style.menuContainer}>
 							<Menu />
 						</div>
 					</div>
 				</div>
-				<div style={Style.navigationMobile}>
-					<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-centered"
-						style={{padding:"0"}}>
-						<Link to="/">
-							<img style={Style.logo} src="/img/logo-icon" onClick={this.handleClick_Logo} />
+				<div className="row" style={Style.navigationMobile}>
+					<div className="col-xs-12 col-centered">
+						<Link to="/" style={{
+								height:"44px",
+								display:"inline-block",
+								float:"left",
+							}}>
+							<img
+								style={Style.logo}
+								src="/img/logo-icon"
+								onClick={this.handleClick_Logo} />
 						</Link>
-						<div style={{float:"left",padding:"3px 5px"}}>
+						<div style={{
+								float:"left",
+								paddingLeft:"10px",
+								display:"inline-block",
+								lineHeight:"44px",
+							}}>
 							<Link to="/" style={Style.titleMobile}>
 								<span>
-									Slate
-									<br/>
-									Robotics
+									Slate Robotics
 								</span>
 							</Link>
 						</div>
-						<div style={Style.menuContainer}>
+						<div style={{
+						    height:"44px",
+								position:"absolute",
+								top:"0",
+								right:"0",
+							}}>
 							<MenuNavButton />
 						</div>
 					</div>
