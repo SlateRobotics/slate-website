@@ -9,8 +9,9 @@ var OrderStore = require('../../stores/order');
 var Component = React.createClass({
   componentDidMount: function () {
     window.scrollTo(0,0);
-    $("#tr1-heading").fadeIn(500);
-    $("#tr1-footer").fadeIn(500);
+    $("#tr1-heading").delay(500).fadeIn(1000);
+    $("#tr1-footer").delay(1000).fadeIn(1000);
+    $("#tr1-footer-details").delay(2000).fadeIn(1000);
   },
 
   render: function() {
@@ -22,10 +23,20 @@ var Component = React.createClass({
             backgroundPosition:"center top",
             backgroundColor:"#262626",
             backgroundRepeat:"no-repeat",
+            backgroundSize:"1122px 700px",
           }}>
-          <div className="col-xs-12" style={{overflowX:"hidden",height:"746px",position:"relative"}}>
-            <img src="/img/slate-tr1-1" style={{visibility:"hidden"}} />
-            <div id="tr1-heading" style={{display:"none",position:"absolute",top:"0",left:"10px",textAlign:"left"}}>
+          <div className="col-xs-12" style={{
+              overflowX:"hidden",
+              height:"700px",
+              position:"relative",
+            }}>
+            <div id="tr1-heading" style={{
+                display:"none",
+                position:"absolute",
+                top:"0",
+                left:"10px",
+                textAlign:"left"
+              }}>
               <h1 style={{fontSize:"72px"}} className="hidden-sm hidden-xs">
                 Slate TR1
               </h1>
@@ -45,21 +56,38 @@ var Component = React.createClass({
               </h4>
             </div>
           </div>
-          <div id="tr1-footer" className="col-xs-12" style={{position:"relative",bottom:"0",left:"0",textAlign:"left"}}>
-            <div id="tr1-footer-details" style={{position:"absolute",right:"0",bottom:"0"}}>
+          <div
+            id="tr1-footer"
+            className="col-xs-12"
+            style={{
+              display:"none",
+              position:"relative",
+              bottom:"0",left:"0",
+              textAlign:"left"
+            }}>
+            <div id="tr1-footer-details" style={{
+                position:"absolute",
+                right:"0",
+                display:"none",
+                bottom:"0"
+              }}>
               <span className="hidden-xs" style={{fontStyle:"italic"}}>
                 Starting at $2,499
               </span>
               <span className="hidden-xs" style={{marginLeft:"20px"}} />
               <ButtonPrimary
-                label={"Learn more"}
-                onClick={this.handleClick_LearnMore} />
-              <span style={{marginLeft:"20px"}} />
-              <ButtonPrimary
                 label={"Buy"}
                 onClick={this.handleClick_Buy} />
+              <span style={{marginLeft:"20px"}} />
+              <ButtonPrimary
+                label={"Learn more"}
+                onClick={this.handleClick_LearnMore} />
             </div>
-            <div id="tr1-control-toggle" style={{position:"absolute",left:"0",bottom:"0"}}>
+            <div id="tr1-control-toggle" style={{
+                position:"absolute",
+                left:"0",
+                bottom:"0"
+              }}>
               <ButtonSecondary
                 label={"Toggle View"}
                 onClick={this.handleClick_ToggleText} />
