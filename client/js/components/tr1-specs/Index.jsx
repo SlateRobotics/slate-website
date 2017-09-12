@@ -20,7 +20,7 @@ var Component = React.createClass({
               <div style={{float:"left"}}>
                 <span style={{lineHeight:"34px"}}>Slate TR1</span>
               </div>
-              <div style={{float:"right"}}>
+              <div style={{float:"right",fontSize:"14px"}}>
                 <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
                 <span style={{marginLeft:"25px"}} />
                 <span style={{color:"#666",cursor:"default",lineHeight:"34px"}}>Specs</span>
@@ -34,7 +34,7 @@ var Component = React.createClass({
               <div style={{float:"left"}}>
                 <span style={{lineHeight:"34px"}}>TR1</span>
               </div>
-              <div style={{float:"right"}}>
+              <div style={{float:"right",fontSize:"14px"}}>
                 <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
                 <span style={{marginLeft:"25px"}} />
                 <MenuButton to="/shop/tr1" label="Buy" />
