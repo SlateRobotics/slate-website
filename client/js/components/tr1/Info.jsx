@@ -7,7 +7,10 @@ var Component = React.createClass({
   render: function() {
     return (
       <div className="row" style={{marginTop:"34px",textAlign:"left"}}>
-        <div className="hidden-lg hidden-md col-xs-12">
+        <div className="hidden-lg hidden-md col-xs-12" style={{
+            backgroundColor:"#262626",
+            color:"#fff",
+          }}>
           <h1 style={{fontSize:"95px"}}>
             Slate TR1
           </h1>
@@ -46,6 +49,8 @@ var Component = React.createClass({
         <div className="col-md-6 hidden-sm hidden-xs" style={{
             height:"800px",
             paddingTop:"125px",
+            backgroundColor:"#262626",
+            color:"#fff",
           }}>
           <h1 style={{fontSize:"95px"}}>
             Slate TR1
