@@ -11,6 +11,7 @@ var BottomMenu = require('./BottomMenu.jsx');
 
 var Component = React.createClass({
   componentDidMount: function () {
+    document.title = "TR1 - Slate Robotics";
     window.scrollTo(0,0);
   },
 

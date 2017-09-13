@@ -8,6 +8,7 @@ var MenuButton = require('./MenuButton.jsx');
 
 var Component = React.createClass({
   componentDidMount: function () {
+    document.title = "TR1 - Technical Specifications - Slate Robotics";
     window.scrollTo(0,0);
   },
 

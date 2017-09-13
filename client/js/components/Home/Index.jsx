@@ -9,6 +9,7 @@ var OrderStore = require('../../stores/order');
 
 var Component = React.createClass({
   componentDidMount: function () {
+    document.title = "Slate Robotics";
     window.scrollTo(0,0);
     $("#tr1-heading").delay(500).fadeIn(1000);
     $("#tr1-footer").delay(1000).fadeIn(1000);

@@ -5,6 +5,7 @@ var ButtonPrimary = require('../Button/Index.jsx').Primary;
 
 var Component = React.createClass({
   componentDidMount: function () {
+    document.title = "Terms and Conditions - Slate Robotics";
     window.scrollTo(0,0);
   },
 

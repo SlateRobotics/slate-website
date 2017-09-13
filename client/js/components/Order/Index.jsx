@@ -64,6 +64,7 @@ var Component = React.createClass({
   },
 
   componentDidMount: function () {
+    document.title = "Order Details - Slate Robotics";
     window.scrollTo(0,0);
   },
 
