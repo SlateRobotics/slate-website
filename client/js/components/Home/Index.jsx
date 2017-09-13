@@ -19,11 +19,43 @@ var Component = React.createClass({
   render: function() {
     return (
       <div className="container-fluid" style={Style.container}>
-        <div className="row" style={{
+        <div className="row hidden-lg hidden-md hidden-sm" style={{
             color:"white",
             backgroundImage:"url('/img/slate-tr1-1')",
             backgroundPosition:"center top",
-            backgroundColor:"#262626",
+            backgroundColor:"#222",
+            backgroundRepeat:"no-repeat",
+            backgroundSize:"800px 500px",
+          }}>
+          <div
+            className="col-lg-10 col-xs-12 col-centered"
+            style={{
+              overflowX:"hidden",
+              height:"500px",
+              position:"relative",
+            }}>
+            <div style={{
+                position:"absolute",
+                top:"0",
+                left:"10px",
+                textAlign:"left"
+              }}>
+              <h1>
+                Slate
+                <br />
+                TR1
+              </h1>
+              <ButtonPrimary
+                label={"Learn more"}
+                onClick={this.handleClick_LearnMore} />
+            </div>
+          </div>
+        </div>
+        <div className="row hidden-xs" style={{
+            color:"white",
+            backgroundImage:"url('/img/slate-tr1-1')",
+            backgroundPosition:"center top",
+            backgroundColor:"#222",
             backgroundRepeat:"no-repeat",
             backgroundSize:"1122px 700px",
           }}>
@@ -47,20 +79,18 @@ var Component = React.createClass({
               <h1 style={{fontSize:"48px"}} className="hidden-lg hidden-md hidden-xs">
                 Slate TR1
               </h1>
-              <h1 className="hidden-lg hidden-md hidden-sm">
-                Slate
-                <br />
-                TR1
-              </h1>
               <h3 className="hidden-sm hidden-xs">
                 Human-sized robot for hackers
               </h3>
               <h4 className="hidden-lg hidden-md hidden-xs">
                 Human-sized robot for hackers
               </h4>
-              <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}} className="hidden-xs">Learn More {">"}</Link>
-              <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}} className="hidden-lg hidden-md hidden-sm">Details {">"}</Link>
-              <Link to="/shop/tr1" style={{color:"#fff"}} className="hidden-xs">Buy {">"}</Link>
+              <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}}>
+                Learn More {">"}
+              </Link>
+              <Link to="/shop/tr1" style={{color:"#fff"}}>
+                Buy {">"}
+              </Link>
             </div>
           </div>
           <div
