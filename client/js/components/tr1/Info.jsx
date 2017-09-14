@@ -7,20 +7,19 @@ var MenuButton = require('./MenuButton.jsx');
 var Component = React.createClass({
   render: function() {
     return (
-      <div className="row" style={{marginTop:"34px",textAlign:"left"}}>
-        <div className="hidden-lg hidden-md col-xs-12" style={{
-            backgroundColor:"#222",
-            color:"#fff",
-          }}>
+      <div className="row" style={{
+          marginTop:"34px",
+          textAlign:"left",
+          backgroundColor:"#222",
+          color:"#fff",
+        }}>
+        <div className="hidden-lg hidden-md col-xs-12">
           <h1 style={{fontSize:"95px"}}>
             Slate TR1
           </h1>
           <h4 style={{fontSize:"32px"}}>
             A human-sized robot for hackers
           </h4>
-          <div style={Style.buttonContainer}>
-            <h3>Starting at $2,499</h3>
-          </div>
         </div>
         <div className="col-md-6 hidden-sm hidden-xs" style={{
             height:"800px",
@@ -64,10 +63,6 @@ var Component = React.createClass({
             <div>• 3 DOF head w/ Kinect 2.0</div>
             <div>• NVIDIA Jetson embedded development system</div>
             <div>• 8 to 12 hour battery life</div>
-          </div>
-          <div style={Style.buttonContainer}>
-            <h3>Starting at $2,499</h3>
-            <MenuButton to="/shop/tr1" label="Buy" />
           </div>
         </div>
       </div>

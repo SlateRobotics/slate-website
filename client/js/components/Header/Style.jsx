@@ -9,7 +9,7 @@ module.exports = {
     width: "100%",
     height:"44px",
     position: "fixed",
-    zIndex: "1",
+    zIndex: "9",
     borderBottom: "1px solid #ccc",
   },
   navigationMobile: {
@@ -67,7 +67,7 @@ module.exports = {
     padding: "0",
     width: "100%",
     display: "none",
-    zIndex: "2",
+    zIndex: "9",
     position: "absolute",
     top: "44px",
     right: "0",

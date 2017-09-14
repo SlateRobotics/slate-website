@@ -2,11 +2,11 @@ var React = require('react');
 var Style = require('./Style.jsx');
 var Menu = require('./Menu.jsx');
 var Info = require('./Info.jsx');
-var Arms = require('./Arms.jsx');
-var Base = require('./Base.jsx');
-var Torso = require('./Torso.jsx');
-var Kinect = require('./Kinect.jsx');
-var OtherDetails = require('./Other.jsx');
+var Detail1 = require('./Detail1.jsx');
+var Detail2 = require('./Detail2.jsx');
+var Detail3 = require('./Detail3.jsx');
+var Detail4 = require('./Detail4.jsx');
+var Detail5 = require('./Detail5.jsx');
 var BottomMenu = require('./BottomMenu.jsx');
 
 var Component = React.createClass({
@@ -20,11 +20,11 @@ var Component = React.createClass({
       <div className="container-fluid" style={Style.container}>
         <Menu />
         <Info />
-        <Arms />
-        <Base />
-        <Torso />
-        <Kinect />
-        <OtherDetails />
+        <Detail1 />
+        <Detail2 />
+        <Detail3 />
+        <Detail4 />
+        <Detail5 />
         <BottomMenu />
       </div>
     );
