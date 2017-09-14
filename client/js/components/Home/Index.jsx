@@ -30,7 +30,6 @@ var Component = React.createClass({
           <div
             className="col-lg-10 col-xs-12 col-centered"
             style={{
-              overflowX:"hidden",
               height:"500px",
               position:"relative",
             }}>
@@ -62,7 +61,6 @@ var Component = React.createClass({
           <div
             className="col-lg-10 col-xs-12 col-centered"
             style={{
-              overflowX:"hidden",
               height:"700px",
               position:"relative",
             }}>
