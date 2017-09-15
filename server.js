@@ -7,9 +7,9 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 
-// var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
-// var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
-// var credentials = {key: privateKey, cert: certificate};
+var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
 
 var app = express();
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, "config.json"), "utf8"));
@@ -34,15 +34,17 @@ app.use(function (req, res, next) {
 require('./server/config/session') (app);
 app.use('/', require('./server/router'));
 
-// var httpServer = express.createServer();
-// var httpsServer = https.createServer(credentials, app);
-//
-// http.get('*',function(req,res){
-//     res.redirect('https://slaterobots.com'+req.url)
-// });
-//
-// httpServer.listen(80);
-// httpsServer.listen(443)
+var httpServer = express();
+var httpsServer = https.createServer(credentials, app);
 
-app.listen(80);
+httpServer.all("*", function (req, res, next) {
+  if(req.secure) {
+    return next();
+  };
+  res.redirect('https://' + req.hostname + req.url);
+});
+
+httpServer.listen(80);
+httpsServer.listen(443)
+
 console.log('Slate Website on port 80, 443');
