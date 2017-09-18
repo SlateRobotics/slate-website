@@ -16,7 +16,7 @@ var Component = React.createClass({
           className="col-md-6 col-xs-12"
           style={{backgroundColor:"#45415E",color:"#fff",padding:"35px 0px",cursor:"pointer"}}
           onClick={this.handleClick_Buy}>
-          <h1>Buy Now</h1>
+          <h1>Pre-order</h1>
         </div>
       </div>
     );

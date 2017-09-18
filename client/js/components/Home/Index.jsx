@@ -87,7 +87,7 @@ var Component = React.createClass({
                 Learn More {">"}
               </Link>
               <Link to="/shop/tr1" style={{color:"#fff"}}>
-                Buy {">"}
+                Pre-order {">"}
               </Link>
             </div>
           </div>

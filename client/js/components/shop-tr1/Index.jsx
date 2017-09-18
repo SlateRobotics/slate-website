@@ -79,7 +79,7 @@ var Component = React.createClass({
             <div className="row" style={{paddingBottom:"30px"}}>
               <div className="col-xs-12" style={{padding:"5px 0px",color:"#da383c"}}>
                 <b>
-                  NOTE: TR1 is on back-order. Orders placed today can
+                  NOTE: TR1 is on pre-order. Orders placed today can
                   be expected to ship by 12/15/2017
                 </b>
               </div>
