@@ -168,6 +168,18 @@ router.get('/icon-chip', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/icon-chip.png'));
 });
 
+router.get('/icon-warranty', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-warranty.png'));
+});
+
+router.get('/icon-support', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-support.png'));
+});
+
+router.get('/icon-chat', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-chat.png'));
+});
+
 router.get('/ubuntu', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/ubuntu.jpg'));
 });

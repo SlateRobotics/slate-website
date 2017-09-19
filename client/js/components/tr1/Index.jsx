@@ -25,7 +25,6 @@ var Component = React.createClass({
         <Detail3 />
         <Detail4 />
         <Detail5 />
-        <BottomMenu />
       </div>
     );
   },

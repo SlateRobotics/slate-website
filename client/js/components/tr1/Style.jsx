@@ -107,8 +107,8 @@ module.exports = {
     paddingTop:"75px",
   },
   detail5Container: {
-    backgroundColor:"#fff",
-    color:"#222",
+    backgroundColor:"#222",
+    color:"#fff",
     paddingBottom:"75px",
     paddingTop:"75px",
   },

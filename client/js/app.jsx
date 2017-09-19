@@ -21,6 +21,7 @@ var Order = require('./components/Order/Index.jsx');
 var About = require('./components/About/Index.jsx');
 var PrivacyPolicy = require('./components/PrivacyPolicy/Index.jsx');
 var TermsAndConditions = require('./components/TermsAndConditions/Index.jsx');
+var SalesPolicies = require('./components/SalesPolicies/Index.jsx');
 
 function handleRouterUpdate () {
 	$("#menu-sub").slideUp("fast");
@@ -43,6 +44,7 @@ var Routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
 		<Route path="/about" component={About} />
+		<Route path="/sales-policies" component={SalesPolicies} />
 		<Route path="/privacy-policy" component={PrivacyPolicy} />
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />
 		<Route path="/tr1" component={tr1} />

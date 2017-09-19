@@ -218,6 +218,50 @@ var Component = React.createClass({
     return (
       <div className="row">
 
+      {/* WHAT IS TR1 */}
+      <div className="container-fluid" style={Style.detail1Container}>
+        <div className="row" style={{padding:"75px 0px"}}>
+          <div className="col-md-8 col-xs-12 col-centered">
+            <h1 style={{paddingBottom:"25px"}}>
+              What is the TR1?
+            </h1>
+            <div style={{textAlign:"left"}}>
+              <p>
+                The Slate TR1 is a human-sized, programmable robot
+                from Slate Robotics. The TR1 is designed to give
+                hackers, programmers, and engineers a research-grade,
+                top-of-the-line robot development platform for about
+                the price of a MacBook Pro.
+              </p>
+              <p>
+                The Slate TR1 is powered by a popular Linux distribution,
+                Ubuntu, which gives you the power to do whatever you want
+                with the robot. Once the robot is on your home network,
+                you can connect to the on-board computer via SSH or VNC--or
+                through the exposed HDMI port, if needed. Any programming
+                language that can interface with the I2C bus on the operating
+                system can be used to program the robot! You could program in
+                Javascript w/ Node.js should you so desire!
+              </p>
+              <p>
+                One of our major goals is to nurture an open-source community
+                of hackers who are building stuff with the TR1. The major
+                advantage of building a robot for the hacker--in contrast to,
+                say, research institutions--is that millions of people get
+                to build stuff--compared to a few thousand. Towards this end,
+                we have open-sourced all proprietary code that comes
+                pre-installed on the TR1, which can be seen on our
+                {" "}
+                <a href="https://github.com/SlateRobotics" style={{color:"#fff"}}>
+                  GitHub
+                </a>{" "}
+                page.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
         {/* ---DESKTOP--- */}
         <div className="container-fluid hidden-xs" style={Style.detail1Container}>
