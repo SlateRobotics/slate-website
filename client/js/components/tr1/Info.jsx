@@ -58,13 +58,11 @@ var Component = React.createClass({
           </h4>
           <div style={{padding:"15px 0px"}}>
             <ul>
-              <li>Two, 7 DOF arms</li>
+              <li>Two, 7-axis arms</li>
               <li>Omni-drive mobile base</li>
-              <li>Actuated torso - extends up to 12in (300mm)</li>
-              <li>3 DOF head w/ Kinect 2.0</li>
+              <li>3-axis head w/ Kinect 2.0</li>
               <li>NVIDIA Jetson embedded development system</li>
-              <li>ROS Pre-installed</li>
-              <li>8 to 12 hour battery life</li>
+              <li>ROS Compatable & Pre-installed</li>
             </ul>
           </div>
         </div>

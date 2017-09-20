@@ -2,6 +2,7 @@ var React = require('react');
 var Style = require('./Style.jsx');
 var Menu = require('./Menu.jsx');
 var Info = require('./Info.jsx');
+var InfoRibbon = require('./InfoRibbon.jsx');
 var Detail1 = require('./Detail1.jsx');
 var Detail2 = require('./Detail2.jsx');
 var Detail3 = require('./Detail3.jsx');
@@ -20,6 +21,7 @@ var Component = React.createClass({
       <div className="container-fluid" style={Style.container}>
         <Menu />
         <Info />
+        <InfoRibbon />
         <Detail1 />
         <Detail2 />
         <Detail3 />
