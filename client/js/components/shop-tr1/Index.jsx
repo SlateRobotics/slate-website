@@ -76,15 +76,7 @@ var Component = React.createClass({
         </div>
         <div className="row" style={{marginTop:"34px"}}>
           <div className="col-md-10 col-xs-12 col-centered">
-            <div className="row" style={{paddingBottom:"30px"}}>
-              <div className="col-xs-12" style={{padding:"5px 0px",color:"#da383c"}}>
-                <b>
-                  NOTE: TR1 is on pre-order. Orders placed today can
-                  be expected to ship by 12/15/2017
-                </b>
-              </div>
-            </div>
-            <div className="row">
+            <div className="row" style={{paddingTop:"15px"}}>
               <div className="col-md-6 col-sm-12 hidden-xs">
                 <img src="/img/slate-tr1-specs-2" style={{height:"400px",maxWidth:"100%"}} />
                 <div className="hidden-lg hidden-md" style={{paddingBottom:"15px"}} />
@@ -109,8 +101,20 @@ var Component = React.createClass({
                       label={"Checkout"}
                       onClick={this.handleClick_Checkout} />
                   </div>
-                  <div style={{paddingTop:"15px",fontStyle:"italic",fontSize:"14px"}}>
-                    Estimated Shipment Date: 12/15/2017
+                  <div style={{
+                      paddingTop:"15px",
+                      fontStyle:"italic",
+                      fontSize:"14px"
+                    }}>
+                      <h4 style={{color:"#ff7600"}}>Pre-order Item</h4>
+                      <div>
+                        {"Order within "}
+                        <span style={{color:"green"}}>
+                          {this.getRemainingDays()} days
+                        </span>
+                        {" and have it delivered by "}
+                        <b>{"Friday, Dec. 15"}</b>
+                      </div>
                   </div>
                 </div>
                 <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
@@ -208,15 +212,6 @@ var Component = React.createClass({
                     index={3}
                     onClick={this.handleClick_ConfigItem} />
                 </div>
-                <div>
-                  <h3>{this.getTotalString()}</h3>
-                  <ButtonPrimary
-                    label={"Checkout"}
-                    onClick={this.handleClick_Checkout} />
-                </div>
-                <div style={{paddingTop:"15px",paddingBottom:"35px",fontStyle:"italic",fontSize:"14px"}}>
-                  Estimated Shipment Date: 12/15/2017
-                </div>
               </div>
             </div>
           </div>
@@ -238,6 +233,14 @@ var Component = React.createClass({
       CartStore.update(doc);
     }.bind(this));
     BrowserHistory.push("/checkout");
+  },
+
+  getRemainingDays: function () {
+    var date1 = new Date();
+    var date2 = new Date("11/1/2017");
+    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return diffDays;
   },
 
   getOverviewText: function (index, arrayName, arrayPrice) {

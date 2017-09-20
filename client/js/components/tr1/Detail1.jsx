@@ -220,44 +220,66 @@ var Component = React.createClass({
 
       {/* WHAT IS TR1 */}
       <div className="container-fluid" style={Style.detail1Container}>
-        <div className="row" style={{padding:"75px 0px"}}>
-          <div className="col-md-8 col-xs-12 col-centered">
-            <h1 style={{paddingBottom:"25px"}}>
-              What is the TR1?
-            </h1>
-            <div style={{textAlign:"left"}}>
-              <p>
-                The Slate TR1 is a human-sized, programmable robot
-                from Slate Robotics. The TR1 is designed to give
-                hackers, programmers, and engineers a research-grade,
-                top-of-the-line robot development platform for about
-                the price of a MacBook Pro.
-              </p>
-              <p>
-                The Slate TR1 is powered by a popular Linux distribution,
-                Ubuntu, which gives you the power to do whatever you want
-                with the robot. Once the robot is on your home network,
-                you can connect to the on-board computer via SSH or VNC--or
-                through the exposed HDMI port, if needed. Any programming
-                language that can interface with the I2C bus on the operating
-                system can be used to program the robot! You could program in
-                Javascript w/ Node.js should you so desire!
-              </p>
-              <p>
-                One of our major goals is to nurture an open-source community
-                of hackers who are building stuff with the TR1. The major
-                advantage of building a robot for the hacker--in contrast to,
-                say, research institutions--is that millions of people get
-                to build stuff--compared to a few thousand. Towards this end,
-                we have open-sourced all proprietary code that comes
-                pre-installed on the TR1, which can be seen on our
-                {" "}
-                <a href="https://github.com/SlateRobotics" style={{color:"#fff"}}>
-                  GitHub
-                </a>{" "}
-                page.
-              </p>
+        <div className="row" style={{paddingTop:"75px"}}>
+          <div className="col-lg-10 col-xs-12 col-centered">
+            <div className="row" style={{borderTop:"1px solid #ccc",paddingTop:"75px"}} />
+            <div className="row">
+              <div className="col-md-4 col-xs-12">
+                <img src="/img/icon-info" style={{height:"75px",width:"75px"}} />
+                <h2 style={{paddingBottom:"25px"}}>
+                  What is it?
+                </h2>
+                <div style={{textAlign:"left"}}>
+                  <p>
+                    The Slate TR1 is a robot development platform.
+                  </p>
+                  <p>
+                    It is human-sized and mobile, so that it can work in a
+                    variety of human environments. The embedded computer features
+                    an integrated GPU and CUDA computing platform, which makes
+                    it perfect for vision, machine learning, and AI tasks.
+                  </p>
+                </div>
+              </div>
+              <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{marginTop:"25px"}} />
+              <div className="col-md-4 col-xs-12">
+                <img src="/img/icon-person" style={{height:"75px",width:"75px"}} />
+                <h2 style={{paddingBottom:"25px"}}>
+                  Who is it for?
+                </h2>
+                <div style={{textAlign:"left"}}>
+                  <p>
+                    The Slate TR1 is for programmers.
+                  </p>
+                  <p>
+                    The robot will feel intimately familiar to anyone who has
+                    spun up an EC2 instance, programmed a Node.js server, or
+                    trained a CNN in TensorFlow—even better if you've done all
+                    three.
+                  </p>
+                </div>
+              </div>
+              <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{marginTop:"25px"}} />
+              <div className="col-md-4 col-xs-12">
+                <img src="/img/icon-money" style={{height:"75px",width:"75px"}} />
+                <h2 style={{paddingBottom:"25px"}}>
+                  Why buy it?
+                </h2>
+                <div style={{textAlign:"left"}}>
+                  <p>
+                    It's challenging.
+                  </p>
+                  <p>
+                    The Slate TR1 lets you work on challenging problems that are
+                    unique to human-scale robotics, and the solutions to these
+                    problems will shape the world over the coming decades. Also,
+                    it{"'"}s exhilarating to train a CNN that your robot uses to
+                    detect and pick up obstacles around your house!
+                  </p>
+                </div>
+              </div>
             </div>
+            <div className="row" style={{borderBottom:"1px solid #ccc",paddingBottom:"75px"}} />
           </div>
         </div>
       </div>

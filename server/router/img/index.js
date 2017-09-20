@@ -180,6 +180,22 @@ router.get('/icon-chat', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/icon-chat.png'));
 });
 
+router.get('/icon-missing-person', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-missing-person.png'));
+});
+
+router.get('/icon-person', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-person.png'));
+});
+
+router.get('/icon-info', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-info.png'));
+});
+
+router.get('/icon-money', function (req, res, next) {
+	res.sendFile(path.join(__dirname, _root, '/icon-money.png'));
+});
+
 router.get('/ubuntu', function (req, res, next) {
 	res.sendFile(path.join(__dirname, _root, '/ubuntu.jpg'));
 });

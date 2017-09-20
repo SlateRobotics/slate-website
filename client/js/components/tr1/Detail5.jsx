@@ -7,7 +7,7 @@ var Component = React.createClass({
     return (
       <div className="row">
         <div className="container-fluid" style={Style.detail5Container}>
-          <div className="row" style={{padding:"75px inherit"}}>
+          <div className="row">
             <div className="col-lg-10 col-xs-12 col-centered">
               <div className="row" style={{borderTop:"1px solid #ccc",paddingTop:"75px"}} />
               <div className="row">
@@ -28,7 +28,7 @@ var Component = React.createClass({
                   <h3>Technical Support</h3>
                   <p>
                     Free technical support is available everyday from
-                    7:30 AM to midnight.
+                    7:30 AM to midnight CST.
                   </p>
                   <Link to="/support" style={{color:"#fff"}}>
                     {"Learn more >"}
