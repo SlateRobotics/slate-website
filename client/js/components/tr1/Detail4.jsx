@@ -79,7 +79,7 @@ var Component = React.createClass({
                     <div className="col-xs-4">
                       <img src="/img/icon-chip" height="50" width="50" />
                       <div style={{marginTop:"5px"}}></div>
-                      <p>GPU + CPU Integrated Chip</p>
+                      <p>Up to 8GB 128 bit memory</p>
                     </div>
                     <div className="col-xs-4">
                       <img src="/img/icon-cuda" height="50" width="50" />
@@ -107,10 +107,10 @@ var Component = React.createClass({
                   {/* icon descriptions */}
                   <div className="row hidden-xs" style={Style.iconDescriptionContainer}>
                     <div className="col-sm-4">
-                      <p>GPU + CPU Integrated Chip</p>
+                      <p>Up to 8GB 128 bit memory</p>
                     </div>
                     <div className="col-sm-4">
-                      <p>CUDA Platform</p>
+                      <p>CUDA Parallel Computing Platform</p>
                     </div>
                     <div className="col-sm-4">
                       <p>Wifi + Bluetooth Connectivity</p>

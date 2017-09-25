@@ -16,7 +16,7 @@ var Component = React.createClass({
                   <h2 style={{paddingBottom:"25px"}}>
                     What is it?
                   </h2>
-                  <div style={{textAlign:"left"}}>
+                  <div style={{textAlign:"justify"}}>
                     <p>
                       A robot development platform.
                     </p>
@@ -34,7 +34,7 @@ var Component = React.createClass({
                   <h2 style={{paddingBottom:"25px"}}>
                     Who is it for?
                   </h2>
-                  <div style={{textAlign:"left"}}>
+                  <div style={{textAlign:"justify"}}>
                     <p>
                       Programmers.
                     </p>
@@ -52,15 +52,15 @@ var Component = React.createClass({
                   <h2 style={{paddingBottom:"25px"}}>
                     Why buy it?
                   </h2>
-                  <div style={{textAlign:"left"}}>
+                  <div style={{textAlign:"justify"}}>
                     <p>
-                      It's challenging.
+                      It's challenging, exciting, and critical.
                     </p>
                     <p>
                       The Slate TR1 lets you work on challenging problems that are
                       unique to human-scale robotics, and the solutions to these
-                      problems will shape the world over the coming decades. Also,
-                      it{"'"}s exhilarating to train a CNN that your robot uses to
+                      problems will shape the world over the coming decades.
+                      It is exhilarating to train a CNN that your robot uses to
                       detect and pick up obstacles around your house!
                     </p>
                   </div>

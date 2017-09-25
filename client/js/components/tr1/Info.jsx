@@ -58,11 +58,11 @@ var Component = React.createClass({
           </h4>
           <div style={{padding:"15px 0px"}}>
             <ul>
-              <li>Two, 7-axis arms</li>
+              <li>Two, 7-axis arms w/ 4.5 kg (10 lb) payload</li>
               <li>Omni-drive mobile base</li>
-              <li>3-axis head w/ Kinect 2.0</li>
+              <li>Kinect 2.0 integrated vision system</li>
               <li>NVIDIA Jetson embedded development system</li>
-              <li>ROS Compatable & Pre-installed</li>
+              <li>ROS Pre-installed</li>
             </ul>
           </div>
         </div>
