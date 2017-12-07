@@ -113,7 +113,7 @@ var Component = React.createClass({
                           {this.getRemainingDays()} days
                         </span>
                         {" and have it delivered by "}
-                        <b>{"Friday, Feb. 15"}</b>
+                        <b>{"Thursday, Feb. 15"}</b>
                       </div>
                   </div>
                 </div>
