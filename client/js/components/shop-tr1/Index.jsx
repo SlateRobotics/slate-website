@@ -113,7 +113,7 @@ var Component = React.createClass({
                           {this.getRemainingDays()} days
                         </span>
                         {" and have it delivered by "}
-                        <b>{"Friday, Dec. 15"}</b>
+                        <b>{"Friday, Feb. 15"}</b>
                       </div>
                   </div>
                 </div>
@@ -237,7 +237,7 @@ var Component = React.createClass({
 
   getRemainingDays: function () {
     var date1 = new Date();
-    var date2 = new Date("11/1/2017");
+    var date2 = new Date("2/1/2018");
     var timeDiff = Math.abs(date2.getTime() - date1.getTime());
     var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return diffDays;

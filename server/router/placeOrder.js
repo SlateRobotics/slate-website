@@ -214,7 +214,7 @@ router.post('/', function (req, res) {
     order.total = order.subtotal + order.tax;
     order.createdOn = Date(new Date().getTime());
     order.status = "placed";
-    order.expectedShipmentDate = new Date("2017-12-15 12:00:00 UTC");
+    order.expectedShipmentDate = new Date("2018-02-15 12:00:00 UTC");
     order.token = token();
 
     var metadata = {};
