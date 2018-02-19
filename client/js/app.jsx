@@ -13,6 +13,7 @@ var Home = require('./components/Home/Index.jsx');
 var tr1 = require('./components/tr1/Index.jsx');
 var tr1Specs = require('./components/tr1-specs/Index.jsx');
 var tr1Shop = require('./components/shop-tr1/Index.jsx');
+var Printing = require('./components/Printing/Index.jsx');
 var Support = require('./components/Support/Index.jsx');
 var Checkout = require('./components/Checkout/Index.jsx');
 var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
@@ -49,6 +50,7 @@ var Routes = (
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />
 		<Route path="/tr1" component={tr1} />
 		<Route path="/tr1/specs" component={tr1Specs} />
+		<Route path="/printing" component={Printing} />
 		<Route path="/support" component={Support} />
 		<Route path="/shop/tr1" component={tr1Shop} />
 		<Route path="/checkout" component={Checkout} />
