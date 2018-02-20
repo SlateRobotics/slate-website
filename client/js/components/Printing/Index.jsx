@@ -51,7 +51,7 @@ var Component = React.createClass({
                 <li>24 to 48 hour shipping time for most orders</li>
                 <li>Free print post-processing: filling, sanding, and painting</li>
               </ul>
-              <h3>
+              <h3 style={{backgroundColor:"#e6e6e6",padding:"25px",borderRadius:"15px"}}>
                 <span>
                   For a quote, email{" "}
                 </span>
