@@ -8,7 +8,7 @@ var EmailSender = require('../components/EmailSender');
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, "../../config.json"), "utf8"));
 var stripe = require('stripe')(config.stripe.secret);
 
-var basePrice = 2499;
+var basePrice = 2999;
 var computer = [0, 300, 400];
 var linearActuator = [0, 50];
 var battery = [0, 30];
@@ -214,7 +214,7 @@ router.post('/', function (req, res) {
     order.total = order.subtotal + order.tax;
     order.createdOn = Date(new Date().getTime());
     order.status = "placed";
-    order.expectedShipmentDate = new Date("2018-03-31 12:00:00 UTC");
+    order.expectedShipmentDate = new Date("2018-07-01 12:00:00 UTC");
     order.token = token();
 
     var metadata = {};

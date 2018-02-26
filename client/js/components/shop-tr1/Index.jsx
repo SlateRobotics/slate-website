@@ -7,7 +7,7 @@ var ConfigItem = require('./ConfigItem.jsx');
 
 var CartStore = require('../../stores').cart;
 
-var basePrice = 2499;
+var basePrice = 2999;
 var computer = [0, 300, 400];
 var computerName = ["NVIDIA Jetson TK1", "NVIDIA Jetson TX1", "NVIDIA Jetson TX2"];
 var linearActuator = [0, 50];
@@ -89,7 +89,7 @@ var Component = React.createClass({
                 <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
                   <h1 style={{marginTop:"0px"}}>TR1.config</h1>
                   <div style={{lineHeight:"150%"}}>
-                    <div style={{color:"#aaa"}}>Base Price ($2,499.00)</div>
+                    <div style={{color:"#aaa"}}>Base Price ($2,999.00)</div>
                     <div>{this.getOverviewText(this.state.computer, computerName, computer)}</div>
                     <div>{this.getOverviewText(this.state.linearActuator, linearActuatorName, linearActuator)}</div>
                     <div>{this.getOverviewText(this.state.battery, batteryName, battery)}</div>
@@ -108,13 +108,16 @@ var Component = React.createClass({
                     }}>
                       <h4 style={{color:"#ff7600"}}>Pre-order Item</h4>
                       <div>
+                        Orders are expected to ship July 2018
+                      </div>
+                      {/*<div>
                         {"Order within "}
                         <span style={{color:"green"}}>
                           {this.getRemainingDays()} days
                         </span>
                         {" and have it delivered by "}
                         <b>{"Saturday, Mar. 31"}</b>
-                      </div>
+                      </div>*/}
                   </div>
                 </div>
                 <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
