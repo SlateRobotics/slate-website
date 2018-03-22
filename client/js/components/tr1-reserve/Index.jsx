@@ -61,23 +61,28 @@ var Component = React.createClass({
       <div className="container-fluid" style={Style.container}>
         <div className="row" style={{marginTop:"34px"}}>
           <div className="col-md-10 col-xs-12 col-centered"
-            style={{ textAlign:"left",paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
+            style={{ textAlign:"left",paddingBottom:"25px",borderBottom:"1px solid #ccc", fontSize:"14px"}}>
             <h1>
               Reserve your TR1
             </h1>
             <p>
-              By placing your reservation, you save your place in line
-              for delivery priority and are placing a down payment
-              on your future TR1 order. Your reservation may be cancelled at
-              any time, in which case you will receive a full refund of
-              your payment.
+              By placing your reservation, you ensure that you are
+              among the first to get a TR1. Orders will be fulfilled based on
+              the rank order of reservation payments by their reservation date.
+              The reservation payment will be deducted from your final order
+              payment in the future.
             </p>
             <p>
-              This helps us tremendously in ramping up production and putting
+              This helps us tremendously in ramping
+              up production and putting
               all of the proper building blocks in place for a smooth fulfillment
               process. It{"\'"}s a way for us to judge how many people are
               really serious about ordering a TR1 without asking for the full
               payment amount way in advance.
+            </p>
+            <p>
+              Your reservation may be cancelled at any time, in which case
+              you will receive a full refund of your payment.
             </p>
             <p>
               The Slate Robotics TR1 will begin delivery of the first
