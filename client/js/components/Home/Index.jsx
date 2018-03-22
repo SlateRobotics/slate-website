@@ -45,7 +45,7 @@ var Component = React.createClass({
                 TR1
               </h1>
               <ButtonPrimary
-                label={"Learn more"}
+                label={"Learn more >"}
                 onClick={this.handleClick_LearnMore} />
             </div>
           </div>
