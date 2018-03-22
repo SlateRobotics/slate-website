@@ -20,11 +20,11 @@ var cardStyle = {
     lineHeight: '24px'
   }
 };
-var card = elements.create('card', {style: cardStyle});
 
 var Component = React.createClass({
   getInitialState: function () {
     return {
+      card: '',
       total: 0,
       page: 0,
       isLoading: false,
@@ -33,12 +33,15 @@ var Component = React.createClass({
   },
 
   componentWillMount: function () {
+    var state = this.state;
+    state.card = elements.create('card', {style: cardStyle});
+    this.setState(state);
+
     CartStore.getOne(0, function (doc) {
       if (!doc) {
         return BrowserHistory.push("/shop/tr1");
       }
 
-      var state = {};
       state.total = doc.total;
       this.setState(state);
     }.bind(this));
@@ -47,6 +50,12 @@ var Component = React.createClass({
   componentDidMount: function () {
     document.title = "Checkout - Slate Robotics";
     window.scrollTo(0,0);
+  },
+
+  componentWillUnmount: function () {
+    this.state.card.unmount("#card-element");
+    this.state.card.clear();
+    this.state.card.destroy();
   },
 
   render: function() {
@@ -113,7 +122,7 @@ var Component = React.createClass({
 
   getPage: function () {
     var page = pages[this.state.page];
-    return React.createElement(page, {next: this.handleClick_Next, card: card});
+    return React.createElement(page, {next: this.handleClick_Next, card: this.state.card});
   },
 
   getErrorsMapped: function () {
@@ -217,7 +226,7 @@ var Component = React.createClass({
     this.validateData(false, function (errors) {
       if (!errors || errors.length == 0) {
         CartStore.getOne(0, function (doc) {
-          stripe.createToken(card).then(function(result) {
+          stripe.createToken(this.state.card).then(function(result) {
             if (result.error) {
               var state = this.state;
               state.isLoading = false;

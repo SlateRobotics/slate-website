@@ -56,15 +56,9 @@ var Component = React.createClass({
           <h4 style={{fontSize:"32px"}}>
             A human-sized robot for hackers
           </h4>
-          <div style={{padding:"15px 0px"}}>
-            <ul>
-              <li>Two, 7-axis arms w/ 4.5 kg (10 lb) payload</li>
-              <li>Omni-drive mobile base</li>
-              <li>Kinect 2.0 integrated vision system</li>
-              <li>NVIDIA Jetson embedded development system</li>
-              <li>ROS Pre-installed</li>
-            </ul>
-          </div>
+          <h4 style={{paddingTop:"20px"}}>
+            Starting at just $2,999
+          </h4>
         </div>
       </div>
     );

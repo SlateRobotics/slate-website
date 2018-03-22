@@ -86,8 +86,8 @@ var Component = React.createClass({
               <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}}>
                 Learn More {">"}
               </Link>
-              <Link to="/shop/tr1" style={{color:"#fff"}}>
-                Pre-order {">"}
+              <Link to="/tr1/reserve" style={{color:"#fff"}}>
+                Reserve Yours {">"}
               </Link>
             </div>
           </div>
@@ -108,7 +108,7 @@ var Component = React.createClass({
                 bottom:"0"
               }}>
               <span style={{fontStyle:"italic",lineHeight:"38px"}}>
-                Starting at $2,499
+                Starting at $2,999
               </span>
             </div>
             <div id="tr1-control-toggle" style={{
@@ -122,46 +122,55 @@ var Component = React.createClass({
             </div>
           </div>
         </div>
-        <div className="row" style={{
-            padding:"150px 0px",
-          }}>
-          <div className="col-md-8 col-xs-12 col-centered">
-            <h1 style={{fontSize:"64px",paddingBottom:"25px"}}>
-              What is the TR1?
-            </h1>
-            <div style={{textAlign:"left"}}>
-              <p>
-                The Slate TR1 is a human-sized, programmable robot
-                from Slate Robotics. The TR1 is designed to give
-                hackers, programmers, and engineers a research-grade,
-                top-of-the-line robot development platform for about
-                the price of a MacBook Pro.
-              </p>
-              <p>
-                The Slate TR1 is powered by a popular Linux distribution,
-                Ubuntu, which gives you the power to do whatever you want
-                with the robot. Once the robot is on your home network,
-                you can connect to the on-board computer via SSH or VNC--or
-                through the exposed HDMI port, if needed. Any programming
-                language that can interface with the I2C bus on the operating
-                system can be used to program the robot! You could program in
-                Javascript w/ Node.js should you so desire!
-              </p>
-              <p>
-                One of our major goals is to nurture an open-source community
-                of hackers who are building stuff with the TR1. The major
-                advantage of building a robot for the hacker--in contrast to,
-                say, research institutions--is that millions of people get
-                to build stuff--compared to a few thousand. Towards this end,
-                we have open-sourced all proprietary code that comes
-                pre-installed on the TR1, which can be seen on our
-                {" "}<a href="https://github.com/SlateRobotics">GitHub</a>{" "}
-                page.
-              </p>
+        <div className="row" style={{padding:"100px 0px"}}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <h1 style={{paddingBottom:"25px"}}>
+                  Let's build the future of general purpose robots
+                </h1>
+                <div style={{textAlign:"justify"}}>
+                  <p>
+                    I used to dream of one day being able to sit down and program
+                    one of the super-advanced research robots like Willow Garage's PR2.
+                    My grades in high school and college weren't great, so I probably
+                    wasn't destined to work with one in UC Berkeley's Robotics
+                    and Intelligent Machines Lab. And with a price tag of $400,000,
+                    it's rather obvious how likely it is that I would just go out and
+                    buy one. This also made me realize that even if all
+                    of the hard problems of AI and perception were solved today,
+                    we still wouldn't get general purpose robot butlers, since
+                    the hardware cost problem hadn't been addressed.
+                  </p>
+                  <p>
+                    Naturally, I decided I would just try to build my own
+                    research robot that I could program and would be affordable
+                    enough for other people to program too. A year of hacking
+                    on hardware in my garage led to the development of the TR1,
+                    a human-sized platform with two, 7-DOF arms and a mobile,
+                    omnidirectional base for only $2,999.
+                  </p>
+                  <p>
+                    I hope affordable robots like the TR1 can do for personal
+                    robots what the Altair 8800 and the Apple II did for
+                    personal computing. Perhaps, if we can build a community of
+                    hackers and engineers around building tools and applications
+                    for robots like the TR1, we can begin to build the future of
+                    general purpose robots.
+                  </p>
+                  <p style={{fontStyle:"italic"}}>
+                    <b>Zach Allen</b><br/>
+                    Founder & CEO
+                  </p>
+                </div>
+                <ButtonPrimary
+                  label={"Learn more"}
+                  onClick={this.handleClick_LearnMore} />
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <img src="/img/slate-tr1-8" style={{maxWidth:"100%"}} />
+              </div>
             </div>
-            <ButtonPrimary
-              label={"Learn more"}
-              onClick={this.handleClick_LearnMore} />
           </div>
         </div>
       </div>

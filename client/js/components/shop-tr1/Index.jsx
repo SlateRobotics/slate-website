@@ -78,11 +78,11 @@ var Component = React.createClass({
           <div className="col-md-10 col-xs-12 col-centered">
             <div className="row" style={{paddingTop:"15px"}}>
               <div className="col-md-6 col-sm-12 hidden-xs">
-                <img src="/img/slate-tr1-specs-2" style={{height:"400px",maxWidth:"100%"}} />
+                <img src="/img/slate-tr1-9" style={{maxWidth:"100%"}} />
                 <div className="hidden-lg hidden-md" style={{paddingBottom:"15px"}} />
               </div>
                 <div className="hidden-lg hidden-md hidden-sm col-xs-12">
-                  <img src="/img/slate-tr1-specs-2" style={{minHeight:"300px",maxHeight:"400px",maxWidth:"100%"}} />
+                  <img src="/img/slate-tr1-9" style={{minHeight:"300px",maxHeight:"400px",maxWidth:"100%"}} />
                   <div style={{paddingBottom:"15px"}} />
                 </div>
               <div className="col-md-6 col-xs-12" style={{textAlign:"left"}}>

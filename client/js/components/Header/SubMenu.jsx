@@ -9,7 +9,6 @@ var SubMenu = React.createClass({
 		return (
   		<ul id="menu-sub" style={Style.subMenu} className="hidden-lg hidden-md hidden-sm">
 	  		<SubMenuListItem label={"TR1"} to={"/tr1"} onClick={this.handleClick_SubMenuListItem} />
-		  	<SubMenuListItem label={"3D Printing"} to={"/printing"} onClick={this.handleClick_SubMenuListItem} />
 		  	<SubMenuListItem label={"Support"} to="/support" onClick={this.handleClick_SubMenuListItem} />
   		</ul>
 		);

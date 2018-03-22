@@ -26,7 +26,7 @@ var Component = React.createClass({
                 <span style={{marginLeft:"25px"}} />
                 <span style={{color:"#666",cursor:"default",lineHeight:"34px"}}>Specs</span>
                 <span style={{marginLeft:"25px"}} />
-                <MenuButton to="/shop/tr1" label="Pre-order" />
+                <MenuButton to="/tr1/reserve" label="Reserve Yours" />
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@ var Component = React.createClass({
               <div style={{float:"right",fontSize:"14px"}}>
                 <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
                 <span style={{marginLeft:"25px"}} />
-                <MenuButton to="/shop/tr1" label="Pre-order" />
+                <MenuButton to="/tr1/reserve" label="Reserve Yours" />
               </div>
             </div>
           </div>
