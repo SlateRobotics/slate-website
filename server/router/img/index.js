@@ -27,11 +27,17 @@ router.get('*', function (req, res, next) {
 								if (err == null) {
 									res.sendFile(fileName + '.jpeg');
 								} else {
-									fs.stat(fileName + '.svg', function (err, stat) {
+									fs.stat(fileName + '.gif', function (err, stat) {
 										if (err == null) {
-											res.sendFile(fileName + '.svg');
+											res.sendFile(fileName + '.gif');
 										} else {
-											next();
+											fs.stat(fileName + '.svg', function (err, stat) {
+												if (err == null) {
+													res.sendFile(fileName + '.svg');
+												} else {
+													next();
+												}
+											});
 										}
 									});
 								}

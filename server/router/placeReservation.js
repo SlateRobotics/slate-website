@@ -95,7 +95,7 @@ router.post('/', function (req, res) {
   VerifyData(req, res);
   if (!errorOccurred) {
     var reservation = req.body;
-    reservation.total = 500;
+    reservation.total = 99;
     reservation.createdOn = Date(new Date().getTime());
     reservation.token = token();
 

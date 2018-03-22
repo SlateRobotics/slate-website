@@ -24,7 +24,13 @@
 </head>
 <body>
 	<script type="text/javascript">
-		var stripe = Stripe('pk_live_ze8hA2F83TUWD4s1pY5Fwn1K');
+		var stripe;
+		if (location.hostname == "localhost" || location.hostname == "127.0.0.1") {
+			stripe = Stripe('pk_test_CsY0cjghmRENfY4wFOYRtBxD');
+			console.log("Using Stripe Test API Key.")
+		} else {
+			stripe = Stripe('pk_live_ze8hA2F83TUWD4s1pY5Fwn1K');
+		}
 		var elements = stripe.elements();
 	</script>
 	<div id="container" style="height: 100%;">

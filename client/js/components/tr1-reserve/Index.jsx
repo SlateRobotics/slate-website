@@ -77,7 +77,7 @@ var Component = React.createClass({
               all of the proper building blocks in place for a smooth fulfillment
               process. It{"\'"}s a way for us to judge how many people are
               really serious about ordering a TR1 without asking for the full
-              payment amount up front.
+              payment amount way in advance.
             </p>
             <p>
               The Slate Robotics TR1 will begin delivery in September 2018.
@@ -149,7 +149,7 @@ var Component = React.createClass({
                     className="hidden-xs"
                     style={{float:"right"}} />
                   <h4 style={{ textAlign:"left"}}>
-                    TR1 requires a $500 reservation payment.
+                    TR1 requires a $99 reservation payment.
                   </h4>
                   <img
                     src="/img/powered-by-stripe"
@@ -287,13 +287,23 @@ var Component = React.createClass({
     this.setState(state);
 
     this.validateData(function (errors) {
-      state.isLoading = false;
       state.errors = errors;
       this.setState(state);
 
-      if (errors.length > 0) return;
+      if (errors.length > 0) {
+        state.isLoading = false;
+        this.setState(state);
+        return;
+      }
 
       stripe.createToken(this.state.card).then(function(result) {
+        if (!result || !result.token) {
+          state.isLoading = false;
+          state.errors = [{name:"stripe",message:"Error validating card information. Is this data correct?"}];
+          this.setState(state);
+          return;
+        }
+
         var reservation = {};
         reservation.user = {
           firstName: this.state.firstName,
@@ -370,7 +380,7 @@ var Component = React.createClass({
     for (var i = 0; i < this.state.errors.length; i++) {
       var error = this.state.errors[i];
       if (error.name == name) {
-        messages += error.message + ". ";
+        messages += error.message + " ";
       }
     }
 
