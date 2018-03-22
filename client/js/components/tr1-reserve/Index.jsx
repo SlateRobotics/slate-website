@@ -215,7 +215,7 @@ var Component = React.createClass({
             </div>
           </div>
         </div>
-        <div className="row" style={{textAlign:"left"}}>
+        <div className="row hidden-sm hidden-xs" style={{textAlign:"left"}}>
           <div className="col-md-10 col-xs-12 col-centered" style={{paddingTop:"25px",paddingBottom:"25px"}}>
             <div style={{display:"inline-block",width:"100%"}}>
               <span style={{float:"right"}}>
@@ -227,6 +227,21 @@ var Component = React.createClass({
                   TR1 Reservation Agreement
                 </a>
               </h4>
+            </div>
+          </div>
+        </div>
+        <div className="row hidden-lg hidden-md" style={{textAlign:"left"}}>
+          <div className="col-md-10 col-xs-12 col-centered" style={{paddingTop:"25px",paddingBottom:"25px"}}>
+            <div style={{display:"inline-block",width:"100%"}}>
+              <h4 style={{}}>
+                {"By placing this order you agree to the "}
+                <a href="/pdf/tr1-reservation-agreement" target="_blank">
+                  TR1 Reservation Agreement
+                </a>
+              </h4>
+              <div>
+                {this.getReservationButton()}
+              </div>
             </div>
           </div>
         </div>

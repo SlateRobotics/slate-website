@@ -70,7 +70,8 @@ var Component = React.createClass({
                 </div>
                 <div className="col-sm-8 col-xs-12" style={{height:"600px",padding:"0"}}>
                   <div style={Style.imageContainer}>
-                    <img style={Style.imageCenter} src="/img/slate-tr1-2" height="600" />
+                    <img style={Style.imageCenter} className="hidden-sm hidden-xs" src="/img/slate-tr1-2" height="600" />
+                    <img style={Style.imageCenter} className="hidden-lg hidden-md" src="/img/slate-tr1-2" width="100%" />
                   </div>
                 </div>
               </div>
@@ -144,7 +145,8 @@ var Component = React.createClass({
                 </div>
                 <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{height:"600px",padding:"0"}}>
                   <div style={Style.imageContainer}>
-                    <img style={Style.imageCenter} src="/img/slate-tr1-3" height="600" />
+                    <img style={Style.imageCenter} className="hidden-sm hidden-xs" src="/img/slate-tr1-3" height="600" />
+                    <img style={Style.imageCenter} className="hidden-lg hidden-md" src="/img/slate-tr1-3" height="500" />
                   </div>
                 </div>
               </div>
