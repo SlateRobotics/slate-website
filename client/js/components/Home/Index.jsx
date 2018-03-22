@@ -152,7 +152,7 @@ var Component = React.createClass({
                   </p>
                   <p>
                     I hope affordable robots like the TR1 can do for personal
-                    robots what the Altair 8800 and the Apple II did for
+                    robotics what the Altair 8800 and the Apple II did for
                     personal computing. Perhaps, if we can build a community of
                     hackers and engineers around building tools and applications
                     for robots like the TR1, we can begin to build the future of
