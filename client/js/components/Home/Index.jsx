@@ -125,6 +125,9 @@ var Component = React.createClass({
         <div className="row" style={{padding:"100px 0px"}}>
           <div className="container">
             <div className="row">
+              <div className="hidden-lg hidden-md col-xs-12">
+                <img src="/img/slate-tr1-8" style={{maxWidth:"100%"}} />
+              </div>
               <div className="col-md-6 col-xs-12">
                 <h1 style={{paddingBottom:"25px"}}>
                   Let's build the future of general purpose robots
@@ -164,10 +167,10 @@ var Component = React.createClass({
                   </p>
                 </div>
                 <ButtonPrimary
-                  label={"Learn more"}
+                  label={"Learn more >"}
                   onClick={this.handleClick_LearnMore} />
               </div>
-              <div className="col-md-6 col-xs-12">
+              <div className="col-md-6 hidden-sm hidden-xs">
                 <img src="/img/slate-tr1-8" style={{maxWidth:"100%"}} />
               </div>
             </div>
