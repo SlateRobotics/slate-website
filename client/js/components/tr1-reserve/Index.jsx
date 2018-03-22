@@ -80,7 +80,8 @@ var Component = React.createClass({
               payment amount way in advance.
             </p>
             <p>
-              The Slate Robotics TR1 will begin delivery in September 2018.
+              The Slate Robotics TR1 will begin delivery of the first
+              reservations in September 2018.
             </p>
           </div>
         </div>
