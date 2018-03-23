@@ -57,13 +57,10 @@ var Component = React.createClass({
                   <div className="row" style={{textAlign:"justify"}}>
                     <div className="col-xs-12">
                       <p>
-                        The arms on the Slate TR1 are powered by stepper motors
-                        and servos. The wrist and gripper are servo-actuated, and
-                        the remaining joints are actuated by stepper motors.
-                      </p>
-                      <p>
-                        The joint at the bottom of the shoulder as well as the connection
-                        between the bicep and forearm can rotate 360 degrees.
+                        The arms on the Slate TR1 are powered by 12v DC motors
+                        and standard servos. Joint angles are measured via
+                        8-bit, absolute angle encoders, which closes the feedback
+                        loop necessary to do inverse kinematics.
                       </p>
                     </div>
                   </div>
