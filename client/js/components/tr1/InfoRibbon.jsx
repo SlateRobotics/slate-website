@@ -48,7 +48,7 @@ var Component = React.createClass({
                     <p>
                       tr1_hardware_interface, tr1_moveit_config, and tr1_description
                       are open-source packages among the most principle building
-                      blocks for programming with ROS on the TR1. Togther, they
+                      blocks for programming with ROS on the TR1. Together, they
                       provide tools for controlling, visualizing, and planning
                       the robot right out of the box.
                     </p>
