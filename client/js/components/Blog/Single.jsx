@@ -89,9 +89,21 @@ var Component = React.createClass({
             </p>
             <iframe
               srcDoc='<html><body><script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/shell.js"></script><script>hbspt.forms.create({portalId: "4322786",formId: "e1557a14-0023-45af-a782-02dad3bbceab"});</script></body></html>'
-              style={{height:"500px",border:"none",width:"100%"}}/>
+              style={{height:"210px",border:"none",width:"100%"}}/>
           </div>
           <div className="col-lg-1 hidden-md hidden-sm hidden-xs" />
+        </div>
+        <div style={{marginTop:"60px"}} className="hidden-lg hidden-md" />
+        <div className="row hidden-lg hidden-md">
+          <div className="hidden-lg hidden-md col-xs-12" style={{textAlign:"left"}}>
+            <h3>Join our newsletter!</h3>
+            <p>
+              Stay up to date with the latest TR1 and Slate Robotics developments.
+            </p>
+            <iframe
+              srcDoc='<html><body><script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/shell.js"></script><script>hbspt.forms.create({portalId: "4322786",formId: "e1557a14-0023-45af-a782-02dad3bbceab"});</script></body></html>'
+              style={{height:"210px",border:"none",width:"100%"}}/>
+          </div>
         </div>
         {this.getEditor()}
         <div style={{marginTop:"60px"}} />
