@@ -9,6 +9,7 @@ var Menu = React.createClass({
 		return (
   		<ul id="menu" style={Style.menu}>
 				<MenuListItem label={"TR1"} to={"/tr1"} farRight={false} />
+				<MenuListItem label={"Blog"} to={"/blog"} farRight={true} />
 				{/*<MenuListItem label={"Support"} to={"/support"} farRight={true} />*/}
   		</ul>
 		);

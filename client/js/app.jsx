@@ -22,6 +22,8 @@ var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
 var CheckoutSuccess = require('./components/CheckoutSuccess/Index.jsx');
 var Order = require('./components/Order/Index.jsx');
 var About = require('./components/About/Index.jsx');
+var Blog = require('./components/Blog/Index.jsx');
+var BlogSingle = require('./components/Blog/Single.jsx');
 var PrivacyPolicy = require('./components/PrivacyPolicy/Index.jsx');
 var TermsAndConditions = require('./components/TermsAndConditions/Index.jsx');
 var SalesPolicies = require('./components/SalesPolicies/Index.jsx');
@@ -47,6 +49,9 @@ var Routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
 		<Route path="/about" component={About} />
+		<Route path="/blog" component={Blog} />
+		<Route path="/blog/:id" component={BlogSingle} />
+		<Route path="/blog/:id/*" component={BlogSingle} />
 		<Route path="/sales-policies" component={SalesPolicies} />
 		<Route path="/privacy-policy" component={PrivacyPolicy} />
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />

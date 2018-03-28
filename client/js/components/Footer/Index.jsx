@@ -37,6 +37,7 @@ var Footer = React.createClass({
               </div>
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>SOCIAL</h3>
+                <a href="https://www.slaterobots.com/blog" style={Style.link}>Blog</a>
                 <a href="https://www.github.com/SlateRobotics/" style={Style.link}>Github</a>
                 <a href="https://www.facebook.com/SlateRobotics/" style={Style.link}>Facebook</a>
                 <a href="https://www.twitter.com/SlateRobotics/" style={Style.link}>Twitter</a>
