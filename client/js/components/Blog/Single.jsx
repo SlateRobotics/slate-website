@@ -47,9 +47,9 @@ var Component = React.createClass({
   render: function() {
     return (
       <div className="container-fluid" style={Style.container}>
-        <div className="row" style={{paddingTop:"5px",paddingBottom:"5px",backgroundColor:"#565371"}}>
+        <div className="row" style={{paddingTop:"5px",paddingBottom:"5px",borderBottom:"1px solid #ccc"}}>
           <div className="col-md-8 col-xs-12 col-centered" style={{textAlign:"left"}}>
-            <Link to="/blog" style={{color:"white"}}>{"< Back to blogs"}</Link>
+            <Link to="/blog">{"< Back to blogs"}</Link>
           </div>
         </div>
         <div className="row">
@@ -59,7 +59,7 @@ var Component = React.createClass({
               backgroundPositionX:"center",
               backgroundPositionY:"top",
               backgroundColor:"#222",
-              height:"300px"
+              height:"400px"
             }}>
           </div>
         </div>
@@ -76,7 +76,12 @@ var Component = React.createClass({
         </div>
         <div style={{marginTop:"20px"}} />
         <div className="row">
-          <div className="col-lg-1 hidden-md hidden-sm hidden-xs" />
+          <div className="col-md-3 hidden-sm hidden-xs">
+
+          </div>
+          <div className="col-md-6 col-xs-12" style={{textAlign:"left",backgroundColor:"#f1f1f1"}}>
+            {this.getBody()}
+          </div>
           <div className="col-lg-2 col-md-3 hidden-sm hidden-xs" style={{textAlign:"left"}}>
             <h3>Join our newsletter!</h3>
             <p>
@@ -86,12 +91,7 @@ var Component = React.createClass({
               srcDoc='<html><body><script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/shell.js"></script><script>hbspt.forms.create({portalId: "4322786",formId: "e1557a14-0023-45af-a782-02dad3bbceab"});</script></body></html>'
               style={{height:"500px",border:"none",width:"100%"}}/>
           </div>
-          <div className="col-md-6 col-xs-12" style={{textAlign:"left",backgroundColor:"#f1f1f1"}}>
-            {this.getBody()}
-          </div>
-          <div className="col-md-3 hidden-sm hidden-xs">
-
-          </div>
+          <div className="col-lg-1 hidden-md hidden-sm hidden-xs" />
         </div>
         {this.getEditor()}
         <div style={{marginTop:"60px"}} />
