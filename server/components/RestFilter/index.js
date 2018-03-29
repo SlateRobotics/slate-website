@@ -21,7 +21,6 @@ var ValidateRequestWithoutId = require('./validateRequestWithoutId');
 var ValidateRequestWithId = require('./validateRequestWithId');
 
 function RestFilter(config) {
-
   config.invalidRequest = {
     success: false,
     message: "Authentication error."

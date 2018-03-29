@@ -7,15 +7,16 @@ module.exports = function (config) {
 
 	this.route = function (req, res, next) {
 		var id = req.params.id;
-		var userId = req.session.userId;
+		var userEmail = req.session.email;
+		var userAccessToken = req.headers['accesstoken'];
 
-		if (!userId || !id) {
+		if (!userEmail || !userAccessToken || !id) {
 			return res.status(401).json(config.invalidRequest);
 		}
 
 		req.body = filter(config.writeFilterSchema, req.body);
 
-		getUser(req.session.userId, function (user) {
+		getUser(userEmail, userAccessToken, function (user) {
 
 			var requestSecurity = new RequestSecurity({
 				method : req.method,

@@ -72,6 +72,15 @@ userSchema.methods.generateToken = function(callback) {
       value: encryptedToken,
       createdOn: Date.now(),
     });
+
+    // sort tokens by descending
+    this.tokens.sort(function(a,b){
+      return new Date(b.createdOn) - new Date(a.createdOn);
+    });
+
+    // only keep 2 most recent tokens (for speed)
+    this.tokens = this.tokens.splice(0, 2);
+
     this.save(function(err) {
       if (err) {
         console.log(err);

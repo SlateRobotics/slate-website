@@ -1,12 +1,13 @@
 var React = require('react');
+var marked = require('marked');
+var sanitizeHtml = require('sanitize-html');
 var Link = require('react-router').Link;
 var BrowserHistory = require('react-router').browserHistory;
-var sanitizeHtml = require('sanitize-html');
 var Style = require('./Style.jsx');
 var Form = require('../Form/Index.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
-var blogs = require('./Blogs');
-var marked = require('marked');
+var BlogStore = require('../../stores').blog;
+var UserStore = require('../../stores').user;
 
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -18,25 +19,45 @@ function getUrlParameter(name) {
 var Component = React.createClass({
   getInitialState: function () {
     return {
-      editor: false,
-      editorValue: "",
-      blog: {
-        id: -1,
-        title: "Loading blog...",
-      },
+      user: '',
+      error: '',
+      isLoading: true,
+      blog: '',
     }
   },
 
   componentWillMount: function () {
-    var blogId = this.props.params.id;
-    var blog = blogs.find(function(x) {return x.id == blogId})
-    var state = this.state;
-    state.blog = blog;
-    if (getUrlParameter("editor") == "true") {
-      state.editor = true;
-      state.editorValue = blog.body;
-    }
-    this.setState(state);
+    UserStore.get({
+      error: function (error) {
+        console.log(error);
+      }.bind(this),
+      success: function (docs) {
+        var user = '';
+        if (docs && docs.length > 0) user = docs[0];
+        var state = this.state;
+        state.user = user;
+        this.setState(user);
+      }.bind(this),
+    });
+
+    BlogStore.get({
+      id: this.props.params.id,
+      error: function (error) {
+        var state = this.state;
+        state.blog.title = "An error occured loading the blog:";
+        state.blog.subtitle = error;
+        state.error = error;
+        state.isLoading = false;
+        this.setState(state);
+      }.bind(this),
+      success: function (doc) {
+        var state = this.state;
+        state.blog = doc;
+        state.isLoading = false;
+        this.setState(state);
+        document.title = this.state.blog.title + " - Blog - Slate Robotics";
+      }.bind(this),
+    });
   },
 
   componentDidMount: function () {
@@ -44,12 +65,13 @@ var Component = React.createClass({
     window.scrollTo(0,0);
   },
 
-  render: function() {
+  render: function () {
     return (
       <div className="container-fluid" style={Style.container}>
         <div className="row" style={{paddingTop:"5px",paddingBottom:"5px",borderBottom:"1px solid #ccc"}}>
           <div className="col-md-8 col-xs-12 col-centered" style={{textAlign:"left"}}>
             <Link to="/blog">{"< Back to blogs"}</Link>
+            {this.getEditButton()}
           </div>
         </div>
         <div className="row">
@@ -105,14 +127,28 @@ var Component = React.createClass({
               style={{height:"210px",border:"none",width:"100%"}}/>
           </div>
         </div>
-        {this.getEditor()}
         <div style={{marginTop:"60px"}} />
       </div>
     );
   },
 
+  getEditButton: function () {
+    if (this.state.user.isAdmin) {
+      return (
+        <span style={{float:"right"}}>
+          <Link to={"/blog/" + this.state.blog._id + "/edit"}>Edit</Link>
+          <a style={{cursor:"pointer",marginLeft:"15px"}} onClick={this.handleClick_Delete}>
+            {"Delete"}
+          </a>
+        </span>
+      )
+    }
+  },
+
   getBody: function () {
-    var html = marked(this.state.blog.body);
+    var body = "";
+    if (this.state.blog.body) body = this.state.blog.body;
+    var html = marked(body);
     var options = {
       allowedTags: ['h1','h2','h3','h4','h5','h6','blockquote','p','a','ul','ol',
         'nl','li','b','i','strong','em','strike','code','hr','br','div',
@@ -134,36 +170,17 @@ var Component = React.createClass({
   },
 
   getPublishedOnString: function () {
-    if (!this.state.blog.publishedOn) return;
-    return this.state.blog.publishedOn.toLocaleDateString();
+    if (!this.state.blog.publishedOn) return "";
+    var publishedOn = new Date(this.state.blog.publishedOn);
+    return publishedOn.toLocaleDateString();
   },
 
-  getEditor: function () {
-    if (this.state.editor == true) {
-      return (
-        <div className="row">
-          <div className="col-md-3 hidden-sm hidden-xs">
-
-          </div>
-          <div className="col-md-6 col-xs-12" style={{textAlign:"left"}}>
-            <Form.TextArea
-              attribute="body"
-              value={this.state.editorValue}
-              onChange={this.handleChange_Editor} />
-          </div>
-          <div className="col-md-3 hidden-sm hidden-xs">
-
-          </div>
-        </div>
-      )
+  handleClick_Delete: function () {
+    if (confirm('Are you sure you want to delete this blog?')) {
+      BlogStore.delete(this.state.blog, function (data) {
+        BrowserHistory.push("/blog");
+      });
     }
-  },
-
-  handleChange_Editor: function (attribute, value) {
-    var state = this.state;
-    state.blog.body = value;
-    state.editorValue = value;
-    this.setState(state);
   },
 });
 

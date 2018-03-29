@@ -45,6 +45,6 @@ httpServer.all("*", function (req, res, next) {
 });
 
 httpServer.listen(80);
-httpsServer.listen(443)
+httpsServer.listen(443);
 
 console.log('Slate Website on port 80, 443');

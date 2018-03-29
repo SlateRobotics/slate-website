@@ -6,12 +6,21 @@ module.exports = function (config) {
 
 	this.route = function (req, res) {
 		var id = req.params.id;
-		var token = req.query.token;
-		var userId = req.session.userId;
+		var userEmail = req.session.email;
+		var userAccessToken = req.headers['accesstoken'];
+
+		if (config.isPublicRead || !userEmail || !userAccessToken) {
+			// don't need user-specific authentication
+			if (config.securityRoles.read({})) {
+				return config.findOne(userAccessToken, id, function (doc) {
+					return res.json(doc);
+				});
+			}
+		}
 
 		// token-based authentication
-		if (config.securityRoles.read(token) == true) {
-			return config.findOne(token, id, function (doc) {
+		if (config.securityRoles.read(userAccessToken) == true) {
+			return config.findOne(userAccessToken, id, function (doc) {
 				if (doc && doc._id) {
 					var result = filter(config.readFilterSchema, doc);
 					return res.json(result);
@@ -21,11 +30,11 @@ module.exports = function (config) {
 			});
 		}
 
-		if (!userId || !id) {
+		if (!userEmail || !id) {
 			return res.status(401).json(config.invalidRequest);
 		}
 
-		getUser(req.session.userId, function (user) {
+		getUser(userEmail, function (user) {
 
 			var requestSecurity = new RequestSecurity({
 				method : req.method,

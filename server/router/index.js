@@ -7,6 +7,8 @@ router.use('/pdf', require('./pdf'));
 router.use('/js', require('./js'));
 router.use('/css', require('./css'));
 
+router.use(require('./auth'));
+
 router.use('/placeReservation', require('./placeReservation'));
 router.use('/placeOrder', require('./placeOrder'));
 router.use('/stores', require('./stores'));

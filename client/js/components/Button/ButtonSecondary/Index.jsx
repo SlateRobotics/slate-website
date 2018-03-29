@@ -25,6 +25,19 @@ var Button = React.createClass({
                 </span>
             )
         }
+
+        if (this.props.disabled) {
+          var style = Style.container;
+          style.cursor = "default";
+          return (
+            <span style={Style.container} onClick={this.props.onClick} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
+              <div style={Style.contents}>
+                {this.props.label}
+              </div>
+            </span>
+          )
+        }
+
         return (
             <span style={Style.container} onClick={this.props.onClick} onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
                 <div style={Style.contents}>

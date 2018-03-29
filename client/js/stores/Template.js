@@ -11,12 +11,26 @@ module.exports = function(ApiService) {
 
   this._docs = [];
 
+  this.getParams = function (opts) {
+    if (opts.params) {
+      return opts.params;
+    }
+
+    if (opts.allAttributes === false) {
+      return "s=!layers"
+    } else {
+      return "";
+    }
+  }.bind(this);
+
   this.get = function(opts) {
+    if (opts.id) return this.getOne(opts);
     var params = this.getParams(opts);
     if (this._docs.length === 0 || opts.refresh === true) {
       ApiService.get(params, function(docs) {
         this._docs = docs;
         opts.success(this._docs);
+        this.Store.emitChange();
       }.bind(this));
     } else {
       opts.success(this._docs);
@@ -24,71 +38,48 @@ module.exports = function(ApiService) {
   }.bind(this);
 
   this.getOne = function(opts) {
-    var id = opts.id;
-    if (!id && opts.doc) {
-      id = opts.doc._id || opts.doc.id;
-    }
-
-    var success = function (doc) {
+    var params = this.getParams(opts);
+    ApiService.getOne(opts.id, params, function (doc) {
       this.replaceOne(doc);
-      if (opts.success) {
-        opts.success(doc);
-      } else {
-        var message = ApiService.name + "store call succeeded, but no ";
-        message += "success function was defined in options";
-        console.warn(message);
-      }
-    }.bind(this);
+      opts.success(doc);
+      this.Store.emitChange();
+    }.bind(this));
+  }.bind(this);
 
-    var error = function (error) {
-      if (opts.error) {
-        opts.error(error);
-      } else {
-        var message = "An error occurred in the " + ApiService.name + "store";
-        message += ", but no error function was defined in options";
-        console.error(message);
-      }
-    }
-
-    if (!id) {
-      error({eror:"getOne method requires an ID via id or doc option"});
-      return;
-    }
-
-    var url = opts.id;
-    if (opts.params) { url += opts.params; }
-    ApiService.getOne(url, success, error);
+  this.find = function () {
+    return this._docs;
   }.bind(this);
 
   this.findOne = function (id) {
     var doc = '';
     for (var i = 0; i < this._docs.length; i++) {
-      if (this._docs[i].name === id) {
-        if (allAttributes === true && this._docs[i].layers) {
-          doc = this._docs[i];
-          break;
-        } else if (!allAttributes) {
-          doc = this._docs[i];
-          break;
-        }
+      if (this._docs[i]._id === id) {
+        doc = this._docs[i];
+        break;
       }
     }
     return doc;
   }.bind(this);
 
   this.replaceOne = function (doc) {
+    var replaced = false;
     for (var i = 0; i < this._docs.length; i++) {
       if (this._docs[i].name === doc.name) {
-  			Object.keys(doc).forEach(function(key, index) {
-  				this._docs[i][key] = doc[key];
-  			}.bind(this));
+        replaced = true;
+  			this._docs[i] = doc;
       }
     }
+    if (!replaced) {
+      this._docs.push(doc);
+    }
+    this.Store.emitChange();
   }.bind(this);
 
   this.Store = assign({}, EventEmitter.prototype, {
     get: this.get,
     getOne: this.getOne,
+    find: this.find,
+    findOne: this.findOne,
 
     insert: function(doc, callback) {
       ApiService.insert(doc, callback);
@@ -103,9 +94,7 @@ module.exports = function(ApiService) {
     },
 
     emitChange: function() {
-      this.get(function(docs) {
-        this.emit(CHANGE_EVENT);
-      }.bind(this), true);
+      this.emit(CHANGE_EVENT);
     },
 
     addChangeListener: function(callback) {

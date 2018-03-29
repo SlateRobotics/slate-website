@@ -7,9 +7,17 @@ var Route = require('react-router').Route;
 var browserHistory = require('react-router').browserHistory;
 var IndexRoute = require('react-router').IndexRoute;
 
+var UserStore = require('./stores/user');
+
 var Footer = require('./components/Footer/Index.jsx');
 var Header = require('./components/Header/Index.jsx');
 var Home = require('./components/Home/Index.jsx');
+var SignIn = require('./components/SignIn/Index.jsx');
+var SignOut = require('./components/SignOut/Index.jsx');
+var Register = require('./components/Register/Index.jsx');
+var RegisterVerify = require('./components/Register/Verify.jsx');
+var ForgotPassword = require('./components/ForgotPassword/Index.jsx');
+var ForgotPasswordVerify = require('./components/ForgotPassword/Verify.jsx');
 var tr1 = require('./components/tr1/Index.jsx');
 var tr1Specs = require('./components/tr1-specs/Index.jsx');
 var tr1Reserve = require('./components/tr1-reserve/Index.jsx');
@@ -24,6 +32,7 @@ var Order = require('./components/Order/Index.jsx');
 var About = require('./components/About/Index.jsx');
 var Blog = require('./components/Blog/Index.jsx');
 var BlogSingle = require('./components/Blog/Single.jsx');
+var BlogEdit = require('./components/Blog/Edit.jsx');
 var PrivacyPolicy = require('./components/PrivacyPolicy/Index.jsx');
 var TermsAndConditions = require('./components/TermsAndConditions/Index.jsx');
 var SalesPolicies = require('./components/SalesPolicies/Index.jsx');
@@ -49,8 +58,16 @@ var Routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
 		<Route path="/about" component={About} />
+		<Route path="/sign-in" component={SignIn} />
+		<Route path="/sign-out" component={SignOut} />
+		<Route path="/register" component={Register} />
+		<Route path="/register/:id" component={RegisterVerify} />
+		<Route path="/forgot-password" component={ForgotPassword} />
+    <Route path="forgot-password/:id" component={ForgotPasswordVerify} />
 		<Route path="/blog" component={Blog} />
+		<Route path="/blog/new" component={BlogEdit} />
 		<Route path="/blog/:id" component={BlogSingle} />
+		<Route path="/blog/:id/edit" component={BlogEdit} />
 		<Route path="/blog/:id/*" component={BlogSingle} />
 		<Route path="/sales-policies" component={SalesPolicies} />
 		<Route path="/privacy-policy" component={PrivacyPolicy} />
@@ -68,6 +85,16 @@ var Routes = (
 		<Route path="/order/:id" component={Order} />
   </Route>
 );
+
+UserStore.get({
+	success: function (data) {
+		if (!data || data.length == 0) {
+			console.log("Unauthenticated user.");
+		} else {
+			console.log("User logged in: " + data[0].email);
+		}
+	},
+});
 
 ReactDOM.render(
  	<Router

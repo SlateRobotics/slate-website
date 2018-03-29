@@ -3,19 +3,48 @@ var Link = require('react-router').Link;
 var BrowserHistory = require('react-router').browserHistory;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
-var blogs = require('./Blogs');
+var BlogStore = require('../../stores').blog;
+var UserStore = require('../../stores').user;
 
 var Component = React.createClass({
   getInitialState: function () {
     return {
+      user: '',
       blogs: [],
+      error: '',
+      isLoading: true,
     }
   },
 
   componentWillMount: function () {
-    var state = this.state;
-    state.blogs = blogs;
-    this.setState(state);
+    UserStore.get({
+      error: function (error) {
+        console.log(error);
+      }.bind(this),
+      success: function (docs) {
+        var user = '';
+        if (docs && docs.length > 0) user = docs[0];
+        var state = this.state;
+        state.user = user;
+        this.setState(user);
+      }.bind(this),
+    });
+
+    BlogStore.get({
+      refresh: true,
+      error: function (error) {
+        var state = this.state;
+        state.errors.push({name:"load",message:error});
+        state.isLoading = false;
+        this.setState(state);
+      }.bind(this),
+      success: function (docs) {
+        var state = this.state;
+        state.blogs = docs;
+        state.isLoading = false;
+        this.setState(state);
+      }.bind(this),
+    });
   },
 
   componentDidMount: function () {
@@ -32,12 +61,21 @@ var Component = React.createClass({
             <h4>
               You can read all of the blog related things here. Bloggity blog blog.
             </h4>
+            {this.getNewBlogButton()}
           </div>
         </div>
         {this.getBlogs()}
         <div style={{marginTop:"25px"}} />
       </div>
     );
+  },
+
+  getNewBlogButton: function () {
+    if (this.state.user.isAdmin) {
+      return (
+        <Link to="/blog/new">{"New blog"}</Link>
+      )
+    }
   },
 
   getBlogs: function () {
@@ -70,11 +108,17 @@ var Component = React.createClass({
       friendlyTitle = friendlyTitle.split("`").join("-");
       friendlyTitle = friendlyTitle.split("\\").join("-");
       friendlyTitle = friendlyTitle.split("\"").join("-");
-      var url = "/blog/" + blog.id + "/" + friendlyTitle;
+      var url = "/blog/" + blog._id + "/" + friendlyTitle;
+
+      var getPublishedOnString = function (publishedOn) {
+        if (!publishedOn) return;
+        publishedOn = new Date(publishedOn);
+        return publishedOn.toLocaleDateString();
+      }
 
       var toBlog = function () {BrowserHistory.push(url);}
       return (
-        <div key={blog.id} className="row">
+        <div key={blog._id} className="row">
           <div className="col-md-8 col-xs-12 col-centered" style={{textAlign:"left"}}>
             <div style={{margin:"10px",borderTop:"1px solid #ccc"}} />
             <div className="row">
@@ -92,7 +136,7 @@ var Component = React.createClass({
                 <h2><Link to={url}>{blog.title}</Link></h2>
                 <p>{blog.subtitle}</p>
                 <div style={{fontStyle:"italic"}}>
-                  By {blog.by}, published on {blog.publishedOn.toLocaleDateString()}
+                  By {blog.by}, published on {getPublishedOnString(blog.publishedOn)}
                 </div>
               </div>
             </div>

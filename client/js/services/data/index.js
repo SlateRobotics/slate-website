@@ -3,6 +3,8 @@ var Slave = require('./slave');
 
 var Service = {
   order: new Slave("order"),
+  blog: new Slave("blog"),
+  user: new Slave("user"),
 }
 
 Service.signIn = function(options, callback) {
