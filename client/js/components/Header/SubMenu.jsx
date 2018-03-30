@@ -7,7 +7,7 @@ var UserStore = require('../../stores').user;
 var SubMenu = React.createClass({
 	getInitialState: function () {
 		return {
-			user: {}
+			user: ''
 		}
 	},
 
