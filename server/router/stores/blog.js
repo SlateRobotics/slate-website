@@ -44,9 +44,7 @@ function findOne(token, id, callback) {
 
 function findMany(user, callback) {
   Blog
-    .find({
-      "status": "active",
-    })
+    .find()
     .exec(function(err, result) {
       return callback(result);
     });

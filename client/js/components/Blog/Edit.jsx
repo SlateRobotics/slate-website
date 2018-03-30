@@ -72,8 +72,9 @@ var Component = React.createClass({
             <div className="row">
               <div className="col-xs-12">
                 <Form.Label label="Status" isRequired />
-                <Form.Input
+                <Form.Select
                   attribute="status"
+                  options={["Active","In Progress","Archive"]}
                   value={this.state.blog.status}
                   onChange={this.handleChange_Field} />
                 {this.getError("status")}
@@ -111,7 +112,7 @@ var Component = React.createClass({
                 {this.getError("img")}
               </div>
               <div className="col-xs-12">
-                <Form.Label label="Published On" isRequired />
+                <Form.Label label="Published On" />
                 <Form.Input
                   attribute="publishedOn"
                   value={this.state.blog.publishedOn}
@@ -168,8 +169,8 @@ var Component = React.createClass({
     if (!this.state.blog.img) {
       errors.push({name:"img", message: "Image is a required field"});
     }
-    if (!this.state.blog.publishedOn) {
-      errors.push({name:"publishedOn", message: "Published on is a required field"});
+    if (!this.state.blog.status == "Active" && this.state.blog.publishedOn) {
+      errors.push({name:"publishedOn", message: "Published on is a required field for Active blogs"});
     }
     if (!this.state.blog.img) {
       errors.push({name:"body", message: "Body is a required field"});
@@ -223,7 +224,9 @@ var Component = React.createClass({
 
     if (messages != "") {
       return (
-        <span style={{fontSize:"11px",fontStyle:"italic",color:"red"}}>{messages}</span>
+        <span style={{fontSize:"11px",fontStyle:"italic",color:"red"}}>
+          {messages}
+        </span>
       )
     }
   },

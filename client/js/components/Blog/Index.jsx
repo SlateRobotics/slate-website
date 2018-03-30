@@ -3,6 +3,7 @@ var Link = require('react-router').Link;
 var BrowserHistory = require('react-router').browserHistory;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
+var Form = require('../Form/Index.jsx');
 var BlogStore = require('../../stores').blog;
 var UserStore = require('../../stores').user;
 
@@ -10,6 +11,9 @@ var Component = React.createClass({
   getInitialState: function () {
     return {
       user: '',
+      status: 'Active',
+      sort: 'Descending By Date',
+      search: '',
       blogs: [],
       error: '',
       isLoading: true,
@@ -57,10 +61,11 @@ var Component = React.createClass({
       <div className="container-fluid" style={Style.container}>
         <div className="row">
           <div className="col-md-8 col-xs-12 col-centered" style={{textAlign:"left"}}>
-            <h1>The Blog</h1>
+            <h1>Blog | Slate Robotics</h1>
             <h4>
-              You can read all of the blog related things here. Bloggity blog blog.
+              Tutorials, essays, and company updates.
             </h4>
+            {this.getTools()}
             {this.getNewBlogButton()}
           </div>
         </div>
@@ -70,19 +75,91 @@ var Component = React.createClass({
     );
   },
 
+  getTools: function () {
+    if (this.state.user.isAdmin) {
+      return (
+        <div className="row">
+          <div className="col-md-6 col-xs-12">
+            <Form.Input
+              attribute="search"
+              placeholder="Search for a blog..."
+              value={this.state.search}
+              onChange={this.handleChange_Field} />
+          </div>
+          <div className="hidden-lg hidden-md col-xs-12" style={{marginTop:"10px"}} />
+          <div className="col-md-3 col-xs-12">
+            <Form.Select
+              attribute="sort"
+              options={["Ascending By Date","Descending By Date"]}
+              value={this.state.sort}
+              onChange={this.handleChange_Field} />
+          </div>
+          <div className="hidden-lg hidden-md col-xs-12" style={{marginTop:"10px"}} />
+          <div className="col-md-3 col-xs-12">
+            <Form.Select
+              attribute="status"
+              options={["Active","In Progress","Archive"]}
+              value={this.state.status}
+              onChange={this.handleChange_Field} />
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div className="row">
+        <div className="col-md-9 col-xs-12">
+          <Form.Input
+            attribute="search"
+            placeholder="Search for a blog..."
+            value={this.state.search}
+            onChange={this.handleChange_Field} />
+        </div>
+        <div className="hidden-lg hidden-md col-xs-12" style={{marginTop:"10px"}} />
+        <div className="col-md-3 col-xs-12">
+          <Form.Select
+            attribute="sort"
+            options={["Ascending By Date","Descending By Date"]}
+            value={this.state.sort}
+            onChange={this.handleChange_Field} />
+        </div>
+      </div>
+    )
+  },
+
   getNewBlogButton: function () {
     if (this.state.user.isAdmin) {
       return (
-        <Link to="/blog/new">{"New blog"}</Link>
+        <div style={{marginTop:"10px"}}>
+          <Link to="/blog/new">{"New blog"}</Link>
+        </div>
       )
     }
   },
 
   getBlogs: function () {
-    var ascendingByDate = function(a,b){return a.publishedOn - b.publishedOn};
-    var descendingByDate = function(a,b){return b.publishedOn - a.publishedOn};
+    var sort = {};
+    sort["Ascending By Date"] = function(a,b){return new Date(a.publishedOn) - new Date(b.publishedOn)};
+    sort["Descending By Date"] = function(a,b){return new Date(b.publishedOn) - new Date(a.publishedOn)};
 
-    return this.state.blogs.sort(descendingByDate).map(function (blog, i) {
+    var blogs = this.state.blogs;
+    if (this.state.status != "") {
+      blogs = blogs.filter(function (blog) {
+        return blog.status == this.state.status;
+      }.bind(this));
+    }
+
+    if (this.state.search) {
+      var search = this.state.search.toLowerCase();
+      blogs = blogs.filter(function (blog) {
+        var title = blog.title.toLowerCase().includes(search);
+        var subtitle = blog.subtitle.toLowerCase().includes(search);
+        //var body = blog.body.toLowerCase().includes(search);
+        return title || subtitle;
+      }.bind(this));
+    }
+
+    return blogs.sort(sort[this.state.sort]).map(function (blog, i) {
       var friendlyTitle = blog.title;
       friendlyTitle = friendlyTitle.substring(0,35);
       friendlyTitle = friendlyTitle.toLowerCase();
@@ -116,6 +193,19 @@ var Component = React.createClass({
         return publishedOn.toLocaleDateString();
       }
 
+      var getTitle = function () {
+        var title = blog.title;
+        if (blog.status == "In Progress") title = "*" + title;
+        return title;
+      }
+
+      var getDetails = function () {
+        if (blog.status == "In Progress") {
+          return "By " + blog.by + ", currently in progress.";
+        }
+        return "By " + blog.by + ", published on " + getPublishedOnString(blog.publishedOn);
+      }
+
       var toBlog = function () {BrowserHistory.push(url);}
       return (
         <div key={blog._id} className="row">
@@ -133,10 +223,10 @@ var Component = React.createClass({
                 }} onClick={toBlog}>
               </div>
               <div className="col-lg-10 col-md-9 col-xs-12">
-                <h2><Link to={url}>{blog.title}</Link></h2>
+                <h2><Link to={url}>{getTitle()}</Link></h2>
                 <p>{blog.subtitle}</p>
                 <div style={{fontStyle:"italic"}}>
-                  By {blog.by}, published on {getPublishedOnString(blog.publishedOn)}
+                  {getDetails()}
                 </div>
               </div>
             </div>
@@ -144,6 +234,12 @@ var Component = React.createClass({
         </div>
       )
     });
+  },
+
+  handleChange_Field: function (attribute, value) {
+    var state = this.state;
+    state[attribute] = value;
+    this.setState(state);
   },
 });
 
