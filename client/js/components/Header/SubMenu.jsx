@@ -20,6 +20,17 @@ var SubMenu = React.createClass({
 	},
 
 	render: function () {
+		if (this.state.user) {
+			return (
+	  		<ul id="menu-sub" style={Style.subMenu} className="hidden-lg hidden-md hidden-sm">
+		  		<SubMenuListItem label={"TR1"} to={"/tr1"} onClick={this.handleClick_SubMenuListItem} />
+			  	<SubMenuListItem label={"Blog"} to={"/blog"} onClick={this.handleClick_SubMenuListItem} />
+			  	<SubMenuListItem label={"Sign Out"} to={"/sign-out"} onClick={this.handleClick_SubMenuListItem} />
+			  	{/*<SubMenuListItem label={"Support"} to="/support" onClick={this.handleClick_SubMenuListItem} />*/}
+	  		</ul>
+			);
+		}
+
 		return (
   		<ul id="menu-sub" style={Style.subMenu} className="hidden-lg hidden-md hidden-sm">
 	  		<SubMenuListItem label={"TR1"} to={"/tr1"} onClick={this.handleClick_SubMenuListItem} />
