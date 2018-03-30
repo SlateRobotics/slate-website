@@ -161,7 +161,7 @@ var Component = React.createClass({
 
     return blogs.sort(sort[this.state.sort]).map(function (blog, i) {
       var friendlyTitle = blog.title;
-      friendlyTitle = friendlyTitle.substring(0,35);
+      //friendlyTitle = friendlyTitle.substring(0,35);
       friendlyTitle = friendlyTitle.toLowerCase();
       friendlyTitle = friendlyTitle.split(" ").join("-");
       friendlyTitle = friendlyTitle.split("/").join("-");
