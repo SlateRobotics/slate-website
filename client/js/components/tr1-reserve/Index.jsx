@@ -38,6 +38,17 @@ var Component = React.createClass({
     var state = this.state;
     state.card = elements.create('card', {style: cardStyle});
     this.setState(state);
+
+    $.getJSON('https://freegeoip.net/json/', function(data) {
+      if (data) {
+        var state = this.state;
+        state.city = data['city'];
+        state.state = data['region_code'];
+        state.zip = data['zip_code'];
+        state.country = data['country_name'];
+        this.setState(state);
+      }
+    }.bind(this));
   },
 
   componentDidMount: function () {
@@ -188,24 +199,24 @@ var Component = React.createClass({
                     onChange={this.handleChange_Field} />
                   {this.getError("address2")}
                 </div>
-                <div className="col-md-6 col-xs-12">
-                  <Form.Label label="City" isRequired />
+                <div className="col-lg-6 col-md-4 col-xs-12">
+                  <Form.Label label={this.getCityLabel()} isRequired />
                   <Form.Input
                     attribute="city"
                     value={this.state.city}
                     onChange={this.handleChange_Field} />
                   {this.getError("city")}
                 </div>
-                <div className="col-md-3 col-xs-12">
-                  <Form.Label label="State/Region" isRequired />
+                <div className="col-lg-3 col-md-4 col-xs-12">
+                  <Form.Label label={this.getStateLabel()} isRequired />
                   <Form.Input
                     attribute="state"
                     value={this.state.state}
                     onChange={this.handleChange_Field} />
                   {this.getError("state")}
                 </div>
-                <div className="col-md-3 col-xs-12">
-                  <Form.Label label="Zip/Postal Code" isRequired />
+                <div className="col-lg-3 col-md-4 col-xs-12">
+                  <Form.Label label={this.getZipLabel()} isRequired />
                   <Form.Input
                     attribute="zip"
                     value={this.state.zip}
@@ -259,6 +270,30 @@ var Component = React.createClass({
     );
   },
 
+  getCityLabel: function () {
+    if (this.isCountryUsa()) {
+      return "City";
+    } else {
+      return "City/Town";
+    }
+  },
+
+  getZipLabel: function () {
+    if (this.isCountryUsa()) {
+      return "Zip";
+    } else {
+      return "Zip/Postal";
+    }
+  },
+
+  getStateLabel: function () {
+      if (this.isCountryUsa()) {
+        return "State";
+      } else {
+        return "State/Region";
+      }
+  },
+
   getReservationButton: function () {
     if (this.state.isLoading) {
       var fakeButtonStyle = {
@@ -293,11 +328,15 @@ var Component = React.createClass({
     }
   },
 
+  isCountryUsa: function () {
+    return (["united states", "u", "us", "usa"].indexOf(this.state.country.toLowerCase()) > -1);
+  },
+
   handleChange_Field: function (attribute, value) {
     var state = this.state;
     state[attribute] = value;
 
-    if (["United States", "U", "US", "USA"].indexOf(state.country) == -1) {
+    if (this.isCountryUsa() == false) {
       state.info = [{name:"country", message:"Info: Due to the size of the TR1 and complexity of international logistics, shipping outside of the USA can be expensive. Overseas shipping can be upwards of $1,500 USD. We will happily do it! It just might get expensive."}];
     } else {
       state.info = [];
