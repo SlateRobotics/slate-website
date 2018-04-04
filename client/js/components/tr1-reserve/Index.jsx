@@ -27,7 +27,9 @@ var Component = React.createClass({
       city: '',
       state: '',
       zip: '',
+      country: 'United States',
       isLoading: false,
+      info: [],
       errors: [],
     }
   },
@@ -195,7 +197,7 @@ var Component = React.createClass({
                   {this.getError("city")}
                 </div>
                 <div className="col-md-3 col-xs-12">
-                  <Form.Label label="State" isRequired />
+                  <Form.Label label="State/Region" isRequired />
                   <Form.Input
                     attribute="state"
                     value={this.state.state}
@@ -203,13 +205,21 @@ var Component = React.createClass({
                   {this.getError("state")}
                 </div>
                 <div className="col-md-3 col-xs-12">
-                  <Form.Label label="Zip" isRequired />
+                  <Form.Label label="Zip/Postal Code" isRequired />
                   <Form.Input
                     attribute="zip"
                     value={this.state.zip}
-                    onChange={this.handleChange_Field}
-                    onKeyPress={this.handleKeyPress_Zip} />
+                    onChange={this.handleChange_Field} />
                   {this.getError("zip")}
+                </div>
+                <div className="col-xs-12">
+                  <Form.Label label="Country" isRequired />
+                  <Form.Input
+                    attribute="country"
+                    value={this.state.country}
+                    onChange={this.handleChange_Field} />
+                  {this.getInfo("country")}
+                  {this.getError("country")}
                 </div>
               </div>
             </div>
@@ -286,6 +296,13 @@ var Component = React.createClass({
   handleChange_Field: function (attribute, value) {
     var state = this.state;
     state[attribute] = value;
+
+    if (["United States", "U", "US", "USA"].indexOf(state.country) == -1) {
+      state.info = [{name:"country", message:"Info: Due to the size of the TR1 and complexity of international logistics, shipping outside of the USA can be expensive. Overseas shipping can be upwards of $1,500 USD. We will happily do it! It just might get expensive."}];
+    } else {
+      state.info = [];
+    }
+
     this.setState(state);
   },
 
@@ -338,6 +355,7 @@ var Component = React.createClass({
           city: this.state.city,
           state: this.state.state,
           zip: this.state.zip,
+          country: this.state.country,
         };
         reservation.card = {
           token: result.token.id,
@@ -390,6 +408,9 @@ var Component = React.createClass({
     if (!this.state.zip) {
       errors.push({name:"zip", message: "Zip Code is a required field"});
     }
+    if (!this.state.country) {
+      errors.push({name:"country", message: "Country is a required field"});
+    }
     if (this.state.email != this.state.emailConfirm) {
       errors.push({name:"emailConfirm", message: "Emails do not match"});
     }
@@ -408,6 +429,22 @@ var Component = React.createClass({
     if (messages != "") {
       return (
         <span style={{fontSize:"11px",fontStyle:"italic",color:"red"}}>{messages}</span>
+      )
+    }
+  },
+
+  getInfo: function (name) {
+    var messages = "";
+    for (var i = 0; i < this.state.info.length; i++) {
+      var info = this.state.info[i];
+      if (info.name == name) {
+        messages += info.message + " ";
+      }
+    }
+
+    if (messages != "") {
+      return (
+        <span style={{fontSize:"11px",fontStyle:"italic"}}>{messages}</span>
       )
     }
   },

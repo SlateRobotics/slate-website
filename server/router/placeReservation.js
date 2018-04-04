@@ -33,7 +33,8 @@ function getBillingAddressString (reservation) {
   return reservation.billing.address1
     + ", " + reservation.billing.city
     + ", " + reservation.billing.state
-    + " " + reservation.billing.zip;
+    + " " + reservation.billing.zip
+    + " " + reservation.billing.country;
 }
 
 function OrderSuccess (res, reservation) {
@@ -72,6 +73,8 @@ function VerifyData (req, res) {
     OrderError(res, "Invalid billing data in body of post request: null state");
   } else if (!req.body.billing.zip) {
     OrderError(res, "Invalid billing data in body of post request: null zip");
+  } else if (!req.body.billing.country) {
+    OrderError(res, "Invalid billing data in body of post request: null country");
   } else if (!req.body.card) {
     OrderError(res, "Invalid card data in body of post request");
   } else if (!req.body.card.token) {

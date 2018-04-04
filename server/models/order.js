@@ -32,6 +32,7 @@ var schema = new mongoose.Schema({
     city: String,
     state: String,
     zip: String,
+    country: String,
     carrier: String,
     trackingNumber: String,
   },
@@ -43,6 +44,7 @@ var schema = new mongoose.Schema({
     city: String,
     state: String,
     zip: String,
+    country: String,
   },
   card: {
     token: String,
