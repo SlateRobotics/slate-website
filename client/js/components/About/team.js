@@ -1,0 +1,30 @@
+module.exports = [{
+  isActive: true,
+  name: "Zachary Allen",
+  title: "Chairman, CEO and Product Architect",
+  img: "/img/zach",
+  description: "With a B.A. in Spanish from Drury University, Zach's path to robotics is a long and winding one. Soon after graduating, he found his way into computers and worked as a software engineer for 3 years for his dad. A book on Deep Learning turned his attention to robotics, where he realized it was impossible to buy the kinds of robots with which you could really experiment, ergo the Slate TR1.",
+  linkedin: "https://www.linkedin.com/in/zachary-allen-674ab8a9/",
+  twitter: "https://twitter.com/ZachAllen417",
+  facebook: "https://www.facebook.com/zach.allen.566",
+},{
+  isActive: false,
+  name: "COO",
+  title: "Chief Operating Officer",
+  img: "/img/person-icon",
+  description: "",
+},{
+  isActive: false,
+  name: "CTO",
+  title: "Chief Technology Officer",
+  img: "/img/person-icon",
+  description: "",
+},{
+  isActive: true,
+  name: "Brian Allen",
+  title: "Investor & Board Member",
+  img: "/img/brian",
+  description: "Brian is the founder of Pension Consultants, Inc., and he has served as President and Board Chairperson since its inception in 1994. He serves as Chairperson for Pension Consultants’ Investment Committee, which oversees nearly $3.1B in AUM/AUA. He was approached by Zach in May 2017 to help fund the early stages of Slate Robotics, and he has been an unwaivering proponent of the vision of the company and of the company itself.",
+  linkedin: "https://www.linkedin.com/in/brianallenretireadviser1/",
+  twitter: "https://twitter.com/RetireAdviser1",
+}];

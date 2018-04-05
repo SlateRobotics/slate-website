@@ -25,24 +25,28 @@ var Footer = React.createClass({
                 <h3>TR1</h3>
                 <Link to="/tr1" style={Style.link}>Overview</Link>
                 <Link to="/tr1/reserve" style={Style.link}>Reserve Yours</Link>
+                <div style={{marginTop:"10px"}} />
+                <h3>Other</h3>
+                <Link to="/printing" style={Style.link}>3D Printing</Link>
+                <a href="https://teespring.com/stores/slate-robotics" style={Style.link}>T-Shirts</a>
               </div>
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>COMPANY</h3>
                 <Link to="/about" style={Style.link}>About Us</Link>
-                <Link to="printing" style={Style.link}>3D Printing</Link>
-                <a href="https://teespring.com/stores/slate-robotics" style={Style.link}>T-Shirts</a>
+                <Link to="/careers" style={Style.link}>Careers</Link>
+                <Link to="/blog" style={Style.link}>Blog</Link>
                 <Link to="/privacy-policy" style={Style.link}>Privacy Policy</Link>
                 <Link to="/terms-and-conditions" style={Style.link}>Terms & Conditions</Link>
                 <Link to="/sales-policies" style={Style.link}>Sales Policies</Link>
               </div>
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>SOCIAL</h3>
-                <a href="https://www.slaterobots.com/blog" style={Style.link}>Blog</a>
                 <a href="https://www.github.com/SlateRobotics/" style={Style.link}>Github</a>
                 <a href="https://www.facebook.com/SlateRobotics/" style={Style.link}>Facebook</a>
                 <a href="https://www.twitter.com/SlateRobotics/" style={Style.link}>Twitter</a>
                 <a href="https://www.linkedin.com/company/24790837/" style={Style.link}>LinkedIn</a>
                 <a href="https://www.instagram.com/SlateRobotics/" style={Style.link}>Instagram</a>
+                <a href="https://www.youtube.com/channel/UC1xko_FNwN6H8PL3MLtJ1UQ" style={Style.link}>YouTube</a>
               </div>
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>CONTACT</h3>
