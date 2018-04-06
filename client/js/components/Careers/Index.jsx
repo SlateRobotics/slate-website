@@ -2,12 +2,27 @@ var React = require('react');
 var BrowserHistory = require('react-router').browserHistory;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
+var Form = require('../Form/Index.jsx');
+var Job = require('./Job.jsx');
 var jobs = require('./jobs');
 
 var Component = React.createClass({
+  getInitialState: function () {
+    return {
+      jobs: jobs,
+      search: "",
+    };
+  },
+
   componentDidMount: function () {
     document.title = "Careers - Slate Robotics";
     window.scrollTo(0,0);
+
+    if (this.props.params && this.props.params.id) {
+      var state = this.state;
+      state.search = this.props.params.id.replace(/-/g, " ");
+      this.setState(state);
+    }
   },
 
   render: function() {
@@ -17,13 +32,21 @@ var Component = React.createClass({
           <div className="col-md-8 col-xs-12 col-centered">
             <h1>Careers</h1>
             <h4>
-              Our mission is to get high performance robots into
-              the hands of hackers.
+              We're building the future of general purpose robots. Join our
+              growing team and play an integral part of the most important
+              technological revolution of our lifetime.
             </h4>
           </div>
         </div>
         <div style={{marginTop:"25px"}} />
         <div className="row">
+          <div className="col-md-8 col-xs-12 col-centered" style={{marginBottom:"25px"}}>
+            <Form.Input
+              attribute="search"
+              placeholder="Search..."
+              value={this.state.search}
+              onChange={this.handleChange_Field} />
+          </div>
           <div className="col-md-8 col-xs-12 col-centered">
             <div className="row">
               {this.getJobs()}
@@ -34,10 +57,16 @@ var Component = React.createClass({
     );
   },
 
+  handleChange_Field: function (attribute, value) {
+    var state = this.state;
+    state[attribute] = value;
+    this.setState(state);
+  },
+
   getJobs: function () {
-    var activeJobs = jobs.filter(function (job) {
+    var activeJobs = this.state.jobs.filter(function (job) {
       return job.isActive;
-    });
+    }.bind(this));
 
     if (activeJobs.length == 0) {
       return (
@@ -52,47 +81,22 @@ var Component = React.createClass({
       )
     }
 
+    activeJobs = activeJobs.filter(function (job) {
+      return job.name.toLowerCase().includes(this.state.search.toLowerCase());
+    }.bind(this));
+
     return activeJobs.map(function (job, i) {
-      function getDuties() {
-        return job.duties.map(function (duty, j) {
-          return (
-            <li key={"job-" + i + "-duty-" + j}>{duty}</li>
-          );
-        })
-      }
-
-      function getSkills() {
-        return job.skills.map(function (skill, j) {
-          return (
-            <li key={"job-" + i + "-skill-" + j}>{skill}</li>
-          );
-        })
-      }
-
       var line;
       if (i != activeJobs.length - 1) {
-        line = (<div style={{borderBottom:"1px solid #ccc",marginTop:"25px"}} />)
+        line = (<div style={{borderBottom:"1px solid #ccc",marginTop:"10px"}} />)
       }
 
       return (
-        <div key={"job-" + i} className="col-xs-12" style={{textAlign:"left",marginBottom:"25px"}}>
-          <h3>{job.name}</h3>
-          <p>{job.description}</p>
-          <div>Responsibilities:</div>
-          <ul>{getDuties()}</ul>
-          <div>Skills and Qualifications:</div>
-          <ul>{getSkills()}</ul>
-          <p>
-            {"To apply, send to "}
-            <a href="mailto:zach@slaterobots.com">zach@slaterobots.com</a>
-            {" a resume and a 3-5 sentence explanation for why you "}
-            are the absolute best, most capable person on this wonderful planet
-            to perform this job.
-          </p>
-          {line}
+        <div key={"job-" + i}>
+          <Job job={job} line={line} />
         </div>
       )
-    });
+    }.bind(this));
   },
 });
 

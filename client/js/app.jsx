@@ -60,6 +60,7 @@ var Routes = (
     <IndexRoute component={Home} />
 		<Route path="/about" component={About} />
 		<Route path="/careers" component={Careers} />
+		<Route path="/careers/:id" component={Careers} />
 		<Route path="/sign-in" component={SignIn} />
 		<Route path="/sign-out" component={SignOut} />
 		<Route path="/register" component={Register} />
