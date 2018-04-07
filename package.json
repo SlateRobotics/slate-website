@@ -4,10 +4,10 @@
   "description": "Code for the website of Slate Robotics",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start-r": "browserify -t reactify client/js/app.jsx -t envify --NODE_ENV development | uglifyjs --compress --mangle > client/build/bundle.js && node index.js",
-    "build": "browserify -t reactify client/js/app.jsx -t envify --NODE_ENV development | uglifyjs --compress --mangle > client/build/bundle.js",
-    "build-f": "browserify -t reactify client/js/app.jsx > client/build/bundle.js"
+    "s": "node index.js",
+    "sb": "browserify -t reactify client/js/app.jsx -t envify --NODE_ENV development | uglifyjs --compress --mangle > client/build/bundle.js && node index.js",
+    "b": "browserify -t reactify client/js/app.jsx -t envify --NODE_ENV development | uglifyjs --compress --mangle > client/build/bundle.js",
+    "bf": "browserify -t reactify client/js/app.jsx > client/build/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -22,18 +22,13 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
-    "chart.js": "^1.1.1",
     "connect-mongo": "^1.1.0",
     "cookie-parser": "^1.4.1",
-    "envify": "^3.4.0",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "flux": "^2.1.1",
-    "griddle-react": "^0.4.1",
-    "jquery": "^2.2.2",
-    "jquery-ui": "^1.10.5",
+    "jquery": "^3.3.1",
     "keymirror": "^0.1.1",
-    "latest-version": "^2.0.0",
     "marked": "^0.3.19",
     "moment": "^2.12.0",
     "mongoose": "^4.4.10",
@@ -41,16 +36,15 @@
     "nodemailer": "^0.7.1",
     "object-assign": "^4.0.1",
     "react": "^0.14.7",
-    "react-autosuggest": "^3.7.3",
-    "react-chartjs": "^0.7.3",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.1",
     "sanitize-html": "^1.18.2",
     "string": "^3.3.1",
-    "stripe": "^4.24.1",
-    "uglifyjs": "^2.4.10"
+    "stripe": "^4.24.1"
   },
   "devDependencies": {
+    "browserify": "^16.1.1",
+    "envify": "^3.4.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
