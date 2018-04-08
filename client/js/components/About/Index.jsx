@@ -31,7 +31,7 @@ var Component = React.createClass({
           <div className="col-lg-8 col-md-10 col-xs-12 col-centered">
             <div className="row">
               <div className="col-md-10 col-xs-12 col-centered">
-                <img src="/img/slate-tr1-8" style={{minHeight:"100%"}} />
+                <img src="/img/slate-tr1-8" style={{minHeight:"100%",maxWidth:"100%"}} />
               </div>
               <div className="col-md-10 col-xs-12 col-centered" style={{marginBottom:"15px"}}>
                 <h2>
