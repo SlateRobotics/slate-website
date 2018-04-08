@@ -4,10 +4,11 @@
   "description": "Code for the website of Slate Robotics",
   "main": "index.js",
   "scripts": {
-    "s": "node index.js",
-    "sb": "browserify -t reactify client/js/app.jsx -t envify --NODE_ENV development | uglifyjs --compress --mangle > client/build/bundle.js && node index.js",
-    "b": "browserify -t reactify client/js/app.jsx -t envify --NODE_ENV development | uglifyjs --compress --mangle > client/build/bundle.js",
-    "bf": "browserify -t reactify client/js/app.jsx > client/build/bundle.js"
+    "s": "sudo node scripts/start.sh",
+    "sb": "scripts/build.sh && scripts/start.sh",
+    "sbf": "scripts/buildfast.sh && scripts/start.sh",
+    "b": "scripts/build.sh",
+    "bf": "scripts/buildfast.sh"
   },
   "repository": {
     "type": "git",

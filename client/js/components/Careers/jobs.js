@@ -2,7 +2,7 @@ var jobs = [];
 var job = {};
 
 job = {duties:[],skills:[]};
-job.isActive = true;
+job.isActive = false;
 job.name = "Chief Operating Officer";
 job.type = "coo";
 job.location = "Springfield, MO";
@@ -37,7 +37,7 @@ job.skills.push("High-level understanding of machine learning concepts");
 jobs.push(job);
 
 job = {duties:[],skills:[]};
-job.isActive = true;
+job.isActive = false;
 job.name = "Manufacturing Technician";
 job.type = "technician";
 job.location = "Springfield, MO";
