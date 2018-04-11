@@ -59,7 +59,7 @@ var Component = React.createClass({
                       <p>
                         The arms on the Slate TR1 are powered by 12v DC motors
                         and standard servos. Joint angles are measured via
-                        8-bit, absolute angle encoders, which closes the feedback
+                        1024 PPR absolute angle encoders, which closes the feedback
                         loop necessary to do inverse kinematics.
                       </p>
                     </div>

@@ -168,6 +168,12 @@ var ChargerImageSection = React.createClass({
               This allows you to quickly get full voltage even if the
               battery is low.
             </p>
+            <i>
+              * Battery life is dependent upon use and can vary greatly.
+              Non-stop use of all motors in arms and base can cause a great
+              reduction in battery life; whereas simply programming on the
+              computer will use minimal levels of battery life.
+            </i>
           </div>
         </div>
         {/* learn more button */}
@@ -210,7 +216,7 @@ var ChargerIconDescriptions = React.createClass({
     return (
       <div>
         <div className="col-sm-2 col-xs-4">
-          <p>8+ Hour Battery Life</p>
+          <p>8+ Hour Battery Life*</p>
         </div>
         <div className="col-sm-2 col-xs-4">
           <p>12V Power Source</p>

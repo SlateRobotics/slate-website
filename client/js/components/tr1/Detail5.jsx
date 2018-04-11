@@ -13,9 +13,9 @@ var Component = React.createClass({
               <div className="row">
                 <div className="col-md-3 col-sm-6 col-xs-12">
                   <img src="/img/icon-warranty" style={{height:"75px",width:"75px"}} />
-                  <h3>One Year Warranty</h3>
+                  <h3>1 Year Warranty</h3>
                   <p>
-                    The TR1 is backed by a one year warranty in the event that
+                    The TR1 is backed by a 1 year warranty in the event that
                     parts break or gears strip.
                   </p>
                   <Link to="/sales-policies" style={{color:"#fff"}}>

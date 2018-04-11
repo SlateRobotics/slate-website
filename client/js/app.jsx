@@ -29,6 +29,7 @@ var Checkout = require('./components/Checkout/Index.jsx');
 var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
 var CheckoutSuccess = require('./components/CheckoutSuccess/Index.jsx');
 var Order = require('./components/Order/Index.jsx');
+var NotFound = require('./components/NotFound/Index.jsx');
 var About = require('./components/About/Index.jsx');
 var Careers = require('./components/Careers/Index.jsx');
 var Blog = require('./components/Blog/Index.jsx');
@@ -66,7 +67,7 @@ var Routes = (
 		<Route path="/register" component={Register} />
 		<Route path="/register/:id" component={RegisterVerify} />
 		<Route path="/forgot-password" component={ForgotPassword} />
-    <Route path="forgot-password/:id" component={ForgotPasswordVerify} />
+    <Route path="/forgot-password/:id" component={ForgotPasswordVerify} />
 		<Route path="/blog" component={Blog} />
 		<Route path="/blog/new" component={BlogEdit} />
 		<Route path="/blog/:id" component={BlogSingle} />
@@ -76,16 +77,12 @@ var Routes = (
 		<Route path="/privacy-policy" component={PrivacyPolicy} />
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />
 		<Route path="/tr1" component={tr1} />
-		<Route path="/tr1/specs" component={tr1Specs} />
 		<Route path="/tr1/reserve" component={tr1Reserve} />
 		<Route path="/tr1/reserve/success" component={tr1ReserveSuccess} />
 		<Route path="/printing" component={Printing} />
 		<Route path="/support" component={Support} />
-		<Route path="/shop/tr1" component={tr1Shop} />
-		<Route path="/checkout" component={Checkout} />
-		<Route path="/checkout/review" component={CheckoutReview} />
-		<Route path="/checkout/success" component={CheckoutSuccess} />
 		<Route path="/order/:id" component={Order} />
+		<Route path="*" component={NotFound} />
   </Route>
 );
 
