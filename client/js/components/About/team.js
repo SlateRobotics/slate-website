@@ -16,6 +16,8 @@ module.exports = [{
   type: "team",
   img: "/img/dylan",
   description: "Dylan joined Slate Robotics in April 2018 to handle operations. He oversees and implements processes required of manufacturing, production, supply-chain, and business infrastructure. Dylan has a background in computer networking and working like an absolute animal. He's dependable and determined to make every single customer of Slate Robotics delighted with their robot.",
+  linkedin: "https://Www.linkedin.com/in/dylanahall12",
+  twitter: "https://twitter.com/dylanahall12",
 },{
   isActive: false,
   name: "CTO",
