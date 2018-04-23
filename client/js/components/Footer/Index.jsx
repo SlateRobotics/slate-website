@@ -1,8 +1,17 @@
 var React = require('react');
+var $ = require('jquery');
 var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
 
 var Footer = React.createClass({
+  componentDidMount: function () {
+    $("#label-email-b950c68a-3845-476b-8a68-0b660e83f906").css("color","white");
+  },
+
+  componentWillUnmount: function () {
+
+  },
+
   render: function() {
     var today = new Date(Date.now());
     return (
@@ -68,7 +77,22 @@ var Footer = React.createClass({
             </div>
           </div>
         </div>
-        <div className="row" style={{marginBottom:"15px",marginTop:"45px"}}>
+        <div className="row" style={{marginTop:"25px", color:"white"}}>
+  				<div className="col-md-10 col-xs-12 col-centered">
+            <div className="row">
+              <div className="col-xs-12" style={{textAlign:"left"}}>
+                <h3>GET SLATE ROBOTICS UPDATES</h3>
+                <p>Stay up to date with all product and company information via our email updates</p>
+                <iframe
+                  id="footer-email-form-iframe"
+                  onLoad={this.handleLoad_iFrame}
+                  srcDoc='<html><body><script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/shell.js"></script><script>hbspt.forms.create({portalId:"4322786",formId:"b950c68a-3845-476b-8a68-0b660e83f906"});</script></body></html>'
+                  style={{height:"215px",border:"none",width:"100%"}}/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row" style={{marginBottom:"15px"}}>
   				<div className="col-md-10 col-xs-12 col-centered">
   					<div>
               {"© " + today.getFullYear() + " Slate Robotics, Inc"}
@@ -79,7 +103,15 @@ var Footer = React.createClass({
         </div>
       </div>
     );
-  }
+  },
+
+  handleLoad_iFrame: function () {
+    var emailFrameContents = $("#footer-email-form-iframe").contents();
+    var hubspotFrameContents = emailFrameContents.find("#hs-form-iframe-0").contents();
+    hubspotFrameContents.find("#label-email-b950c68a-3845-476b-8a68-0b660e83f906").css("display","none");
+    hubspotFrameContents.find(".actions").css("padding","0");
+    hubspotFrameContents.find(".hubspot-link__container").css("display","none");
+  },
 });
 
 module.exports = Footer;
