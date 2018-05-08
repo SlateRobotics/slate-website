@@ -71,8 +71,8 @@ var Footer = React.createClass({
                 </div>
                 <br />
                 <div>Slate Robotics, Inc.</div>
-                <div>4826 W Stanford St.</div>
-                <div>Springfield, MO 65802</div>
+                <div>210 W Sunshine St., Suite C</div>
+                <div>Springfield, MO 65807</div>
               </div>
             </div>
           </div>
