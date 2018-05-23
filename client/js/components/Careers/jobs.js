@@ -18,7 +18,7 @@ job.skills.push("Understanding of data analysis and performance/operation metric
 jobs.push(job);
 
 job = {duties:[],skills:[]};
-job.isActive = true;
+job.isActive = false;
 job.name = "Chief Technology Officer";
 job.type = "cto";
 job.location = "Springfield, MO";
@@ -37,12 +37,12 @@ job.skills.push("High-level understanding of machine learning concepts");
 jobs.push(job);
 
 job = {duties:[],skills:[]};
-job.isActive = false;
+job.isActive = true;
 job.name = "Manufacturing Technician";
 job.type = "technician";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
-job.description = "Slate Robotics is looking for an industrious Manufacturing Technician to help pioneer the future of personal robots. Perform functions associated with all manufacturing operations, including working with engineers in set-up and calibration tasks, as well as performing rework and quality testing related to the production of parts, components, subassemblies and final assemblies. Uses sophisticated programs to collect and evaluate operating data to conduct on-line adjustments to products, instruments or equipment. Determines and may assist in developing methods and procedures to control or modify equipment. Determines and may assist in developing methods and procedures to control or modify the manufacturing process. Works with engineers in conducting experiments. Works with engineers in conducting experiments. Works on assignments that are routine in nature, requiring limited judgment.";
+job.description = "Slate Robotics is looking for an industrious Manufacturing Technician to help pioneer the future of personal robots. Performs functions associated with all manufacturing operations, including working with engineers in set-up and calibration tasks, as well as performing rework and quality testing related to the production of parts, components, subassemblies and final assemblies. Uses sophisticated programs to collect and evaluate operating data to conduct on-line adjustments to products, instruments or equipment. Determines and may assist in developing methods and procedures to control or modify equipment. Determines and may assist in developing methods and procedures to control or modify the manufacturing process. Works with engineers in conducting experiments. Works with engineers in conducting experiments.";
 job.duties.push("Performs functions assoicated with all manufacturing operations.");
 job.duties.push("Uses sophisticated programs to collect and evaluate operating data to conduct on-line adjustments to products, instruments or equipment.");
 job.duties.push("Determine and may assist in developing methods and procedures to control or modify the manufacturing process.");
@@ -68,10 +68,11 @@ job.skills.push("Experience designing electric circuits");
 job.skills.push("Experience designing sophisticated mechanical systems");
 job.skills.push("Demonstrable competancy in C++, Python, and ROS");
 job.skills.push("High-level understanding of machine learning concepts");
+job.skills.push("A college degree in a relevant field is beneficial, but NOT required. We mostly want to see previous projects and evidence that you can build robots!");
 jobs.push(job);
 
 job = {duties:[],skills:[]};
-job.isActive = true;
+job.isActive = false;
 job.name = "Robotics Intern";
 job.type = "intern";
 job.location = "Springfield, MO";

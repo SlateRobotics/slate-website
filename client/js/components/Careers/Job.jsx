@@ -41,11 +41,9 @@ var Component = React.createClass({
         {this.getDuties()}
         {this.getSkills()}
         <p>
-          {"To apply, send to "}
+          {"To apply, send a resume to "}
           <a href="mailto:zach@slaterobots.com">zach@slaterobots.com</a>
-          {" a resume and a 3-5 sentence explanation for why you "}
-          are the absolute best, most capable person on this wonderful planet
-          to fulfill this role.
+          {"."}
         </p>
         {this.props.line}
       </div>
