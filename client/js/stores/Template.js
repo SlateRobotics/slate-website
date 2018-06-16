@@ -24,6 +24,7 @@ module.exports = function(ApiService) {
   }.bind(this);
 
   this.get = function(opts) {
+    if (!opts) opts = {};
     if (opts.id) return this.getOne(opts);
     var params = this.getParams(opts);
     if (this._docs.length === 0 || opts.refresh === true) {
@@ -38,6 +39,7 @@ module.exports = function(ApiService) {
   }.bind(this);
 
   this.getOne = function(opts) {
+    if (!opts) opts = {};
     var params = this.getParams(opts);
     ApiService.getOne(opts.id, params, function (doc) {
       this.replaceOne(doc);

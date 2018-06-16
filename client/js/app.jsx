@@ -9,6 +9,7 @@ var IndexRoute = require('react-router').IndexRoute;
 
 var UserStore = require('./stores/user');
 
+var AdminReservations = require('./components/Admin.Reservations/Index.jsx');
 var Footer = require('./components/Footer/Index.jsx');
 var Header = require('./components/Header/Index.jsx');
 var Home = require('./components/Home/Index.jsx');
@@ -60,6 +61,7 @@ var Routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
 		<Route path="/about" component={About} />
+		<Route path="/admin/reservations" component={AdminReservations} />
 		<Route path="/careers" component={Careers} />
 		<Route path="/careers/:id" component={Careers} />
 		<Route path="/sign-in" component={SignIn} />

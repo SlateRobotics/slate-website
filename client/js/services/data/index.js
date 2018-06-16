@@ -5,6 +5,7 @@ var Service = {
   order: new Slave("order"),
   blog: new Slave("blog"),
   user: new Slave("user"),
+  reservation: new Slave("reservation"),
 }
 
 Service.signIn = function(options, callback) {

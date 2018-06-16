@@ -2,14 +2,21 @@ var React = require('react');
 var $ = require('jquery');
 var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
+var UserStore = require('../../stores').user;
 
 var Footer = React.createClass({
+	getInitialState: function () {
+		return {
+			user: ''
+		}
+	},
   componentDidMount: function () {
     $("#label-email-b950c68a-3845-476b-8a68-0b660e83f906").css("color","white");
+  	UserStore.addChangeListener(this.handleChange_UserStore);
   },
 
   componentWillUnmount: function () {
-
+		UserStore.removeChangeListener(this.handleChange_UserStore);
   },
 
   render: function() {
@@ -77,6 +84,7 @@ var Footer = React.createClass({
             </div>
           </div>
         </div>
+        {this.getAdminSection()}
         <div className="row" style={{marginTop:"25px", color:"white"}}>
   				<div className="col-md-10 col-xs-12 col-centered">
             <div className="row">
@@ -104,6 +112,32 @@ var Footer = React.createClass({
       </div>
     );
   },
+
+  getAdminSection: function () {
+    if (this.state.user && this.state.user.isAdmin) {
+      return (
+        <div className="row" style={{marginTop:"25px"}}>
+          <div className="col-md-10 col-xs-12 col-centered">
+            <div className="row">
+              <div className="col-md-3 col-sm-6 col-xs-12">
+                <h3>ADMIN</h3>
+                <Link to="/admin/reservations" style={Style.link}>Reservations</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+  },
+
+	handleChange_UserStore: function () {
+		var users = UserStore.find();
+		if (users.length > 0) {
+			var state = this.state;
+			state.user = users[0];
+			this.setState(state);
+		}
+	},
 
   handleLoad_iFrame: function () {
     var emailFrameContents = $("#footer-email-form-iframe").contents();
