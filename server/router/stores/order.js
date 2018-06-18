@@ -162,14 +162,17 @@ function findOne(token, id, callback) {
 }
 
 function findMany(user, callback) {
-  callback([]);
-  // Order
-  //   .find({
-  //     "user.id": user.id,
-  //   })
-  //   .exec(function(err, result) {
-  //     return callback(result);
-  //   });
+  var userId = "";
+  if (user && user._id) userId = user._id;
+  if (user.isAdmin === true) {
+  	Order
+  		.find()
+  		.exec(function (err, result) {
+  			return callback(result);
+  		});
+  } else {
+    return callback([]);
+  }
 }
 
 module.exports = new RestFilter({

@@ -8,7 +8,8 @@ module.exports = function (config) {
 	this.route = function (req, res, next) {
 		var id = req.params.id;
 		var userEmail = req.session.email;
-		var userAccessToken = req.headers['accesstoken'];
+		var userAccessToken = req.headers['accesstoken'] || req.cookies["accessToken"];
+		var authType = req.headers['authType'];
 
 		if (!userEmail || !userAccessToken || !id) {
 			return res.status(401).json(config.invalidRequest);

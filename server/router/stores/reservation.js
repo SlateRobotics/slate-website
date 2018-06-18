@@ -6,8 +6,10 @@ var readFilterSchema = {
   "title": "Reservation Schema",
   "type": "object",
   "properties": {
+    "_id": {"type":"string"},
     "token": {"type":"string"},
     "total": {"type":"string"},
+    "status": {"type":"string"},
     "user": {
       "type": "object",
       "properties": {
@@ -35,6 +37,11 @@ var readFilterSchema = {
         "last4": { "type": "string" },
       }
     },
+    "trackingNumber": {"type":"string"},
+    "trackingUrl": {"type":"string"},
+    "beganBuildOn": {"type":"date"},
+    "shippedOn": {"type":"date"},
+    "expectedShipmentDate": {"type":"date"},
     "createdOn": {"type":"date"},
   },
 }
@@ -45,6 +52,7 @@ var writeFilterSchema = {
   "properties": {
     "token": {"type":"string"},
     "total": {"type":"string"},
+    "status": {"type":"string"},
     "user": {
       "type": "object",
       "properties": {
@@ -72,23 +80,36 @@ var writeFilterSchema = {
         "last4": { "type": "string" },
       }
     },
+    "trackingNumber": {"type":"string"},
+    "trackingUrl": {"type":"string"},
+    "beganBuildOn": {"type":"date"},
+    "shippedOn": {"type":"date"},
+    "expectedShipmentDate": {"type":"date"},
     "createdOn": {"type":"date"},
   },
 }
 
 function findOne (user, id, callback) {
-  var userId = "";
-  if (user && user._id) userId = user._id;
-	Reservation
-		.findOne({"_id": id})
-		.where({
-			$or: [
-				{"_id": userId},
-			]
-		})
-		.exec(function (err, result) {
-			return callback(result);
-		});
+  if (user.isAdmin) {
+  	Reservation
+      .findOne({
+        "_id": id,
+      })
+  		.exec(function (err, result) {
+  			return callback(result);
+  		});
+  }
+}
+
+function findOneToken (token, id, callback) {
+  Reservation
+    .findOne({
+      "_id": id,
+      "token": token,
+    })
+    .exec(function (err, result) {
+      return callback(result);
+    });
 }
 
 function findMany (user, callback) {
@@ -111,11 +132,12 @@ module.exports = new RestFilter({
 	readFilterSchema: readFilterSchema,
 	writeFilterSchema: writeFilterSchema,
 	findOne: findOne,
+  findOneToken: findOneToken,
 	findMany: findMany,
 	securityRoles: {
 		create: UserSecurity.isNotAllowed,
-		read: UserSecurity.isActiveUser,
-		update: UserSecurity.isActiveUser,
+		read: UserSecurity.isAllowed,
+		update: UserSecurity.isAdmin,
 		destroy: UserSecurity.isNotAllowed,
 	}
 });

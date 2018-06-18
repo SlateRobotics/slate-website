@@ -4,6 +4,7 @@ var mongoose = restful.mongoose;
 var schema = new mongoose.Schema({
   token: String,
   total: Number,
+  status: String,
   user: {
     firstName: String,
     lastName: String,
@@ -22,6 +23,11 @@ var schema = new mongoose.Schema({
     token: String,
     last4: String,
   },
+  trackingNumber: String,
+  trackingUrl: String,
+  beganBuildOn: Date, // utc
+  shippedOn: Date, // utc
+  expectedShipmentDate: Date, // utc
   createdOn: Date, // utc
 });
 

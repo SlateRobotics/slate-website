@@ -52,8 +52,8 @@ module.exports = function (app) {
 				user = new User();
 				user.email = email;
 				user.password = user.generateHash(password);
-
-        console.log("k");
+        user.createdOn = new Date();
+        user.modifiedOn = new Date();
 
 				UserSetupRequest.findOne({
 					"email": user.email

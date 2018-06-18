@@ -10,6 +10,9 @@ var IndexRoute = require('react-router').IndexRoute;
 var UserStore = require('./stores/user');
 
 var AdminReservations = require('./components/Admin.Reservations/Index.jsx');
+var AdminReservationsEdit = require('./components/Admin.Reservations/Edit.jsx');
+var AdminUsers = require('./components/Admin.Users/Index.jsx');
+var AdminUsersEdit = require('./components/Admin.Users/Edit.jsx');
 var Footer = require('./components/Footer/Index.jsx');
 var Header = require('./components/Header/Index.jsx');
 var Home = require('./components/Home/Index.jsx');
@@ -29,6 +32,7 @@ var Support = require('./components/Support/Index.jsx');
 var Checkout = require('./components/Checkout/Index.jsx');
 var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
 var CheckoutSuccess = require('./components/CheckoutSuccess/Index.jsx');
+var Reservation = require('./components/Reservation/Index.jsx');
 var Order = require('./components/Order/Index.jsx');
 var NotFound = require('./components/NotFound/Index.jsx');
 var About = require('./components/About/Index.jsx');
@@ -62,6 +66,9 @@ var Routes = (
     <IndexRoute component={Home} />
 		<Route path="/about" component={About} />
 		<Route path="/admin/reservations" component={AdminReservations} />
+		<Route path="/admin/reservations/:id" component={AdminReservationsEdit} />
+		<Route path="/admin/users" component={AdminUsers} />
+		<Route path="/admin/users/:id" component={AdminUsersEdit} />
 		<Route path="/careers" component={Careers} />
 		<Route path="/careers/:id" component={Careers} />
 		<Route path="/sign-in" component={SignIn} />
@@ -77,6 +84,7 @@ var Routes = (
 		<Route path="/blog/:id/*" component={BlogSingle} />
 		<Route path="/sales-policies" component={SalesPolicies} />
 		<Route path="/privacy-policy" component={PrivacyPolicy} />
+		<Route path="/reservation/:id" component={Reservation} />
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />
 		<Route path="/tr1" component={tr1} />
 		<Route path="/tr1/reserve" component={tr1Reserve} />

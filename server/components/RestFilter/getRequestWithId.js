@@ -8,11 +8,13 @@ module.exports = function (config) {
 		var id = req.params.id;
 		var userEmail = req.session.email;
 		var userAccessToken = req.headers['accesstoken'] || req.cookies["accessToken"];
+		if (req.query.token) userAccessToken = req.query.token;
 
+		// don't need user-specific authentication
 		if (config.isPublicRead || !userEmail || !userAccessToken) {
-			// don't need user-specific authentication
 			if (config.securityRoles.read({})) {
-				return config.findOne(userAccessToken, id, function (doc) {
+				var findOne = config.findOneToken || config.findOne;
+				return findOne(userAccessToken, id, function (doc) {
 					return res.json(doc);
 				});
 			}
@@ -20,7 +22,8 @@ module.exports = function (config) {
 
 		// token-based authentication
 		if (config.securityRoles.read(userAccessToken) == true) {
-			return config.findOne(userAccessToken, id, function (doc) {
+			var findOne = config.findOneToken || config.findOne;
+			return findOne(userAccessToken, id, function (doc) {
 				if (doc && doc._id) {
 					var result = filter(config.readFilterSchema, doc);
 					return res.json(result);
