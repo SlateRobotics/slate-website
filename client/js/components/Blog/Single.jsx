@@ -36,7 +36,7 @@ var Component = React.createClass({
         if (docs && docs.length > 0) user = docs[0];
         var state = this.state;
         state.user = user;
-        this.setState(user);
+        this.setState(state);
       }.bind(this),
     });
 

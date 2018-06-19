@@ -8,33 +8,23 @@ var Form = require('../Form/Index.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var UserStore = require('../../stores').user;
-var ReservationStore = require('../../stores').reservation;
-
-function gup( name, url ) {
-    if (!url) url = location.href;
-    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-    var regexS = "[\\?&]"+name+"=([^&#]*)";
-    var regex = new RegExp( regexS );
-    var results = regex.exec( url );
-    return results == null ? null : results[1];
-}
 
 var Component = React.createClass({
   getInitialState: function () {
     return {
       errors: [],
       isLoading: true,
-      reservation: {},
+      user: {},
+      metaUser: {},
     }
   },
 
   componentWillMount: function () {
     UserStore.addChangeListener(this.handleChange_UserStore);
     if (this.props.params.id) {
-  		ReservationStore.get({
+  		UserStore.get({
         refresh: true,
         id: this.props.params.id,
-        params: "token=" + gup('token', location.href),
         error: function (error) {
           var state = this.state;
           state.errors.push({name:"load",message:error});
@@ -43,7 +33,7 @@ var Component = React.createClass({
         }.bind(this),
         success: function (data) {
     			var state = this.state;
-    			state.reservation = data;
+    			state.user = data;
           state.isLoading = false;
     			this.setState(state);
         }.bind(this),
@@ -56,7 +46,7 @@ var Component = React.createClass({
   },
 
   componentDidMount: function () {
-    document.title = "Edit Reservation - Slate Robotics";
+    document.title = "Edit User - Slate Robotics";
     window.scrollTo(0,0);
   },
 
@@ -80,61 +70,29 @@ var Component = React.createClass({
             <h3>Edit Reservation</h3>
             <div className="row">
               <div className="col-xs-12">
-                <Form.Label label="Status" isRequired />
+                <Form.Label label="First Name" isRequired />
+                <Form.Input
+                  attribute="firstName"
+                  value={this.state.user.firstName}
+                  onChange={this.handleChange_Field} />
+                {this.getError("firstName")}
+              </div>
+              <div className="col-xs-12">
+                <Form.Label label="Last Name" isRequired />
+                <Form.Input
+                  attribute="lastName"
+                  value={this.state.user.lastName}
+                  onChange={this.handleChange_Field} />
+                {this.getError("lastName")}
+              </div>
+              <div className="col-xs-12">
+                <Form.Label label="Is Admin" isRequired />
                 <Form.Select
                   attribute="status"
-                  options={["Placed","Began Build","Shipped"]}
-                  value={this.state.reservation.status}
+                  options={["true","false"]}
+                  value={this.state.user.isAdmin}
                   onChange={this.handleChange_Field} />
-                {this.getError("status")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Token" isRequired />
-                <Form.Input
-                  attribute="token"
-                  value={this.state.reservation.token}
-                  onChange={this.handleChange_Field} />
-                {this.getError("token")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Total" isRequired />
-                <Form.Input
-                  attribute="total"
-                  value={this.state.reservation.total}
-                  onChange={this.handleChange_Field} />
-                {this.getError("total")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Began Build On" isRequired />
-                <Form.Input
-                  attribute="beganBuildOn"
-                  value={this.state.reservation.beganBuildOn}
-                  onChange={this.handleChange_Field} />
-                {this.getError("beganBuildOn")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Shipped On" isRequired />
-                <Form.Input
-                  attribute="shippedOn"
-                  value={this.state.reservation.shippedOn}
-                  onChange={this.handleChange_Field} />
-                {this.getError("shippedOn")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Tracking URL" isRequired />
-                <Form.Input
-                  attribute="trackingUrl"
-                  value={this.state.reservation.trackingUrl}
-                  onChange={this.handleChange_Field} />
-                {this.getError("trackingUrl")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Tracking Number" isRequired />
-                <Form.Input
-                  attribute="trackingNumber"
-                  value={this.state.reservation.trackingNumber}
-                  onChange={this.handleChange_Field} />
-                {this.getError("trackingNumber")}
+                {this.getError("isAdmin")}
               </div>
             </div>
             <div style={{marginTop:"25px"}} />
@@ -163,15 +121,6 @@ var Component = React.createClass({
 
   validateData: function (callback) {
     var errors = [];
-    if (!this.state.reservation.status) {
-      errors.push({name:"status", message: "Status is a required field"});
-    }
-    if (!this.state.reservation.token) {
-      errors.push({name:"token", message: "Token is a required field"});
-    }
-    if (!this.state.reservation.total) {
-      errors.push({name:"total", message: "Total is a required field"});
-    }
     callback(errors);
   },
 
@@ -179,14 +128,14 @@ var Component = React.createClass({
 		var users = UserStore.find();
 		if (users.length > 0) {
 			var state = this.state;
-			state.user = users[0];
+			state.metaUser = users[0];
 			this.setState(state);
 		}
 	},
 
   handleChange_Field: function (attribute, value) {
     var state = this.state;
-    state.reservation[attribute] = value;
+    state.user[attribute] = value;
     this.setState(state);
   },
 
@@ -206,10 +155,10 @@ var Component = React.createClass({
         return;
       }
 
-      var reservation = this.state.reservation;
-      if (reservation._id) {
-        ReservationStore.update(reservation, function (data) {
-          BrowserHistory.push("/admin/reservations");
+      var user = this.state.user;
+      if (user._id) {
+        UserStore.update(user, function (data) {
+          BrowserHistory.push("/admin/users");
         });
       }
     }.bind(this));

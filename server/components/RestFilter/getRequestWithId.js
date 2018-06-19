@@ -1,62 +1,51 @@
 var filter = require('../JsonFilter');
-var RequestSecurity = require('./RequestSecurity');
 var getUser = require('./getUser');
 
 module.exports = function (config) {
 
 	this.route = function (req, res) {
 		var id = req.params.id;
-		var userEmail = req.session.email;
-		var userAccessToken = req.headers['accesstoken'] || req.cookies["accessToken"];
-		if (req.query.token) userAccessToken = req.query.token;
+		var userEmail = req.session.email || req.query.email;
+		var userAccessToken = req.query.accessToken || req.query.token;
 
-		// don't need user-specific authentication
-		if (config.isPublicRead || !userEmail || !userAccessToken) {
-			if (config.securityRoles.read({})) {
-				var findOne = config.findOneToken || config.findOne;
-				return findOne(userAccessToken, id, function (doc) {
-					return res.json(doc);
-				});
-			}
-		}
-
-		// token-based authentication
-		if (config.securityRoles.read(userAccessToken) == true) {
-			var findOne = config.findOneToken || config.findOne;
-			return findOne(userAccessToken, id, function (doc) {
-				if (doc && doc._id) {
-					var result = filter(config.readFilterSchema, doc);
-					return res.json(result);
-				}
-
-				return res.json({});
-			});
-		}
-
-		if (!userEmail || !id) {
+		// id required
+		if (!id) {
 			return res.status(401).json(config.invalidRequest);
 		}
 
-		getUser(userEmail, function (user) {
-
-			var requestSecurity = new RequestSecurity({
-				method : req.method,
-				user: user,
-				securityRoles: config.securityRoles
+		// public access
+		if (config.security.read({})) {
+			if (!config.findOnePublic) return res.json({});
+			return config.findOnePublic(id, function (doc) {
+				var result = filter(config.readFilterSchema, doc);
+				return res.json(result);
 			});
+		}
 
-			if (!requestSecurity.isAuthorized()) {
-				return res.status(401).json(config.invalidRequest);
-			}
+		// unauthenticated access w/ token
+		if (config.security.read({}, userAccessToken)) {
+			if (!config.findOneToken) return res.json({});
+			return config.findOneToken(userAccessToken, id, function (doc) {
+				var result = filter(config.readFilterSchema, doc);
+				return res.json(result);
+			});
+		}
 
-			config.findOne(user, id, function (doc) {
-				if (doc && doc._id) {
+		// user-authenticated access
+		// email and access token both required
+		if (req.cookies["accessToken"]) userAccessToken = req.cookies["accessToken"];
+		var userAccessToken = userAccessToken || req.headers['accesstoken'] || req.cookies["accessToken"];
+		if (!userEmail || !userAccessToken) return res.json({});
+		getUser(userEmail, userAccessToken, function (user) {
+			if (config.security.read(user, userAccessToken)) {
+				if (!config.findOneUser) return res.json({});
+				return config.findOneUser(user, id, function (doc) {
 					var result = filter(config.readFilterSchema, doc);
 					return res.json(result);
-				}
-
+				});
+			} else {
 				return res.json({});
-			});
+			}
 		});
 	}
 

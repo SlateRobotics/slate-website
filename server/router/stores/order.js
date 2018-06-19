@@ -150,42 +150,58 @@ var writeFilterSchema = {
   }
 }
 
-function findOne(token, id, callback) {
-  Order
-    .findOne({
-      "_id": id,
-      "token": token,
-    })
-    .exec(function(err, result) {
-      return callback(result);
-    });
-}
-
-function findMany(user, callback) {
-  var userId = "";
-  if (user && user._id) userId = user._id;
-  if (user.isAdmin === true) {
-  	Order
-  		.find()
-  		.exec(function (err, result) {
-  			return callback(result);
-  		});
-  } else {
-    return callback([]);
-  }
-}
-
 module.exports = new RestFilter({
   path: "/order",
   model: Order,
   readFilterSchema: readFilterSchema,
   writeFilterSchema: writeFilterSchema,
-  findOne: findOne,
-  findMany: findMany,
-  securityRoles: {
-    create: UserSecurity.isNotAllowed,
-    read: UserSecurity.isAllowed,
-    update: UserSecurity.isNotAllowed,
-    destroy: UserSecurity.isNotAllowed,
-  }
+	findOnePublic: function (id, callback) {
+    return callback({});
+  },
+	findOneToken: function (token, id, callback) {
+    Order
+      .findOne({
+        "_id": id,
+        "token": token,
+      })
+      .exec(function (err, result) {
+        return callback(result);
+      });
+  },
+	findOneUser: function (user, id, callback) {
+    if (user.isAdmin) {
+      Order
+        .findOne({
+          "_id": id,
+        })
+        .exec(function (err, result) {
+          return callback(result);
+        });
+    } else {
+      return callback({});
+    }
+  },
+	findManyPublic: function (callback) {
+    return callback([]);
+  },
+	findManyToken: function (token, callback) {
+    return callback([]);
+  },
+	findManyUser: function (user, callback) {
+    if (user.isAdmin) {
+    	Order
+    		.find()
+    		.exec(function (err, result) {
+    			return callback(result);
+    		});
+    } else {
+      return callback([]);
+    }
+  },
+	security: {
+		create: function (user, token) { return false; },
+		read: function (user, token) { return (user && user.isAdmin) || token; },
+		update: function (user, token) { return (user && user.isAdmin); },
+		destroy: function (user, token) { return false; },
+  },
 });

@@ -1,43 +1,40 @@
 var filter = require('../JsonFilter');
 var moment = require('moment');
-var RequestSecurity = require('./RequestSecurity');
 var getUser = require('./getUser');
 
 module.exports = function (config) {
 
 	this.route = function (req, res, next) {
 		var id = req.params.id;
-		var userEmail = req.session.email;
-		var userAccessToken = req.headers['accesstoken'] || req.cookies["accessToken"];
-		var authType = req.headers['authType'];
+		var userEmail = req.session.email || req.query.email;
+		var userAccessToken = req.query.accessToken || req.query.token;
 
-		if (!userEmail || !userAccessToken || !id) {
+		// id required
+		if (!id) {
 			return res.status(401).json(config.invalidRequest);
 		}
 
-		req.body = filter(config.writeFilterSchema, req.body);
+		// public access
+		if (config.security.update({})) {
+			return next();
+		}
 
+		// unauthenticated access w/ token
+		if (config.security.update({}, userAccessToken)) {
+			return next();
+		}
+
+		// user-authenticated access
+		// email and access token both required
+		if (req.cookies["accessToken"]) userAccessToken = req.cookies["accessToken"];
+		var userAccessToken = userAccessToken || req.headers['accesstoken'] || req.cookies["accessToken"];
+		if (!userEmail || !userAccessToken) return res.status(401).json(config.invalidRequest);
 		getUser(userEmail, userAccessToken, function (user) {
-
-			var requestSecurity = new RequestSecurity({
-				method : req.method,
-				user: user,
-				securityRoles: config.securityRoles
-			});
-
-			if (!requestSecurity.isAuthorized()) {
+			if (config.security.update(user, userAccessToken)) {
+				return next();
+			} else {
 				return res.status(401).json(config.invalidRequest);
 			}
-
-			config.findOne(user, id, function (doc) {
-				if (doc && doc._id) {
-					req.body.modifiedBy = user._id;
-					req.body.modifiedOn = moment();
-					return next();
-				}
-
-				return res.status(401).json(config.invalidRequest);
-			});
 		});
 	}
 

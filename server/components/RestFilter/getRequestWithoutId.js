@@ -1,55 +1,57 @@
 var filter = require('../JsonFilter');
-var RequestSecurity = require('./RequestSecurity');
 var getUser = require('./getUser');
 
 module.exports = function (config) {
 
 	this.route = function (req, res) {
-		var userEmail = req.session.email;
-		var userAccessToken = req.headers['accesstoken'] || req.cookies["accessToken"];
+		var userEmail = req.session.email || req.query.email;
+		var userAccessToken = req.query.accessToken || req.query.token;
 
-		if (req.query.email) userEmail = req.query.email;
-		if (req.query.accessToken) userAccessToken = req.query.accessToken;
-
-		if (config.isPublicRead || !userAccessToken || !userEmail) {
-			// don't need user-specific authentication
-			if (config.securityRoles.read({})) {
-				return config.findMany({}, function (docs) {
-					var result = [];
-					if (docs) {
-						for (i=0;i<docs.length;i++) {
-							result.push(filter(config.readFilterSchema, docs[i]));
-						}
-					}
-					return res.json(result);
-				});
-			}
-		}
-
-		if (!userEmail) {
-			return res.status(401).json(config.invalidRequest);
-		}
-
-		getUser(userEmail, userAccessToken, function (user) {
-			var requestSecurity = new RequestSecurity({
-				method : req.method,
-				user: user,
-				securityRoles: config.securityRoles
-			});
-
-			if (!requestSecurity.isAuthorized()) {
-				return res.status(401).json(config.invalidRequest);
-			}
-
-			config.findMany(user, function (docs) {
+		// public access
+		if (config.security.read()) {
+			if (!config.findManyPublic) return res.json([]);
+			return config.findManyPublic(function (docs) {
+				if (!docs) docs = [];
 				var result = [];
-				if (docs) {
-					for (i=0;i<docs.length;i++) {
-						result.push(filter(config.readFilterSchema, docs[i]));
-					}
+				for (var i = 0; i < docs.length; i++) {
+					result.push(filter(config.readFilterSchema, docs[i]));
 				}
 				return res.json(result);
 			});
+		}
+
+		// unauthenticated access w/ token
+		if (config.security.read(null, userAccessToken)) {
+			if (!config.findManyToken) return res.json([]);
+			return config.findManyToken(userAccessToken, function (docs) {
+				if (!docs) docs = [];
+				var result = [];
+				for (var i = 0; i < docs.length; i++) {
+					result.push(filter(config.readFilterSchema, docs[i]));
+				}
+				return res.json(result);
+			});
+		}
+
+		// user-authenticated access
+		// email and access token both required
+		if (req.cookies["accessToken"]) userAccessToken = req.cookies["accessToken"];
+		var userAccessToken = userAccessToken || req.headers['accesstoken'] || req.cookies["accessToken"];
+		if (!userEmail || !userAccessToken) return res.json([]);
+		getUser(userEmail, userAccessToken, function (user) {
+			if (config.security.read(user, userAccessToken)) {
+				if (!config.findManyUser) return res.json([]);
+				return config.findManyUser(user, function (docs) {
+					if (!docs) docs = [];
+					var result = [];
+					for (var i = 0; i < docs.length; i++) {
+						result.push(filter(config.readFilterSchema, docs[i]));
+					}
+					return res.json(result);
+				});
+			} else {
+				return res.json([]);
+			}
 		});
 	}
 

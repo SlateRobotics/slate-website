@@ -1,5 +1,11 @@
 module.exports = {
 
+	types: {
+		token: 0,
+		user: 1,
+		userOrToken: 2,
+	},
+
 	isNotAllowed: function (user) {
 		return false;
 	},

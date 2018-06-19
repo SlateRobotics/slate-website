@@ -45,6 +45,7 @@ var Component = React.createClass({
         <div className="row" style={{paddingTop:"25px"}}>
           <div className="col-md-8 col-xs-12 col-centered">
             <h1>Reservations</h1>
+            <div>{this.state.reservations.length + " total reservations"}</div>
           </div>
         </div>
         <div className="row" style={{paddingTop:"25px"}}>
@@ -98,6 +99,13 @@ var Component = React.createClass({
         if (!reservation.billing) reservation.billing = {};
         if (!reservation.card) reservation.card = {};
 
+        var number = 1;
+        reservations.map(function (r, j) {
+            if (new Date(r.createdOn) < new Date(reservation.createdOn)) {
+              number += 1;
+            }
+        });
+
         function getBeganBuildOnString () {
           if (reservation.beganBuildOn) {
             return new Date(reservation.beganBuildOn).toLocaleString();
@@ -125,7 +133,10 @@ var Component = React.createClass({
         return (
           <div className="row" key={"reservation-" + i} style={{fontSize:"12px", textAlign:"left", paddingBottom:"15px", marginBottom:"15px", borderBottom:"1px solid #ccc"}}>
             <div className="col-xs-12" style={{marginBottom:"15px"}}>
-              <h4 style={{display:"inline"}}>{reservation.user.firstName + " " + reservation.user.lastName}</h4>
+              <h4 style={{display:"inline"}}>
+                {"#" + number + " "}
+                {reservation.user.firstName + " " + reservation.user.lastName}
+              </h4>
               <span> | </span>
               <Link to={"/reservation/" + reservation._id + "?token=" + reservation.token} style={Style.link}>view</Link>
               <span> | </span>
