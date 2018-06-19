@@ -24,7 +24,7 @@ var writeFilterSchema = {
     "properties": {
 		"firstName": {"type":"string"},
 		"lastName": {"type":"string"},
-		"isAdmin": {"type":"boolean"},
+		"isAdmin": {"type":"string"},
 		"email": {"type":"string"},
 	},
 }

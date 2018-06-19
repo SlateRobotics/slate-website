@@ -52,8 +52,6 @@ module.exports = function (app) {
 				user = new User();
 				user.email = email;
 				user.password = user.generateHash(password);
-        user.createdOn = new Date();
-        user.modifiedOn = new Date();
 
 				UserSetupRequest.findOne({
 					"email": user.email
@@ -100,6 +98,8 @@ module.exports = function (app) {
 				var user = new User();
 				user.email = userSetupRequest.email.toLowerCase();
 				user.password = userSetupRequest.password;
+        user.createdOn = new Date();
+        user.modifiedOn = new Date();
 
 				userSetupRequest.isExpired = true;
 				userSetupRequest.password = null;

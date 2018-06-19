@@ -88,7 +88,7 @@ var Component = React.createClass({
               <div className="col-xs-12">
                 <Form.Label label="Is Admin" isRequired />
                 <Form.Select
-                  attribute="status"
+                  attribute="isAdmin"
                   options={["true","false"]}
                   value={this.state.user.isAdmin}
                   onChange={this.handleChange_Field} />
