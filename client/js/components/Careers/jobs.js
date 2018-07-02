@@ -93,7 +93,7 @@ job.name = "3D Printer Operator";
 job.type = "technician";
 job.location = "Springfield, MO";
 job.employmentType = "Part Time";
-job.description = "Slate Robotics is looking for a 3D Printer Operator to help pioneer the future of personal robots. 25 hours per week, 12 to 5 PM, Monday through Friday. Performs functions associated with 3D printers, including printer maintenance, operation, and post-processing. Uses slicer programs to turn 3D models into gcode, which is required of 3D printers. Operates filament extruder and spooling system to fabricate materials needed by 3D printers. Adheres to strict quality guidelines and standards.";
+job.description = "Slate Robotics is looking for a 3D Printer Operator to help pioneer the future of personal robots. Performs functions associated with 3D printers, including printer maintenance, operation, and post-processing. Uses slicer programs to turn 3D models into gcode, which is required of 3D printers. Operates filament extruder and spooling system to fabricate materials needed by 3D printers. Adheres to strict quality guidelines and standards.";
 job.duties.push("Performs functions associated with 3D printers, including printer maintenance, operation, and post-processing.");
 job.duties.push("Uses slicer programs to turn 3D models into gcode, which is required of 3D printers.");
 job.duties.push("Operates filament extruder and spooling system to fabricate materials needed by 3D printers.");
