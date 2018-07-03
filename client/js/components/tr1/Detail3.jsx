@@ -2,18 +2,18 @@ var React = require('react');
 var $ = require('jquery');
 var Style = require('./Style.jsx');
 
-var KinectHeading = React.createClass({
+var CameraHeading = React.createClass({
   render: function () {
     return (
       <div>
-        <h1>Kinect 2.0</h1>
+        <h1>Orbbec Astra</h1>
         <h3>Integrated Vision System</h3>
       </div>
     )
   }
 });
 
-var KinectIcons = React.createClass({
+var CameraIcons = React.createClass({
   render: function () {
     return (
       <div>
@@ -24,32 +24,32 @@ var KinectIcons = React.createClass({
           <img src="/img/icon-point-cloud" height="50" width="50" />
         </div>
         <div className="col-sm-2 col-xs-4">
-          <img src="/img/icon-frame-rate" height="50" width="50" />
+          <img src="/img/icon-microphone" height="50" width="50" />
         </div>
       </div>
     )
   }
 });
 
-var KinectIconDescriptions = React.createClass({
+var CameraIconDescriptions = React.createClass({
   render: function () {
     return (
       <div>
         <div className="col-sm-2 col-xs-4">
-          <p>1080p RGB Video</p>
+          <p>Up to 1280x960 RGB Video Resolution</p>
         </div>
         <div className="col-sm-2 col-xs-4">
-          <p>510x424 Point Cloud</p>
+          <p>Up to 640x320 Depth Video Resolution</p>
         </div>
         <div className="col-sm-2 col-xs-4">
-          <p>30 Frames Per Second</p>
+          <p>2 integrated microphones</p>
         </div>
       </div>
     )
   }
 });
 
-var KinectImageSection = React.createClass({
+var CameraImageSection = React.createClass({
   render: function () {
     return (
       <div style={Style.imageContainer}
@@ -62,20 +62,23 @@ var KinectImageSection = React.createClass({
         {/* learn more */}
         <div id="detail-3-learn-more-1" style={Style.learnMoreContainer}>
           <div style={Style.learnMoreText}>
-            <h3>Kinect 2.0</h3>
+            <h3>Orbbec Astra</h3>
             <p>
-              Kinect is a motion sensing input device by Microsoft
-              for Xbox One video game consoles and Microsoft Windows PCs.
+              The Astra Series was designed to further improve on the attributes
+              that set Orbbec 3D cameras apart from existing 3D cameras on the
+              market. Astra 3D cameras provide computer vision that enables
+              dozens of functions such as face recognition, gesture recognition,
+              human body tracking, three-dimensional measurement, environment
+              perception, and three-dimensional map reconstruction.
             </p>
             <p>
-              What makes the Kinect such an incredible device is its
-              1080p RGB camera and integrated IR point-cloud sensor.
-              The result is that--for each frame--you get both the color-pixel
-              values as well as a vast array of depth information.
-            </p>
-            <p>
-              The Kinect is used heavily in research institions as it is
-              very easy to work with, affordable, and incredibly powerful.
+              Orbbec Astra shares the same appearance, size, and weight as
+              Orbbec Astra S. The difference is that Astra is optimized for
+              long-range use cases, which makes it great for interactive systems,
+              entertainment, retail, and robotics. Astra was developed to be
+              highly compatible with existing OpenNI applications making both
+              the Astra and Astra S ideal cameras for pre-existing apps that
+              were built with OpenNI.
             </p>
           </div>
         </div>
@@ -158,21 +161,16 @@ var ChargerImageSection = React.createClass({
             <h3>Integrated Charging</h3>
             <p>
               The Slate TR1 comes equiped with a built-in charger and
-              maintainer for its 12V lead-acid battery. The result
-              is that you simply plug in the included 25ft power cord
+              maintainer for its 12V deep cycle battery, which is capable
+              of delivering power in an instant when required of any of
+              the robot's actuators. To charge, simply plug in the included 25ft power cord
               into the back of the robot when power is low.
             </p>
-            <p>
-              While charging, the robot will feed power directly from
-              the power cable for purposes of computing and actuation.
-              This allows you to quickly get full voltage even if the
-              battery is low.
-            </p>
             <i>
-              * Battery life is dependent upon use and can vary greatly.
-              Non-stop use of all motors in arms and base can cause a great
-              reduction in battery life; whereas simply programming on the
-              computer will use minimal levels of battery life.
+              * For non-standard, upgradable 100 AH battery option.
+              Battery life can vary greatly and is entirely dependent upon
+              use. Proper maintenance and care must be taken to ensure the
+              optimal life of the battery.
             </i>
           </div>
         </div>
@@ -216,7 +214,7 @@ var ChargerIconDescriptions = React.createClass({
     return (
       <div>
         <div className="col-sm-2 col-xs-4">
-          <p>8+ Hour Battery Life*</p>
+          <p>Up to 8 Hour Battery Life*</p>
         </div>
         <div className="col-sm-2 col-xs-4">
           <p>12V Power Source</p>
@@ -240,7 +238,7 @@ var Component = React.createClass({
           {/* headings */}
           <div className="row">
             <div className="col-sm-6">
-              <KinectHeading />
+              <CameraHeading />
             </div>
             <div className="col-sm-6">
               <ChargerHeading />
@@ -248,18 +246,18 @@ var Component = React.createClass({
           </div>
           {/* icons */}
           <div className="row">
-            <KinectIcons />
+            <CameraIcons />
             <ChargerIcons />
           </div>
           {/* icon descriptions */}
           <div className="row" style={Style.iconDescriptionContainer}>
-            <KinectIconDescriptions />
+            <CameraIconDescriptions />
             <ChargerIconDescriptions />
           </div>
           {/* images */}
           <div className="row">
             <div className="col-sm-6" style={{height:"550px",padding:"0"}}>
-              <KinectImageSection imgHeight="550" />
+              <CameraImageSection imgHeight="550" />
             </div>
             <div className="col-sm-6" style={{height:"550px",padding:"0"}}>
               <ChargerImageSection imgHeight="550" />
@@ -275,22 +273,22 @@ var Component = React.createClass({
           {/* arm section */}
           <div className="row">
             <div className="col-xs-12">
-              <KinectHeading />
+              <CameraHeading />
             </div>
           </div>
           <div className="row">
             <div className="col-xs-12">
-              <KinectIcons />
+              <CameraIcons />
             </div>
           </div>
           <div className="row" style={Style.iconDescriptionContainer}>
             <div className="col-xs-12" style={{fontSize:"12px"}}>
-              <KinectIconDescriptions />
+              <CameraIconDescriptions />
             </div>
           </div>
           <div className="row" style={{marginBottom:"35px"}}>
             <div className="col-xs-12" style={{height:"500px",padding:"0"}}>
-              <KinectImageSection imgHeight="500" isMobile={true} />
+              <CameraImageSection imgHeight="500" isMobile={true} />
             </div>
           </div>
           {/* base section */}

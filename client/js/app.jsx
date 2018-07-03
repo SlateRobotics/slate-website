@@ -9,6 +9,8 @@ var IndexRoute = require('react-router').IndexRoute;
 
 var UserStore = require('./stores/user');
 
+var AdminOrders = require('./components/Admin.Orders/Index.jsx');
+var AdminOrdersEdit = require('./components/Admin.Orders/Edit.jsx');
 var AdminReservations = require('./components/Admin.Reservations/Index.jsx');
 var AdminReservationsEdit = require('./components/Admin.Reservations/Edit.jsx');
 var AdminUsers = require('./components/Admin.Users/Index.jsx');
@@ -65,6 +67,8 @@ var Routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
 		<Route path="/about" component={About} />
+		<Route path="/admin/orders" component={AdminOrders} />
+		<Route path="/admin/orders/:id" component={AdminOrdersEdit} />
 		<Route path="/admin/reservations" component={AdminReservations} />
 		<Route path="/admin/reservations/:id" component={AdminReservationsEdit} />
 		<Route path="/admin/users" component={AdminUsers} />
@@ -85,12 +89,13 @@ var Routes = (
 		<Route path="/sales-policies" component={SalesPolicies} />
 		<Route path="/privacy-policy" component={PrivacyPolicy} />
 		<Route path="/reservation/:id" component={Reservation} />
+		<Route path="/shop/tr1" component={tr1Shop} />
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />
 		<Route path="/tr1" component={tr1} />
-		<Route path="/tr1/reserve" component={tr1Reserve} />
-		<Route path="/tr1/reserve/success" component={tr1ReserveSuccess} />
-		<Route path="/printing" component={Printing} />
 		<Route path="/support" component={Support} />
+		<Route path="/checkout" component={Checkout} />
+		<Route path="/checkout/review" component={CheckoutReview} />
+		<Route path="/checkout/success" component={CheckoutSuccess} />
 		<Route path="/order/:id" component={Order} />
 		<Route path="*" component={NotFound} />
   </Route>

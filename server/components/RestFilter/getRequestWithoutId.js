@@ -5,7 +5,7 @@ module.exports = function (config) {
 
 	this.route = function (req, res) {
 		var userEmail = req.session.email || req.query.email;
-		var userAccessToken = req.query.accessToken || req.query.token;
+		var userAccessToken = req.query.token || req.query.accessToken;
 
 		// public access
 		if (config.security.read()) {

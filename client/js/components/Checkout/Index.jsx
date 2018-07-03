@@ -239,7 +239,10 @@ var Component = React.createClass({
               });
             }
           }.bind(this)).catch(function (error) {
-            console.log(error);
+            var state = this.state;
+            state.isLoading = false;
+            state.errors = [error];
+            this.setState(state);
           }.bind(this));
         }.bind(this));
       } else {

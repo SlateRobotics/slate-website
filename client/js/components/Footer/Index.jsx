@@ -40,10 +40,9 @@ var Footer = React.createClass({
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>TR1</h3>
                 <Link to="/tr1" style={Style.link}>Overview</Link>
-                <Link to="/tr1/reserve" style={Style.link}>Reserve Yours</Link>
+                <Link to="/shop/tr1" style={Style.link}>Buy</Link>
                 <div style={{marginTop:"10px"}} />
                 <h3>Other</h3>
-                <Link to="/printing" style={Style.link}>3D Printing</Link>
                 <a href="https://teespring.com/stores/slate-robotics" style={Style.link}>T-Shirts</a>
               </div>
       				<div className="col-md-3 col-sm-6 col-xs-12">
@@ -121,6 +120,7 @@ var Footer = React.createClass({
             <div className="row">
               <div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>ADMIN</h3>
+                <Link to="/admin/orders" style={Style.link}>Orders</Link>
                 <Link to="/admin/reservations" style={Style.link}>Reservations</Link>
                 <Link to="/admin/users" style={Style.link}>Users</Link>
               </div>

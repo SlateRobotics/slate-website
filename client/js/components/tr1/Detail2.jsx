@@ -17,7 +17,7 @@ var Component = React.createClass({
                     style={Style.iconDescriptionContainer}>
                     <div className="col-xs-4">
                       <img src="/img/icon-up" height="50" width="50" />
-                      <p>300mm Extension</p>
+                      <p>1500mm Extension</p>
                     </div>
                     <div className="col-xs-4">
                       <img src="/img/icon-force" height="50" width="50" />
@@ -43,7 +43,7 @@ var Component = React.createClass({
                   {/* icon descriptions */}
                   <div className="row hidden-xs" style={Style.iconDescriptionContainer}>
                     <div className="col-sm-4">
-                      <p>300mm Extension</p>
+                      <p>150mm Extension</p>
                     </div>
                     <div className="col-sm-4">
                       <p>1.5kN Force</p>

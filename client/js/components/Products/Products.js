@@ -1,0 +1,67 @@
+module.exports = [{
+  id: "tr1",
+  name: "Slate TR1",
+  basePrice: 3199,
+  config: [{
+    name: "arm",
+    label: "Arms",
+    items: [{
+      id: 0,
+      label: "One-armed TR1",
+      price: 0,
+    }, {
+      id: 1,
+      label: "Two-armed TR1",
+      price: 1250,
+    }]
+  }, {
+    name: "computer",
+    label: "Computer",
+    description: '<div style="font-style:italic;" ><span data-reactid=".0.1.1.0.0.1.2.1.0">Learn more about NVIDIA\'s</span><span data-reactid=".0.1.1.0.0.1.2.1.1"> </span><a target="_blank" href="http://elinux.org/Jetson_TX1">TX1</a><span> and</span><span> </span><a target="_blank" href="http://elinux.org/Jetson_TX2">TX2</a></div>',
+    items: [{
+      id: 0,
+      label: "NVIDIA Jetson TX1",
+      price: 0,
+    }, {
+      id: 1,
+      label: "NVIDIA Jetson TX2",
+      price: 300,
+    }]
+  }, {
+    name: "linearActuator",
+    label: "Linear Actuator",
+    items: [{
+      id: 0,
+      label: "150mm Linear Actuator",
+      price: 0,
+    }, {
+      id: 1,
+      label: "150mm Linear Actuator w/ position feedback",
+      price: 75,
+    }]
+  }, {
+    name: "battery",
+    label: "Battery",
+    items: [{
+      id: 0,
+      label: "12V 20AH Deep Cycle Battery",
+      price: 0,
+    }, {
+      id: 1,
+      label: "12V 100AH Deep Cycle Battery",
+      price: 150,
+    }]
+  }, {
+    name: "shipping",
+    label: "Shipping",
+    items: [{
+      id: 0,
+      label: "Local Pickup - Springfield, MO",
+      price: 0,
+    }, {
+      id: 1,
+      label: "UPS Ground",
+      price: 150,
+    }]
+  }],
+}]

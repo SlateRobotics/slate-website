@@ -6,16 +6,7 @@ var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var OrderStore = require('../../stores/order');
-
-var basePrice = 2499;
-var computer = [0, 300, 400];
-var computerName = ["NVIDIA Jetson TK1", "NVIDIA Jetson TX1", "NVIDIA Jetson TX2"];
-var linearActuator = [0, 50];
-var linearActuatorName = ["12in 5.7mm/s Linear Actuator", "12in 10mm/s Linear Actuator"];
-var battery = [0, 30];
-var batteryName = ["12V 8AH Lead-Acid Battery", "12V 20AH Lead-Acid Battery"];
-var shipping = [0, 125, 375, 550];
-var shippingName = ["Local Pickup - Springfield, MO", "UPS Ground", "UPS 3 Day Select®", "UPS 2nd Day Air®"];
+var Products = require('../Products/Products.js');
 
 function gup( name, url ) {
     if (!url) url = location.href;
@@ -31,6 +22,7 @@ var Component = React.createClass({
     return {
       isLoading: true,
       error: '',
+      product: Products[0],
       order: {
         id: 0,
         total: 0,
@@ -46,7 +38,7 @@ var Component = React.createClass({
     this.isLoading();
     OrderStore.getOne({
       id: this.props.params.id,
-      params: "?token=" + gup('token', location.href),
+      params: "token=" + gup('token', location.href),
       success: function (data) {
         var state = this.state;
         state.order = data;
@@ -108,7 +100,7 @@ var Component = React.createClass({
                     <h1><span style={{color:"green"}}>✔</span></h1>
                   </div>
                   <div className="col-xs-4">
-                    <h1>{this.getShippedIcon()}</h1>
+                    <h1>{this.getBeganBuildIcon()}</h1>
                   </div>
                   <div className="col-xs-4">
                     <h1>{this.getShippedIcon()}</h1>
@@ -130,7 +122,7 @@ var Component = React.createClass({
                     <h3 style={{marginTop:"0px"}}>Placed</h3>
                   </div>
                   <div className="col-xs-4">
-                    <h3 style={{marginTop:"0px"}}>Assembled</h3>
+                    <h3 style={{marginTop:"0px"}}>Began Build</h3>
                   </div>
                   <div className="col-xs-4">
                     <h3 style={{marginTop:"0px"}}>Shipped</h3>
@@ -141,7 +133,7 @@ var Component = React.createClass({
                     <div>{this.getCreatedOnString("MMM D")}</div>
                   </div>
                   <div className="col-xs-4">
-                    <div>{this.getAssembledOnString("MMM D")}</div>
+                    <div>{this.getBeganBuildString("MMM D")}</div>
                   </div>
                   <div className="col-xs-4">
                     <div>{this.getShippedOnString("MMM D")}</div>
@@ -171,8 +163,9 @@ var Component = React.createClass({
               <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
                 <h2 style={{marginTop:"0px"}}>TR1 Configuration</h2>
                 <div style={{lineHeight:"150%"}}>
-                  <div style={{color:"#aaa"}}>TR1 Base Price ($2,499.00)</div>
+                  <div style={{color:"#aaa"}}>TR1 Base Price ({this.getBasePrice()})</div>
                   {this.getProductConfig()}
+                  {this.getDiscountConfig()}
                 </div>
               </div>
               <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
@@ -198,7 +191,7 @@ var Component = React.createClass({
               </div>
               <div className="row">
                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                  Estimated Tax
+                  Tax
                 </div>
                 <div className="col-lg-2 col-md-3 col-sm-4 col-xs-6" style={{textAlign:"right"}}>
                   {this.getTaxString()}
@@ -238,8 +231,8 @@ var Component = React.createClass({
     }
   },
 
-  getAssebmledIcon: function () {
-    if (this.state.order.assembledOn) {
+  getBeganBuildIcon: function () {
+    if (this.state.order.beganBuildOn) {
       return (<span style={{color:"green"}}>✔</span>);
     } else {
       return (<span>⏳</span>)
@@ -255,7 +248,7 @@ var Component = React.createClass({
   },
 
   getStatusDetails: function () {
-    var status = ""; // placed, assembling, assembled, shipped
+    var status = ""; // placed, began build, shipped
     if (this.state.order.status) {
       status = this.state.order.status.toUpperCase();
     }
@@ -272,13 +265,12 @@ var Component = React.createClass({
         </div>
       )
     } else if (status == "SHIPPED") {
-      var tracking = "1Z30Y8241367880737";
-      var trackingUrl = "https://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=" + tracking;
+      var tracking = this.state.order.shipping.trackingNumber;
+      var trackingUrl = this.state.order.shipping.trackingUrl;
       return (
         <div>
           <div>Status: {status}</div>
-          <div>Carrier: UPS</div>
-          <div>Tracking #: <a href={trackingUrl} target="_blank">tracking</a></div>
+          <div>Tracking #: <a href={trackingUrl} target="_blank">{tracking}</a></div>
         </div>
       )
     }
@@ -301,9 +293,9 @@ var Component = React.createClass({
     }
   },
 
-  getAssembledOnString: function (format) {
-    if (this.state.order && this.state.order.assembledOn) {
-      return moment(this.state.order.assembledOn).format(format);
+  getBeganBuildString: function (format) {
+    if (this.state.order && this.state.order.beganBuildOn) {
+      return moment(this.state.order.beganBuildOn).format(format);
     } else {
       return "---";
     }
@@ -325,38 +317,56 @@ var Component = React.createClass({
     }
   },
 
+  getBasePrice: function () {
+    var basePrice = this.state.product.basePrice;
+    return "$" + basePrice.toLocaleString();
+  },
+
+  getProductConfigDetails: function (orderConfig) {
+    for (var i = 0; i < this.state.product.config.length; i++) {
+      var productConfig = this.state.product.config[i];
+      if (orderConfig.name == productConfig.name) {
+        return productConfig;
+      }
+    }
+  },
+
+  getDiscountConfig: function () {
+    if (this.state.order.discount && this.state.order.reservationToken) {
+      return (
+        <div style={{marginTop:"25px"}}><b>{"Reservation discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
+      )
+    } else if (this.state.order.discount) {
+      return (
+        <div style={{marginTop:"25px"}}><b>{"Discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
+      )
+    }
+  },
+
   getProductConfig: function () {
     if (!this.state.order.products) { return; }
     return this.state.order.products.map(function (product, i) {
       if (!product.config) { return; }
       return product.config.map(function (config, j) {
-        if (config.name == "computer") {
-          if (computer[config.value] == 0) {
-            return (<div>{computerName[config.value]}</div>)
-          } else {
-            return (<div><b>{computerName[config.value] + " (+$" + computer[config.value] + ")"}</b></div>)
+        var productConfig = this.getProductConfigDetails(config);
+        if (productConfig ) {
+          var selectedConfig;
+          for (var k = 0; k < productConfig.items.length; k++) {
+            var item = productConfig.items[k];
+            if (item.id == config.value) {
+              selectedConfig = item;
+            }
           }
-        } else if (config.name == "linearActuator") {
-          if (linearActuator[config.value] == 0) {
-            return (<div>{linearActuatorName[config.value]}</div>)
-          } else {
-            return (<div><b>{linearActuatorName[config.value] + " (+$" + linearActuator[config.value] + ")"}</b></div>)
-          }
-        } else if (config.name == "battery") {
-          if (battery[config.value] == 0) {
-            return (<div>{batteryName[config.value]}</div>)
-          } else {
-            return (<div><b>{batteryName[config.value] + " (+$" + battery[config.value] + ")"}</b></div>)
-          }
-        } else if (config.name == "shipping") {
-          if (shipping[config.value] == 0) {
-            return (<div>{shippingName[config.value]}</div>)
-          } else {
-            return (<div><b>{shippingName[config.value] + " (+$" + shipping[config.value] + ")"}</b></div>)
+          if (selectedConfig) {
+            if (selectedConfig.price == 0) {
+              return (<div>{selectedConfig.label}</div>)
+            } else {
+              return (<div><b>{selectedConfig.label + " (+$" + selectedConfig.price.toLocaleString() + ")"}</b></div>)
+            }
           }
         }
-      });
-    });
+      }.bind(this));
+    }.bind(this));
   },
 
   getSubtotalString: function () {

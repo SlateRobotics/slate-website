@@ -6,14 +6,18 @@ var readFilterSchema = {
   "title": "Order Schema",
   "type": "object",
   "properties": {
+    "_id": {"type":"string"},
+    "token": {"type":"string"},
+    "reservationToken": {"type":"string"},
     "status": { "type": "string" },
-    "createdOn": { "type": "date" },
-    "shippedOn": { "type": "date" },
-    "assembledOn": { "type": "date" },
-    "expectedShipmentDate": { "type": "date" },
+    "beganBuildOn": {"type":"date"},
+    "shippedOn": {"type":"date"},
+    "expectedShipmentDate": {"type":"date"},
+    "createdOn": {"type":"date"},
     "subtotal": { "type": "string" },
     "tax": { "type": "string" },
     "total": { "type": "string" },
+    "discount": { "type": "string" },
     "products": {
       "type": "array",
       "items": {
@@ -51,7 +55,7 @@ var readFilterSchema = {
         "city": { "type": "string" },
         "state": { "type": "string" },
         "zip": { "type": "string" },
-        "carrier": { "type": "string" },
+        "trackingUrl": { "type": "string" },
         "trackingNumber": { "type": "string" },
       }
     },
@@ -70,6 +74,7 @@ var readFilterSchema = {
     "card": {
       "type": "object",
       "properties": {
+        "token": { "type": "string" },
         "last4": { "type": "string" },
       }
     },
@@ -80,14 +85,19 @@ var writeFilterSchema = {
   "title": "Order Schema",
   "type": "object",
   "properties": {
+    "_id": {"type":"string"},
+    "token": {"type":"string"},
+    "reservationToken": {"type":"string"},
     "status": { "type": "string" },
-    "createdOn": { "type": "date" },
-    "shippedOn": { "type": "date" },
-    "assembledOn": { "type": "date" },
+    "beganBuildOn": {"type":"date"},
+    "shippedOn": {"type":"date"},
+    "expectedShipmentDate": {"type":"date"},
+    "createdOn": {"type":"date"},
     "expectedShipmentDate": { "type": "date" },
     "subtotal": { "type": "string" },
     "tax": { "type": "string" },
     "total": { "type": "string" },
+    "discount": { "type": "string" },
     "products": {
       "type": "array",
       "items": {
@@ -125,7 +135,7 @@ var writeFilterSchema = {
         "city": { "type": "string" },
         "state": { "type": "string" },
         "zip": { "type": "string" },
-        "carrier": { "type": "string" },
+        "trackingUrl": { "type": "string" },
         "trackingNumber": { "type": "string" },
       }
     },
@@ -144,6 +154,7 @@ var writeFilterSchema = {
     "card": {
       "type": "object",
       "properties": {
+        "token": { "type": "string" },
         "last4": { "type": "string" },
       }
     },

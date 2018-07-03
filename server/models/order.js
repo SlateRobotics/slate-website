@@ -14,10 +14,12 @@ var productSchema = new mongoose.Schema({
 
 var schema = new mongoose.Schema({
   token: String,
+  reservationToken: String,
   status: String, // placed, assembling, assembled, shipped
   subtotal: Number,
   tax: Number,
   total: Number,
+  discount: Number,
   products: [productSchema],
   user: {
     id: String,
@@ -34,6 +36,7 @@ var schema = new mongoose.Schema({
     zip: String,
     country: String,
     carrier: String,
+    trackingUrl: String,
     trackingNumber: String,
   },
   billing: {
@@ -50,10 +53,12 @@ var schema = new mongoose.Schema({
     token: String,
     last4: String,
   },
-  createdOn: Date, // utc
+  trackingNumber: String,
+  trackingUrl: String,
+  beganBuildOn: Date, // utc
   shippedOn: Date, // utc
-  assembledOn: Date, //utc
   expectedShipmentDate: Date, // utc
+  createdOn: Date, // utc
 });
 
 module.exports = restful.model('order', schema);

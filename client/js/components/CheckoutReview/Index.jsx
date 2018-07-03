@@ -3,28 +3,20 @@ var BrowserHistory = require('react-router').browserHistory;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
+var Products = require('../Products/Products.js');
 var CartStore = require('../../stores').cart;
 var $ = require('jquery');
-
-var basePrice = 2499;
-var computer = [0, 300, 400];
-var computerName = ["NVIDIA Jetson TK1", "NVIDIA Jetson TX1", "NVIDIA Jetson TX2"];
-var linearActuator = [0, 50];
-var linearActuatorName = ["12in 5.7mm/s Linear Actuator", "12in 10mm/s Linear Actuator"];
-var battery = [0, 30];
-var batteryName = ["12V 8AH Lead-Acid Battery", "12V 20AH Lead-Acid Battery"];
-var shipping = [0, 125, 375, 550];
-var shippingName = ["Local Pickup - Springfield, MO", "UPS Ground", "UPS 3 Day Select®", "UPS 2nd Day Air®"];
 
 var Component = React.createClass({
   getInitialState: function () {
     return {
       isLoading: false,
       error: '',
+      product: Products[0],
       order: {
         id: 0,
         total: 0,
-        config: {},
+        config: [],
         shipping: {},
         billing: {},
         payment: {},
@@ -79,11 +71,9 @@ var Component = React.createClass({
               <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
                 <h2 style={{marginTop:"0px"}}>TR1 Configuration</h2>
                 <div style={{lineHeight:"150%"}}>
-                  <div style={{color:"#aaa"}}>TR1 Base Price ($2,499.00)</div>
-                  <div>{this.getOverviewText(this.state.order.config.computer, computerName, computer)}</div>
-                  <div>{this.getOverviewText(this.state.order.config.linearActuator, linearActuatorName, linearActuator)}</div>
-                  <div>{this.getOverviewText(this.state.order.config.battery, batteryName, battery)}</div>
-                  <div>{this.getOverviewText(this.state.order.config.shipping, shippingName, shipping)}</div>
+                  <div style={{color:"#aaa"}}>TR1 Base Price ({this.getBasePrice()})</div>
+                  {this.getProductConfig()}
+                  {this.getDiscountConfig()}
                 </div>
               </div>
               <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
@@ -125,7 +115,7 @@ var Component = React.createClass({
               </div>
               <div className="row">
                 <div className="col-xs-12" style={{paddingBottom:"15px",fontStyle:"italic",fontSize:"14px"}}>
-                  Estimated Shipment Date: 12/15/2017
+                  Estimated Shipment Date: {this.getExpectedShipDate()}
                 </div>
               </div>
               {this.getButtons()}
@@ -160,12 +150,7 @@ var Component = React.createClass({
       }
       order.products = [{
         productId: "tr1",
-        config: [
-          {name: "computer", value: order.config.computer},
-          {name: "linearActuator", value: order.config.linearActuator},
-          {name: "battery", value: order.config.battery},
-          {name: "shipping", value: order.config.shipping}
-        ],
+        config: order.config,
       }];
     }
 
@@ -183,6 +168,12 @@ var Component = React.createClass({
           state.error = result.message;
           this.setState(state);
         }
+      }.bind(this),
+      error: function (xhr, ajaxOptions, thrownError) {
+        var state = this.state;
+        state.isLoading = false;
+        state.error = "An ajax error occured: " + thrownError;
+        this.setState(state);
       }.bind(this),
       dataType: "json"
     });
@@ -216,6 +207,14 @@ var Component = React.createClass({
         </div>
       )
     }
+  },
+
+  getExpectedShipDate: function () {
+    var beginDate = new Date();
+    beginDate.setDate(beginDate.getDate() + (7*8));
+    var endDate = new Date();
+    endDate.setDate(endDate.getDate() + (7*12));
+    return beginDate.toLocaleDateString() + " - " + endDate.toLocaleDateString();
   },
 
   getButtons: function () {
@@ -257,6 +256,18 @@ var Component = React.createClass({
     }
   },
 
+  getDiscountConfig: function () {
+    if (this.state.order.discount && this.state.order.reservationToken) {
+      return (
+        <div style={{marginTop:"25px"}}><b>{"Reservation discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
+      )
+    } else if (this.state.discount) {
+      return (
+        <div style={{marginTop:"25px"}}><b>{"Discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
+      )
+    }
+  },
+
   getSubtotalString: function () {
     var subtotal = 0;
     if (this.state.order && this.state.order.total) {
@@ -294,6 +305,43 @@ var Component = React.createClass({
       total = this.state.order.total + this.calculateTaxes();
     }
     return "$" + total.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
+  },
+
+  getBasePrice: function () {
+    var basePrice = this.state.product.basePrice;
+    return "$" + basePrice.toLocaleString();
+  },
+
+  getProductConfigDetails: function (orderConfig) {
+    for (var i = 0; i < this.state.product.config.length; i++) {
+      var productConfig = this.state.product.config[i];
+      if (orderConfig.name == productConfig.name) {
+        return productConfig;
+      }
+    }
+  },
+
+  getProductConfig: function () {
+    if (!this.state.order.config) { return; }
+    return this.state.order.config.map(function (config, j) {
+      var productConfig = this.getProductConfigDetails(config);
+      if (productConfig) {
+        var selectedConfig;
+        for (var k = 0; k < productConfig.items.length; k++) {
+          var item = productConfig.items[k];
+          if (item.id == config.value) {
+            selectedConfig = item;
+          }
+        }
+        if (selectedConfig) {
+          if (selectedConfig.price == 0) {
+            return (<div key={config.name + "-" + j}>{selectedConfig.label}</div>)
+          } else {
+            return (<div key={config.name + "-" + j}><b>{selectedConfig.label + " (+$" + selectedConfig.price.toLocaleString() + ")"}</b></div>)
+          }
+        }
+      }
+    }.bind(this));
   },
 });
 

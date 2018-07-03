@@ -56,7 +56,7 @@ var Component = React.createClass({
             backgroundPosition:"center top",
             backgroundColor:"#222",
             backgroundRepeat:"no-repeat",
-            backgroundSize:"1122px 700px",
+            backgroundSize:"1204px 674px",
           }}>
           <div
             className="col-lg-10 col-xs-12 col-centered"
@@ -78,16 +78,16 @@ var Component = React.createClass({
                 Slate TR1
               </h1>
               <h3 className="hidden-sm hidden-xs">
-                Human-sized robot for hackers
+                The preeminent machine learning playground
               </h3>
               <h4 className="hidden-lg hidden-md hidden-xs">
-                Human-sized robot for hackers
+                The preeminent machine learning playground
               </h4>
               <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}}>
                 Learn More {">"}
               </Link>
-              <Link to="/tr1/reserve" style={{color:"#fff"}}>
-                Reserve Yours {">"}
+              <Link to="/shop/tr1" style={{color:"#fff"}}>
+                Buy {">"}
               </Link>
             </div>
           </div>
@@ -108,7 +108,7 @@ var Component = React.createClass({
                 bottom:"0"
               }}>
               <span style={{fontStyle:"italic",lineHeight:"38px"}}>
-                Starting at $2,999
+                {/*"Starting at $3,199"*/}
               </span>
             </div>
             <div id="tr1-control-toggle" style={{

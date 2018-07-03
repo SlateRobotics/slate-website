@@ -4,26 +4,41 @@ var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ConfigItem = require('./ConfigItem.jsx');
-
+var Products = require('../Products/Products.js');
 var CartStore = require('../../stores').cart;
 
-var basePrice = 2999;
-var computer = [0, 300, 400];
-var computerName = ["NVIDIA Jetson TK1", "NVIDIA Jetson TX1", "NVIDIA Jetson TX2"];
-var linearActuator = [0, 50];
-var linearActuatorName = ["12in 5.7mm/s Linear Actuator", "12in 10mm/s Linear Actuator"];
-var battery = [0, 30];
-var batteryName = ["12V 8AH Lead-Acid Battery", "12V 20AH Lead-Acid Battery"];
-var shipping = [0, 125, 375, 550];
-var shippingName = ["Local Pickup - Springfield, MO", "UPS Ground", "UPS 3 Day Select®", "UPS 2nd Day Air®"];
+function gup( name, url ) {
+    if (!url) url = location.href;
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( url );
+    return results == null ? null : results[1];
+}
 
 var Component = React.createClass({
   getInitialState: function () {
     return {
-      computer: 0,
-      linearActuator: 0,
-      battery: 0,
-      shipping: 1,
+      product: Products[0],
+      discount: 0,
+      order: {
+        config: [{
+          name: "arm",
+          value: 1
+        }, {
+          name: "computer",
+          value: 0,
+        }, {
+          name: "linearActuator",
+          value: 0,
+        }, {
+          name: "battery",
+          value: 0,
+        }, {
+          name: "shipping",
+          value: 1,
+        }]
+      }
     }
   },
 
@@ -32,12 +47,20 @@ var Component = React.createClass({
       if (!doc) {
         CartStore.insert({
           id: 0,
-          config: this.state,
+          config: this.state.config,
         });
       } else {
         this.setState(doc.config);
       }
     }.bind(this));
+
+    var reservationToken = gup('reservationToken', location.href);
+    if (reservationToken) {
+      var state = this.state;
+      state.discount = 1450;
+      state.reservationToken = reservationToken;
+      this.setState(state);
+    }
   },
 
   componentDidMount: function () {
@@ -56,8 +79,6 @@ var Component = React.createClass({
               </div>
               <div style={{float:"right",fontSize:"14px"}}>
                 <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
-                <span style={{marginLeft:"25px"}} />
-                  <Link to="/tr1/specs" style={{lineHeight:"34px",color:"#222"}}>Specs</Link>
               </div>
             </div>
           </div>
@@ -68,8 +89,6 @@ var Component = React.createClass({
               </div>
               <div style={{float:"right",fontSize:"14px"}}>
                 <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
-                <span style={{marginLeft:"25px"}} />
-                <Link to="/tr1/specs" style={{lineHeight:"34px",color:"#222"}}>Specs</Link>
               </div>
             </div>
           </div>
@@ -77,23 +96,14 @@ var Component = React.createClass({
         <div className="row" style={{marginTop:"34px"}}>
           <div className="col-md-10 col-xs-12 col-centered">
             <div className="row" style={{paddingTop:"15px"}}>
-              <div className="col-md-6 col-sm-12 hidden-xs">
-                <img src="/img/slate-tr1-9" style={{maxWidth:"100%"}} />
-                <div className="hidden-lg hidden-md" style={{paddingBottom:"15px"}} />
-              </div>
-                <div className="hidden-lg hidden-md hidden-sm col-xs-12">
-                  <img src="/img/slate-tr1-9" style={{minHeight:"300px",maxHeight:"400px",maxWidth:"100%"}} />
-                  <div style={{paddingBottom:"15px"}} />
-                </div>
+              {this.getImg()}
               <div className="col-md-6 col-xs-12" style={{textAlign:"left"}}>
                 <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
                   <h1 style={{marginTop:"0px"}}>TR1.config</h1>
                   <div style={{lineHeight:"150%"}}>
-                    <div style={{color:"#aaa"}}>Base Price ($2,999.00)</div>
-                    <div>{this.getOverviewText(this.state.computer, computerName, computer)}</div>
-                    <div>{this.getOverviewText(this.state.linearActuator, linearActuatorName, linearActuator)}</div>
-                    <div>{this.getOverviewText(this.state.battery, batteryName, battery)}</div>
-                    <div>{this.getOverviewText(this.state.shipping, shippingName, shipping)}</div>
+                    <div style={{color:"#aaa"}}>Base Price ({this.getBasePrice()})</div>
+                    {this.getProductConfig()}
+                    {this.getDiscountConfig()}
                   </div>
                   <div style={{paddingTop:"15px"}}>
                     <h4>{this.getTotalString()}</h4>
@@ -108,113 +118,11 @@ var Component = React.createClass({
                     }}>
                       <h4 style={{color:"#ff7600"}}>Pre-order Item</h4>
                       <div>
-                        Orders are expected to ship July 2018
+                        Orders take 8 to 12 weeks to ship
                       </div>
-                      {/*<div>
-                        {"Order within "}
-                        <span style={{color:"green"}}>
-                          {this.getRemainingDays()} days
-                        </span>
-                        {" and have it delivered by "}
-                        <b>{"Saturday, Mar. 31"}</b>
-                      </div>*/}
                   </div>
                 </div>
-                <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
-                  <h3>Computer</h3>
-                  <div style={{fontStyle:"italic"}}>
-                    Learn more about NVIDIA's
-                    {" "}<a target="_blank" href="http://elinux.org/Jetson_TK1">TK1</a>,
-                    {" "}<a target="_blank" href="http://elinux.org/Jetson_TX1">TX1</a>, and
-                    {" "}<a target="_blank" href="http://elinux.org/Jetson_TX2">TX2</a>
-                  </div>
-                  <ConfigItem
-                    label="NVIDIA Jetson TK1"
-                    value={computer[0]}
-                    isSelected={this.state.computer == 0}
-                    category="computer"
-                    index={0}
-                    onClick={this.handleClick_ConfigItem} />
-                  <ConfigItem
-                    label="NVIDIA Jetson TX1"
-                    value={computer[1]}
-                    isSelected={this.state.computer == 1}
-                    category="computer"
-                    index={1}
-                    onClick={this.handleClick_ConfigItem} />
-                  <ConfigItem
-                    label="NVIDIA Jetson TX2"
-                    value={computer[2]}
-                    isSelected={this.state.computer == 2}
-                    category="computer"
-                    index={2}
-                    onClick={this.handleClick_ConfigItem} />
-                </div>
-                <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
-                  <h3>Linear Actuator</h3>
-                  <ConfigItem
-                    label="12in 5.7mm/s Linear Actuator"
-                    value={linearActuator[0]}
-                    isSelected={this.state.linearActuator == 0}
-                    category="linearActuator"
-                    index={0}
-                    onClick={this.handleClick_ConfigItem} />
-                  <ConfigItem
-                    label="12in 10mm/s Linear Actuator"
-                    value={linearActuator[1]}
-                    isSelected={this.state.linearActuator == 1}
-                    category="linearActuator"
-                    index={1}
-                    onClick={this.handleClick_ConfigItem} />
-                </div>
-                <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
-                  <h3>Battery</h3>
-                  <ConfigItem
-                    label="12V 8AH Lead-Acid Battery"
-                    value={battery[0]}
-                    isSelected={this.state.battery == 0}
-                    category="battery"
-                    index={0}
-                    onClick={this.handleClick_ConfigItem} />
-                  <ConfigItem
-                    label="12V 20AH Lead-Acid Battery"
-                    value={battery[1]}
-                    isSelected={this.state.battery == 1}
-                    category="battery"
-                    index={1}
-                    onClick={this.handleClick_ConfigItem} />
-                </div>
-                <div style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
-                  <h3>Shipping</h3>
-                  <ConfigItem
-                    label={shippingName[0]}
-                    value={shipping[0]}
-                    isSelected={this.state.shipping == 0}
-                    category="shipping"
-                    index={0}
-                    onClick={this.handleClick_ConfigItem} />
-                  <ConfigItem
-                    label={shippingName[1]}
-                    value={shipping[1]}
-                    isSelected={this.state.shipping == 1}
-                    category="shipping"
-                    index={1}
-                    onClick={this.handleClick_ConfigItem} />
-                  <ConfigItem
-                    label={shippingName[2]}
-                    value={shipping[2]}
-                    isSelected={this.state.shipping == 2}
-                    category="shipping"
-                    index={2}
-                    onClick={this.handleClick_ConfigItem} />
-                  <ConfigItem
-                    label={shippingName[3]}
-                    value={shipping[3]}
-                    isSelected={this.state.shipping == 3}
-                    category="shipping"
-                    index={3}
-                    onClick={this.handleClick_ConfigItem} />
-                </div>
+                {this.getConfigItems()}
               </div>
             </div>
           </div>
@@ -223,27 +131,88 @@ var Component = React.createClass({
     );
   },
 
-  handleClick_ConfigItem: function (item) {
-    var state = this.state;
-    state[item.category] = item.index;
-    this.setState(state);
-  },
-
   handleClick_Checkout: function () {
     CartStore.getOne(0, function (doc) {
-      doc.config = this.state;
+      doc.config = this.state.order.config;
       doc.total = this.getTotal();
+      doc.reservationToken = this.state.reservationToken;
+      doc.discount = this.state.discount;
       CartStore.update(doc);
     }.bind(this));
     BrowserHistory.push("/checkout");
   },
 
-  getRemainingDays: function () {
-    var date1 = new Date();
-    var date2 = new Date("3/1/2018");
-    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return diffDays;
+  getConfigItems: function () {
+    return this.state.product.config.map(function (config, i) {
+      var handleClick_ConfigItem = function (item) {
+        var state = this.state;
+        for (var j = 0; j < state.order.config.length; j++) {
+          if (state.order.config[j].name == item.category) {
+            state.order.config[j].value = item.index;
+          }
+        }
+        this.setState(state);
+      }.bind(this);
+
+      var getConfigItems = function () {
+        return config.items.map(function (item, j) {
+          var isSelected = false;
+          for (var k = 0; k < this.state.order.config.length; k++) {
+            if (this.state.order.config[k].value == item.id) {
+              if (this.state.order.config[k].name == config.name) {
+                isSelected = true;
+              }
+            }
+          }
+
+          if (config.name == "arm" && this.state.reservationToken && item.id == 0) {
+            return (
+              <ConfigItem
+                key={config.name + "-selection-" + j}
+                label={item.label}
+                value={item.price}
+                isSelected={false}
+                category={config.name}
+                index={item.id}
+                disabled={true}
+                onClick={function(){}} />
+            )
+          }
+
+          if (config.name == "arm" && this.state.reservationToken && item.id == 1) {
+            return (
+              <ConfigItem
+                key={config.name + "-selection-" + j}
+                label={"Two-armed TR1 (required by reservation)"}
+                value={item.price}
+                isSelected={true}
+                category={config.name}
+                index={item.id}
+                onClick={handleClick_ConfigItem} />
+            )
+          }
+
+          return (
+            <ConfigItem
+              key={config.name + "-selection-" + j}
+              label={item.label}
+              value={item.price}
+              isSelected={isSelected}
+              category={config.name}
+              index={item.id}
+              onClick={handleClick_ConfigItem} />
+          )
+        }.bind(this));
+      }.bind(this);
+
+      return (
+        <div key={config.name} style={{paddingBottom:"25px",borderBottom:"1px solid #ccc"}}>
+          <h3>{config.label}</h3>
+          <div dangerouslySetInnerHTML={{__html: config.description}} />
+          {getConfigItems()}
+        </div>
+      )
+    }.bind(this));
   },
 
   getOverviewText: function (index, arrayName, arrayPrice) {
@@ -259,17 +228,112 @@ var Component = React.createClass({
     }
   },
 
+  getImg: function () {
+    var config;
+    for (var i = 0; i < this.state.order.config.length; i++) {
+      if (this.state.order.config[i].name == "arm") {
+        config = this.state.order.config[i];
+      }
+    }
+    var img = "/img/slate-tr1-9";
+    if (config.value == 0) {
+      img = "/img/slate-tr1-11";
+    } else if (config.value == 1) {
+      img = "/img/slate-tr1-9";
+    }
+    return (
+      <div>
+        <div className="col-md-6 col-sm-12 hidden-xs">
+          <img src={img} style={{maxWidth:"100%"}} />
+          <div className="hidden-lg hidden-md" style={{paddingBottom:"15px"}} />
+        </div>
+        <div className="hidden-lg hidden-md hidden-sm col-xs-12">
+          <img src={img} style={{minHeight:"300px",maxHeight:"400px",maxWidth:"100%"}} />
+          <div style={{paddingBottom:"15px"}} />
+        </div>
+      </div>
+    )
+  },
+
+  getDiscountConfig: function () {
+    if (this.state.discount && this.state.reservationToken) {
+      return (
+        <div style={{marginTop:"25px"}}><b>{"Reservation discount (-$" + this.state.discount.toLocaleString() + ")"}</b></div>
+      )
+    } else if (this.state.discount) {
+      return (
+        <div style={{marginTop:"25px"}}><b>{"Discount (-$" + this.state.discount.toLocaleString() + ")"}</b></div>
+      )
+    }
+  },
+
   getTotal: function () {
-    return basePrice
-      + computer[this.state.computer]
-      + linearActuator[this.state.linearActuator]
-      + battery[this.state.battery]
-      + shipping[this.state.shipping];
+    var total = this.state.product.basePrice;
+    for (var i = 0; i < this.state.product.config.length; i++) {
+      var productConfig = this.state.product.config[i];
+      var orderConfig;
+      for (var j = 0; j < this.state.order.config.length; j++) {
+        if (this.state.order.config[j].name == productConfig.name) {
+          orderConfig = this.state.order.config[j];
+        }
+      }
+      var configItem;
+      for (var j = 0; j < productConfig.items.length; j++) {
+        if (productConfig.items[j].id == orderConfig.value) {
+          configItem = productConfig.items[j];
+        }
+      }
+
+      if (configItem) { total += configItem.price; }
+    }
+
+    if (this.state.discount > 0) {
+      total = total - this.state.discount;
+    }
+
+    return total;
   },
 
   getTotalString: function () {
     var total = this.getTotal();
     return "$" + total.toLocaleString('en-US', { minimumFractionDigits: 2 });
+  },
+
+  getBasePrice: function () {
+    var basePrice = this.state.product.basePrice;
+    return "$" + basePrice.toLocaleString();
+  },
+
+  getProductConfigDetails: function (orderConfig) {
+    for (var i = 0; i < this.state.product.config.length; i++) {
+      var productConfig = this.state.product.config[i];
+      if (orderConfig.name == productConfig.name) {
+        return productConfig;
+      }
+    }
+  },
+
+  getProductConfig: function () {
+    if (!this.state.order.config) { return; }
+    return this.state.order.config.map(function (config, j) {
+      var productConfig = this.getProductConfigDetails(config);
+      if (productConfig) {
+        var selectedConfig;
+        for (var k = 0; k < productConfig.items.length; k++) {
+          var item = productConfig.items[k];
+          if (item.id == config.value) {
+            selectedConfig = item;
+          }
+        }
+        if (selectedConfig) {
+          if (selectedConfig.price == 0) {
+            return (<div key={config.name + "-summary-" + j}>{selectedConfig.label}</div>)
+          } else {
+            return (<div key={config.name + "-summary-" + j}><b>{selectedConfig.label + " (+$" + selectedConfig.price.toLocaleString() + ")"}</b></div>)
+          }
+        }
+      }
+    }.bind(this));
   },
 });
 

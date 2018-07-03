@@ -22,7 +22,7 @@ var Component = React.createClass({
                     <div className="col-xs-4">
                       <img src="/img/icon-weights" height="50" width="50" />
                       <div style={{marginTop:"5px"}}></div>
-                      <p>4.5kg Payload</p>
+                      <p>1.8kg Payload</p>
                     </div>
                     <div className="col-xs-4">
                       <img src="/img/icon-range" height="50" width="50" />
@@ -48,7 +48,7 @@ var Component = React.createClass({
                       <p>7 Degrees of Freedom</p>
                     </div>
                     <div className="col-sm-4">
-                      <p>4.5kg Payload</p>
+                      <p>1.8kg Payload</p>
                     </div>
                     <div className="col-sm-4">
                       <p>1m Range</p>
@@ -59,8 +59,8 @@ var Component = React.createClass({
                       <p>
                         The arms on the Slate TR1 are powered by 12v DC motors
                         and standard servos. Joint angles are measured via
-                        1024 PPR absolute angle encoders, which closes the feedback
-                        loop necessary to do inverse kinematics.
+                        1024 PPR absolute angle encoders, which provides position
+                        feedback for the joints.
                       </p>
                     </div>
                   </div>
@@ -91,12 +91,12 @@ var Component = React.createClass({
                     <div className="col-xs-4">
                       <img src="/img/icon-torque" height="50" width="50" />
                       <div style={{marginTop:"5px"}}></div>
-                      <p>6Nm Torque</p>
+                      <p>Up to 16Nm Torque</p>
                     </div>
                     <div className="col-xs-4">
                       <img src="/img/icon-engine" height="50" width="50" />
                       <div style={{marginTop:"5px"}}></div>
-                      <p>75W Power</p>
+                      <p>Up to 300W Power</p>
                     </div>
                   </div>
                   {/* icons */}
@@ -117,10 +117,10 @@ var Component = React.createClass({
                       <p>3 Degrees of Freedom</p>
                     </div>
                     <div className="col-sm-4">
-                      <p>6Nm Torque</p>
+                      <p>Up to 16Nm Torque</p>
                     </div>
                     <div className="col-sm-4">
-                      <p>75W Power</p>
+                      <p>Up to 300W Power</p>
                     </div>
                   </div>
                   <div className="row" style={{textAlign:"justify"}}>

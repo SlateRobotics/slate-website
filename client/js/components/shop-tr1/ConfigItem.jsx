@@ -32,6 +32,11 @@ var Component = React.createClass({
       style = Style.configItemHovered;
     }
 
+    if (this.props.disabled) {
+      style = Style.configItem;
+      style.cursor = "default";
+    }
+
     return (
       <div
         style={style}

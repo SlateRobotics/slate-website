@@ -16,7 +16,7 @@ var Component = React.createClass({
                 </div>
                 <div className="col-sm-4 col-xs-12">
                   <div className="hidden-xs" style={{paddingTop:"150px"}}></div>
-                  <h1>Ubuntu 14.04</h1>
+                  <h1>Ubuntu Linux</h1>
                   <h3>Operating System</h3>
                   {/* mobile */}
                   <div className="row hidden-lg hidden-md hidden-sm"

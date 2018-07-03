@@ -3,16 +3,13 @@ var path = require('path');
 var express = require('express');
 var router = express.Router();
 var Order = require('../models/order');
+var Reservation = require('../models/reservation');
 var EmailSender = require('../components/EmailSender');
+var Products = require('../../client/js/components/Products/Products.js');
+var ProductTr1 = Products[0];
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, "../../config.json"), "utf8"));
 var stripe = require('stripe')(config.stripe.secret);
-
-var basePrice = 2999;
-var computer = [0, 300, 400];
-var linearActuator = [0, 50];
-var battery = [0, 30];
-var shipping = [0, 125, 375, 550];
 
 var errorOccurred = false;
 
@@ -35,6 +32,19 @@ var token = function() {
     return rand() + rand(); // to make it longer
 };
 
+function ValidateReservationToken (order, callback) {
+  var reservationToken = order.reservationToken;
+  var reservationExists = false;
+  var orderWithReservationExists = false;
+  Reservation.findOne({"token": reservationToken}).exec(function(err, reservation) {
+    if (reservation) reservationExists = true;
+    Order.findOne({"reservationToken": reservationToken}).exec(function(err, order) {
+      if (order) orderWithReservationExists = true;
+      callback(reservationExists && !orderWithReservationExists);
+    });
+  });
+}
+
 function getShippingAddressString (order) {
   return order.shipping.address1
     + ", " + order.shipping.city
@@ -43,11 +53,6 @@ function getShippingAddressString (order) {
 }
 
 function getProductDetailString (order) {
-  var computerName = ["NVIDIA Jetson TK1", "NVIDIA Jetson TX1", "NVIDIA Jetson TX2"];
-  var linearActuatorName = ["12in 5.7mm/s Linear Actuator", "12in 10mm/s Linear Actuator"];
-  var batteryName = ["12V 8AH Lead-Acid Battery", "12V 20AH Lead-Acid Battery"];
-  var shippingName = ["Local Pickup - Springfield, MO", "UPS Ground", "UPS 3 Day Select®", "UPS 2nd Day Air®"];
-
   var result = "";
 
   for (var i = 0; i < order.products.length; i++) {
@@ -60,24 +65,31 @@ function getProductDetailString (order) {
     result = result + ": ";
 
     for (var j = 0; j < order.products[i].config.length; j++) {
-      if (order.products[i].config[j].name == "computer") {
-        result = result + computerName[order.products[i].config[j].value];
-      } else if (order.products[i].config[j].name == "linearActuator") {
-        result = result + linearActuatorName[order.products[i].config[j].value];
-      } else if (order.products[i].config[j].name == "battery") {
-        result = result + batteryName[order.products[i].config[j].value];
-      } else if (order.products[i].config[j].name == "shipping") {
-        result = result + shippingName[order.products[i].config[j].value];
+      var config = order.products[i].config[j];
+      var productConfig;
+      for (var k = 0; k < ProductTr1.config.length; k++) {
+        if (config.name == ProductTr1.config[k].name) {
+          productConfig = ProductTr1.config[k];
+        }
+      }
+      var configItem;
+      for (var k = 0; k < productConfig.items.length; k++) {
+        if (config.value == productConfig.items[k].id) {
+          configItem = productConfig.items[k];
+        }
+      }
+
+      if (configItem) {
+        result = result + configItem.label;
       }
 
       if (j < order.products[i].config.length - 1) {
         result = result + ", ";
       }
     }
-
-    return result;
   }
 
+  return result;
 }
 
 function OrderSuccess (res, order) {
@@ -158,28 +170,25 @@ function VerifyData (req, res) {
 }
 
 function CalculateSubtotalProduct(product) {
-  var subtotal = basePrice;
+  var subtotal = ProductTr1.basePrice;
 
-  // ensure that only 1 of each is added to price
-  // can't purchase 2 shippings, for instance
-  var computerAdded = false;
-  var linearActuatorAdded = false;
-  var batteryAdded = false;
-  var shippingAdded = false;
+  for (var j = 0; j < product.config.length; j++) {
+    var config = product.config[j];
+    var productConfig;
+    for (var k = 0; k < ProductTr1.config.length; k++) {
+      if (config.name == ProductTr1.config[k].name) {
+        productConfig = ProductTr1.config[k];
+      }
+    }
+    var configItem;
+    for (var k = 0; k < productConfig.items.length; k++) {
+      if (config.value == productConfig.items[k].id) {
+        configItem = productConfig.items[k];
+      }
+    }
 
-  for (var i = 0; i < product.config.length; i++) {
-    if (product.config[i].name == "computer" && !computerAdded) {
-      subtotal = subtotal + computer[product.config[i].value];
-      computerAdded = true;
-    } else if (product.config[i].name == "linearActuator" && !linearActuatorAdded) {
-      subtotal = subtotal + linearActuator[product.config[i].value];
-      linearActuatorAdded = true;
-    } else if (product.config[i].name == "battery" && !batteryAdded) {
-      subtotal = subtotal + battery[product.config[i].value];
-      batteryAdded = true;
-    } else if (product.config[i].name == "shipping" && !shippingAdded) {
-      subtotal = subtotal + shipping[product.config[i].value];
-      shippingAdded = true;
+    if (configItem) {
+      subtotal += configItem.price;
     }
   }
 
@@ -214,7 +223,8 @@ router.post('/', function (req, res) {
     order.total = order.subtotal + order.tax;
     order.createdOn = Date(new Date().getTime());
     order.status = "placed";
-    order.expectedShipmentDate = new Date("2018-07-01 12:00:00 UTC");
+    order.expectedShipmentDate = new Date();
+    order.expectedShipmentDate.setDate(new Date().getDate() + (7*12));
     order.token = token();
 
     var metadata = {};
@@ -226,27 +236,60 @@ router.post('/', function (req, res) {
       }
     }
 
-    stripe.charges.create({
-      amount: Math.round(order.total * 100),
-      currency: "usd",
-      description: "Slate Robotics, Inc. - TR1",
-      metadata: metadata,
-      source: order.card.token,
-    }, function (err, charge) {
-      if (err) {
-        OrderError(res, "An error occurred while processing your payment:" + err.message);
-      } else {
-          var orderDoc = new Order(order);
-          orderDoc.save(function (err, savedDoc) {
+    if (order.reservationToken) {
+      ValidateReservationToken(req.body, function (isValidReservation) {
+        if (!isValidReservation) {
+          OrderError(res, "Invalid reservation token.");
+        } else {
+          order.subtotal = order.subtotal - 1450;
+          order.discount = 1450;
+          order.tax = CalculateTaxes(order);
+          order.total = order.subtotal + order.tax;
+
+          stripe.charges.create({
+            amount: Math.round(order.total * 100),
+            currency: "usd",
+            description: "Slate Robotics, Inc. - TR1",
+            metadata: metadata,
+            source: order.card.token,
+          }, function (err, charge) {
             if (err) {
-              OrderError(res, "An error occurred while saving the order details to our system:" + err);
+              OrderError(res, "An error occurred while processing your payment:" + err.message);
             } else {
-              OrderSuccess(res, savedDoc);
+                var orderDoc = new Order(order);
+                orderDoc.save(function (err, savedDoc) {
+                  if (err) {
+                    OrderError(res, "An error occurred while saving the order details to our system:" + err);
+                  } else {
+                    OrderSuccess(res, savedDoc);
+                  }
+                });
             }
           });
-      }
-    });
-
+        }
+      });
+    } else {
+      stripe.charges.create({
+        amount: Math.round(order.total * 100),
+        currency: "usd",
+        description: "Slate Robotics, Inc. - TR1",
+        metadata: metadata,
+        source: order.card.token,
+      }, function (err, charge) {
+        if (err) {
+          OrderError(res, "An error occurred while processing your payment:" + err.message);
+        } else {
+            var orderDoc = new Order(order);
+            orderDoc.save(function (err, savedDoc) {
+              if (err) {
+                OrderError(res, "An error occurred while saving the order details to our system:" + err);
+              } else {
+                OrderSuccess(res, savedDoc);
+              }
+            });
+        }
+      });
+    }
   }
 
 });
