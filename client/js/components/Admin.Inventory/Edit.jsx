@@ -219,6 +219,7 @@ var Component = React.createClass({
                 <Form.Label label="Stock" isRequired />
                 <Form.Input
                   attribute="stock"
+                  type="number"
                   value={this.state.inventoryItem.stock}
                   onChange={this.handleChange_Field} />
                 {this.getError("stock")}
@@ -227,6 +228,7 @@ var Component = React.createClass({
                 <Form.Label label="Price" isRequired />
                 <Form.Input
                   attribute="price"
+                  type="number"
                   disabled={this.getPriceDisabled()}
                   value={this.getPriceValue()}
                   onChange={this.handleChange_Field} />
@@ -236,6 +238,7 @@ var Component = React.createClass({
                 <Form.Label label="Filament (g)" isRequired />
                 <Form.Input
                   attribute="filament"
+                  type="number"
                   value={this.state.inventoryItem.filament}
                   onChange={this.handleChange_Field} />
                 {this.getError("filament")}
