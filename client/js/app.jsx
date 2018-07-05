@@ -9,6 +9,8 @@ var IndexRoute = require('react-router').IndexRoute;
 
 var UserStore = require('./stores/user');
 
+var AdminInventory = require('./components/Admin.Inventory/Index.jsx');
+var AdminInventoryEdit = require('./components/Admin.Inventory/Edit.jsx');
 var AdminOrders = require('./components/Admin.Orders/Index.jsx');
 var AdminOrdersEdit = require('./components/Admin.Orders/Edit.jsx');
 var AdminReservations = require('./components/Admin.Reservations/Index.jsx');
@@ -69,6 +71,8 @@ var Routes = (
 		<Route path="/about" component={About} />
 		<Route path="/admin/orders" component={AdminOrders} />
 		<Route path="/admin/orders/:id" component={AdminOrdersEdit} />
+		<Route path="/admin/inventory" component={AdminInventory} />
+		<Route path="/admin/inventory/:id" component={AdminInventoryEdit} />
 		<Route path="/admin/reservations" component={AdminReservations} />
 		<Route path="/admin/reservations/:id" component={AdminReservationsEdit} />
 		<Route path="/admin/users" component={AdminUsers} />

@@ -123,6 +123,7 @@ var Footer = React.createClass({
                 <Link to="/admin/orders" style={Style.link}>Orders</Link>
                 <Link to="/admin/reservations" style={Style.link}>Reservations</Link>
                 <Link to="/admin/users" style={Style.link}>Users</Link>
+                <Link to="/admin/inventory" style={Style.link}>Inventory</Link>
               </div>
             </div>
           </div>

@@ -35,4 +35,14 @@ module.exports = {
     cursor: "auto",
     backgroundColor: "#ffffff",
   },
+  inputDisabled: {
+    width: "100%",
+    height: "40px",
+    lineHeight: "30px",
+    padding: "0 6px 0 8px",
+    border: "1px solid #ccc",
+    cursor: "default",
+    color:"grey",
+    backgroundColor: "#f2f2f2",
+  },
 }

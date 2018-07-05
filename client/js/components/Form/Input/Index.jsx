@@ -55,6 +55,7 @@ var FormInput = React.createClass({
 
   getStyle: function () {
     var style = Style.input;
+    if (this.props.disabled) style = Style.inputDisabled;
     if (this.state.isHovered === true) {
       style = Style.inputHovered;
       if (this.state.isFocused === true) {
@@ -69,6 +70,7 @@ var FormInput = React.createClass({
   },
 
   handleMouseEnter: function () {
+    if (this.props.disabled) return;
     this.setState({
       isHovered: true,
       isFocused: this.state.isFocused,
@@ -76,6 +78,7 @@ var FormInput = React.createClass({
   },
 
   handleMouseLeave: function () {
+    if (this.props.disabled) return;
     this.setState({
       isHovered: false,
       isFocused: this.state.isFocused,
@@ -83,6 +86,7 @@ var FormInput = React.createClass({
   },
 
   handleFocus: function () {
+    if (this.props.disabled) return;
     this.setState({
       isHovered: this.state.isHovered,
       isFocused: true,
@@ -90,6 +94,7 @@ var FormInput = React.createClass({
   },
 
   handleBlur: function () {
+    if (this.props.disabled) return;
     if (this.props.onBlur) {
       this.props.onBlur();
     }
@@ -100,6 +105,7 @@ var FormInput = React.createClass({
   },
 
   handleChange: function (event) {
+    if (this.props.disabled) return;
     if (this.props.onChange) {
       var value = event.target.value;
       if (this.props.attribute) {
@@ -111,6 +117,7 @@ var FormInput = React.createClass({
   },
 
   handleKeyPress: function (e) {
+    if (this.props.disabled) return;
     if (this.props.onKeyPress) {
       if (!e) e = window.event;
       var keyCode = e.keyCode || e.which;

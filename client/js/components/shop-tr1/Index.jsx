@@ -118,7 +118,7 @@ var Component = React.createClass({
                     }}>
                       <h4 style={{color:"#ff7600"}}>Pre-order Item</h4>
                       <div>
-                        Orders take 8 to 12 weeks to ship
+                        Orders take 8 to 16 weeks to ship
                       </div>
                   </div>
                 </div>
@@ -258,11 +258,11 @@ var Component = React.createClass({
   getDiscountConfig: function () {
     if (this.state.discount && this.state.reservationToken) {
       return (
-        <div style={{marginTop:"25px"}}><b>{"Reservation discount (-$" + this.state.discount.toLocaleString() + ")"}</b></div>
+        <div style={{marginTop:"25px",color:"green"}}><b>{"Reservation discount (-$" + this.state.discount.toLocaleString() + ")"}</b></div>
       )
     } else if (this.state.discount) {
       return (
-        <div style={{marginTop:"25px"}}><b>{"Discount (-$" + this.state.discount.toLocaleString() + ")"}</b></div>
+        <div style={{marginTop:"25px",color:"green"}}><b>{"Discount (-$" + this.state.discount.toLocaleString() + ")"}</b></div>
       )
     }
   },

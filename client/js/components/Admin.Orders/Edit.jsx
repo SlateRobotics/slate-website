@@ -2,9 +2,11 @@ var React = require('react');
 var marked = require('marked');
 var sanitizeHtml = require('sanitize-html');
 var Link = require('react-router').Link;
-var BrowserHistory = require('react-router').browserHistory;
+var browserHistory = require('react-router').browserHistory;
 var Style = require('./Style.jsx');
 var Form = require('../Form/Index.jsx');
+var Products = require('../Products/Products.js');
+var GetProductConfigItemName = require('../Products/GetProductConfigItemName.js');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var UserStore = require('../../stores').user;
@@ -24,8 +26,12 @@ var Component = React.createClass({
     return {
       errors: [],
       isLoading: true,
+      product: Products[0],
       order: {
         shipping: {},
+        billing: {},
+        user: {},
+        card: {},
       },
     }
   },
@@ -81,7 +87,7 @@ var Component = React.createClass({
             }}>
             <h3>Edit Order</h3>
             <div className="row">
-              <div className="col-xs-12">
+              <div className="col-md-6 col-xs-12">
                 <Form.Label label="Status" isRequired />
                 <Form.Select
                   attribute="status"
@@ -90,39 +96,33 @@ var Component = React.createClass({
                   onChange={this.handleChange_Field} />
                 {this.getError("status")}
               </div>
-              <div className="col-xs-12">
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Expected Shipment Date" isRequired />
+                <Form.Input
+                  attribute="expectedShipmentDate"
+                  value={this.state.order.expectedShipmentDate}
+                  onChange={this.handleChange_Field} />
+                {this.getError("expectedShipmentDate")}
+              </div>
+              <div className="col-md-6 col-xs-12">
                 <Form.Label label="Token" isRequired />
                 <Form.Input
+                  disabled={true}
                   attribute="token"
                   value={this.state.order.token}
                   onChange={this.handleChange_Field} />
                 {this.getError("token")}
               </div>
-              <div className="col-xs-12">
-                <Form.Label label="Total" isRequired />
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Reservation Token" isRequired />
                 <Form.Input
-                  attribute="total"
-                  value={this.state.order.total}
+                  disabled={true}
+                  attribute="reservationToken"
+                  value={this.state.order.reservationToken}
                   onChange={this.handleChange_Field} />
-                {this.getError("total")}
+                {this.getError("reservationToken")}
               </div>
-              <div className="col-xs-12">
-                <Form.Label label="Began Build On" isRequired />
-                <Form.Input
-                  attribute="beganBuildOn"
-                  value={this.state.order.beganBuildOn}
-                  onChange={this.handleChange_Field} />
-                {this.getError("beganBuildOn")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Shipped On" isRequired />
-                <Form.Input
-                  attribute="shippedOn"
-                  value={this.state.order.shippedOn}
-                  onChange={this.handleChange_Field} />
-                {this.getError("shippedOn")}
-              </div>
-              <div className="col-xs-12">
+              <div className="col-md-6 col-xs-12">
                 <Form.Label label="Tracking URL" isRequired />
                 <Form.Input
                   attribute="trackingUrl"
@@ -130,7 +130,7 @@ var Component = React.createClass({
                   onChange={this.handleChange_Field} />
                 {this.getError("trackingUrl")}
               </div>
-              <div className="col-xs-12">
+              <div className="col-md-6 col-xs-12">
                 <Form.Label label="Tracking Number" isRequired />
                 <Form.Input
                   attribute="trackingNumber"
@@ -139,16 +139,273 @@ var Component = React.createClass({
                 {this.getError("trackingNumber")}
               </div>
             </div>
+            <h3 style={{marginTop:"50px"}}>The Product</h3>
+            <div className="row">
+              {this.getProduct()}
+            </div>
+            <h3 style={{marginTop:"50px"}}>The Dates</h3>
+            <div className="row">
+              <div className="col-md-4 col-xs-12">
+                <Form.Label label="Created On" isRequired />
+                <Form.Input
+                  disabled={true}
+                  attribute="createdOn"
+                  value={this.state.order.createdOn}
+                  onChange={this.handleChange_Field} />
+                {this.getError("createdOn")}
+              </div>
+              <div className="col-md-4 col-xs-12">
+                <Form.Label label="Began Build On" isRequired />
+                <Form.Input
+                  attribute="beganBuildOn"
+                  value={this.state.order.beganBuildOn}
+                  onChange={this.handleChange_Field} />
+                {this.getError("beganBuildOn")}
+              </div>
+              <div className="col-md-4 col-xs-12">
+                <Form.Label label="Shipped On" isRequired />
+                <Form.Input
+                  attribute="shippedOn"
+                  value={this.state.order.shippedOn}
+                  onChange={this.handleChange_Field} />
+                {this.getError("shippedOn")}
+              </div>
+            </div>
+            <h3 style={{marginTop:"50px"}}>The Numbers</h3>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Discount" isRequired />
+                <Form.Input
+                  disabled={true}
+                  attribute="discount"
+                  value={this.state.order.discount}
+                  onChange={this.handleChange_Field} />
+                {this.getError("discount")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Subtotal" isRequired />
+                <Form.Input
+                  disabled={true}
+                  attribute="subtotal"
+                  value={this.state.order.subtotal}
+                  onChange={this.handleChange_Field} />
+                {this.getError("subtotal")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Tax" isRequired />
+                <Form.Input
+                  disabled={true}
+                  attribute="tax"
+                  value={this.state.order.tax}
+                  onChange={this.handleChange_Field} />
+                {this.getError("tax")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Total" isRequired />
+                <Form.Input
+                  disabled={true}
+                  attribute="total"
+                  value={this.state.order.total}
+                  onChange={this.handleChange_Field} />
+                {this.getError("total")}
+              </div>
+            </div>
+            <h3 style={{marginTop:"50px"}}>User</h3>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Email" isRequired />
+                <Form.Input
+                  attribute="user.email"
+                  value={this.state.order.user.email}
+                  onChange={this.handleChange_Field} />
+                {this.getError("user.email")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Phone" isRequired />
+                <Form.Input
+                  attribute="user.phone"
+                  value={this.state.order.user.phone}
+                  onChange={this.handleChange_Field} />
+                {this.getError("user.phone")}
+              </div>
+            </div>
+            <h3 style={{marginTop:"50px"}}>Shipping</h3>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="First Name" isRequired />
+                <Form.Input
+                  attribute="shipping.firstName"
+                  value={this.state.order.shipping.firstName}
+                  onChange={this.handleChange_Field} />
+                {this.getError("shipping.firstName")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Last Name" isRequired />
+                <Form.Input
+                  attribute="shipping.lastName"
+                  value={this.state.order.shipping.lastName}
+                  onChange={this.handleChange_Field} />
+                {this.getError("shipping.lastName")}
+              </div>
+              <div className="col-xs-12">
+                <Form.Label label="Address" isRequired />
+                <Form.Input
+                  attribute="shipping.address1"
+                  value={this.state.order.shipping.address1}
+                  onChange={this.handleChange_Field} />
+                <div style={{marginTop:"15px"}} />
+                <Form.Input
+                  attribute="shipping.address2"
+                  value={this.state.order.shipping.address2}
+                  onChange={this.handleChange_Field} />
+                {this.getError("shipping.address2")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="City" isRequired />
+                <Form.Input
+                  attribute="shipping.city"
+                  value={this.state.order.shipping.city}
+                  onChange={this.handleChange_Field} />
+                {this.getError("shipping.city")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="State" isRequired />
+                <Form.Input
+                  attribute="shipping.state"
+                  value={this.state.order.shipping.state}
+                  onChange={this.handleChange_Field} />
+                {this.getError("shipping.state")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Zip" isRequired />
+                <Form.Input
+                  attribute="shipping.zip"
+                  value={this.state.order.shipping.zip}
+                  onChange={this.handleChange_Field} />
+                {this.getError("shipping.zip")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Country" isRequired />
+                <Form.Input
+                  attribute="shipping.country"
+                  value={this.state.order.shipping.country}
+                  onChange={this.handleChange_Field} />
+                {this.getError("shipping.country")}
+              </div>
+            </div>
+            <h3 style={{marginTop:"50px"}}>Billing</h3>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="First Name" isRequired />
+                <Form.Input
+                  attribute="billing.firstName"
+                  value={this.state.order.billing.firstName}
+                  onChange={this.handleChange_Field} />
+                {this.getError("billing.firstName")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Last Name" isRequired />
+                <Form.Input
+                  attribute="billing.lastName"
+                  value={this.state.order.billing.lastName}
+                  onChange={this.handleChange_Field} />
+                {this.getError("billing.lastName")}
+              </div>
+              <div className="col-xs-12">
+                <Form.Label label="Address" isRequired />
+                <Form.Input
+                  attribute="billing.address1"
+                  value={this.state.order.billing.address1}
+                  onChange={this.handleChange_Field} />
+                <div style={{marginTop:"15px"}} />
+                <Form.Input
+                  attribute="billing.address2"
+                  value={this.state.order.billing.address2}
+                  onChange={this.handleChange_Field} />
+                {this.getError("billing.address2")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="City" isRequired />
+                <Form.Input
+                  attribute="billing.city"
+                  value={this.state.order.billing.city}
+                  onChange={this.handleChange_Field} />
+                {this.getError("billing.city")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="State" isRequired />
+                <Form.Input
+                  attribute="billing.state"
+                  value={this.state.order.billing.state}
+                  onChange={this.handleChange_Field} />
+                {this.getError("billing.state")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Zip" isRequired />
+                <Form.Input
+                  attribute="billing.zip"
+                  value={this.state.order.billing.zip}
+                  onChange={this.handleChange_Field} />
+                {this.getError("billing.zip")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Country" isRequired />
+                <Form.Input
+                  attribute="billing.country"
+                  value={this.state.order.billing.country}
+                  onChange={this.handleChange_Field} />
+                {this.getError("billing.country")}
+              </div>
+            </div>
+            <h3 style={{marginTop:"50px"}}>Card</h3>
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Stripe Token" isRequired />
+                <Form.Input
+                  disabled={true}
+                  attribute="card.token"
+                  value={this.state.order.card.token}
+                  onChange={this.handleChange_Field} />
+                {this.getError("card.token")}
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <Form.Label label="Last 4" isRequired />
+                <Form.Input
+                  disabled={true}
+                  attribute="card.last4"
+                  value={this.state.order.card.last4}
+                  onChange={this.handleChange_Field} />
+                {this.getError("card.last4")}
+              </div>
+            </div>
             <div style={{marginTop:"25px"}} />
             <div className="row">
               <div className="col-xs-12">
                 {this.getButton()}
+                <span style={{marginRight:"15px"}} />
+                <ButtonSecondary
+                  label="Cancel/Back"
+                  onClick={this.handleClick_Cancel} />
               </div>
             </div>
           </div>
         </div>
       </div>
     );
+  },
+
+  getProduct: function () {
+    if (!this.state.order.products) return;
+    return this.state.order.products.map(function (product, i) {
+      if (!product.config) return;
+      return product.config.map(function (config, j) {
+        return (
+          <div key={product.productId + "-" + j} className="col-xs-12">
+            <div>{config.name + " - " + GetProductConfigItemName(product.productId, config.name, config.value)}</div>
+          </div>
+        )
+      }.bind(this));
+    }.bind(this));
   },
 
   getButton: function () {
@@ -161,6 +418,10 @@ var Component = React.createClass({
         <ButtonPrimary label="Submit" onClick={this.handleClick_Submit} />
       )
     }
+  },
+
+  handleClick_Cancel: function () {
+    browserHistory.push("/admin/orders");
   },
 
   validateData: function (callback) {

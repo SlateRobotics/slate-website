@@ -166,9 +166,7 @@ module.exports = new RestFilter({
   model: Order,
   readFilterSchema: readFilterSchema,
   writeFilterSchema: writeFilterSchema,
-	findOnePublic: function (id, callback) {
-    return callback({});
-  },
+	findOnePublic: function (id, callback) { return callback({}); },
 	findOneToken: function (token, id, callback) {
     Order
       .findOne({
@@ -192,9 +190,7 @@ module.exports = new RestFilter({
       return callback({});
     }
   },
-	findManyPublic: function (callback) {
-    return callback([]);
-  },
+	findManyPublic: function (callback) { return callback([]); },
 	findManyToken: function (token, callback) {
     return callback([]);
   },

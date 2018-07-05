@@ -213,7 +213,7 @@ var Component = React.createClass({
     var beginDate = new Date();
     beginDate.setDate(beginDate.getDate() + (7*8));
     var endDate = new Date();
-    endDate.setDate(endDate.getDate() + (7*12));
+    endDate.setDate(endDate.getDate() + (7*16));
     return beginDate.toLocaleDateString() + " - " + endDate.toLocaleDateString();
   },
 
@@ -259,11 +259,11 @@ var Component = React.createClass({
   getDiscountConfig: function () {
     if (this.state.order.discount && this.state.order.reservationToken) {
       return (
-        <div style={{marginTop:"25px"}}><b>{"Reservation discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
+        <div style={{marginTop:"25px",color:"green"}}><b>{"Reservation discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
       )
     } else if (this.state.discount) {
       return (
-        <div style={{marginTop:"25px"}}><b>{"Discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
+        <div style={{marginTop:"25px",color:"green"}}><b>{"Discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
       )
     }
   },

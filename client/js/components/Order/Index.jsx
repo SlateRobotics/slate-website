@@ -334,11 +334,11 @@ var Component = React.createClass({
   getDiscountConfig: function () {
     if (this.state.order.discount && this.state.order.reservationToken) {
       return (
-        <div style={{marginTop:"25px"}}><b>{"Reservation discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
+        <div style={{marginTop:"25px",color:"green"}}><b>{"Reservation discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
       )
     } else if (this.state.order.discount) {
       return (
-        <div style={{marginTop:"25px"}}><b>{"Discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
+        <div style={{marginTop:"25px",color:"green"}}><b>{"Discount (-$" + this.state.order.discount.toLocaleString() + ")"}</b></div>
       )
     }
   },

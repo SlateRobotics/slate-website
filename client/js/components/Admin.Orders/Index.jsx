@@ -4,6 +4,7 @@ var Style = require('./Style.jsx');
 var Link = require('react-router').Link;
 var Form = require('../Form/Index.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
+var GetProductConfigItemName = require('../Products/GetProductConfigItemName.js');
 var UserStore = require('../../stores').user;
 var OrderStore = require('../../stores').order;
 
@@ -133,6 +134,20 @@ var Component = React.createClass({
           }
         }
 
+        function getProductConfigDetails () {
+          if (!order.products) return;
+          var text = "";
+          order.products.map(function (product, i) {
+            if (!product.config) return;
+            product.config.map(function (config, j) {
+              if (j == 0) text = GetProductConfigItemName(product.productId, config.name, config.value);
+              else text = text + ", " + GetProductConfigItemName(product.productId, config.name, config.value);
+            }.bind(this));
+          }.bind(this));
+
+          return text;
+        }
+
         return (
           <div className="row" key={"order-" + i} style={{fontSize:"12px", textAlign:"left", paddingBottom:"15px", marginBottom:"15px", borderBottom:"1px solid #ccc"}}>
             <div className="col-xs-12" style={{marginBottom:"15px"}}>
@@ -145,34 +160,39 @@ var Component = React.createClass({
               <span> | </span>
               <Link to={"/admin/orders/" + order._id + "?token=" + order.token} style={Style.link}>edit</Link>
             </div>
-            <div className="col-xs-12" style={{marginBottom:"15px"}}>
-              <div>{"Order Status: " + order.status}</div>
-              <div>{"Order Token: " + order.token}</div>
-              <div>{"Reservation Token: " + order.reservationToken}</div>
-              <div>{"Order Discount: $" + order.discount}</div>
-              <div>{"Order Amount: $" + order.total}</div>
+            <div className="col-xs-12" style={{marginBottom:"5px"}}>
+              {"TR1: " + getProductConfigDetails()}
+            </div>
+            <div className="col-md-4 col-xs-12">
               <div>{"Order Date: " + new Date(order.createdOn).toLocaleString()}</div>
             </div>
-            <div className="col-md-6 col-xs-12">
-              <div>{"Email: " + order.user.email}</div>
-              <div>{"Phone: " + order.user.phone}</div>
-              <div>{"Card Token: " + order.card.token}</div>
+            <div className="col-md-4 col-xs-12">
+              <div>{"Began Build On: " + getBeganBuildOnString()}</div>
+            </div>
+            <div className="col-md-4 col-xs-12">
+              <div>{"Shipped On: " + getShippedOnString()}</div>
+            </div>
+            <div className="col-xs-12" style={{marginTop:"5px"}}></div>
+            <div className="col-md-4 col-xs-12">
+              <div>{"Order Status: " + order.status}</div>
+              <div>{"Expected Shipment Date: " + getExpectedShipmentString()}</div>
+            </div>
+            <div className="col-md-4 col-xs-12">
+              <div>{"Order Amount: $" + order.total}</div>
               <div>{"Card Number: **** **** **** " + order.card.last4}</div>
             </div>
-            <div className="hidden-lg hidden-md col-xs-12" style={{marginBottom:"15px"}}></div>
-            <div className="col-md-6 col-xs-12">
-              <div><b>Billing Address: </b></div>
-              <div>{order.billing.address1 + " " + order.billing.address2}</div>
-              <div>{order.billing.city + ", " + order.billing.state + " " + order.billing.zip}</div>
-              <div>{order.billing.country}</div>
+            <div className="col-md-4 col-xs-12">
+              <div>{"Email: " + order.user.email}</div>
+              <div>{"Phone: " + order.user.phone}</div>
             </div>
-            <div className="col-xs-12" style={{marginBottom:"15px"}}></div>
-            <div className="col-xs-12">
-              <div>{"Began Build On: " + getBeganBuildOnString()}</div>
-              <div>{"Expected Shipment Date: " + getExpectedShipmentString()}</div>
-              <div>{"Shipped On: " + getShippedOnString()}</div>
+            <div className="col-xs-12" style={{marginTop:"5px"}}></div>
+            <div className="col-md-4 col-xs-12">
               <div>{"Tracking Number: " + order.shipping.trackingNumber}</div>
               <div>{"Tracking Url: " + order.shipping.trackingUrl}</div>
+            </div>
+            <div className="col-md-4 col-xs-12">
+              <div>{order.shipping.address1 + " " + order.shipping.address2}</div>
+              <div>{order.shipping.city + ", " + order.shipping.state + " " + order.shipping.zip}</div>
             </div>
           </div>
         )
