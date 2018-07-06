@@ -187,15 +187,13 @@ var Component = React.createClass({
                 {this.getError("description")}
               </div>
               <div className="col-md-6 col-xs-12">
-                <span style={{height:"40px",fontWeight:"400",fontSize:"14px",lineHeight:"40px",margin:"5px 0 0 0"}}>
-                  {"Parent SKU   "}
-                </span>
-                {this.getParentSKULink()}
-                <Form.Input
-                  attribute="parentAssemblySKU"
-                  value={this.state.inventoryItem.parentAssemblySKU}
+                <Form.Label label="Source" isRequired />
+                <Form.Select
+                  attribute="source"
+                  options={["3D Print","CNC","Assembly Build","Vendor"]}
+                  value={this.state.inventoryItem.source}
                   onChange={this.handleChange_Field} />
-                {this.getError("parentAssemblySKU")}
+                {this.getError("source")}
               </div>
               <div className="col-md-6 col-xs-12">
                 <Form.Label label="Type" isRequired />
@@ -233,15 +231,6 @@ var Component = React.createClass({
                   value={this.state.inventoryItem.filament}
                   onChange={this.handleChange_Field} />
                 {this.getError("filament")}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <Form.Label label="Source" isRequired />
-                <Form.Select
-                  attribute="source"
-                  options={["3D Print","CNC","Assembly Build","Vendor"]}
-                  value={this.state.inventoryItem.source}
-                  onChange={this.handleChange_Field} />
-                {this.getError("source")}
               </div>
               <div className="col-xs-12">
                 <Form.Label label="URL" isRequired />
@@ -329,9 +318,10 @@ var Component = React.createClass({
           inventoryItem.quantity = item.quantity;
         }
       }
-      var price = " - ";
-      if (inventoryItem.price) {
-        price = "$" + calculatePrice(inventoryItem, this.state.inventoryItems).toFixed(2).toLocaleString();
+
+      price = calculatePrice(inventoryItem, this.state.inventoryItems);
+      if (price) {
+        price = "$" + price.toFixed(2).toLocaleString();
       }
 
       var parentAssemblyId = "";
@@ -394,7 +384,6 @@ var Component = React.createClass({
     if (attribute == "childItemsString") {
       try {
         state.inventoryItem.childItems = JSON.parse(value);
-        console.log(state.inventoryItem.childItems);
       } catch (err) {
 
       }
