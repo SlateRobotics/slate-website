@@ -212,10 +212,11 @@ var Component = React.createClass({
 
     var result = [];
     inventoryItems.sort(sort[this.state.sort]).map(function (inventoryItem) {
-      var price = " - ";
-      if (inventoryItem.price) {
-        price = "$" + calculatePrice(inventoryItem, this.state.inventoryItems).toFixed(2).toLocaleString();
-      }
+
+    price = calculatePrice(inventoryItem, this.state.inventoryItems);
+    if (price) {
+      price = "$" + price.toFixed(2).toLocaleString();
+    }
 
       var parentAssemblyId = "";
       for (var i = 0; i < this.state.inventoryItems.length; i++) {
