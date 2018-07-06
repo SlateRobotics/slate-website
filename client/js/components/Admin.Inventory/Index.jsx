@@ -89,6 +89,7 @@ var Component = React.createClass({
       user: '',
       inventoryItems: [],
       search: '',
+      totalValue: 0,
       sort: 'Ascending By SKU',
     }
   },
@@ -131,12 +132,16 @@ var Component = React.createClass({
   },
 
   render: function() {
+    var totalValue = "";
+    if (this.state.totalValue) {
+      totalValue = "Over $" + this.state.totalValue.toFixed(2).toLocaleString() + " in total value.";
+    }
     return (
       <div className="container-fluid" style={Style.container}>
         <div className="row" style={{paddingTop:"25px"}}>
           <div className="col-md-8 col-xs-12 col-centered">
             <h1>Inventory</h1>
-            <div>{this.state.inventoryItems.length + " total items. Over $" + this.state.totalValue + " in total value"}</div>
+            <div>{this.state.inventoryItems.length + " total items. " + totalValue}</div>
           </div>
         </div>
         <div className="row" style={{paddingTop:"25px"}}>
