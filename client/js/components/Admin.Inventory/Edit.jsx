@@ -20,13 +20,6 @@ var LinkComponent = React.createClass({
   },
 });
 
-var ParentLinkComponent = React.createClass({
-  render: function(){
-    var url = "/admin/inventory/" + this.props.rowData.parentAssemblyId;
-    return <a href={url}>{this.props.data}</a>
-  },
-});
-
 var URLComponent = React.createClass({
   render: function(){
     var text = this.props.data;
@@ -45,10 +38,6 @@ var URLComponent = React.createClass({
 var columnMeta = [
   {
     "columnName": "_id",
-    "locked": true,
-    "visible": false,
-  }, {
-    "columnName": "parentAssemblyId",
     "locked": true,
     "visible": false,
   }, {
@@ -73,14 +62,8 @@ var columnMeta = [
     "locked": false,
     "visible": true,
   }, {
-    "columnName": "Parent SKU",
-    "order": 5,
-    "locked": false,
-    "visible": true,
-    "customComponent": ParentLinkComponent
-  }, {
     "columnName": "URL",
-    "order": 6,
+    "order": 5,
     "locked": false,
     "visible": true,
     "customComponent": URLComponent
@@ -97,6 +80,7 @@ var Component = React.createClass({
       parentAssemblyId: "",
       inventoryItems: [],
       inventoryItem: {
+        childItemsString: "",
         childItems: [],
       },
     }
@@ -118,6 +102,14 @@ var Component = React.createClass({
           var state = this.state;
           state.inventoryItem = data;
           if (!state.inventoryItem.childItems) state.inventoryItem.childItems = [];
+          state.inventoryItem.childItemsString = "";
+          for (var i = 0; i < state.inventoryItem.childItems.length; i++) {
+            var item = state.inventoryItem.childItems[i];
+            state.inventoryItem.childItemsString += item.sku;
+            if (i != state.inventoryItem.childItems.length - 1) {
+              state.inventoryItem.childItemsString += ",";
+            }
+          }
           state.isLoading = false;
     			this.setState(state);
       		InventoryItemStore.get({
@@ -277,7 +269,7 @@ var Component = React.createClass({
                   results={this.getGriddleData()}
                   showFilter={true}
                   columnMetadata={columnMeta}
-                  columns={["SKU","Parent SKU","Description","Stock","Price","URL"]}
+                  columns={["SKU","Description","Stock","Price","URL"]}
                   resultsPerPage={20} />
               </div>
               <div className="hidden-lg hidden-md col-xs-12 col-centered">
@@ -287,6 +279,14 @@ var Component = React.createClass({
                   columnMetadata={columnMeta}
                   columns={["SKU","Stock"]}
                   resultsPerPage={20} />
+              </div>
+              <div className="col-xs-12">
+                <Form.Label label="Edit Items:" />
+                <Form.TextArea
+                  attribute="childItemsString"
+                  value={this.state.inventoryItem.childItemsString}
+                  onChange={this.handleChange_Field} />
+                {this.getError("childItemsString")}
               </div>
             </div>
             <div style={{marginTop:"25px"}} />
@@ -332,7 +332,13 @@ var Component = React.createClass({
 
   getGriddleData: function () {
     var result = [];
-    this.state.inventoryItem.childItems.map(function (inventoryItem) {
+    this.state.inventoryItem.childItems.map(function (item) {
+      var inventoryItem = {sku: item.sku};
+      for (var i = 0; i < this.state.inventoryItems.length; i++) {
+        if (this.state.inventoryItems[i].sku == item.sku) {
+          inventoryItem = this.state.inventoryItems[i];
+        }
+      }
       var price = " - ";
       if (inventoryItem.price) {
         price = "$" + inventoryItem.price.toFixed(2).toLocaleString();
@@ -395,6 +401,18 @@ var Component = React.createClass({
   handleChange_Field: function (attribute, value) {
     var state = this.state;
     state.inventoryItem[attribute] = value;
+
+    if (attribute == "childItemsString") {
+      var itemsArray = value.split(",");
+      state.inventoryItem.childItems = [];
+      for (var i = 0; i < itemsArray.length; i++) {
+        state.inventoryItem.childItems.push({
+          sku: itemsArray[i],
+        });
+      }
+      console.log(state.inventoryItem.childItems);
+    }
+
     this.setState(state);
   },
 

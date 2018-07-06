@@ -1,6 +1,10 @@
 var restful = require('node-restful');
 var mongoose = restful.mongoose;
 
+var childItemSchema = new mongoose.Schema({
+  sku: String,
+});
+
 var schema = new mongoose.Schema({
   sku: String,
   type: String, // raw materials, work in process, finished goods
@@ -11,7 +15,7 @@ var schema = new mongoose.Schema({
   filament: Number,
   url: String,
   notes: String,
-  parentAssemblySKU: String,
+  childItems: [childItemSchema],
   createdOn: Date, // utc
 });
 

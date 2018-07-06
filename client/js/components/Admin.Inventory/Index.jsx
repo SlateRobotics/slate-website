@@ -69,14 +69,8 @@ var columnMeta = [
     "locked": false,
     "visible": true,
   }, {
-    "columnName": "Parent SKU",
-    "order": 5,
-    "locked": false,
-    "visible": true,
-    "customComponent": ParentLinkComponent
-  }, {
     "columnName": "URL",
-    "order": 6,
+    "order": 5,
     "locked": false,
     "visible": true,
     "customComponent": URLComponent
@@ -134,14 +128,15 @@ var Component = React.createClass({
   render: function() {
     var totalValue = "";
     if (this.state.totalValue) {
-      totalValue = "Over $" + this.state.totalValue.toFixed(2).toLocaleString() + " in total value.";
+      totalValue = "Over $" + this.state.totalValue.toFixed(2).toLocaleString() + " in value.";
     }
+
     return (
       <div className="container-fluid" style={Style.container}>
         <div className="row" style={{paddingTop:"25px"}}>
           <div className="col-xs-10 col-centered">
             <h1>Inventory</h1>
-            <div>{this.state.inventoryItems.length + " total items. " + totalValue}</div>
+            <div>{this.state.inventoryItems.length + " items. " + totalValue}</div>
           </div>
         </div>
         <div className="row" style={{paddingTop:"25px"}}>
@@ -174,7 +169,7 @@ var Component = React.createClass({
             <Griddle
               results={this.getGriddleData()}
               columnMetadata={columnMeta}
-              columns={["SKU","Parent SKU","Description","Stock","Price","URL"]}
+              columns={["SKU","Description","Stock","Price","URL"]}
               resultsPerPage={20} />
           </div>
           <div className="hidden-lg hidden-md col-xs-12 col-centered">

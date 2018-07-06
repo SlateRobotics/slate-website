@@ -8,7 +8,6 @@ var readFilterSchema = {
   "properties": {
     "_id": { "type": "string" },
     "sku": { "type": "string" },
-    "parentAssemblySKU": { "type": "string" },
     "type": { "type": "string" },
     "filament": { "type": "string" },
     "source": { "type": "string" },
@@ -18,6 +17,16 @@ var readFilterSchema = {
     "url": { "type": "string" },
     "notes": { "type": "string" },
     "createdOn": { "type": "date" },
+    "childItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": { "type":"string" },
+          "sku": { "type":"string" },
+        },
+      }
+    },
   }
 }
 
@@ -26,7 +35,6 @@ var writeFilterSchema = {
   "type": "object",
   "properties": {
     "sku": { "type": "string" },
-    "parentAssemblySKU": { "type": "string" },
     "type": { "type": "string" },
     "filament": { "type": "string" },
     "source": { "type": "string" },
@@ -36,6 +44,16 @@ var writeFilterSchema = {
     "url": { "type": "string" },
     "notes": { "type": "string" },
     "createdOn": { "type": "date" },
+    "childItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": { "type":"string" },
+          "sku": { "type":"string" },
+        },
+      }
+    },
   }
 }
 
