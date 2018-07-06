@@ -24,6 +24,7 @@ var readFilterSchema = {
         "properties": {
           "_id": { "type":"string" },
           "sku": { "type":"string" },
+          "quantity": { "type":"string" },
         },
       }
     },
@@ -51,6 +52,7 @@ var writeFilterSchema = {
         "properties": {
           "_id": { "type":"string" },
           "sku": { "type":"string" },
+          "quantity": { "type":"string" },
         },
       }
     },

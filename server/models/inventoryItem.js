@@ -3,6 +3,7 @@ var mongoose = restful.mongoose;
 
 var childItemSchema = new mongoose.Schema({
   sku: String,
+  quantity: Number,
 });
 
 var schema = new mongoose.Schema({

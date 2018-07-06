@@ -12,6 +12,7 @@ var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var UserStore = require('../../stores').user;
 var InventoryItemStore = require('../../stores').inventoryItem;
+var calculatePrice = require('./calculatePrice');
 
 var LinkComponent = React.createClass({
   render: function(){
@@ -52,18 +53,23 @@ var columnMeta = [
     "locked": false,
     "visible": true,
   }, {
-    "columnName": "Stock",
+    "columnName": "Qty Req",
     "order": 3,
     "locked": false,
     "visible": true,
   }, {
-    "columnName": "Price",
+    "columnName": "Stock",
     "order": 4,
     "locked": false,
     "visible": true,
   }, {
-    "columnName": "URL",
+    "columnName": "Price",
     "order": 5,
+    "locked": false,
+    "visible": true,
+  }, {
+    "columnName": "URL",
+    "order": 6,
     "locked": false,
     "visible": true,
     "customComponent": URLComponent
@@ -102,14 +108,7 @@ var Component = React.createClass({
           var state = this.state;
           state.inventoryItem = data;
           if (!state.inventoryItem.childItems) state.inventoryItem.childItems = [];
-          state.inventoryItem.childItemsString = "";
-          for (var i = 0; i < state.inventoryItem.childItems.length; i++) {
-            var item = state.inventoryItem.childItems[i];
-            state.inventoryItem.childItemsString += item.sku;
-            if (i != state.inventoryItem.childItems.length - 1) {
-              state.inventoryItem.childItemsString += ",";
-            }
-          }
+          state.inventoryItem.childItemsString = JSON.stringify(state.inventoryItem.childItems);
           state.isLoading = false;
     			this.setState(state);
       		InventoryItemStore.get({
@@ -222,7 +221,7 @@ var Component = React.createClass({
                   attribute="price"
                   type="number"
                   disabled={this.getPriceDisabled()}
-                  value={this.getPriceValue()}
+                  value={calculatePrice(this.state.inventoryItem, this.state.inventoryItems)}
                   onChange={this.handleChange_Field} />
                 {this.getError("price")}
               </div>
@@ -269,7 +268,7 @@ var Component = React.createClass({
                   results={this.getGriddleData()}
                   showFilter={true}
                   columnMetadata={columnMeta}
-                  columns={["SKU","Description","Stock","Price","URL"]}
+                  columns={["SKU","Description","Stock","Price","URL","Qty Req"]}
                   resultsPerPage={20} />
               </div>
               <div className="hidden-lg hidden-md col-xs-12 col-centered">
@@ -277,7 +276,7 @@ var Component = React.createClass({
                   results={this.getGriddleData()}
                   showFilter={true}
                   columnMetadata={columnMeta}
-                  columns={["SKU","Stock"]}
+                  columns={["SKU","Stock","Qty Req"]}
                   resultsPerPage={20} />
               </div>
               <div className="col-xs-12">
@@ -320,28 +319,19 @@ var Component = React.createClass({
     return (this.state.inventoryItem.source == "3D Print" || this.state.inventoryItem.source == "Assembly Build" )
   },
 
-  getPriceValue: function () {
-    if (this.state.inventoryItem.source == "3D Print") {
-      var filamentPrice = this.state.filamentPrice;
-      var filament = this.state.inventoryItem.filament / 1000.0;
-      return filament * filamentPrice;
-    } else {
-      return this.state.inventoryItem.price;
-    }
-  },
-
   getGriddleData: function () {
     var result = [];
     this.state.inventoryItem.childItems.map(function (item) {
-      var inventoryItem = {sku: item.sku};
+      var inventoryItem = item;
       for (var i = 0; i < this.state.inventoryItems.length; i++) {
         if (this.state.inventoryItems[i].sku == item.sku) {
           inventoryItem = this.state.inventoryItems[i];
+          inventoryItem.quantity = item.quantity;
         }
       }
       var price = " - ";
       if (inventoryItem.price) {
-        price = "$" + inventoryItem.price.toFixed(2).toLocaleString();
+        price = "$" + calculatePrice(inventoryItem, this.state.inventoryItems).toFixed(2).toLocaleString();
       }
 
       var parentAssemblyId = "";
@@ -354,10 +344,9 @@ var Component = React.createClass({
 
       result.push({
         "_id": inventoryItem._id,
-        "parentAssemblyId": parentAssemblyId,
         "SKU": inventoryItem.sku,
-        "Parent SKU": inventoryItem.parentAssemblySKU,
         "Description": inventoryItem.description,
+        "Qty Req": inventoryItem.quantity,
         "Type": inventoryItem.type,
         "Stock": inventoryItem.stock,
         "Price": price,
@@ -403,14 +392,12 @@ var Component = React.createClass({
     state.inventoryItem[attribute] = value;
 
     if (attribute == "childItemsString") {
-      var itemsArray = value.split(",");
-      state.inventoryItem.childItems = [];
-      for (var i = 0; i < itemsArray.length; i++) {
-        state.inventoryItem.childItems.push({
-          sku: itemsArray[i],
-        });
+      try {
+        state.inventoryItem.childItems = JSON.parse(value);
+        console.log(state.inventoryItem.childItems);
+      } catch (err) {
+
       }
-      console.log(state.inventoryItem.childItems);
     }
 
     this.setState(state);

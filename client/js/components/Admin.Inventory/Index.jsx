@@ -8,6 +8,7 @@ var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var GetProductConfigItemName = require('../Products/GetProductConfigItemName.js');
 var UserStore = require('../../stores').user;
 var InventoryItemStore = require('../../stores').inventoryItem;
+var calculatePrice = require('./calculatePrice');
 
 var LinkComponent = React.createClass({
   render: function(){
@@ -99,7 +100,7 @@ var Component = React.createClass({
         var totalValue = 0;
         data.map(function (inventoryItem) {
           if (inventoryItem.price && inventoryItem.stock) {
-            totalValue += inventoryItem.price * inventoryItem.stock;
+            totalValue += calculatePrice(inventoryItem, state.inventoryItems) * inventoryItem.stock;
           }
         });
         state.totalValue = totalValue;
@@ -213,7 +214,7 @@ var Component = React.createClass({
     inventoryItems.sort(sort[this.state.sort]).map(function (inventoryItem) {
       var price = " - ";
       if (inventoryItem.price) {
-        price = "$" + inventoryItem.price.toFixed(2).toLocaleString();
+        price = "$" + calculatePrice(inventoryItem, this.state.inventoryItems).toFixed(2).toLocaleString();
       }
 
       var parentAssemblyId = "";
