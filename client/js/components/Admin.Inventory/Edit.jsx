@@ -271,8 +271,8 @@ var Component = React.createClass({
             </div>
             <div style={{marginTop:"25px"}} />
             <h3>Child Items</h3>
-            <div className="row">
-              <div className="col-md-8 hidden-sm hidden-xs col-centered">
+            <div className="row" style={{fontSize:"14px"}}>
+              <div className="col-md-12 hidden-sm hidden-xs col-centered">
                 <Griddle
                   results={this.getGriddleData()}
                   showFilter={true}

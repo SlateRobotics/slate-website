@@ -139,13 +139,13 @@ var Component = React.createClass({
     return (
       <div className="container-fluid" style={Style.container}>
         <div className="row" style={{paddingTop:"25px"}}>
-          <div className="col-md-8 col-xs-12 col-centered">
+          <div className="col-xs-10 col-centered">
             <h1>Inventory</h1>
             <div>{this.state.inventoryItems.length + " total items. " + totalValue}</div>
           </div>
         </div>
         <div className="row" style={{paddingTop:"25px"}}>
-          <div className="col-md-8 col-xs-12 col-centered">
+          <div className="col-xs-10 col-centered">
             <div className="row">
               <div className="col-md-6 col-xs-12">
                 <Form.Input
@@ -169,8 +169,8 @@ var Component = React.createClass({
             </div>
           </div>
         </div>
-        <div className="row" style={{paddingTop:"25px", paddingBottom:"25px"}}>
-          <div className="col-md-8 hidden-sm hidden-xs col-centered">
+        <div className="row" style={{paddingTop:"25px", paddingBottom:"25px", fontSize:"14px"}}>
+          <div className="col-md-10 hidden-sm hidden-xs col-centered">
             <Griddle
               results={this.getGriddleData()}
               columnMetadata={columnMeta}
