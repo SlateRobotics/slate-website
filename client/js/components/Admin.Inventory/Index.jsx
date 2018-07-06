@@ -100,9 +100,24 @@ var Component = React.createClass({
       success: function (data) {
   			var state = this.state;
   			state.inventoryItems = data;
+
+        var totalValue = 0;
+        data.map(function (inventoryItem) {
+          if (inventoryItem.price && inventoryItem.stock) {
+            totalValue += inventoryItem.price * inventoryItem.stock;
+          }
+        });
+        state.totalValue = totalValue;
   			this.setState(state);
       }.bind(this),
     });
+
+
+    var totalValue = 0;
+
+    var state = this.state;
+    state.totalValue = totalValue;
+    this.setState(state);
   },
 
   componentDidMount: function () {
@@ -121,7 +136,7 @@ var Component = React.createClass({
         <div className="row" style={{paddingTop:"25px"}}>
           <div className="col-md-8 col-xs-12 col-centered">
             <h1>Inventory</h1>
-            <div>{this.state.inventoryItems.length + " total items"}</div>
+            <div>{this.state.inventoryItems.length + " total items. Over $" + this.state.totalValue + " in total value"}</div>
           </div>
         </div>
         <div className="row" style={{paddingTop:"25px"}}>
