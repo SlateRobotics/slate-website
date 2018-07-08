@@ -24,15 +24,17 @@ var getChildAssemblies = function (item, items) {
 
   // concat
   for (var i = 0; i < childItems.length; i++) {
+    var quantity = childItems[i].quantity;
     for (var j = 0; j < childItems.length; j++) {
       if (i == j) continue;
       var item1 = childItems[i];
       var item2 = childItems[j];
       if (item1.sku == item2.sku) {
-        childItems[i].quantity = item1.quantity + item2.quantity;
+        quantity = quantity + item2.quantity;
         childItems[j] = {remove: true};
       }
     }
+    childItems[i].quantity = quantity;
   }
 
   var result = [];

@@ -304,27 +304,9 @@ var Component = React.createClass({
   getGriddleData2: function () {
     var childItems = getRawMaterialsOutOfStock(this.state.inventoryItem, this.state.inventoryItems);
     var result = [];
-    childItems.map(function (item) {
-      var inventoryItem = item;
-      for (var i = 0; i < this.state.inventoryItems.length; i++) {
-        if (this.state.inventoryItems[i].sku == item.sku) {
-          inventoryItem = this.state.inventoryItems[i];
-          inventoryItem.quantity = item.quantity;
-        }
-      }
-
+    childItems.map(function (inventoryItem) {
       price = calculatePrice(inventoryItem, this.state.inventoryItems);
-      if (price) {
-        price = "$" + price.toFixed(2).toLocaleString();
-      }
-
-      var parentAssemblyId = "";
-      for (var i = 0; i < this.state.inventoryItems.length; i++) {
-        var item = this.state.inventoryItems[i];
-        if (item.sku == inventoryItem.parentAssemblySKU) {
-          parentAssemblyId = item._id;
-        }
-      }
+      if (price) price = "$" + price.toFixed(2).toLocaleString();
 
       result.push({
         "_id": inventoryItem._id,
