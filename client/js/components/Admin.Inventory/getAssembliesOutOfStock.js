@@ -24,8 +24,26 @@ var getAssembliesOutOfStock = function (item, items) {
     }
   }
 
-  return childItemsOutOfStock;
+  // concat
+  for (var i = 0; i < childItemsOutOfStock.length; i++) {
+    for (var j = 0; j < childItemsOutOfStock.length; j++) {
+      if (i == j) continue;
+      var item1 = childItemsOutOfStock[i];
+      var item2 = childItemsOutOfStock[j];
+      if (item1.sku == item2.sku) {
+        childItemsOutOfStock[i].quantity = item1.quantity + item2.quantity;
+        childItemsOutOfStock[j] = {remove: true};
+      }
+    }
+  }
 
+  var result = [];
+  for (var i = 0; i < childItemsOutOfStock.length; i++) {
+    var item = childItemsOutOfStock[i];
+    if (!item.remove) result.push(item);
+  }
+
+  return result;
 }
 
 module.exports = getAssembliesOutOfStock;
