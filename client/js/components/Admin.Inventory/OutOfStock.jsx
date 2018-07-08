@@ -85,6 +85,7 @@ var Component = React.createClass({
       isLoading: true,
       product: Products[0],
       filamentPrice: 4.5,
+      capitalRequirements: 0,
       parentAssemblyId: "",
       inventoryItems: [],
       inventoryItem: {
@@ -175,6 +176,7 @@ var Component = React.createClass({
             <span style={{marginRight:"15px"}} />
             <Link to={"/admin/inventory/" + this.state.inventoryItem._id}>Edit Item</Link>
             <h3>Raw Materials</h3>
+            <div style={{marginBottom:"15px",fontSize:"14px"}}>{"Capital requirements: " + this.getRMCapitalRequirements()}</div>
             <div className="row" style={{fontSize:"14px"}}>
               <div className="col-md-12 hidden-sm hidden-xs col-centered">
                 <Griddle
@@ -271,6 +273,31 @@ var Component = React.createClass({
       });
     }.bind(this));
 
+    return result;
+  },
+
+  getRMCapitalRequirements: function () {
+    var childItems = getRawMaterialsOutOfStock(this.state.inventoryItem, this.state.inventoryItems);
+    var result = 0;
+    childItems.map(function (item) {
+      var inventoryItem = item;
+      for (var i = 0; i < this.state.inventoryItems.length; i++) {
+        if (this.state.inventoryItems[i].sku == item.sku) {
+          inventoryItem = this.state.inventoryItems[i];
+          inventoryItem.quantity = item.quantity;
+        }
+      }
+
+      price = calculatePrice(inventoryItem, this.state.inventoryItems);
+      if (!price) price = 0;
+      if (!item.quantity) item.quantity = 0;
+      if (!item.stock) item.stock = 0;
+
+      result = result + (price * (item.quantity - item.stock));
+
+    }.bind(this));
+
+    if (result) result = "$" + result.toFixed(2).toLocaleString();
     return result;
   },
 

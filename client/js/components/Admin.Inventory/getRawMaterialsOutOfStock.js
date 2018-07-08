@@ -1,49 +1,15 @@
+var getChildItems = require('./getChildItems');
+
 var getRawMaterialsOutOfStock = function (item, items) {
-  var childItemsOutOfStock = [];
-  if (!item.childItems) item.childItems = [];
-  for (var i = 0; i < item.childItems.length; i++) {
-    var childItem = item.childItems[i];
-    var childItemDetail = {};
-
-    for (var j = 0; j < items.length; j++) {
-      if (items[j].sku == childItem.sku) {
-        childItemDetail = items[j];
-        break;
-      }
-    }
-
-    if (childItem.quantity) childItemDetail.quantity = childItem.quantity;
-    if (!childItemDetail.childItems) childItemDetail.childItems = [];
-
-    if (childItemDetail.childItems.length > 0) {
-      var _items = getRawMaterialsOutOfStock(childItemDetail, items);
-      childItemsOutOfStock = childItemsOutOfStock.concat(_items);
-    } else if (!childItemDetail.stock || childItemDetail.stock < childItemDetail.quantity) {
-      childItemsOutOfStock.push(childItemDetail);
-    }
-  }
-
-  // concat
-  for (var i = 0; i < childItemsOutOfStock.length; i++) {
-    for (var j = 0; j < childItemsOutOfStock.length; j++) {
-      if (i == j) continue;
-      var item1 = childItemsOutOfStock[i];
-      var item2 = childItemsOutOfStock[j];
-      if (item1.sku == item2.sku) {
-        childItemsOutOfStock[i].quantity = item1.quantity + item2.quantity;
-        childItemsOutOfStock[j] = {remove: true};
-      }
-    }
-  }
-
+  // get all child items
+  var childItems = getChildItems(item, items);
   var result = [];
-  for (var i = 0; i < childItemsOutOfStock.length; i++) {
-    var item = childItemsOutOfStock[i];
-    if (!item.remove) result.push(item);
+  for (var i = 0; i < childItems.length; i++) {
+    if (childItems[i].stock < childItems[i].quantity) {
+      result.push(childItems[i]);
+    }
   }
-
-return result;
-
+  return result;
 }
 
 module.exports = getRawMaterialsOutOfStock;
