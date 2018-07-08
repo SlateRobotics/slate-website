@@ -18,7 +18,7 @@ var getRawMaterialsOutOfStock = function (item, items) {
     if (childItemDetail.childItems.length > 0) {
       var _items = getRawMaterialsOutOfStock(childItemDetail, items);
       childItemsOutOfStock = childItemsOutOfStock.concat(_items);
-    } else if (childItemDetail.stock < childItemDetail.quantity) {
+    } else if (!childItemDetail.stock || childItemDetail.stock < childItemDetail.quantity) {
       childItemsOutOfStock.push(childItemDetail);
     }
   }

@@ -16,7 +16,7 @@ var getAssembliesOutOfStock = function (item, items) {
     if (!childItemDetail.childItems) childItemDetail.childItems = [];
 
     if (childItemDetail.childItems.length > 0) {
-      if (childItemDetail.stock < childItemDetail.quantity) {
+      if (!childItemDetail.stock || childItemDetail.stock < childItemDetail.quantity) {
         childItemsOutOfStock.push(childItemDetail);
         var _items = getAssembliesOutOfStock(childItemDetail, items);
         childItemsOutOfStock = childItemsOutOfStock.concat(_items);
