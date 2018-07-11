@@ -150,8 +150,8 @@ var Component = React.createClass({
                     research robot that I could program and would be affordable
                     enough for other people to program too. A year of hacking
                     on hardware in my garage led to the development of the TR1,
-                    a human-sized platform with two, 7-DOF arms and a mobile,
-                    omnidirectional base for only $2,999.
+                    a human-sized platform with 7-DOF arms and a mobile,
+                    omnidirectional base with a base price of only $3,199.
                   </p>
                   <p>
                     I hope affordable robots like the TR1 can do for personal
