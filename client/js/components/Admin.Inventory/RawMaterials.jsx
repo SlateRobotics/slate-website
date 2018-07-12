@@ -170,7 +170,7 @@ var Component = React.createClass({
               marginTop: "25px",
               marginBottom: "25px",
             }}>
-            <h3>{this.state.inventoryItem.sku + " - Out Of Stock Items"}</h3>
+            <h3>{this.state.inventoryItem.sku + " - All Raw Materials"}</h3>
             <Link to={"/admin/inventory"}>All Inventory</Link>
             <span style={{marginRight:"15px"}} />
             <Link to={"/admin/inventory/" + this.state.inventoryItem._id}>Edit Item</Link>
