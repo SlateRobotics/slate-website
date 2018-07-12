@@ -11,6 +11,7 @@ var UserStore = require('./stores/user');
 
 var AdminInventory = require('./components/Admin.Inventory/Index.jsx');
 var AdminInventoryEdit = require('./components/Admin.Inventory/Edit.jsx');
+var AdminInventoryRawMaterials = require('./components/Admin.Inventory/RawMaterials.jsx');
 var AdminInventoryOutOfStock = require('./components/Admin.Inventory/OutOfStock.jsx');
 var AdminOrders = require('./components/Admin.Orders/Index.jsx');
 var AdminOrdersEdit = require('./components/Admin.Orders/Edit.jsx');
@@ -74,6 +75,7 @@ var Routes = (
 		<Route path="/admin/orders/:id" component={AdminOrdersEdit} />
 		<Route path="/admin/inventory" component={AdminInventory} />
 		<Route path="/admin/inventory/:id" component={AdminInventoryEdit} />
+		<Route path="/admin/inventory/:id/rm" component={AdminInventoryRawMaterials} />
 		<Route path="/admin/inventory/:id/stock" component={AdminInventoryOutOfStock} />
 		<Route path="/admin/reservations" component={AdminReservations} />
 		<Route path="/admin/reservations/:id" component={AdminReservationsEdit} />

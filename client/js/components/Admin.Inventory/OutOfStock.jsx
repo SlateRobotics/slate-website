@@ -174,6 +174,8 @@ var Component = React.createClass({
             <h3>{this.state.inventoryItem.sku + " - Out Of Stock Items"}</h3>
             <Link to={"/admin/inventory"}>All Inventory</Link>
             <span style={{marginRight:"15px"}} />
+            <Link to={"/admin/inventory/" + this.state.inventoryItem._id + "/rm"}>Raw Materials</Link>
+            <span style={{marginRight:"15px"}} />
             <Link to={"/admin/inventory/" + this.state.inventoryItem._id}>Edit Item</Link>
             <h3>Raw Materials</h3>
             <div style={{marginBottom:"15px",fontSize:"14px"}}>{"Capital requirements: " + this.getRMCapitalRequirements()}</div>

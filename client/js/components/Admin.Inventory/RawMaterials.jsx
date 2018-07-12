@@ -13,8 +13,7 @@ var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var UserStore = require('../../stores').user;
 var InventoryItemStore = require('../../stores').inventoryItem;
 var calculatePrice = require('./calculatePrice');
-var getRawMaterialsOutOfStock = require('./getRawMaterialsOutOfStock');
-var getAssembliesOutOfStock = require('./getAssembliesOutOfStock');
+var getChildItems = require('./getChildItems');
 
 var LinkComponent = React.createClass({
   render: function(){
@@ -85,6 +84,7 @@ var Component = React.createClass({
       isLoading: true,
       product: Products[0],
       filamentPrice: 4.5,
+      capitalRequirements: 0,
       parentAssemblyId: "",
       inventoryItems: [],
       inventoryItem: {
@@ -170,98 +170,17 @@ var Component = React.createClass({
               marginTop: "25px",
               marginBottom: "25px",
             }}>
-            <h3>Edit Inventory Item</h3>
+            <h3>{this.state.inventoryItem.sku + " - Out Of Stock Items"}</h3>
             <Link to={"/admin/inventory"}>All Inventory</Link>
             <span style={{marginRight:"15px"}} />
-            <Link to={"/admin/inventory/" + this.state.inventoryItem._id + "/rm"}>Raw Materials</Link>
+            <Link to={"/admin/inventory/" + this.state.inventoryItem._id}>Edit Item</Link>
             <span style={{marginRight:"15px"}} />
             <Link to={"/admin/inventory/" + this.state.inventoryItem._id + "/stock"}>Out Of Stock Items</Link>
-            <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <Form.Label label="SKU" isRequired />
-                <Form.Input
-                  attribute="sku"
-                  value={this.state.inventoryItem.sku}
-                  onChange={this.handleChange_Field} />
-                {this.getError("sku")}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <Form.Label label="Description" isRequired />
-                <Form.Input
-                  attribute="description"
-                  value={this.state.inventoryItem.description}
-                  onChange={this.handleChange_Field} />
-                {this.getError("description")}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <Form.Label label="Source" isRequired />
-                <Form.Select
-                  attribute="source"
-                  options={["3D Print","CNC","Assembly Build","Vendor"]}
-                  value={this.state.inventoryItem.source}
-                  onChange={this.handleChange_Field} />
-                {this.getError("source")}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <Form.Label label="Type" isRequired />
-                <Form.Select
-                  attribute="type"
-                  options={["RM","WIP","FG"]}
-                  value={this.state.inventoryItem.type}
-                  onChange={this.handleChange_Field} />
-                {this.getError("type")}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <Form.Label label="Stock" isRequired />
-                <Form.Input
-                  attribute="stock"
-                  type="number"
-                  value={this.state.inventoryItem.stock}
-                  onChange={this.handleChange_Field} />
-                {this.getError("stock")}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <Form.Label label="Price" isRequired />
-                <Form.Input
-                  attribute="price"
-                  type="number"
-                  disabled={this.getPriceDisabled()}
-                  value={calculatePrice(this.state.inventoryItem, this.state.inventoryItems)}
-                  onChange={this.handleChange_Field} />
-                {this.getError("price")}
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <Form.Label label="Filament (g)" isRequired />
-                <Form.Input
-                  attribute="filament"
-                  type="number"
-                  value={this.state.inventoryItem.filament}
-                  onChange={this.handleChange_Field} />
-                {this.getError("filament")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="URL" isRequired />
-                <Form.Input
-                  attribute="url"
-                  value={this.state.inventoryItem.url}
-                  onChange={this.handleChange_Field} />
-                {this.getError("url")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Notes" isRequired />
-                <Form.TextArea
-                  attribute="notes"
-                  value={this.state.inventoryItem.notes}
-                  onChange={this.handleChange_Field} />
-                {this.getError("notes")}
-              </div>
-            </div>
-            <div style={{marginTop:"25px"}} />
-            <h3>Child Items</h3>
+            <h3>Raw Materials</h3>
             <div className="row" style={{fontSize:"14px"}}>
               <div className="col-md-12 hidden-sm hidden-xs col-centered">
                 <Griddle
-                  results={this.getGriddleData()}
+                  results={this.getGriddleData2()}
                   showFilter={true}
                   columnMetadata={columnMeta}
                   columns={["SKU","Description","Stock","Price","URL","Qty Req"]}
@@ -269,31 +188,14 @@ var Component = React.createClass({
               </div>
               <div className="hidden-lg hidden-md col-xs-12 col-centered">
                 <Griddle
-                  results={this.getGriddleData()}
+                  results={this.getGriddleData2()}
                   showFilter={true}
                   columnMetadata={columnMeta}
                   columns={["SKU","Stock","Qty Req"]}
                   resultsPerPage={20} />
               </div>
-              <div className="col-xs-12">
-                <Form.Label label="Edit Items:" />
-                <Form.TextArea
-                  attribute="childItemsString"
-                  value={this.state.inventoryItem.childItemsString}
-                  onChange={this.handleChange_Field} />
-                {this.getError("childItemsString")}
-              </div>
             </div>
             <div style={{marginTop:"25px"}} />
-            <div className="row">
-              <div className="col-xs-12">
-                {this.getButton()}
-                <span style={{marginRight:"15px"}} />
-                <ButtonSecondary
-                  label="Cancel/Back"
-                  onClick={this.handleClick_Cancel} />
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -315,29 +217,12 @@ var Component = React.createClass({
     return (this.state.inventoryItem.source == "3D Print" || this.state.inventoryItem.source == "Assembly Build" )
   },
 
-  getGriddleData: function () {
+  getGriddleData2: function () {
+    var childItems = getChildItems(this.state.inventoryItem, this.state.inventoryItems);
     var result = [];
-    this.state.inventoryItem.childItems.map(function (item) {
-      var inventoryItem = item;
-      for (var i = 0; i < this.state.inventoryItems.length; i++) {
-        if (this.state.inventoryItems[i].sku == item.sku) {
-          inventoryItem = this.state.inventoryItems[i];
-          inventoryItem.quantity = item.quantity;
-        }
-      }
-
+    childItems.map(function (inventoryItem) {
       price = calculatePrice(inventoryItem, this.state.inventoryItems);
-      if (price) {
-        price = "$" + price.toFixed(2).toLocaleString();
-      }
-
-      var parentAssemblyId = "";
-      for (var i = 0; i < this.state.inventoryItems.length; i++) {
-        var item = this.state.inventoryItems[i];
-        if (item.sku == inventoryItem.parentAssemblySKU) {
-          parentAssemblyId = item._id;
-        }
-      }
+      if (price) price = "$" + price.toFixed(2).toLocaleString();
 
       result.push({
         "_id": inventoryItem._id,
