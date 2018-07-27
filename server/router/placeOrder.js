@@ -241,8 +241,8 @@ router.post('/', function (req, res) {
         if (!isValidReservation) {
           OrderError(res, "Invalid reservation token.");
         } else {
-          order.subtotal = order.subtotal - 1450;
-          order.discount = 1450;
+          order.subtotal = order.subtotal - 1549;
+          order.discount = 1549;
           order.tax = CalculateTaxes(order);
           order.total = order.subtotal + order.tax;
 

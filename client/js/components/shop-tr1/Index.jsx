@@ -58,7 +58,7 @@ var Component = React.createClass({
     var reservationToken = gup('reservationToken', location.href);
     if (reservationToken) {
       var state = this.state;
-      state.discount = 1450;
+      state.discount = 1549;
       state.reservationToken = reservationToken;
       this.setState(state);
     }
