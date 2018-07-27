@@ -213,7 +213,7 @@ var Component = React.createClass({
     var beginDate = new Date();
     beginDate.setDate(beginDate.getDate() + (7*8));
     var endDate = new Date();
-    endDate.setDate(endDate.getDate() + (7*16));
+    endDate.setDate(endDate.getDate() + (7*12));
     return beginDate.toLocaleDateString() + " - " + endDate.toLocaleDateString();
   },
 

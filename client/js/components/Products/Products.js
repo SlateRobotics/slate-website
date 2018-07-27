@@ -44,11 +44,11 @@ module.exports = [{
     label: "Battery",
     items: [{
       id: 0,
-      label: "12V 20AH Deep Cycle Battery",
+      label: "12V 150Wh Lithium Ion Battery",
       price: 0,
     }, {
       id: 1,
-      label: "12V 100AH Deep Cycle Battery",
+      label: "12V 278Wh Lithium Ion Battery",
       price: 150,
     }]
   }, {
@@ -60,8 +60,12 @@ module.exports = [{
       price: 0,
     }, {
       id: 1,
-      label: "UPS Ground",
-      price: 150,
+      label: "US Contenential LTL Shipping",
+      price: 300,
+    }, {
+      id: 2,
+      label: "International Shipping",
+      price: 1000,
     }]
   }],
 }]

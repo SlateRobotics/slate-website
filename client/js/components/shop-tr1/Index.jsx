@@ -3,6 +3,7 @@ var BrowserHistory = require('react-router').browserHistory;
 var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
+var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var ConfigItem = require('./ConfigItem.jsx');
 var Products = require('../Products/Products.js');
 var CartStore = require('../../stores').cart;
@@ -107,9 +108,7 @@ var Component = React.createClass({
                   </div>
                   <div style={{paddingTop:"15px"}}>
                     <h4>{this.getTotalString()}</h4>
-                    <ButtonPrimary
-                      label={"Checkout"}
-                      onClick={this.handleClick_Checkout} />
+                    {this.getCheckoutButton()}
                   </div>
                   <div style={{
                       paddingTop:"15px",
@@ -118,7 +117,7 @@ var Component = React.createClass({
                     }}>
                       <h4 style={{color:"#ff7600"}}>Pre-order Item</h4>
                       <div>
-                        Orders take 8 to 16 weeks to ship
+                        Orders take 8 to 12 weeks to ship
                       </div>
                   </div>
                 </div>
@@ -334,6 +333,26 @@ var Component = React.createClass({
         }
       }
     }.bind(this));
+  },
+
+  getCheckoutButton: function () {
+    if (this.state.order.config[4].value == 2) {
+      return (
+        <div>
+          <div style={{color:"red"}}>
+            Please contact us at (417) 849-3612 or via the chat in the bottom-right
+            corner for international shipping. We must obtain a quote from our
+            service provider. We apologize for any inconvenience!
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <ButtonPrimary
+          label={"Checkout"}
+          onClick={this.handleClick_Checkout} />
+      )
+    }
   },
 });
 
