@@ -38,8 +38,10 @@ function ValidateReservationToken (order, callback) {
   var orderWithReservationExists = false;
   Reservation.findOne({"token": reservationToken}).exec(function(err, reservation) {
     if (reservation) reservationExists = true;
-    Order.findOne({"reservationToken": reservationToken}).exec(function(err, order) {
+    if (err) callback(false);
+    Order.findOne({"reservationToken": reservationToken}).exec(function(err2, order) {
       if (order) orderWithReservationExists = true;
+      if (err2) callback(false);
       callback(reservationExists && !orderWithReservationExists);
     });
   });
@@ -210,88 +212,85 @@ function CalculateTaxes (order) {
 
 router.post('/', function (req, res) {
   VerifyData(req, res);
-  if (!errorOccurred) {
-    var order = req.body;
-    order.subtotal = 0;
-    for (var i = 0; i < order.products.length; i++) {
-      order.products[i].subtotal = CalculateSubtotalProduct(order.products[i]);
-      order.subtotal = order.subtotal + order.products[i].subtotal;
-    }
+  var order = req.body;
+  order.subtotal = 0;
+  for (var i = 0; i < order.products.length; i++) {
+    order.products[i].subtotal = CalculateSubtotalProduct(order.products[i]);
+    order.subtotal = order.subtotal + order.products[i].subtotal;
+  }
 
-    order.subtotal = order.subtotal;
-    order.tax = CalculateTaxes(order);
-    order.total = order.subtotal + order.tax;
-    order.createdOn = Date(new Date().getTime());
-    order.status = "placed";
-    order.expectedShipmentDate = new Date();
-    order.expectedShipmentDate.setDate(new Date().getDate() + (7*12));
-    order.token = token();
+  order.subtotal = order.subtotal;
+  order.tax = CalculateTaxes(order);
+  order.total = order.subtotal + order.tax;
+  order.createdOn = Date(new Date().getTime());
+  order.status = "placed";
+  order.expectedShipmentDate = new Date();
+  order.expectedShipmentDate.setDate(new Date().getDate() + (7*12));
+  order.token = token();
 
-    var metadata = {};
-    for (var i = 0; i < order.products.length; i++) {
-      for (var j = 0; j < order.products[i].config.length; j++) {
-        var key = order.products[i].productId + i + order.products[i].config[j].name.substr(0,3);
-        var value = String(order.products[i].config[j].value);
-        metadata[key] = value;
-      }
-    }
-
-    if (order.reservationToken) {
-      ValidateReservationToken(req.body, function (isValidReservation) {
-        if (!isValidReservation) {
-          OrderError(res, "Invalid reservation token.");
-        } else {
-          order.subtotal = order.subtotal - 1549;
-          order.discount = 1549;
-          order.tax = CalculateTaxes(order);
-          order.total = order.subtotal + order.tax;
-
-          stripe.charges.create({
-            amount: Math.round(order.total * 100),
-            currency: "usd",
-            description: "Slate Robotics, Inc. - TR1",
-            metadata: metadata,
-            source: order.card.token,
-          }, function (err, charge) {
-            if (err) {
-              OrderError(res, "An error occurred while processing your payment:" + err.message);
-            } else {
-                var orderDoc = new Order(order);
-                orderDoc.save(function (err, savedDoc) {
-                  if (err) {
-                    OrderError(res, "An error occurred while saving the order details to our system:" + err);
-                  } else {
-                    OrderSuccess(res, savedDoc);
-                  }
-                });
-            }
-          });
-        }
-      });
-    } else {
-      stripe.charges.create({
-        amount: Math.round(order.total * 100),
-        currency: "usd",
-        description: "Slate Robotics, Inc. - TR1",
-        metadata: metadata,
-        source: order.card.token,
-      }, function (err, charge) {
-        if (err) {
-          OrderError(res, "An error occurred while processing your payment:" + err.message);
-        } else {
-            var orderDoc = new Order(order);
-            orderDoc.save(function (err, savedDoc) {
-              if (err) {
-                OrderError(res, "An error occurred while saving the order details to our system:" + err);
-              } else {
-                OrderSuccess(res, savedDoc);
-              }
-            });
-        }
-      });
+  var metadata = {};
+  for (var i = 0; i < order.products.length; i++) {
+    for (var j = 0; j < order.products[i].config.length; j++) {
+      var key = order.products[i].productId + i + order.products[i].config[j].name.substr(0,3);
+      var value = String(order.products[i].config[j].value);
+      metadata[key] = value;
     }
   }
 
+  if (order.reservationToken) {
+    ValidateReservationToken(req.body, function (isValidReservation) {
+      if (!isValidReservation) {
+        OrderError(res, "Invalid reservation token.");
+      } else {
+        order.subtotal = order.subtotal - 1549;
+        order.discount = 1549;
+        order.tax = CalculateTaxes(order);
+        order.total = order.subtotal + order.tax;
+
+        stripe.charges.create({
+          amount: Math.round(order.total * 100),
+          currency: "usd",
+          description: "Slate Robotics, Inc. - TR1",
+          metadata: metadata,
+          source: order.card.token,
+        }, function (err, charge) {
+          if (err) {
+            OrderError(res, "An error occurred while processing your payment:" + err.message);
+          } else {
+              var orderDoc = new Order(order);
+              orderDoc.save(function (err, savedDoc) {
+                if (err) {
+                  OrderError(res, "An error occurred while saving the order details to our system:" + err);
+                } else {
+                  OrderSuccess(res, savedDoc);
+                }
+              });
+          }
+        });
+      }
+    });
+  } else {
+    stripe.charges.create({
+      amount: Math.round(order.total * 100),
+      currency: "usd",
+      description: "Slate Robotics, Inc. - TR1",
+      metadata: metadata,
+      source: order.card.token,
+    }, function (err, charge) {
+      if (err) {
+        OrderError(res, "An error occurred while processing your payment:" + err.message);
+      } else {
+          var orderDoc = new Order(order);
+          orderDoc.save(function (err, savedDoc) {
+            if (err) {
+              OrderError(res, "An error occurred while saving the order details to our system:" + err);
+            } else {
+              OrderSuccess(res, savedDoc);
+            }
+          });
+      }
+    });
+  }
 });
 
 module.exports = router;
