@@ -11,8 +11,6 @@ var ProductTr1 = Products[0];
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, "../../config.json"), "utf8"));
 var stripe = require('stripe')(config.stripe.secret);
 
-var errorOccurred = false;
-
 Number.prototype.formatMoney = function(c, d, t){
 var n = this,
     c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -120,7 +118,6 @@ function OrderSuccess (res, order) {
 
 function OrderError (res, message) {
   res.json({success: false, message: message});
-  errorOccurred = true
 }
 
 function VerifyData (req, res) {

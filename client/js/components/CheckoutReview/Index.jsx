@@ -138,21 +138,25 @@ var Component = React.createClass({
     this.setState(state);
 
     var order = this.state.order;
+
     if (order.billing.isSame) {
       order.billing = order.shipping;
-      order.card = {
-        token: order.payment.token.id,
-        last4: order.payment.token.card.last4,
-      }
-      order.user = {
-        email: order.shipping.email,
-        phone: order.shipping.phone,
-      }
-      order.products = [{
-        productId: "tr1",
-        config: order.config,
-      }];
     }
+
+    order.card = {
+      token: order.payment.token.id,
+      last4: order.payment.token.card.last4,
+    }
+
+    order.user = {
+      email: order.shipping.email,
+      phone: order.shipping.phone,
+    }
+
+    order.products = [{
+      productId: "tr1",
+      config: order.config,
+    }];
 
     $.ajax({
       type: "POST",
