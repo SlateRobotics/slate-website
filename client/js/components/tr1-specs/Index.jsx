@@ -3,7 +3,6 @@ var BrowserHistory = require('react-router').browserHistory;
 var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
-var BottomMenu = require('./BottomMenu.jsx');
 var MenuButton = require('./MenuButton.jsx');
 
 var Component = React.createClass({
@@ -26,7 +25,7 @@ var Component = React.createClass({
                 <span style={{marginLeft:"25px"}} />
                 <span style={{color:"#666",cursor:"default",lineHeight:"34px"}}>Specs</span>
                 <span style={{marginLeft:"25px"}} />
-                <MenuButton to="/tr1/reserve" label="Reserve Yours" />
+                <MenuButton to="/shop/tr1" label="Buy" />
               </div>
             </div>
           </div>
@@ -38,109 +37,39 @@ var Component = React.createClass({
               <div style={{float:"right",fontSize:"14px"}}>
                 <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
                 <span style={{marginLeft:"25px"}} />
-                <MenuButton to="/tr1/reserve" label="Reserve Yours" />
+                <MenuButton to="/shop/tr1" label="Buy" />
               </div>
             </div>
           </div>
         </div>
-        <div className="row" style={{marginTop:"34px"}}>
-          <div className="col-md-10 col-xs-12 col-centered">
-            <h1 style={{padding:"50px 0px"}}>Technical Specifications</h1>
+        <div className="row" style={{marginTop:"34px",textAlign:"left"}}>
+          <div className="col-lg-10 col-xs-12 col-centered">
+            <h1 style={{paddingTop:"50px"}}>Slate TR1 Technical Specifications</h1>
           </div>
         </div>
         <div className="row" style={{textAlign:"left"}}>
-          <div className="col-md-10 col-xs-12 col-centered">
+          <div className="col-lg-10 col-xs-12 col-centered">
             <div className="row" style={{paddingTop:"15px",paddingBottom:"30px",borderBottom:"1px solid #90B2BB"}}>
-              <div className="col-xs-12" style={{paddingBottom:"15px"}}>
-                <h3>Arms</h3>
+              <div className="col-xs-12" style={{marginBottom:"15px",borderBottom:"3px solid #ccc"}}>
+                <h3>Arm Specifications</h3>
               </div>
-              <div className="col-md-6 col-xs-12">
-                <img style={{width:"100%"}} src="/img/slate-tr1-specs-1" />
+              <div className="col-xs-12">
+                <img style={{maxWidth:"100%"}} src="/img/slate-tr1-arm-spec" />
               </div>
-              <div className="col-md-6 col-xs-12">
-                <div className="row" style={{paddingBottom:"10px"}}>
-                  <div className="col-sm-4 col-xs-6">
-                    <b>15 lbs</b>
-                  </div>
-                  <div className="col-sm-8 col-xs-6">
-                    Assembly Weight
-                  </div>
-                </div>
-                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
-                  <div className="col-sm-4 col-xs-6">
-                    <b>7</b>
-                  </div>
-                  <div className="col-sm-8 col-xs-6">
-                    Degrees of Freedom
-                  </div>
-                </div>
-                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
-                  <div className="col-sm-4 col-xs-6">
-                    <b>4 in</b>
-                  </div>
-                  <div className="col-sm-8 col-xs-6">
-                    Maximum Gripper Width
-                  </div>
-                </div>
-                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
-                  <div className="col-sm-4 col-xs-6">
-                    <b>3.3 ft</b>
-                  </div>
-                  <div className="col-sm-8 col-xs-6">
-                    Maximum Operating Distance Range
-                  </div>
-                </div>
-                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
-                  <div className="col-sm-4 col-xs-6">
-                    <b>10 lbs</b>
-                  </div>
-                  <div className="col-sm-8 col-xs-6">
-                    Maximum Payload
-                  </div>
+              <div className="col-xs-12" style={{backgroundColor:"#f1f1f1",padding:"15px",border:"1px solid #ccc",borderRadius:"15px"}}>
+                <div className="row" style={{padding:"15px"}}>
+                  <h4>Additional Statistics:</h4>
+                  <div>Degrees of Freedom: 7</div>
+                  <div>Assembly Weight: 8 kilograms</div>
+                  <div>Maximum Payload: 1.8 kilograms</div>
+                  <div>Maximum Operating Distance Range: 1 meter</div>
+                  <div>Maximum Gripper Width: 100 millimeters</div>
+                  <div>Angle Feedback Resolution: 1024 pulses per revolution</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="row" style={{textAlign:"left"}}>
-          <div className="col-md-10 col-xs-12 col-centered">
-            <div className="row" style={{paddingTop:"15px",paddingBottom:"30px"}}>
-              <div className="col-xs-12" style={{paddingBottom:"15px"}}>
-                <h3>Body</h3>
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <img style={{width:"100%"}} src="/img/slate-tr1-specs-2" />
-              </div>
-              <div className="col-md-6 col-xs-12">
-                <div className="row" style={{paddingBottom:"10px"}}>
-                  <div className="col-sm-4 col-xs-6">
-                    <b>35 lbs</b>
-                  </div>
-                  <div className="col-sm-8 col-xs-6">
-                    Assembly Weight
-                  </div>
-                </div>
-                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
-                  <div className="col-sm-4 col-xs-6">
-                    <b>5.1 ft</b>
-                  </div>
-                  <div className="col-sm-8 col-xs-6">
-                    Maximum Height
-                  </div>
-                </div>
-                <div className="row" style={{paddingTop:"10px",paddingBottom:"10px"}}>
-                  <div className="col-sm-4 col-xs-6">
-                    <b>4.1 ft</b>
-                  </div>
-                  <div className="col-sm-8 col-xs-6">
-                    Minimum Height
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <BottomMenu />
       </div>
     );
   },

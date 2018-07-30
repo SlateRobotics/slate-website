@@ -30,8 +30,6 @@ var ForgotPassword = require('./components/ForgotPassword/Index.jsx');
 var ForgotPasswordVerify = require('./components/ForgotPassword/Verify.jsx');
 var tr1 = require('./components/tr1/Index.jsx');
 var tr1Specs = require('./components/tr1-specs/Index.jsx');
-var tr1Reserve = require('./components/tr1-reserve/Index.jsx');
-var tr1ReserveSuccess = require('./components/tr1-reserve-success/Index.jsx');
 var tr1Shop = require('./components/shop-tr1/Index.jsx');
 var Printing = require('./components/Printing/Index.jsx');
 var Support = require('./components/Support/Index.jsx');
@@ -100,6 +98,7 @@ var Routes = (
 		<Route path="/shop/tr1" component={tr1Shop} />
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />
 		<Route path="/tr1" component={tr1} />
+		<Route path="/tr1/specs" component={tr1Specs} />
 		<Route path="/support" component={Support} />
 		<Route path="/checkout" component={Checkout} />
 		<Route path="/checkout/review" component={CheckoutReview} />

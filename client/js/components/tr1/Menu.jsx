@@ -15,6 +15,8 @@ var Component = React.createClass({
             <div style={{float:"right",fontSize:"14px"}}>
               <span style={{color:"#666",cursor:"default",lineHeight:"34px"}}>Overview</span>
               <span style={{marginLeft:"25px"}} />
+              <Link to="/tr1/specs" style={{lineHeight:"34px",color:"#222"}}>Specs</Link>
+              <span style={{marginLeft:"25px"}} />
               <MenuButton to="/shop/tr1" label="Buy" />
             </div>
           </div>
@@ -25,6 +27,8 @@ var Component = React.createClass({
               <span style={{lineHeight:"34px"}}>TR1</span>
             </div>
             <div style={{float:"right",fontSize:"14px"}}>
+              <Link to="/tr1/specs" style={{lineHeight:"34px",color:"#222"}}>Specs</Link>
+              <span style={{marginLeft:"25px"}} />
               <MenuButton to="/shop/tr1" label="Buy" />
             </div>
           </div>

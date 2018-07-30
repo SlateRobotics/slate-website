@@ -80,6 +80,8 @@ var Component = React.createClass({
               </div>
               <div style={{float:"right",fontSize:"14px"}}>
                 <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
+                <span style={{marginLeft:"25px"}} />
+                <Link to="/tr1/specs" style={{lineHeight:"34px",color:"#222"}}>Specs</Link>
               </div>
             </div>
           </div>
@@ -90,6 +92,8 @@ var Component = React.createClass({
               </div>
               <div style={{float:"right",fontSize:"14px"}}>
                 <Link to="/tr1" style={{lineHeight:"34px",color:"#222"}}>Overview</Link>
+                <span style={{marginLeft:"25px"}} />
+                <Link to="/tr1/specs" style={{lineHeight:"34px",color:"#222"}}>Specs</Link>
               </div>
             </div>
           </div>

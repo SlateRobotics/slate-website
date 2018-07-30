@@ -40,6 +40,7 @@ var Footer = React.createClass({
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>TR1</h3>
                 <Link to="/tr1" style={Style.link}>Overview</Link>
+                <Link to="/tr1/specs" style={Style.link}>Specs</Link>
                 <Link to="/shop/tr1" style={Style.link}>Buy</Link>
                 <div style={{marginTop:"10px"}} />
                 <h3>Other</h3>
