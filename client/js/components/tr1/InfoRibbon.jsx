@@ -27,7 +27,7 @@ var Component = React.createClass({
                       Add LIDAR sensors to the base for improved mapping and navigation.
                       Run your algorithms on a seperate, dedicated machine for
                       improved performance. Integrate RFID sensors into the grippers
-                      for item scanning and validation. There is are no limits
+                      for item scanning and validation. There are no limits
                       in your way!
                     </p>
                   </div>
