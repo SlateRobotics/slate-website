@@ -62,6 +62,39 @@ var Component = React.createClass({
       state.reservationToken = reservationToken;
       this.setState(state);
     }
+
+    var quoteToken = gup('quoteToken', location.href);
+    if (quoteToken) {
+      var state = this.state;
+      state.quoteToken = quoteToken;
+      this.setState(state);
+    }
+
+    if (this.state.quoteToken == "4i1bvujfym1xe3tyb9td83s1n1dp4n7y") {
+      var state = this.state;
+      state.order.config[4] = {name: "shipping", value: 3}
+      for (var i = 0; i < state.product.config.length; i++) {
+        var config = state.product.config[i];
+        if (config.name == "shipping") {
+          state.product.config[i].items = [config.items[3]]
+        }
+      }
+      this.setState(state);
+    } else {
+      var state = this.state;
+      for (var i = 0; i < state.product.config.length; i++) {
+        var config = state.product.config[i];
+        var items = [];
+        for (var j = 0; j < config.items.length; j++) {
+          var item = config.items[j];
+          if (item.enabled == true) {
+            items.push(item);
+          }
+        }
+        state.product.config[i].items = items;
+      }
+      this.setState(state);
+    }
   },
 
   componentDidMount: function () {
