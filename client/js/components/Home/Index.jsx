@@ -122,56 +122,66 @@ var Component = React.createClass({
             </div>
           </div>
         </div>
-        <div className="row" style={{padding:"100px 0px"}}>
-          <div className="container">
+        <div className="row" style={{padding:"50px 0px",backgroundColor:"#575371",color:"#fff"}}>
+          <div className="col-md-10 col-xs-12 col-centered">
             <div className="row">
-              <div className="hidden-lg hidden-md col-xs-12">
-                <img src="/img/slate-tr1-8" style={{maxWidth:"100%"}} />
+              <div className="col-md-6 col-xs-12" style={{textAlign:"left"}}>
+                <h2 style={{marginBottom:"25px"}}>
+                  Proudly serving the best in AI
+                </h2>
+                <p>
+                  We are proud to soon be delivering robots to the absolute brightest in
+                  AI and Machine Learning. Our community is top, world-class
+                  talent. If you are a force to be reckoned with in the AI/ML
+                  community, you are in the presence good company.
+                </p>
               </div>
               <div className="col-md-6 col-xs-12">
-                <h1 style={{paddingBottom:"25px"}}>
-                  Let's build the future of general purpose robots
-                </h1>
-                <div style={{textAlign:"justify"}}>
-                  <p>
-                    I used to dream of one day being able to sit down and program
-                    one of the super-advanced research robots like Willow Garage's PR2.
-                    My grades in high school and college weren't great, so I probably
-                    wasn't destined to work with one in UC Berkeley's Robotics
-                    and Intelligent Machines Lab. And with a price tag of $400,000,
-                    it's rather obvious how likely it is that I would just go out and
-                    buy one. This also made me realize that even if all
-                    of the hard problems of AI and perception were solved today,
-                    we still wouldn't get general purpose robot butlers, since
-                    the hardware cost problem hadn't been addressed.
-                  </p>
-                  <p>
-                    Naturally, I decided I would just try to build my own
-                    research robot that I could program and would be affordable
-                    enough for other people to program too. A year of hacking
-                    on hardware in my garage led to the development of the TR1,
-                    a human-sized platform with 7-DOF arms and a mobile,
-                    omnidirectional base with a base price of only $3,199.
-                  </p>
-                  <p>
-                    I hope affordable robots like the TR1 can do for personal
-                    robotics what the Altair 8800 and the Apple II did for
-                    personal computing. Perhaps, if we can build a community of
-                    hackers and engineers around building tools and applications
-                    for robots like the TR1, we can begin to build the future of
-                    general purpose robots.
-                  </p>
-                  <p style={{fontStyle:"italic"}}>
-                    <b>Zach Allen</b><br/>
-                    Founder & CEO
-                  </p>
+                <div className="row">
+                  <div className="col-sm-6 col-xs-12">
+                    <a href="https://intel.com/">
+                      <img style={{height:"150px"}} src="/img/icon-intel-white"/>
+                    </a>
+                  </div>
+                  <div className="col-sm-6 col-xs-12">
+                    <a href="https://facebook.com/">
+                      <img style={{height:"150px"}} src="/img/icon-facebook-white"/>
+                    </a>
+                  </div>
                 </div>
-                <ButtonPrimary
-                  label={"Learn more >"}
-                  onClick={this.handleClick_LearnMore} />
               </div>
-              <div className="col-md-6 hidden-sm hidden-xs">
-                <img src="/img/slate-tr1-8" style={{maxWidth:"100%"}} />
+            </div>
+          </div>
+        </div>
+        <div className="row" style={{paddingTop:"50px"}}>
+          <div className="col-md-10 col-xs-12 col-centered">
+            <div className="row">
+              <div className="col-md-6 col-xs-12">
+                <img src="/img/slate-tr1-5" style={{width:"100%"}}/>
+              </div>
+              <div className="col-md-6 col-xs-12" style={{textAlign:"left"}}>
+                <h2 style={{marginBottom:"25px"}}>
+                  You've been living in a dream world, Neo.
+                </h2>
+                <p>
+                  Slate Robotics is a team of hackers and vagabonds fixated on
+                  a single, unifying purpose:
+                </p>
+                <h3 style={{margin:"20px 0px"}}>
+                  Robots for hackers that don't suck.
+                </h3>
+                <p>
+                  Gone are the days of $3,000 Turtle Bots and $400,000 PR2s. We
+                  match the key features of high-end research robots at
+                  a price formerly reserved for over-priced triflers
+                  like Turtle Bot, Nao, and most recently, Misty II.
+                </p>
+                <p>
+                  My fellow roboticists, eat your heart out.
+                </p>
+                <ButtonPrimary
+                  label="Check it out >"
+                  onClick={this.handleClick_LearnMore} />
               </div>
             </div>
           </div>
@@ -186,6 +196,10 @@ var Component = React.createClass({
 
   handleClick_Buy: function () {
     BrowserHistory.push("/shop/tr1");
+  },
+
+  handleClick_AboutUs: function () {
+    BrowserHistory.push("/about");
   },
 
   handleClick_ToggleText: function () {

@@ -31,13 +31,58 @@ var Component = React.createClass({
           <div className="col-lg-8 col-md-10 col-xs-12 col-centered">
             <div className="row">
               <div className="col-md-10 col-xs-12 col-centered">
-                <img src="/img/slate-tr1-8" style={{minHeight:"100%",maxWidth:"100%"}} />
+                <img src="/img/slate-tr1-5" style={{minHeight:"100%",maxWidth:"100%"}} />
               </div>
-              <div className="col-md-10 col-xs-12 col-centered" style={{marginBottom:"15px"}}>
-                <h2>
-                  We believe that great, affordable platforms for hackers is a crucial
-                  first step to building a future of general purpose robots.
-                </h2>
+            </div>
+          </div>
+        </div>
+        <div className="row" style={{padding:"50px 0px",borderTop:"3px solid #ccc",}}>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8 col-xs-12 col-centered">
+                <h1>Our Story</h1>
+              </div>
+              <div className="hidden-lg hidden-md col-xs-12">
+                <img src="/img/slate-tr1-8" style={{maxWidth:"100%"}} />
+              </div>
+              <div className="col-md-6 col-xs-12">
+                <div style={{textAlign:"justify"}}>
+                  <p>
+                    I used to dream of one day being able to sit down and program
+                    one of the super-advanced research robots like Willow Garage's PR2.
+                    My grades in high school and college weren't great, so I probably
+                    wasn't destined to work with one in UC Berkeley's Robotics
+                    and Intelligent Machines Lab. And with a price tag of $400,000,
+                    it's rather obvious how likely it is that I would just go out and
+                    buy one. This also made me realize that even if all
+                    of the hard problems of AI and perception were solved today,
+                    we still wouldn't get general purpose robot butlers, since
+                    the hardware cost problem hadn't been addressed.
+                  </p>
+                  <p>
+                    Naturally, I decided I would just try to build my own
+                    research robot that I could program and would be affordable
+                    enough for other people to program too. A year of hacking
+                    on hardware in my garage led to the development of the TR1,
+                    a human-sized platform with 7-DOF arms and a mobile,
+                    omnidirectional base with a base price of only $3,199.
+                  </p>
+                  <p>
+                    I hope affordable robots like the TR1 can do for personal
+                    robotics what the Altair 8800 and the Apple II did for
+                    personal computing. Perhaps, if we can build a community of
+                    hackers and engineers around building tools and applications
+                    for robots like the TR1, we can begin to build the future of
+                    general purpose robots.
+                  </p>
+                  <p style={{fontStyle:"italic"}}>
+                    <b>Zach Allen</b><br/>
+                    Founder & CEO
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-6 hidden-sm hidden-xs">
+                <img src="/img/slate-tr1-8" style={{maxWidth:"100%"}} />
               </div>
             </div>
           </div>
