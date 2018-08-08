@@ -133,7 +133,7 @@ var Component = React.createClass({
                   We are proud to soon be delivering robots to the absolute brightest in
                   AI and Machine Learning. Our community is top, world-class
                   talent. If you are a force to be reckoned with in the AI/ML
-                  community, you are in the presence good company.
+                  community, you are in the presence of good company.
                 </p>
               </div>
               <div className="col-md-6 col-xs-12">
@@ -173,8 +173,7 @@ var Component = React.createClass({
                 <p>
                   Gone are the days of $3,000 Turtle Bots and $400,000 PR2s. We
                   match the key features of high-end research robots at
-                  a price formerly reserved for over-priced triflers
-                  like Turtle Bot, Nao, and most recently, Misty II.
+                  a price formerly reserved for over-priced triflers.
                 </p>
                 <p>
                   My fellow roboticists, eat your heart out.
