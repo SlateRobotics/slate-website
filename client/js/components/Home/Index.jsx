@@ -137,16 +137,20 @@ var Component = React.createClass({
                 </p>
               </div>
               <div className="col-md-6 col-xs-12">
-                <div className="row">
-                  <div className="col-sm-6 col-xs-12">
-                    <a href="https://intel.com/">
-                      <img style={{height:"150px"}} src="/img/icon-intel-white"/>
-                    </a>
+                <div className="row hidden-sm hidden-xs">
+                <div className="col-xs-6">
+                    <img style={{height:"150px"}} src="/img/icon-intel-white"/>
                   </div>
-                  <div className="col-sm-6 col-xs-12">
-                    <a href="https://facebook.com/">
-                      <img style={{height:"150px"}} src="/img/icon-facebook-white"/>
-                    </a>
+                  <div className="col-xs-6">
+                    <img style={{height:"150px"}} src="/img/icon-facebook-white"/>
+                  </div>
+                </div>
+                <div className="row hidden-lg hidden-md">
+                <div className="col-xs-6">
+                    <img style={{height:"100px"}} src="/img/icon-intel-white"/>
+                  </div>
+                  <div className="col-xs-6">
+                    <img style={{height:"100px"}} src="/img/icon-facebook-white"/>
                   </div>
                 </div>
               </div>
@@ -154,12 +158,19 @@ var Component = React.createClass({
           </div>
         </div>
         <div className="row" style={{paddingTop:"50px"}}>
-          <div className="col-md-10 col-xs-12 col-centered">
+          <div className="col-xs-12 col-centered">
             <div className="row">
-              <div className="col-md-6 col-xs-12">
-                <img src="/img/slate-tr1-5" style={{width:"100%"}}/>
+              <div className="col-md-6 hidden-sm hidden-xs" style={{
+                  backgroundImage: "url('/img/slate-tr1-5')",
+                  height:"445px",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "contain",
+                  backgroundPositionY: "bottom",
+                }}/>
+              <div className="hidden-lg hidden-md col-xs-12">
+                <img src="/img/slate-tr1-5" style={{width:"100%"}} />
               </div>
-              <div className="col-md-6 col-xs-12" style={{textAlign:"left"}}>
+              <div className="col-md-5 col-xs-12" style={{textAlign:"left"}}>
                 <h2 style={{marginBottom:"25px"}}>
                   You've been living in a dream world, Neo.
                 </h2>
@@ -167,21 +178,22 @@ var Component = React.createClass({
                   Slate Robotics is a team of hackers and vagabonds fixated on
                   a single, unifying purpose:
                 </p>
-                <h3 style={{margin:"20px 0px"}}>
+                <h4 style={{margin:"20px 0px"}}>
                   Robots for hackers that don't suck.
-                </h3>
+                </h4>
                 <p>
                   Gone are the days of $3,000 Turtle Bots and $400,000 PR2s. We
                   match the key features of high-end research robots at
-                  a price formerly reserved for over-priced triflers.
+                  a price formerly reserved for triflers.
                 </p>
                 <p>
-                  My fellow roboticists, eat your heart out.
+                  It is time for a new era of robotic platforms.
                 </p>
                 <ButtonPrimary
                   label="Check it out >"
                   onClick={this.handleClick_LearnMore} />
               </div>
+              <div className="hidden-lg hidden-md col-xs-12" style={{paddingBottom:"10px"}} />
             </div>
           </div>
         </div>
