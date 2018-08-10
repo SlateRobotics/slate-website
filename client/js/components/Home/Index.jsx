@@ -127,7 +127,7 @@ var Component = React.createClass({
             <div className="row">
               <div className="col-md-6 col-xs-12" style={{textAlign:"left"}}>
                 <h2 style={{marginBottom:"25px"}}>
-                  Proudly serving the best in AI
+                  Working with the best in AI
                 </h2>
                 <p>
                   We are proud to soon be delivering robots to the absolute brightest in
