@@ -18,4 +18,18 @@ module.exports = {
   img: {
     maxWidth: "100%",
   },
+  newsIconDefault: {
+    height:"150px",
+    maxWidth:"100%",
+    borderRadius:"75px",
+    cursor: "pointer",
+    background:"rgba(255,255,255,1.0)"
+  },
+  newsIconSelected: {
+    height:"150px",
+    maxWidth:"100%",
+    borderRadius:"75px",
+    cursor: "pointer",
+    background:"rgba(255,255,255,0.5)"
+  }
 }

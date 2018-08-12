@@ -7,6 +7,42 @@ var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var OrderStore = require('../../stores/order');
 
+var NewsLogo = React.createClass({
+  getInitialState: function () {
+    return {
+      isSelected: false,
+    }
+  },
+
+  render: function () {
+    var style = Style.newsIconDefault;
+    if (this.state.isSelected) style = Style.newsIconSelected;
+
+    return (
+      <div
+        className="col-lg-2 col-sm-3 col-xs-6"
+        style={{cursor:"pointer"}}
+        onClick={this.handleClick}
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}>
+        <img style={style} src={this.props.img}/>
+      </div>
+    )
+  },
+
+  handleClick: function () {
+    window.open(this.props.url, '_blank');
+  },
+
+  handleMouseOver: function() {
+      this.setState({isSelected: true});
+  },
+
+  handleMouseOut: function() {
+      this.setState({isSelected: false});
+  }
+});
+
 var Component = React.createClass({
   componentDidMount: function () {
     document.title = "Slate Robotics";
@@ -77,10 +113,10 @@ var Component = React.createClass({
               <h1 style={{fontSize:"48px"}} className="hidden-lg hidden-md hidden-xs">
                 Slate TR1
               </h1>
-              <h3 className="hidden-sm hidden-xs">
+              <h3 className="hidden-sm hidden-xs" style={{backgroundColor:"rgba(34,34,34,0.7)"}}>
                 The preeminent machine learning playground
               </h3>
-              <h4 className="hidden-lg hidden-md hidden-xs">
+              <h4 className="hidden-lg hidden-md hidden-xs" style={{backgroundColor:"rgba(34,34,34,0.7)"}}>
                 The preeminent machine learning playground
               </h4>
               <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}}>
@@ -138,7 +174,7 @@ var Component = React.createClass({
               </div>
               <div className="col-md-6 col-xs-12">
                 <div className="row hidden-sm hidden-xs">
-                <div className="col-xs-6">
+                  <div className="col-xs-6">
                     <img style={{height:"150px"}} src="/img/icon-intel-white"/>
                   </div>
                   <div className="col-xs-6">
@@ -146,12 +182,57 @@ var Component = React.createClass({
                   </div>
                 </div>
                 <div className="row hidden-lg hidden-md">
-                <div className="col-xs-6">
+                  <div className="col-xs-6">
                     <img style={{height:"100px"}} src="/img/icon-intel-white"/>
                   </div>
                   <div className="col-xs-6">
                     <img style={{height:"100px"}} src="/img/icon-facebook-white"/>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row" style={{padding:"50px 0px",backgroundColor:"#90b3bc"}}>
+          <div className="col-md-10 col-xs-12 col-centered">
+            <div className="row">
+              <div className="col-xs-12 col-centered" style={{textAlign:"center"}}>
+                <h1 style={{marginBottom:"25px"}}>
+                  As featured in...
+                </h1>
+              </div>
+              <div className="col-xs-12 col-centered">
+                <div className="row hidden-xs">
+                  <div className="hidden-md hidden-sm col-xs-2"/>
+                  <NewsLogo
+                    url="https://www.news-leader.com/story/news/business/2018/07/19/springfield-company-hopes-life-sized-robots-start-robot-revolution/764322002/"
+                    img="/img/icon-news-leader"/>
+                  <NewsLogo
+                    url="https://bouncy.news/21612"
+                    img="/img/icon-bouncy"/>
+                  <NewsLogo
+                    url="https://spectrum.ieee.org/automaton/robotics/robotics-hardware/video-friday-professor-ishiguro-new-robot-child-and-more"
+                    img="/img/icon-ieee-spectrum"/>
+                  <NewsLogo
+                    url="https://blog.hackster.io/humanoid-slate-tr1-robot-is-a-machine-learning-playground-6edd00ca3299"
+                    img="/img/icon-hackster-io"/>
+                  <div className="hidden-md hidden-sm col-xs-2"/>
+                </div>
+                <div className="row hidden-lg hidden-md hidden-sm">
+                  <NewsLogo
+                    url="https://www.news-leader.com/story/news/business/2018/07/19/springfield-company-hopes-life-sized-robots-start-robot-revolution/764322002/"
+                    img="/img/icon-news-leader"/>
+                  <NewsLogo
+                    url="https://bouncy.news/21612"
+                    img="/img/icon-bouncy"/>
+                </div>
+                <div className="row hidden-lg hidden-md hidden-sm" style={{marginTop:"15px"}}>
+                  <NewsLogo
+                    url="https://spectrum.ieee.org/automaton/robotics/robotics-hardware/video-friday-professor-ishiguro-new-robot-child-and-more"
+                    img="/img/icon-ieee-spectrum"/>
+                  <NewsLogo
+                    url="https://blog.hackster.io/humanoid-slate-tr1-robot-is-a-machine-learning-playground-6edd00ca3299"
+                    img="/img/icon-hackster-io"/>
                 </div>
               </div>
             </div>
