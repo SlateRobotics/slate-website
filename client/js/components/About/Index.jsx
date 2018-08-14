@@ -140,23 +140,25 @@ var Component = React.createClass({
       }
 
       function getSocial() {
-        var marginOne;
-        if (member.linkedin && (member.twitter || member.facebook)) {
-          marginOne = (<span style={{marginRight:"25px"}} />);
-        }
+        var result = [];
+        if (!member.socials) member.socials = [];
+        for (var i = 0; i < member.socials.length; i++) {
+          var social = member.socials[i];
+          var type = new URL(social).hostname.replace("www.","").replace(".com","");
+          result.push(
+            <a href={social}>
+              <img src={"/img/icon-" + type} height="35" width="35" />
+            </a>
+          );
 
-        var marginTwo;
-        if ((member.linkedin || member.twitter) && member.facebook) {
-          marginTwo = (<span style={{marginRight:"25px"}} />);
+          if (i < member.socials.length - 1) {
+            result.push(<span style={{marginRight:"25px"}} />);
+          }
         }
 
         return (
           <div style={{margin:"25px 0px"}}>
-            {getSocialLink("linkedin")}
-            {marginOne}
-            {getSocialLink("twitter")}
-            {marginTwo}
-            {getSocialLink("facebook")}
+            {result.map(function (r,i){return r;})}
           </div>
         )
       }
@@ -179,16 +181,22 @@ var Component = React.createClass({
     for (var i = 0; i < members.length; i = i + 2) {
       var member1 = members[i];
       var member2 = members[i + 1];
+
+      var style = {};
+      if (i > 0) {
+        style = {marginTop:"15px"};
+      }
+
       if (member1 && member2) {
         membersComponent.push((
-          <div key={i} className="row">
+          <div key={i} className="row" style={style}>
             {member1}
             {member2}
           </div>
         ));
       } else if (member1 && !member2) {
         membersComponent.push((
-          <div key={i} className="row">
+          <div key={i} className="row" style={style}>
             {member1}
           </div>
         ));
