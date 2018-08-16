@@ -73,8 +73,13 @@ module.exports = [{
       price: 300,
       enabled: true,
     }, {
+      id: 4,
+      label: "Canada LTL Shipping",
+      price: 825,
+      enabled: true,
+    }, {
       id: 2,
-      label: "International Shipping",
+      label: "Other International Shipping",
       price: 1000,
       enabled: true,
     }, {

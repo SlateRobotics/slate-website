@@ -72,11 +72,11 @@ var Component = React.createClass({
 
     if (this.state.quoteToken == "4i1bvujfym1xe3tyb9td83s1n1dp4n7y") {
       var state = this.state;
-      state.order.config[4] = {name: "shipping", value: 3}
+      state.order.config[4] = {name: "shipping", value: 4}
       for (var i = 0; i < state.product.config.length; i++) {
         var config = state.product.config[i];
         if (config.name == "shipping") {
-          state.product.config[i].items = [config.items[3]]
+          state.product.config[i].items = [config.items[2]]
         }
       }
       this.setState(state);
@@ -377,9 +377,7 @@ var Component = React.createClass({
       return (
         <div>
           <div style={{color:"red"}}>
-            Please contact us at (417) 849-3612 or via the chat in the bottom-right
-            corner for international shipping. We must obtain a quote from our
-            service provider. We apologize for any inconvenience!
+            Please contact us at +1-417-849-3612 or via the chat in the bottom-right corner for other international shipping. We must obtain a quote from our service provider. We apologize for any inconvenience!
           </div>
         </div>
       )
