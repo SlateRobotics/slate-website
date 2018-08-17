@@ -12,7 +12,10 @@ var Component = React.createClass({
 
   render: function() {
     var job = this.props.job;
-    if (!this.state.selected) {
+    var selected = this.state.selected;
+    if (this.props.selected) selected = this.props.selected;
+
+    if (!selected) {
       return (
         <div className="col-xs-12" style={{textAlign:"left",marginBottom:"10px"}}>
           <h3 style={{marginTop:"0px"}}>{job.name}</h3>
@@ -41,7 +44,7 @@ var Component = React.createClass({
         {this.getDuties()}
         {this.getSkills()}
         <p>
-          {"To apply, send a resume to "}
+          {"To apply, send a resume and cover letter to "}
           <a href="mailto:zach@slaterobots.com">zach@slaterobots.com</a>
           {"."}
         </p>

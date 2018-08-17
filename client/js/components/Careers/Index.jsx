@@ -17,15 +17,15 @@ var Component = React.createClass({
   componentDidMount: function () {
     document.title = "Careers - Slate Robotics";
     window.scrollTo(0,0);
+  },
 
+  render: function() {
     if (this.props.params && this.props.params.id) {
       var state = this.state;
       state.search = this.props.params.id.replace(/-/g, " ");
       this.setState(state);
     }
-  },
 
-  render: function() {
     return (
       <div className="container-fluid" style={Style.container}>
         <div className="row">
@@ -84,6 +84,32 @@ var Component = React.createClass({
     activeJobs = activeJobs.filter(function (job) {
       return job.name.toLowerCase().includes(this.state.search.toLowerCase());
     }.bind(this));
+
+    if (activeJobs.length == 1) {
+      function seeAll() {
+        window.scrollTo(0,0);
+        var state = this.state;
+        state.search = "";
+        this.setState();
+        BrowserHistory.push("/careers");
+      }
+
+      var seeAllComponent;
+      if (activeJobs.length < this.state.jobs.length) {
+        seeAllComponent = (
+          <ButtonPrimary
+            label="See All Positions"
+            onClick={seeAll.bind(this)} />
+        )
+      }
+
+      return (
+        <div>
+          <Job job={activeJobs[0]} selected />
+          {seeAllComponent}
+        </div>
+      )
+    }
 
     return activeJobs.map(function (job, i) {
       var line;
