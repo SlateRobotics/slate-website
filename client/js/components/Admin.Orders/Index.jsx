@@ -19,7 +19,12 @@ var Component = React.createClass({
   },
 
   componentWillMount: function () {
-    UserStore.addChangeListener(this.handleChange_UserStore);
+    UserStore.getMe(function (me) {
+      var state = this.state;
+      state.user = me;
+      this.setState(state);
+    }.bind(this));
+
 		OrderStore.get({
       refresh: true,
       success: function (data) {
@@ -34,10 +39,6 @@ var Component = React.createClass({
     document.title = "Admin - Orders - Slate Robotics";
     window.scrollTo(0,0);
     this.handleChange_OrderStore();
-  },
-
-  componentWillUnmount: function () {
-		UserStore.removeChangeListener(this.handleChange_UserStore);
   },
 
   render: function() {

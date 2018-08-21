@@ -66,4 +66,27 @@ restFilter = new RestFilter({
 	}
 });
 
+restFilter.router.get('/me', function (req, res) {
+  var userEmail = req.session.email || req.query.email;
+  var userAccessToken = req.cookies["accessToken"] || req.query.accessToken;
+
+  if (!userEmail || !userAccessToken) {
+    return res.json({});
+  }
+
+  User.getUserAndValidate(userEmail, userAccessToken, function (user) {
+    var _user = {};
+    _user._id = user._id;
+    _user.firstName = user.firstName;
+    _user.lastName = user.lastName;
+    _user.userName = user.userName;
+    _user.isAdmin = user.isAdmin;
+    _user.modifiedBy = user.modifiedBy;
+    _user.modifiedOn = user.modifiedOn;
+    _user.createdBy = user.createdBy;
+    _user.createdOn = user.createdOn;
+    res.json(_user);
+  });
+});
+
 module.exports = restFilter.router;

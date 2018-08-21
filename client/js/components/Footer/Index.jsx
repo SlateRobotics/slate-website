@@ -12,11 +12,12 @@ var Footer = React.createClass({
 	},
   componentDidMount: function () {
     $("#label-email-b950c68a-3845-476b-8a68-0b660e83f906").css("color","white");
-  	UserStore.addChangeListener(this.handleChange_UserStore);
-  },
 
-  componentWillUnmount: function () {
-		UserStore.removeChangeListener(this.handleChange_UserStore);
+    UserStore.getMe(function (me) {
+      var state = this.state;
+      state.user = me;
+      this.setState(state);
+    }.bind(this));
   },
 
   render: function() {
@@ -132,15 +133,6 @@ var Footer = React.createClass({
       )
     }
   },
-
-	handleChange_UserStore: function () {
-		var users = UserStore.find();
-		if (users.length > 0) {
-			var state = this.state;
-			state.user = users[0];
-			this.setState(state);
-		}
-	},
 
   handleLoad_iFrame: function () {
     var emailFrameContents = $("#footer-email-form-iframe").contents();

@@ -38,19 +38,11 @@ var Component = React.createClass({
     document.title = "Q&A - Slate Robotics";
     window.scrollTo(0,0);
 
-    UserStore.get({
-      refresh: true,
-      error: function (error) {
-        console.log(error);
-      }.bind(this),
-      success: function (docs) {
-        var user = '';
-        if (docs && docs.length > 0) user = docs[0];
-        var state = this.state;
-        state.user = user;
-        this.setState(state);
-      }.bind(this),
-    });
+    UserStore.getMe(function (me) {
+      var state = this.state;
+      state.user = me;
+      this.setState(state);
+    }.bind(this));
 
     QuestionStore.get({
       id: this.props.params.id,

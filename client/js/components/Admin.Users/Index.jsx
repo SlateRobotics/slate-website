@@ -17,7 +17,12 @@ var Component = React.createClass({
   },
 
   componentWillMount: function () {
-    UserStore.addChangeListener(this.handleChange_UserStore);
+    UserStore.getMe(function (me) {
+      var state = this.state;
+      state.user = me;
+      this.setState(state);
+    }.bind(this));
+
 		UserStore.get({
       refresh: true,
       success: function (data) {
@@ -31,10 +36,6 @@ var Component = React.createClass({
   componentDidMount: function () {
     document.title = "Admin - Users - Slate Robotics";
     window.scrollTo(0,0);
-  },
-
-  componentWillUnmount: function () {
-		UserStore.removeChangeListener(this.handleChange_UserStore);
   },
 
   render: function() {

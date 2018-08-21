@@ -21,18 +21,11 @@ var Component = React.createClass({
   },
 
   componentWillMount: function () {
-    UserStore.get({
-      error: function (error) {
-        console.log(error);
-      }.bind(this),
-      success: function (docs) {
-        var user = '';
-        if (docs && docs.length > 0) user = docs[0];
-        var state = this.state;
-        state.user = user;
-        this.setState(state);
-      }.bind(this),
-    });
+    UserStore.getMe(function (me) {
+      var state = this.state;
+      state.user = me;
+      this.setState(state);
+    }.bind(this));
 
     BlogStore.get({
       refresh: true,

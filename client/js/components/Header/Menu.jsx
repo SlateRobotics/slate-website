@@ -7,20 +7,20 @@ var UserStore = require('../../stores').user;
 var Menu = React.createClass({
 	getInitialState: function () {
 		return {
-			user: ''
+			user: {}
 		}
 	},
 
 	componentWillMount: function () {
-		UserStore.addChangeListener(this.handleChange_UserStore);
-	},
-
-	componentWillUnmount: function () {
-		UserStore.removeChangeListener(this.handleChange_UserStore);
+		UserStore.getMe(function (me) {
+			var state = this.state;
+			state.user = me;
+			this.setState(state);
+		}.bind(this));
 	},
 
 	render: function () {
-		if (this.state.user) {
+		if (this.state.user._id) {
 			return (
 	  		<ul id="menu" style={Style.menu}>
 					<MenuListItem label={"TR1"} to={"/tr1"} farRight={false} />
@@ -41,15 +41,6 @@ var Menu = React.createClass({
 				{/*<MenuListItem label={"Support"} to={"/support"} farRight={true} />*/}
   		</ul>
 		);
-	},
-
-	handleChange_UserStore: function () {
-		var users = UserStore.find();
-		if (users.length > 0) {
-			var state = this.state;
-			state.user = users[0];
-			this.setState(state);
-		}
 	},
 });
 
