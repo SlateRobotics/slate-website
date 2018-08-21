@@ -23,7 +23,7 @@ module.exports = [{
     "https://twitter.com/dylanahall12"
   ],
 },{
-  isActive: true,
+  isActive: false,
   name: "Samantha Rader",
   title: "Software Engineer",
   type: "team",

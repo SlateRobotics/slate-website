@@ -3,33 +3,33 @@ var RestFilter = require('../../components/RestFilter');
 var UserSecurity = require('../security');
 
 var readFilterSchema = {
-    "title": "User Schema",
-    "type": "object",
-    "properties": {
-		"_id": {"type":"string"},
-		"email": {"type":"string"},
-		"firstName": {"type":"string"},
-		"lastName": {"type":"string"},
-		"isAdmin": {"type":"boolean"},
-		"createdBy": {"type":"string"},
-		"createdOn": {"type":"date"},
-		"modifiedBy": {"type":"string"},
-		"modifiedOn": {"type":"date"},
-	},
+  "title": "User Schema",
+  "type": "object",
+  "properties": {
+    "_id": {"type":"string"},
+    "email": {"type":"string"},
+    "firstName": {"type":"string"},
+    "lastName": {"type":"string"},
+    "userName": {"type":"string"},
+    "isAdmin": {"type":"boolean"},
+    "createdBy": {"type":"string"},
+    "createdOn": {"type":"date"},
+    "modifiedBy": {"type":"string"},
+    "modifiedOn": {"type":"date"},
+  },
 }
 
 var writeFilterSchema = {
-    "title": "User Schema",
-    "type": "object",
-    "properties": {
-		"firstName": {"type":"string"},
-		"lastName": {"type":"string"},
-		"isAdmin": {"type":"string"},
-		"email": {"type":"string"},
-	},
+  "title": "User Schema",
+  "type": "object",
+  "properties": {
+    "firstName": {"type":"string"},
+    "lastName": {"type":"string"},
+    "email": {"type":"string"},
+  },
 }
 
-module.exports = new RestFilter({
+restFilter = new RestFilter({
 	path : "/user",
 	model: User,
 	readFilterSchema: readFilterSchema,
@@ -43,7 +43,7 @@ module.exports = new RestFilter({
   			return callback(result);
   		});
     } else {
-    	User.findOne({"_id": id}).where({$or: [{"_id": user.id}]})
+    	User.findOne({"_id": id})//.where({$or: [{"_id": user.id}]})
         .exec(function (err, result) { return callback(result); });
     }
   },
@@ -65,3 +65,5 @@ module.exports = new RestFilter({
 		destroy: function (user, token) { return false; },
 	}
 });
+
+module.exports = restFilter.router;

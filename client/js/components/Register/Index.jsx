@@ -13,6 +13,7 @@ var Component = React.createClass({
       errors: [],
       isLoading: false,
       success: false,
+      userName: '',
       email: '',
       emailConfirm: '',
       password: '',
@@ -51,6 +52,14 @@ var Component = React.createClass({
     return (
       <div>
         <div className="row">
+          <div className="col-xs-12">
+            <Form.Label label="User Name" isRequired />
+            <Form.Input
+              attribute="userName"
+              value={this.state.userName}
+              onChange={this.handleChange_Field} />
+            {this.getError("userName")}
+          </div>
           <div className="col-xs-12">
             <Form.Label label="Email" isRequired />
             <Form.Input
@@ -176,6 +185,9 @@ var Component = React.createClass({
 
   validateData: function (callback) {
     var errors = [];
+    if (!this.state.userName) {
+      errors.push({name:"userName", message: "User Name is a required field"});
+    }
     if (!this.state.email) {
       errors.push({name:"email", message: "Email is a required field"});
     }
@@ -208,6 +220,7 @@ var Component = React.createClass({
       }
 
       ApiService.requestUserSetup({
+        userName: this.state.userName,
         email: this.state.email,
         password: this.state.password
       }, function(data) {

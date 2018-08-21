@@ -121,7 +121,7 @@ function findMany (user, callback) {
   }
 }
 
-module.exports = new RestFilter({
+restFilter = new RestFilter({
 	path : "/reservation",
 	model: Reservation,
 	readFilterSchema: readFilterSchema,
@@ -176,3 +176,5 @@ module.exports = new RestFilter({
 		destroy: function (user, token) { return false; },
   },
 });
+
+module.exports = restFilter.router;

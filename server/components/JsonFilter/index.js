@@ -2,6 +2,8 @@ module.exports = function(schema, doc) {
 
   var results;
 
+  if (!doc) return;
+
   if (schema.type == 'object') {
 
     results = {};

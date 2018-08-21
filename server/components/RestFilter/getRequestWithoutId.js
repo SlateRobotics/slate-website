@@ -1,6 +1,10 @@
 var filter = require('../JsonFilter');
 var getUser = require('./getUser');
 
+function addSummaryData () {
+
+}
+
 module.exports = function (config) {
 
 	this.route = function (req, res) {
@@ -14,6 +18,7 @@ module.exports = function (config) {
 				if (!docs) docs = [];
 				var result = [];
 				for (var i = 0; i < docs.length; i++) {
+					if (config.beforeFilterMany) config.beforeFilterMany(docs[i]);
 					result.push(filter(config.readFilterSchema, docs[i]));
 				}
 				return res.json(result);
@@ -27,6 +32,7 @@ module.exports = function (config) {
 				if (!docs) docs = [];
 				var result = [];
 				for (var i = 0; i < docs.length; i++) {
+					if (config.beforeFilterMany) config.beforeFilterMany(docs[i]);
 					result.push(filter(config.readFilterSchema, docs[i]));
 				}
 				return res.json(result);
@@ -45,6 +51,7 @@ module.exports = function (config) {
 					if (!docs) docs = [];
 					var result = [];
 					for (var i = 0; i < docs.length; i++) {
+						if (config.beforeFilterMany) config.beforeFilterMany(docs[i]);
 						result.push(filter(config.readFilterSchema, docs[i]));
 					}
 					return res.json(result);

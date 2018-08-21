@@ -15,8 +15,9 @@ module.exports = function (app) {
 	app.post('/sign-up', function(req, res) {
 		var email = req.headers['email'];
 		var password = req.headers['password'];
+		var userName = req.headers['username'];
 
-		if (!email || !password) {
+		if (!email || !password || !userName) {
 			return res.json({
 				success: false,
 				message: "One or more required fields not supplied.",
@@ -37,6 +38,20 @@ module.exports = function (app) {
 			});
     }
 
+    if (userName.length < 3) {
+			return res.json({
+				success: false,
+				message: "User Name length must be at least 3 characters.",
+			});
+    }
+
+    if (userName.length > 15) {
+			return res.json({
+				success: false,
+				message: "User Name length cannot be over 15 characters.",
+			});
+    }
+
 		User.findOne({
 			"email": email
 		}, function(err, user) {
@@ -50,6 +65,7 @@ module.exports = function (app) {
 				});
 			} else if (!user) {
 				user = new User();
+        user.userName = userName;
 				user.email = email;
 				user.password = user.generateHash(password);
 
@@ -63,6 +79,7 @@ module.exports = function (app) {
 						userSetupRequest = new UserSetupRequest();
 					}
 
+          userSetupRequest.userName = user.userName;
 					userSetupRequest.email = user.email;
 					userSetupRequest.password = user.password;
 					userSetupRequest.attempts = 0;
@@ -96,6 +113,7 @@ module.exports = function (app) {
 
 			if (userSetupRequest.isValidToken(token)) {
 				var user = new User();
+				user.userName = userSetupRequest.userName;
 				user.email = userSetupRequest.email.toLowerCase();
 				user.password = userSetupRequest.password;
         user.createdOn = new Date();

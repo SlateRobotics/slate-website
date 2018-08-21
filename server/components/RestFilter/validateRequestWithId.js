@@ -31,6 +31,15 @@ module.exports = function (config) {
 		if (!userEmail || !userAccessToken) return res.status(401).json(config.invalidRequest);
 		getUser(userEmail, userAccessToken, function (user) {
 			if (config.security.update(user, userAccessToken)) {
+				if (req.body) {
+					if (config.trackWithUserName) {
+						req.body.modifiedBy = user.userName;
+					} else {
+						req.body.modifiedBy = user._id;
+					}
+					var currentDate = new Date(new Date().toUTCString());
+					req.body.modifiedOn = currentDate;
+				}
 				return next();
 			} else {
 				return res.status(401).json(config.invalidRequest);

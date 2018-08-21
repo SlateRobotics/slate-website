@@ -86,6 +86,14 @@ var Component = React.createClass({
                 {this.getError("lastName")}
               </div>
               <div className="col-xs-12">
+                <Form.Label label="User Name" isRequired />
+                <Form.Input
+                  attribute="userName"
+                  value={this.state.user.userName}
+                  onChange={this.handleChange_Field} />
+                {this.getError("userName")}
+              </div>
+              <div className="col-xs-12">
                 <Form.Label label="Is Admin" isRequired />
                 <Form.Select
                   attribute="isAdmin"

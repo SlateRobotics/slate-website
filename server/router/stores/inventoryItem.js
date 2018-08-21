@@ -59,7 +59,7 @@ var writeFilterSchema = {
   }
 }
 
-module.exports = new RestFilter({
+restFilter = new RestFilter({
   path: "/inventoryItem",
   model: InventoryItem,
   readFilterSchema: readFilterSchema,
@@ -99,3 +99,5 @@ module.exports = new RestFilter({
 		destroy: function (user, token) { return (user && user.isAdmin); },
   },
 });
+
+module.exports = restFilter.router;

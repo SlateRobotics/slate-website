@@ -16,6 +16,7 @@ function addMinutes(date, minutes) {
 var userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
+  userName: String,
   email: {
     type: String,
     unique: true,

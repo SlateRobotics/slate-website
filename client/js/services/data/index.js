@@ -4,6 +4,7 @@ var Slave = require('./slave');
 var Service = {
   order: new Slave("order"),
   blog: new Slave("blog"),
+  question: new Slave("question"),
   user: new Slave("user"),
   reservation: new Slave("reservation"),
   inventoryItem: new Slave("inventoryItem"),
@@ -29,11 +30,13 @@ Service.signIn = function(options, callback) {
 }
 
 Service.requestUserSetup = function(options, callback) {
+  console.log(options);
   $.ajax({
     url: '/sign-up',
     type: 'POST',
     contentType: "application/json",
     beforeSend: function(xhr) {
+      xhr.setRequestHeader('userName', options.userName);
       xhr.setRequestHeader('email', options.email);
       xhr.setRequestHeader('firstname', options.firstName);
       xhr.setRequestHeader('lastname', options.lastName);

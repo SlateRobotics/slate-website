@@ -37,6 +37,9 @@ var Checkout = require('./components/Checkout/Index.jsx');
 var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
 var CheckoutSuccess = require('./components/CheckoutSuccess/Index.jsx');
 var Reservation = require('./components/Reservation/Index.jsx');
+var qa = require('./components/Q&A/Index.jsx');
+var question = require('./components/Q&A/Question.jsx');
+var newQuestion = require('./components/Q&A/New.jsx');
 var Order = require('./components/Order/Index.jsx');
 var NotFound = require('./components/NotFound/Index.jsx');
 var About = require('./components/About/Index.jsx');
@@ -97,6 +100,9 @@ var Routes = (
 		<Route path="/reservation/:id" component={Reservation} />
 		<Route path="/shop/tr1" component={tr1Shop} />
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />
+		<Route path="/questions/new" component={newQuestion} />
+		<Route path="/questions/:id/*" component={question} />
+		<Route path="/questions" component={qa} />
 		<Route path="/tr1" component={tr1} />
 		<Route path="/tr1/specs" component={tr1Specs} />
 		<Route path="/support" component={Support} />

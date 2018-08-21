@@ -41,6 +41,15 @@ module.exports = function(ApiService) {
   this.getOne = function(opts) {
     if (!opts) opts = {};
     var params = this.getParams(opts);
+
+    if (!opts.refresh) {
+      for (var i = 0; i < this._docs.length; i++) {
+        if (this._docs[i]._id == opts.id) {
+          return opts.success(this._docs[i]);
+        }
+      }
+    }
+
     ApiService.getOne(opts.id, params, function (doc) {
       this.replaceOne(doc);
       opts.success(doc);

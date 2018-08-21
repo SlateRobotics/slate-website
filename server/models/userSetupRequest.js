@@ -13,6 +13,7 @@ function createToken(callback) {
 
 var userSetupRequestSchema = new mongoose.Schema({
   email: String,
+  userName: String,
   password: String,
   firstName: String,
   lastName: String,

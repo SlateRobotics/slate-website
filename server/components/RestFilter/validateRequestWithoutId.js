@@ -25,6 +25,18 @@ module.exports = function (config) {
 		if (!userEmail || !userAccessToken) return res.status(401).json(config.invalidRequest);
 		getUser(userEmail, userAccessToken, function (user) {
 			if (config.security.create(user, userAccessToken)) {
+				if (req.body) {
+					if (config.trackWithUserName) {
+						req.body.createdBy = user.userName;
+						req.body.modifiedBy = user.userName;
+					} else {
+						req.body.createdBy = user._id;
+						req.body.modifiedBy = user._id;
+					}
+					var currentDate = new Date(new Date().toUTCString());
+					req.body.createdOn = currentDate
+					req.body.modifiedOn = currentDate;
+				}
 				return next();
 			} else {
 				return res.status(401).json(config.invalidRequest);
