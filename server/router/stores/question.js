@@ -402,6 +402,8 @@ restFilter.router.post('/question/:id/vote', function (req, res) {
           res.json(question);
         });
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 });
@@ -434,6 +436,8 @@ restFilter.router.post('/question/:id', function (req, res) {
           return res.json({success:false,message:"User not authorized to make these changes."});
         }
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 });
@@ -459,6 +463,8 @@ restFilter.router.post('/question/:id/delete', function (req, res) {
           return res.json({success:false,message:"User not authorized to make these changes."});
         }
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 });
@@ -488,6 +494,8 @@ restFilter.router.post('/question/:id/comment', function (req, res) {
           res.json(question);
         });
       });
+    } else {
+      res.json({success:false,message:"You must be signed-in in order to post a comment"});
     }
   });
 });
@@ -532,6 +540,8 @@ restFilter.router.post('/question/:id/comment/:cid/delete', function (req, res) 
           res.json({success:false,message:"Not authorized"})
         }
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 
@@ -570,6 +580,8 @@ restFilter.router.post('/question/:id/answer', function (req, res) {
           res.json(question);
         });
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 });
@@ -619,6 +631,8 @@ restFilter.router.post('/question/:id/answer/:aid', function (req, res) {
           res.json(question);
         });
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 });
@@ -665,6 +679,8 @@ restFilter.router.post('/question/:id/answer/:aid/delete', function (req, res) {
           res.json(question);
         });
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 });
@@ -730,6 +746,8 @@ restFilter.router.post('/question/:id/answer/:aid/vote', function (req, res) {
           res.json(question);
         });
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 });
@@ -778,6 +796,8 @@ restFilter.router.post('/question/:id/answer/:aid/comment', function (req, res) 
           res.json(question);
         });
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 });
@@ -818,6 +838,8 @@ restFilter.router.post('/question/:id/answer/:aid/comment/:cid/delete', function
           res.json({success:false,message:"Not authorized"})
         }
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 
@@ -864,6 +886,8 @@ restFilter.router.post('/question/:id/answer/:aid/accept', function (req, res) {
           res.json(question);
         });
       });
+    } else {
+      res.json({success:false,message:"Not authorized"})
     }
   });
 });

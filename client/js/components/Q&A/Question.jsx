@@ -20,6 +20,7 @@ var Component = React.createClass({
       openComment: false,
       flagDelete: false,
       comment: '',
+      error: '',
       answer: '',
       user: {},
       vote: {
@@ -61,6 +62,7 @@ var Component = React.createClass({
         state.question = doc;
         state.question.votesCountOriginal = state.question.votesCount;
         state.tagsString = "";
+        state.error = '';
         for (var i = 0; i < state.question.tags.length; i++) {
           state.tagsString += state.question.tags[i] + ",";
         }
@@ -192,6 +194,7 @@ var Component = React.createClass({
                   {this.getComments()}
                   {this.getCommentControls()}
                 </div>
+                {this.getError()}
               </div>
               <div className="col-md-3 col-xs-12">
                 {this.getTimeStampShort()}
@@ -224,6 +227,18 @@ var Component = React.createClass({
     )
   },
 
+  getError: function (){
+    if (this.state.error) {
+      return (
+        <div className="row" style={{color:"red",marginTop:"15px",marginBottom:"15px"}}>
+          <div className="col-xs-12">
+            {this.state.error}
+          </div>
+        </div>
+      )
+    }
+  },
+
   handleClick_DeleteFoReal: function () {
     var state = this.state;
     state.flagDelete = false;
@@ -253,6 +268,7 @@ var Component = React.createClass({
       state.question.tags = doc.tags;
       state.isLoading = false;
       state.edit = false;
+      state.error = '';
       this.setState(state);
       this.sortAnswers();
     }.bind(this));
@@ -341,6 +357,28 @@ var Component = React.createClass({
       )
     }
 
+    if (!this.state.user._id) {
+        return (
+          <div className="row">
+            <div className="col-md-1 col-xs-12">
+            </div>
+            <div className="col-md-8 col-xs-12">
+              <h3 style={{marginTop:"0px"}}>Your Answer</h3>
+              <p>You can use markdown to format your post.</p>
+              <Form.TextArea
+                attribute="answer"
+                value={this.state.answer}
+                onChange={this.handleChange_Field}
+                disabled />
+              <div style={{marginTop:"10px"}} />
+              <p style={{color:"red"}}>Please sign in to answer</p>
+            </div>
+            <div className="col-md-3 col-xs-12">
+            </div>
+          </div>
+        )
+    }
+
     return (
       <div className="row">
         <div className="col-md-1 col-xs-12">
@@ -356,6 +394,7 @@ var Component = React.createClass({
           <ButtonPrimary
             label="Post your answer"
             onClick={this.handleClick_PostAnswer} />
+          {this.getError()}
         </div>
         <div className="col-md-3 col-xs-12">
         </div>
@@ -641,6 +680,13 @@ var Component = React.createClass({
 
   handleClick_UpVoteComment: function () {
     var state = this.state;
+
+    if (!state.user._id) {
+      state.error = "You must be signed in to vote";
+      this.setState(state);
+      return;
+    }
+
     var vote = {
       value: 1,
       userId: this.state.user._id,
@@ -666,6 +712,13 @@ var Component = React.createClass({
 
   handleClick_DownVoteComment: function () {
     var state = this.state;
+
+    if (!state.user._id) {
+      state.error = "You must be signed in to vote";
+      this.setState(state);
+      return;
+    }
+
     var vote = {
       value: -1,
       userId: this.state.user._id,
@@ -692,8 +745,15 @@ var Component = React.createClass({
 
   handleClick_PostAnswer: function () {
     var state = this.state;
-    state.postingAnswer = true;
-    this.setState(state);
+
+    if (!state.user._id) {
+      state.error = "You must be signed in to post an answer";
+      this.setState(state);
+      return;
+    } else {
+      state.postingAnswer = true;
+      this.setState(state);
+    }
 
     var answer = {
       body: state.answer,
@@ -702,6 +762,7 @@ var Component = React.createClass({
     QuestionStore.addQuestionAnswer(this.state.question._id, answer, function (question) {
       var state = this.state;
       state.answer = "";
+      state.error = '';
       state.question.answers = question.answers;
       state.postingAnswer = false;
       this.setState(state);
@@ -728,8 +789,15 @@ var Component = React.createClass({
 
   handleClick_PostComment: function () {
     var state = this.state;
-    state.postingComment = true;
-    this.setState(state);
+
+    if (!state.user._id) {
+      state.error = "You must be signed in to post a comment";
+      this.setState(state);
+      return;
+    } else {
+      state.postingComment = true;
+      this.setState(state);
+    }
 
     var comment = {
       text: state.comment,
@@ -741,6 +809,7 @@ var Component = React.createClass({
       state.question.comments = question.comments;
       state.postingComment = false;
       state.openComment = false;
+      state.error = '';
       this.setState(state);
       this.sortAnswers();
 

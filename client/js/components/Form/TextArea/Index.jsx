@@ -20,7 +20,8 @@ var FormTextArea = React.createClass({
         onMouseLeave={this.handleMouseLeave}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
-        onChange={this.handleChange}/>
+        onChange={this.handleChange}
+        disabled={this.props.disabled}/>
     )
   },
 

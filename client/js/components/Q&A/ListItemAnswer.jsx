@@ -21,6 +21,7 @@ var Component = React.createClass({
       isLoading: false,
       body: '',
       comment: '',
+      error: '',
       vote: {
         value: 0,
         userId: '',
@@ -123,10 +124,23 @@ var Component = React.createClass({
             {this.getComments()}
             {this.getCommentControls()}
           </div>
+          {this.getError()}
           <div className="row" style={{marginBottom:"30px",paddingBottom:"30px",borderBottom:"1px solid #222"}} />
         </div>
       </div>
     )
+  },
+
+  getError: function (){
+    if (this.state.error) {
+      return (
+        <div className="row" style={{color:"red",marginTop:"15px",marginBottom:"15px"}}>
+          <div className="col-xs-12">
+            {this.state.error}
+          </div>
+        </div>
+      )
+    }
   },
 
   handleClick_DeleteFoReal: function () {
@@ -138,6 +152,7 @@ var Component = React.createClass({
       var state = this.state;
       state.isLoading = false;
       state.flagDelete = false;
+      state.error = '';
       this.setState(state);
       this.props.onDelete();
     }.bind(this));
@@ -392,6 +407,7 @@ var Component = React.createClass({
     QuestionStore.editQuestionAnswer(this.props.question._id, this.props.answer._id, answer, function (question) {
       var state = this.state;
       state.isLoading = false;
+      state.error = '';
       this.setState(state);
       this.props.updateAnswer(answer);
     }.bind(this));
@@ -405,6 +421,7 @@ var Component = React.createClass({
     QuestionStore.acceptQuestionAnswer(this.props.question._id, this.props.answer._id, function (question) {
       var state = this.state;
       state.isLoading = false;
+      state.error = '';
       this.setState(state);
 
       var answer = this.props.answer;
@@ -494,8 +511,15 @@ var Component = React.createClass({
 
   handleClick_PostComment: function () {
     var state = this.state;
-    state.postingComment = true;
-    this.setState(state);
+
+    if (!this.props.user._id) {
+      state.error = "You must be signed in to comment";
+      this.setState(state);
+      return;
+    } else {
+      state.postingComment = true;
+      this.setState(state);
+    }
 
     var comment = {
       text: state.comment,
@@ -503,6 +527,7 @@ var Component = React.createClass({
 
     QuestionStore.addQuestionAnswerComment(this.props.question._id, this.props.answer._id, comment, function (question) {
       var state = this.state;
+      state.error = '';
       state.comment = "";
       for (var i = 0; i < question.answers.length; i++) {
         if (this.props.answer._id == question.answers[i]._id) {
@@ -518,6 +543,13 @@ var Component = React.createClass({
 
   handleClick_UpVoteComment: function () {
     var state = this.state;
+
+    if (!this.props.user._id) {
+      state.error = 'You must signed in to vote';
+      this.setState(state);
+      return;
+    }
+
     var vote = {
       value: 1,
       userId: this.props.user._id,
@@ -542,6 +574,13 @@ var Component = React.createClass({
 
   handleClick_DownVoteComment: function () {
     var state = this.state;
+
+    if (!this.props.user._id) {
+      state.error = 'You must signed in to vote';
+      this.setState(state);
+      return;
+    }
+
     var vote = {
       value: -1,
       userId: this.props.user._id,
