@@ -51,7 +51,14 @@ module.exports = function (config) {
 		methods['user'] = function (lock) {
 			if (req.cookies["accessToken"]) userAccessToken = req.cookies["accessToken"];
 			var userAccessToken = userAccessToken || req.headers['accesstoken'] || req.cookies["accessToken"];
-			if (!userEmail || !userAccessToken) return res.json({});
+			if (!userEmail || !userAccessToken) {
+				if (!config.security.read({})) {
+					return res.json({});
+				} else {
+					// move on to next method
+					return;
+				}
+			}
 
 			lock();
 			getUser(userEmail, userAccessToken, function (user) {
@@ -70,10 +77,7 @@ module.exports = function (config) {
 		}
 
 		var isLocked = false;
-		function lock () {
-			isLocked = true;
-		}
-
+		function lock () { isLocked = true; }
 		for (var i = 0; i < methodOrder.length; i++) {
 			if (!isLocked) {
 				methods[methodOrder[i]](lock);

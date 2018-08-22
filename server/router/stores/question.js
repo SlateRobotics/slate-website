@@ -258,6 +258,7 @@ var restFilter = new RestFilter({
   methodOrderOne: ['user','public','token'],
   trackWithUserName: true,
   beforeFilterOne: function (question, user) {
+    if (!question) return;
     if (!user) user = {};
 		var votesCount = 0;
 		if (question.votes) {
@@ -308,6 +309,7 @@ var restFilter = new RestFilter({
     question.votes = undefined;
   },
   beforeFilterMany: function (question) {
+    if (!question) return;
 		var votesCount = 0;
 		if (question.votes) {
 			for (var j = 0; j < question.votes.length; j++) {
