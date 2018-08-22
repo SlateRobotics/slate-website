@@ -6,7 +6,7 @@ module.exports = {
     padding: "0 6px 0 8px",
     border: "1px solid #ccc",
     cursor: "pointer",
-    backgroundColor: "#fbfbfb",
+    backgroundColor: "#ffffff",
   },
   inputFocused: {
     width: "100%",

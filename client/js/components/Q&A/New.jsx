@@ -60,7 +60,7 @@ var Component = React.createClass({
             <div className="col-md-10 col-xs-12 col-centered" style={{textAlign:"left"}}>
               <div className="row" style={{marginBottom:"20px"}}>
                 <div className="col-xs-12 col-centered">
-                  <h3>You must be logged in in order to post a question</h3>
+                  <h3>You must be logged in to post a question</h3>
                   <Link to="/sign-in">Sign in here</Link>
                 </div>
               </div>
