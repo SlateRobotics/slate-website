@@ -64,32 +64,46 @@ module.exports = function (app) {
 					message: "There is already a user with that email address.",
 				});
 			} else if (!user) {
-				user = new User();
-        user.userName = userName;
-				user.email = email;
-				user.password = user.generateHash(password);
+        User.findOne({
+          "userName": userName
+        }, function(err, user) {
+    			if (err) {
+    				throw err;
+    			}
+    			if (user) {
+    				return res.json({
+    					success: false,
+    					message: "That user name is already taken.",
+    				});
+    			} else if (!user) {
+    				user = new User();
+            user.userName = userName;
+    				user.email = email;
+    				user.password = user.generateHash(password);
 
-				UserSetupRequest.findOne({
-					"email": user.email
-				}, function (err, userSetupRequest) {
-					// if there is no user but there has already been a registration request,
-					// create a new token (because we don't store them plan-text) and
-					// send it to the user's email address
-					if (!userSetupRequest) {
-						userSetupRequest = new UserSetupRequest();
-					}
+    				UserSetupRequest.findOne({
+    					"email": user.email
+    				}, function (err, userSetupRequest) {
+    					// if there is no user but there has already been a registration request,
+    					// create a new token (because we don't store them plan-text) and
+    					// send it to the user's email address
+    					if (!userSetupRequest) {
+    						userSetupRequest = new UserSetupRequest();
+    					}
 
-          userSetupRequest.userName = user.userName;
-					userSetupRequest.email = user.email;
-					userSetupRequest.password = user.password;
-					userSetupRequest.attempts = 0;
-					userSetupRequest.isExpired = false;
-					userSetupRequest.generateTokenAndSendEmail(function () {
-						return res.json({
-							success: true,
-							message: 'User registration request successfully submitted. Check your email for instructions on how to complete your registration.',
-						});
-					});
+              userSetupRequest.userName = user.userName;
+    					userSetupRequest.email = user.email;
+    					userSetupRequest.password = user.password;
+    					userSetupRequest.attempts = 0;
+    					userSetupRequest.isExpired = false;
+    					userSetupRequest.generateTokenAndSendEmail(function () {
+    						return res.json({
+    							success: true,
+    							message: 'User registration request successfully submitted. Check your email for instructions on how to complete your registration.',
+    						});
+    					});
+    				});
+          }
 				});
 			}
 		});

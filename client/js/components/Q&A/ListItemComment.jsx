@@ -63,7 +63,7 @@ var Component = React.createClass({
       <div>
         {this.props.comment.text}
         {" - "}
-        <span style={{color:"#07C",cursor:"pointer"}}>
+        <span style={{color:"#07C"}}>
           {this.props.comment.createdBy}
         </span>
         {" "}

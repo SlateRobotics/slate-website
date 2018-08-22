@@ -456,7 +456,9 @@ var Component = React.createClass({
 
       return (
         <div style={{fontSize:"12px",marginTop:"7px"}}>
-          {label + " " + person + " " + timeLabel}
+          {label + " "}
+          <span style={{color:"#07C"}}>{person}</span>
+          {" " + timeLabel}
         </div>
       )
     }

@@ -385,7 +385,7 @@ restFilter.router.post('/question/:id/vote', function (req, res) {
           if (question.votes[i].userName == user.userName) {
             voteExists = true;
             question.votes[i].value = vote.value;
-            question.votes[i].userName = user._userName;
+            question.votes[i].userName = user.userName;
           }
         }
 
@@ -589,7 +589,7 @@ restFilter.router.post('/question/:id/answer/:aid', function (req, res) {
 
         for (var i = 0; i < question.answers.length; i++) {
           if (question.answers[i]._id == answerId) {
-            if (user.isAdmin || question.createdBy == user.userName) {
+            if (user.isAdmin || question.answers[i].createdBy == user.userName) {
               var currentDate = new Date(new Date().toUTCString());
               question.answers[i].body = answer.body;
               question.answers[i].modifiedBy = user.userName;
@@ -637,7 +637,7 @@ restFilter.router.post('/question/:id/answer/:aid/delete', function (req, res) {
 
         for (var i = 0; i < question.answers.length; i++) {
           if (question.answers[i]._id == answerId) {
-            if (user.isAdmin || question.createdBy == user.userName) {
+            if (user.isAdmin || question.answers[i].createdBy == user.userName) {
               question.answers.splice(i, 1);
               break;
             } else {
@@ -800,7 +800,7 @@ restFilter.router.post('/question/:id/answer/:aid/comment/:cid/delete', function
         for (var i = 0; i < question.answers.length; i++) {
           for (var j = 0; j < question.answers[i].comments.length; j++) {
             if (question.answers[i].comments[j]._id == commentId) {
-              if (user.isAdmin || user.userName == question.answers[i].comments[i].createdBy) {
+              if (user.isAdmin || user.userName == question.answers[i].comments[j].createdBy) {
                 authorized = true;
                 question.answers[i].comments.splice(j, 1);
               }
