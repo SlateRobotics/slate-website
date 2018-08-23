@@ -108,7 +108,12 @@ var Component = React.createClass({
                 <h1>Question & Answer</h1>
               </div>
               <div className="col-md-2 col-xs-12" style={{marginTop:"20px"}}>
-                <div style={{float:"right"}}>
+                <div className="hidden-sm hidden-xs" style={{float:"right"}}>
+                  <ButtonPrimary
+                    label="Ask Question"
+                    onClick={this.handleClickNewQuestion} />
+                </div>
+                <div className="hidden-lg hidden-md" style={{marginBottom:"20px"}}>
                   <ButtonPrimary
                     label="Ask Question"
                     onClick={this.handleClickNewQuestion} />

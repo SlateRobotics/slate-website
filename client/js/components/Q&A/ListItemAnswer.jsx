@@ -91,7 +91,7 @@ var Component = React.createClass({
 
     return (
       <div className="row">
-        <div className="col-md-1 col-xs-12" style={{textAlign:"center",fontSize:"35px",color:"#888"}}>
+        <div className="col-md-1 col-xs-2" style={{textAlign:"center",fontSize:"35px",color:"#888"}}>
           {this.getQuestionUpVote()}
           <div style={{fontSize:"28px"}}>
             {this.getVotesCount()}
@@ -99,8 +99,8 @@ var Component = React.createClass({
           {this.getQuestionDownVote()}
           {this.getCheckMark()}
         </div>
-        <div className="col-md-8 col-xs-12">
-        <div className="row">
+        <div className="col-md-8 col-xs-10">
+          <div className="row">
             <div className="col-xs-12">
               {this.getBody()}
             </div>
