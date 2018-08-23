@@ -10,7 +10,7 @@ var jobs = require('./jobs.js');
 var Component = React.createClass({
   getInitialState: function () {
     return {
-      job: {},
+      job: {duties:[],skills:[]},
       name: '',
       email: '',
       phone: '',
@@ -78,6 +78,14 @@ var Component = React.createClass({
           </div>
         </div>
         <div style={{marginTop:"25px"}} />
+        <div className="row" style={{paddingTop:"15px",paddingBottom:"15px",backgroundColor:"#f3f3f3"}}>
+          <div className="col-md-8 col-xs-12 col-centered" style={{textAlign:"left",marginBottom:"10px"}}>
+            <p>{this.state.job.description}</p>
+            {this.getDuties()}
+            {this.getSkills()}
+          </div>
+        </div>
+        <div style={{marginTop:"25px"}} />
         <div className="row">
           <div className="col-md-8 col-xs-12 col-centered" style={{textAlign:"left"}}>
             <div className="row">
@@ -134,6 +142,40 @@ var Component = React.createClass({
     );
   },
 
+  getDuties: function () {
+    var job = this.state.job;
+    var duties = job.duties.map(function (duty, i) {
+      return (
+        <li key={"duty-" + i}>{duty}</li>
+      );
+    });
+    if (job.duties.length > 0) {
+      return (
+        <div>
+          <div>Duties and Responsibilities:</div>
+          <ul>{duties}</ul>
+        </div>
+      )
+    }
+  },
+
+  getSkills: function () {
+    var job = this.state.job;
+    var skills = job.skills.map(function (skill, i) {
+      return (
+        <li key={"skill-" + i}>{skill}</li>
+      );
+    });
+    if (job.skills.length > 0) {
+      return (
+        <div>
+          <div>Skills and Qualifications:</div>
+          <ul>{skills}</ul>
+        </div>
+      )
+    }
+  },
+
   getError: function () {
     if (this.state.error) {
       return (
@@ -164,7 +206,7 @@ var Component = React.createClass({
         <div>
           <div className="row">
             <div className="col-xs-12" style={{marginBottom:"15px"}}>
-              <h2>Job-specific Questions</h2>
+              <h2>Job-Specific Questions</h2>
             </div>
           </div>
           <div className="row">
