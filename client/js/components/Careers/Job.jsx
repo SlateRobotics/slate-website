@@ -24,7 +24,8 @@ var Component = React.createClass({
             {" - "}
             {job.employmentType}
           </div>
-          <a onClick={this.handleSelect} style={{cursor:"pointer",marginTop:"5px"}}>View More</a>
+          <a onClick={this.handleClick_Apply} style={{cursor:"pointer",marginTop:"5px",marginRight:"10px"}}>Apply Now</a>
+          <a onClick={this.handleSelect} style={{cursor:"pointer",marginTop:"5px"}}>View Details</a>
           {this.props.line}
         </div>
       )
@@ -43,14 +44,14 @@ var Component = React.createClass({
         <p>{job.description}</p>
         {this.getDuties()}
         {this.getSkills()}
-        <p>
-          {"To apply, send a resume and cover letter to "}
-          <a href="mailto:zach@slaterobots.com">zach@slaterobots.com</a>
-          {"."}
-        </p>
+        <a onClick={this.handleClick_Apply} style={{cursor:"pointer",marginTop:"5px",marginRight:"10px"}}>Click here to apply</a>
         {this.props.line}
       </div>
     );
+  },
+
+  handleClick_Apply: function () {
+    BrowserHistory.push("/careers/" + this.props.job._id + "/apply");
   },
 
   handleSelect: function () {

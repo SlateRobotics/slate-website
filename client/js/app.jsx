@@ -44,6 +44,7 @@ var Order = require('./components/Order/Index.jsx');
 var NotFound = require('./components/NotFound/Index.jsx');
 var About = require('./components/About/Index.jsx');
 var Careers = require('./components/Careers/Index.jsx');
+var Apply = require('./components/Careers/Apply.jsx');
 var Blog = require('./components/Blog/Index.jsx');
 var BlogSingle = require('./components/Blog/Single.jsx');
 var BlogEdit = require('./components/Blog/Edit.jsx');
@@ -84,6 +85,7 @@ var Routes = (
 		<Route path="/admin/users/:id" component={AdminUsersEdit} />
 		<Route path="/careers" component={Careers} />
 		<Route path="/careers/:id" component={Careers} />
+		<Route path="/careers/:id/apply" component={Apply} />
 		<Route path="/sign-in" component={SignIn} />
 		<Route path="/sign-out" component={SignOut} />
 		<Route path="/register" component={Register} />
