@@ -14,13 +14,15 @@ job.name = "Software Engineer";
 job.type = "software-engineer";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
-job.description = "Slate Robotics is looking for a highly creative and extremely industrious Software Engineer to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can be high stress and requires long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
+job.description = "Slate Robotics is looking for a highly creative and extremely industrious Software Engineer to help pioneer the future of personal robots. You must have experience designing and building complex software systems, and you should be able to do so in about one-third the time that most competent people think possible. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can be high stress and requires long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
 job.duties.push("Support our open source community efforts via package creation, tool support, and issue tracking");
 job.duties.push("Provide customer support on software-related technical issues");
 job.duties.push("Develop new features and applications that we can demonstrate to potential customers");
 job.skills.push("Demonstrable competancy in C++, Python, and ROS");
+job.skills.push("Experience converting high-level product requirements into successful products through solid software architectures, engineering design and implementation");
 job.skills.push("Strong understanding of advanced geometric and algebraic concepts");
 job.skills.push("High-level understanding of machine learning concepts");
+job.skills.push("Excellent problem solving and critical thinking skills");
 job.questions.push({
   type: "textarea",
   name: "Describe how you might design the software for the low-level controllers in a dog robot.",
