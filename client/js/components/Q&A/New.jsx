@@ -101,7 +101,7 @@ var Component = React.createClass({
                   onClick={this.handleClick_Post} />
               </div>
               <div className="col-md-6 col-xs-12">
-                <h1>{this.state.title}</h1>
+                <h1>{this.state.question.title}</h1>
                 {this.getBody()}
                 <div className="row">
                   <div className="col-xs-12">

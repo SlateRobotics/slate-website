@@ -116,16 +116,6 @@ var Routes = (
   </Route>
 );
 
-UserStore.get({
-	success: function (data) {
-		if (!data || data.length == 0) {
-			console.log("Unauthenticated user.");
-		} else {
-			console.log("User logged in: " + data[0].email);
-		}
-	},
-});
-
 ReactDOM.render(
  	<Router
 		history={browserHistory}

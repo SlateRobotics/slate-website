@@ -44,7 +44,9 @@ var Component = React.createClass({
         <p>{job.description}</p>
         {this.getDuties()}
         {this.getSkills()}
-        <a onClick={this.handleClick_Apply} style={{cursor:"pointer",marginTop:"5px",marginRight:"10px"}}>Click here to apply</a>
+        <a onClick={this.handleClick_Apply} style={{cursor:"pointer",marginTop:"5px",marginRight:"10px"}}>
+          Click here to apply
+        </a>
         {this.props.line}
       </div>
     );

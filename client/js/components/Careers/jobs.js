@@ -1,7 +1,49 @@
 var jobs = [];
 var job = {};
 
-job = {duties:[],skills:[],questions:[]};
+function Job () {
+  this.duties = [];
+  this.skills = [];
+  this.questions = [];
+}
+
+job = new Job();
+job.isActive = true;
+job._id= "se";
+job.name = "Software Engineer";
+job.type = "software-engineer";
+job.location = "Springfield, MO";
+job.employmentType = "Full Time";
+job.description = "Slate Robotics is looking for a highly creative and extremely industrious Software Engineer to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can be high stress and requires long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
+job.duties.push("Support our open source community efforts via package creation, tool support, and issue tracking");
+job.duties.push("Provide customer support on software-related technical issues");
+job.duties.push("Develop new features and applications that we can demonstrate to potential customers");
+job.skills.push("Demonstrable competancy in C++, Python, and ROS");
+job.skills.push("Strong understanding of advanced geometric and algebraic concepts");
+job.skills.push("High-level understanding of machine learning concepts");
+job.questions.push({
+  type: "textarea",
+  name: "Describe how you might design the software for the low-level controllers in a dog robot.",
+});
+job.questions.push({
+  type: "textarea",
+  name: "In what areas (i.e. layers of the stack) are machine learning techniques, such as Deep Learning and Reinforcement Learning, most effectively applied in the software of a robot like the TR1?",
+});
+job.questions.push({
+  type: "textarea",
+  name: "Given a set of geometric points on a plane, list the series of calculations needed to place those points on a new plane definitions. (e.x. (1))",
+});
+job.questions.push({
+  type: "textarea",
+  name: "By default, the TR1 does not come equipped with a position feedback sensor in the torso extension joint, so you cannot directly read how high the torso is extended from the base from a sensor. Why might this be acceptable for most customers? Is there any other way to read the position of the torso?",
+});
+job.questions.push({
+  type: "textarea",
+  name: "In the domain of software, what could we, Slate Robotics, do to provide better support to our customers?",
+});
+jobs.push(job);
+
+job = new Job();
 job.isActive = true;
 job._id= "mt";
 job.name = "Robot Manufacturing Technician";
@@ -40,8 +82,8 @@ job.questions.push({
 });
 jobs.push(job);
 
-job = {duties:[],skills:[],questions:[]};
-job.isActive = true;
+job = new Job();
+job.isActive = false;
 job._id= "re";
 job.name = "Robotics Engineer";
 job.type = "engineer";
@@ -61,7 +103,7 @@ job.skills.push("High-level understanding of machine learning concepts");
 job.skills.push("A college degree in a relevant field is beneficial, but NOT required. We mostly want to see previous projects and evidence that you can build robots!");
 jobs.push(job);
 
-job = {duties:[],skills:[],questions:[]};
+job = new Job();
 job.isActive = true;
 job._id = "3po";
 job.name = "3D Printer Operator";
