@@ -1,5 +1,6 @@
 module.exports = {
   container: {
+    wordWrap:"break-word",
     color: "#3b3a36",
     minHeight: "calc(100% - 86px)",
     fontFamily: "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",

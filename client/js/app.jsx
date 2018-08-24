@@ -103,6 +103,7 @@ var Routes = (
 		<Route path="/shop/tr1" component={tr1Shop} />
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />
 		<Route path="/questions/new" component={newQuestion} />
+		<Route path="/questions/:id" component={question} />
 		<Route path="/questions/:id/*" component={question} />
 		<Route path="/questions" component={qa} />
 		<Route path="/tr1" component={tr1} />
