@@ -5,6 +5,10 @@
     height: 100%;
 }
 
+pre, code: {
+  max-height: 500px,
+}
+
 .col-centered {
     float: none;
     margin: 0 auto;
