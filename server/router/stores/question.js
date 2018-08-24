@@ -2,6 +2,7 @@ var Question = require('../../models/question');
 var User = require('../../models/user');
 var RestFilter = require('../../components/RestFilter');
 var UserSecurity = require('../security');
+var EmailSender = require('../../components/EmailSender');
 
 var readFilterSchema = {
   "title": "Question Schema",
@@ -492,6 +493,24 @@ restFilter.router.post('/question/:id/comment', function (req, res) {
         question.comments.push(comment);
         question.save(function (err) {
           res.json(question);
+
+          if (user.userName != question.createdBy) {
+            User.findOne({"userName": question.createdBy}).exec(function (err, questionUser) {
+              if (err) return;
+              if (!questionUser) return;
+              var html = EmailSender.Emails.NewComment
+                .replace(new RegExp("__QUESTION__", 'g'), question.title)
+                .replace(new RegExp("__QUESTION_ID__", 'g'), question._id);
+              var emailSender = new EmailSender({
+                from: "zach@slaterobots.com",
+                to: questionUser.email,
+                bcc: "zach@slaterobots.com",
+                subject: "There's a new comment on your question",
+                html: html,
+              });
+              emailSender.send();
+            });
+          }
         });
       });
     } else {
@@ -578,6 +597,24 @@ restFilter.router.post('/question/:id/answer', function (req, res) {
         question.answers.push(answer);
         question.save(function (err) {
           res.json(question);
+
+          if (user.userName != question.createdBy) {
+            User.findOne({"userName": question.createdBy}).exec(function (err, questionUser) {
+              if (err) return;
+              if (!questionUser) return;
+              var html = EmailSender.Emails.NewAnswer
+                .replace(new RegExp("__QUESTION__", 'g'), question.title)
+                .replace(new RegExp("__QUESTION_ID__", 'g'), question._id);
+              var emailSender = new EmailSender({
+                from: "zach@slaterobots.com",
+                to: questionUser.email,
+                bcc: "zach@slaterobots.com",
+                subject: "There's a new answer on your question",
+                html: html,
+              });
+              emailSender.send();
+            });
+          }
         });
       });
     } else {
