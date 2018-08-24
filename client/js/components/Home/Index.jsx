@@ -175,18 +175,18 @@ var Component = React.createClass({
               <div className="col-md-6 col-xs-12">
                 <div className="row hidden-sm hidden-xs">
                   <div className="col-xs-6">
-                    <img style={{height:"150px"}} src="/img/icon-intel-white"/>
+                    {/*<img style={{height:"150px"}} src="/img/icon-intel-white"/>*/}
                   </div>
                   <div className="col-xs-6">
-                    <img style={{height:"150px"}} src="/img/icon-facebook-white"/>
+                    {/*<img style={{height:"150px"}} src="/img/icon-facebook-white"/>*/}
                   </div>
                 </div>
                 <div className="row hidden-lg hidden-md">
                   <div className="col-xs-6">
-                    <img style={{height:"100px"}} src="/img/icon-intel-white"/>
+                    {/*<img style={{height:"100px"}} src="/img/icon-intel-white"/>*/}
                   </div>
                   <div className="col-xs-6">
-                    <img style={{height:"100px"}} src="/img/icon-facebook-white"/>
+                    {/*<img style={{height:"100px"}} src="/img/icon-facebook-white"/>*/}
                   </div>
                 </div>
               </div>
@@ -260,7 +260,7 @@ var Component = React.createClass({
                   a single, unifying purpose:
                 </p>
                 <h4 style={{margin:"20px 0px"}}>
-                  Robots for hackers that don't suck.
+                  Human-sized robots for hackers.
                 </h4>
                 <p>
                   Gone are the days of $3,000 Turtle Bots and $400,000 PR2s. We
