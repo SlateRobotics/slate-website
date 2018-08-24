@@ -5,8 +5,8 @@
     height: 100%;
 }
 
-pre, code: {
-  max-height: 500px,
+pre, code {
+  max-height: 500px;
 }
 
 .col-centered {
