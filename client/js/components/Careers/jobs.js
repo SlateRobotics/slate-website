@@ -33,7 +33,7 @@ job.questions.push({
 });
 job.questions.push({
   type: "textarea",
-  name: "Given a set of geometric points on a plane, list the series of calculations needed to place those points on a new plane definitions. (e.x. (1))",
+  name: "Given a set of geometric points on a plane, list the series of calculations needed to place those points on a new plane definitions.",
 });
 job.questions.push({
   type: "textarea",
@@ -108,36 +108,39 @@ jobs.push(job);
 job = new Job();
 job.isActive = true;
 job._id = "3po";
-job.name = "3D Printer Operator";
+job.name = "3D Printer Technician";
 job.type = "technician";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
-job.description = "Slate Robotics is looking for a 3D Printer Operator to help pioneer the future of personal robots. Performs functions associated with 3D printers, including printer maintenance, operation, and post-processing. Uses slicer programs to turn 3D models into gcode, which is required of 3D printers. Operates filament extruder and spooling system to fabricate materials needed by 3D printers. Adheres to strict quality guidelines and standards.";
+job.payRange = "$12 to $16 per hour";
+job.description = "Slate Robotics is looking for a 3D Printer Operator to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can be high stress and requires long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
 job.duties.push("Performs functions associated with 3D printers, including printer maintenance, operation, and post-processing.");
 job.duties.push("Uses slicer programs to turn 3D models into gcode, which is required of 3D printers.");
 job.duties.push("Operates filament extruder and spooling system to fabricate materials needed by 3D printers.");
 job.duties.push("Adheres to strict quality guidelines and standards.");
 job.skills.push("Experience with 3D printing is a big advantage.");
 job.skills.push("Hardworking with high standards of excellence.");
+job.skills.push("Strong understanding of geometric and algebraic concepts");
+job.skills.push("Excellent problem solving and critical thinking skills");
 job.questions.push({
   type: "input",
   name: "Are you willing to work on your feet for eight hours, five days a week?",
 });
 job.questions.push({
-  type: "input",
-  name: "Do you think you'll reach a point where you storm off the floor and never return?",
+  type: "textarea",
+  name: "A 3D printer enclosure is heated with a space heater that is positioned on the ceiling of the enclosure and blows hot air directly down toward the bed along the x-axis. For tall prints, the machine routinely clogs towards the top of the part. What is a potential cause of this?",
 });
 job.questions.push({
   type: "textarea",
-  name: "What would you do if you broke a part on a robot that is supposed to ship that day?",
+  name: "A 3D printer has dual z-axis steppers. You press \"Home Z-Axis\" on the 3D printer's control box. The left side of the cross bar lowers, but the right side stays in place. What is a potential cause of this?",
 });
 job.questions.push({
   type: "textarea",
-  name: "A machine is malfunctioning that you are attempting to utilize to manufacture a part. What do you do next?",
+  name: "A 3D printer has retraction disabled, prints at 0.5mm layer height, and prints with a zig-zag infill. At the beginning of each layer, it fails to extrude for a small portion of the new layer. What is a potential cause of this? Please explain the problem as fundamentally as you can.",
 });
 job.questions.push({
   type: "textarea",
-  name: "Describe how you might organize a shop (machines, processes, teams, etc.) for the purpose of building go karts.",
+  name: "This is our 3D printer farm: https://www.reddit.com/r/3Dprinting/comments/8p26qi/our_new_16_3d_printer_farm/ We have four CR-10 S5 3D printers and 12 Monoprice MakerSelect V2 printers. We print with 1mm nozzles and 0.5mm layer height in most printers. Most of the hot ends are stock. We print with ABS. We're currently using 2A heat lamps in each enclosure of the CR-10 S5 printers. What would you do to improve our print quality and print times?",
 });
 jobs.push(job);
 

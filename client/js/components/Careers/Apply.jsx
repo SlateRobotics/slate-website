@@ -81,6 +81,7 @@ var Component = React.createClass({
         <div className="row" style={{paddingTop:"15px",paddingBottom:"15px",backgroundColor:"#f3f3f3"}}>
           <div className="col-md-8 col-xs-12 col-centered" style={{textAlign:"left",marginBottom:"10px"}}>
             <p>{this.state.job.description}</p>
+            {this.getPayRange()}
             {this.getDuties()}
             {this.getSkills()}
           </div>
@@ -140,6 +141,16 @@ var Component = React.createClass({
         <div style={{marginTop:"25px"}} />
       </div>
     );
+  },
+
+  getPayRange: function () {
+    if (this.state.job.payRange) {
+      return (
+        <p>
+          {"Pay Range: " + this.state.job.payRange}
+        </p>
+      )
+    }
   },
 
   getDuties: function () {
