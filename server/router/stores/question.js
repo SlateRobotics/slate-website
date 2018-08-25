@@ -511,6 +511,28 @@ restFilter.router.post('/question/:id/comment', function (req, res) {
               emailSender.send();
             });
           }
+
+          if (comment.text[0] == "@") {
+            var bodyWordArray = comment.text.split(' ');
+            var replyToUserName = bodyWordArray[0].replace('@','');
+            if (replyToUserName != question.createdBy) {
+              User.findOne({"userName": replyToUserName}).exec(function (err, replyToUser) {
+                if (err) return;
+                if (!replyToUser) return;
+                var html = EmailSender.Emails.CommentMention
+                  .replace(new RegExp("__QUESTION__", 'g'), question.title)
+                  .replace(new RegExp("__QUESTION_ID__", 'g'), question._id);
+                var emailSender = new EmailSender({
+                  from: "zach@slaterobots.com",
+                  to: replyToUser.email,
+                  bcc: "zach@slaterobots.com",
+                  subject: "You were mentioned in a comment",
+                  html: html,
+                });
+                emailSender.send();
+              });
+            }
+          }
         });
       });
     } else {
@@ -803,9 +825,11 @@ restFilter.router.post('/question/:id/answer/:aid/comment', function (req, res) 
       Question.findOne({"_id": questionId}).exec(function (err, question) {
         if (err) return res.json({});
         if (!question) return res.json({});
+        var answer = {};
 
         for (var i = 0; i < question.answers.length; i++) {
           if (question.answers[i]._id == answerId) {
+            answer = question.answers[i];
             var currentDate = new Date(new Date().toUTCString());
             comment.createdBy = user.userName;
             comment.createdOn = currentDate;
@@ -831,6 +855,46 @@ restFilter.router.post('/question/:id/answer/:aid/comment', function (req, res) 
 
         question.save(function (err) {
           res.json(question);
+
+          if (user.userName != answer.createdBy) {
+            User.findOne({"userName": answer.createdBy}).exec(function (err, answerUser) {
+              if (err) return;
+              if (!answerUser) return;
+              var html = EmailSender.Emails.NewCommentAnswer
+                .replace(new RegExp("__QUESTION__", 'g'), question.title)
+                .replace(new RegExp("__QUESTION_ID__", 'g'), question._id);
+              var emailSender = new EmailSender({
+                from: "zach@slaterobots.com",
+                to: answerUser.email,
+                bcc: "zach@slaterobots.com",
+                subject: "There's a new comment on your answer",
+                html: html,
+              });
+              emailSender.send();
+            });
+          }
+
+          if (comment.text[0] == "@") {
+            var bodyWordArray = comment.text.split(' ');
+            var replyToUserName = bodyWordArray[0].replace('@','');
+            if (replyToUserName != answer.createdBy) {
+              User.findOne({"userName": replyToUserName}).exec(function (err, replyToUser) {
+                if (err) return;
+                if (!replyToUser) return;
+                var html = EmailSender.Emails.CommentMention
+                  .replace(new RegExp("__QUESTION__", 'g'), question.title)
+                  .replace(new RegExp("__QUESTION_ID__", 'g'), question._id);
+                var emailSender = new EmailSender({
+                  from: "zach@slaterobots.com",
+                  to: replyToUser.email,
+                  bcc: "zach@slaterobots.com",
+                  subject: "You were mentioned in a comment",
+                  html: html,
+                });
+                emailSender.send();
+              });
+            }
+          }
         });
       });
     } else {

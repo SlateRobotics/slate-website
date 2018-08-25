@@ -7,5 +7,7 @@ module.exports = {
     PasswordReset: fs.readFileSync(__dirname + "/PasswordReset.html", "utf8"),
     ApplicationReceived: fs.readFileSync(__dirname + "/ApplicationReceived.html", "utf8"),
     NewComment: fs.readFileSync(__dirname + "/NewComment.html", "utf8"),
+    NewCommentAnswer: fs.readFileSync(__dirname + "/NewCommentAnswer.html", "utf8"),
     NewAnswer: fs.readFileSync(__dirname + "/NewAnswer.html", "utf8"),
+    CommentMention: fs.readFileSync(__dirname + "/CommentMention.html", "utf8"),
 }

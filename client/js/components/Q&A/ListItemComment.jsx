@@ -59,9 +59,26 @@ var Component = React.createClass({
     var currentTime = new Date();
     var timeSeconds = (currentTime - new Date(this.props.comment.createdOn)) / 1000;
 
+    var body = this.props.comment.text;
+    if (!body) body = '';
+
+    var reply;
+    if (this.props.comment.text[0] == "@") {
+      var bodyWordArray = body.split(' ');
+      var replyText = bodyWordArray[0];
+      body = bodyWordArray.splice(1, bodyWordArray.length).join(' ');
+      reply = (
+        <span style={{color:"#07C"}}>
+          {replyText}
+        </span>
+      )
+    }
+
     return (
       <div>
-        {this.props.comment.text}
+        {reply}
+        {" "}
+        {body}
         {" - "}
         <span style={{color:"#07C"}}>
           {this.props.comment.createdBy}
