@@ -14,7 +14,8 @@ job.name = "Software Engineer";
 job.type = "software-engineer";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
-job.description = "Slate Robotics is looking for a highly creative and extremely industrious Software Engineer to help pioneer the future of personal robots. You must have experience designing and building complex software systems, and you should be able to do so in about one-third the time that most competent people think possible. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can be high stress and requires long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
+job.payRange = "$30,000 to $40,000 per year + 0.5% to 2.0% equity";
+job.description = "Slate Robotics is looking for a highly creative and extremely industrious Software Engineer to help pioneer the future of personal robots. You must have experience designing and building complex software systems, and you should be able to do so in about one-third the time that most competent people think possible. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can often require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
 job.duties.push("Support our open source community efforts via package creation, tool support, and issue tracking");
 job.duties.push("Provide customer support on software-related technical issues");
 job.duties.push("Develop new features and applications that we can demonstrate to potential customers");
@@ -25,23 +26,11 @@ job.skills.push("High-level understanding of machine learning concepts");
 job.skills.push("Excellent problem solving and critical thinking skills");
 job.questions.push({
   type: "textarea",
-  name: "Describe how you might design the software for the low-level controllers in a dog robot.",
+  name: "Explain the intricacies of desinging a movement controller for a dog robot that accepts a single 2D vector (for describing the desired direction and magnitude the robot should travel) as its input.",
 });
 job.questions.push({
   type: "textarea",
   name: "In what areas (i.e. layers of the stack) are machine learning techniques, such as Deep Learning and Reinforcement Learning, most effectively applied in the software of a robot like the TR1?",
-});
-job.questions.push({
-  type: "textarea",
-  name: "Given a set of geometric points on a plane, list the series of calculations needed to place those points on a new plane definitions.",
-});
-job.questions.push({
-  type: "textarea",
-  name: "By default, the TR1 does not come equipped with a position feedback sensor in the torso extension joint, so you cannot directly read how high the torso is extended from the base from a sensor. Why might this be acceptable for most customers? Is there any other way to read the position of the torso?",
-});
-job.questions.push({
-  type: "textarea",
-  name: "In the domain of software, what could we, Slate Robotics, do to provide better support to our customers?",
 });
 jobs.push(job);
 
@@ -52,7 +41,8 @@ job.name = "Robot Manufacturing Technician";
 job.type = "technician";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
-job.description = "Slate Robotics is looking for an industrious Robot Manufacturing Technician to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can be high stress and requires long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
+job.payRange = "$24,000 to $26,000 per year";
+job.description = "Slate Robotics is looking for an industrious Robot Manufacturing Technician to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can often require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
 job.duties.push("Performs functions assoicated with all manufacturing operations.");
 job.duties.push("Assembles robotic components such as arms, wheeled bases, electronics, etc.");
 job.duties.push("Operates 3D printers and filament extruder systems.");
@@ -63,24 +53,12 @@ job.duties.push("Performs quality assurance testing on finished goods.");
 job.duties.push("Closely follows manufacturing procedures and maintains rigorous performance-tracking records.");
 job.skills.push("Experience with 3D printing, soldering, or electronics is beneficial but not required.");
 job.questions.push({
-  type: "input",
-  name: "Are you willing to work on your feet for eight hours, five days a week?",
-});
-job.questions.push({
-  type: "input",
-  name: "Do you think you'll reach a point where you storm off the floor and never return?",
-});
-job.questions.push({
   type: "textarea",
   name: "What would you do if you broke a part on a robot that is supposed to ship that day?",
 });
 job.questions.push({
   type: "textarea",
   name: "A machine is malfunctioning that you are attempting to utilize to manufacture a part. What do you do next?",
-});
-job.questions.push({
-  type: "textarea",
-  name: "Describe how you might organize a shop (machines, processes, teams, etc.) for the purpose of building go karts.",
 });
 jobs.push(job);
 
@@ -91,6 +69,7 @@ job.name = "Production Manager";
 job.type = "productionmanager";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
+job.payRange = "$30,000 to $40,000 per year + 0.5% to 2.0% equity";
 job.description = "Slate Robotics is looking for an industrious, highly motivated Production Manager to help pioneer the future of personal robots. The Production Manager has the responsibility of overseeing the entire manufacturing process, including equipment, inventory, raw materials, assembly, and more. The Production Manager must stick to strict delivery deadlines for our customers and be willing to do whatever it takes to get things done. The Production Manager is given a growing team of motivated workers, an operating budget, and the necessary equipment to make a great product. This is a demanding position, which can be stressful and require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
 job.duties.push("Manage and evaluate machine resources to ensure productivity and minimal downtime");
 job.duties.push("Oversee a growing team of motivated workers");
@@ -107,6 +86,14 @@ job.skills.push("Excellent project management skills");
 job.skills.push("Proven track record of getting things done");
 job.skills.push("Working knowledge of OSHA and EPA regulations");
 job.skills.push("Ability to coach and mentor employees on a one-on-one basis as well as as a group");
+job.questions.push({
+  type: "textarea",
+  name: "Explain a time you discovered quality control issues in an operation. How did you address these issues?",
+});
+job.questions.push({
+  type: "textarea",
+  name: "Explain a time you implemented an improvement to a procedure. What was the impact of this change?",
+});
 jobs.push(job);
 
 job = new Job();
@@ -117,7 +104,7 @@ job.type = "technician";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
 job.payRange = "$12 to $16 per hour";
-job.description = "Slate Robotics is looking for a 3D Printer Operator to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can be high stress and requires long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
+job.description = "Slate Robotics is looking for a 3D Printer Operator to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can often require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
 job.duties.push("Performs functions associated with 3D printers, including printer maintenance, operation, and post-processing");
 job.duties.push("Uses slicer programs to turn 3D models into gcode, which is required of 3D printers.");
 job.duties.push("Takes ownership of print quality and speed");
@@ -129,24 +116,12 @@ job.skills.push("Hardworking with high standards of excellence.");
 job.skills.push("Strong understanding of geometric and algebraic concepts");
 job.skills.push("Excellent problem solving and critical thinking skills");
 job.questions.push({
-  type: "input",
-  name: "Are you willing to work on your feet for eight hours, five days a week?",
-});
-job.questions.push({
   type: "textarea",
   name: "A 3D printer enclosure is heated with a space heater that is positioned on the ceiling of the enclosure and blows hot air directly down toward the bed along the x-axis. For tall prints, the machine routinely clogs towards the top of the part. What is a potential cause of this?",
 });
 job.questions.push({
   type: "textarea",
-  name: "A 3D printer has dual z-axis steppers. You press \"Home Z-Axis\" on the 3D printer's control box. The left side of the cross bar lowers, but the right side stays in place. What is a potential cause of this?",
-});
-job.questions.push({
-  type: "textarea",
   name: "A 3D printer has retraction disabled, prints at 0.5mm layer height, and prints with a zig-zag infill. At the beginning of each layer, it fails to extrude for a small portion of the new layer. What is a potential cause of this? Please explain the problem as fundamentally as you can.",
-});
-job.questions.push({
-  type: "textarea",
-  name: "This is our 3D printer farm: https://www.reddit.com/r/3Dprinting/comments/8p26qi/our_new_16_3d_printer_farm/ We have four CR-10 S5 3D printers and 12 Monoprice MakerSelect V2 printers. We print with 1mm nozzles and 0.5mm layer height in most printers. Most of the hot ends are stock. We print with ABS. We're currently using 2A heat lamps in each enclosure of the CR-10 S5 printers. What would you do to improve our print quality and print times?",
 });
 jobs.push(job);
 
