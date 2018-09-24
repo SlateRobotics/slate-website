@@ -14,7 +14,7 @@ job.name = "Software Engineer";
 job.type = "software-engineer";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
-job.payRange = "$30,000 to $40,000 per year + 0.5% to 2.0% equity";
+job.payRange = "$30,000 to $40,000 per year + 0.5% to 1.0% equity";
 job.description = "Slate Robotics is looking for a highly creative and extremely industrious Software Engineer to help pioneer the future of personal robots. You must have experience designing and building complex software systems, and you should be able to do so in about one-third the time that most competent people think possible. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can often require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
 job.duties.push("Support our open source community efforts via package creation, tool support, and issue tracking");
 job.duties.push("Provide customer support on software-related technical issues");
@@ -36,37 +36,9 @@ jobs.push(job);
 
 job = new Job();
 job.isActive = true;
-job._id= "mt";
-job.name = "Robot Manufacturing Technician";
-job.type = "technician";
-job.location = "Springfield, MO";
-job.employmentType = "Full Time";
-job.payRange = "$24,000 to $26,000 per year";
-job.description = "Slate Robotics is looking for an industrious Robot Manufacturing Technician to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can often require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
-job.duties.push("Performs functions assoicated with all manufacturing operations.");
-job.duties.push("Assembles robotic components such as arms, wheeled bases, electronics, etc.");
-job.duties.push("Operates 3D printers and filament extruder systems.");
-job.duties.push("Operates CNC machine.");
-job.duties.push("Solders electronics and electrical components.");
-job.duties.push("Builds complex mechanical structures, such as frames and chassis, from their raw materials.");
-job.duties.push("Performs quality assurance testing on finished goods.");
-job.duties.push("Closely follows manufacturing procedures and maintains rigorous performance-tracking records.");
-job.skills.push("Experience with 3D printing, soldering, or electronics is beneficial but not required.");
-job.questions.push({
-  type: "textarea",
-  name: "What would you do if you broke a part on a robot that is supposed to ship that day?",
-});
-job.questions.push({
-  type: "textarea",
-  name: "A machine is malfunctioning that you are attempting to utilize to manufacture a part. What do you do next?",
-});
-jobs.push(job);
-
-job = new Job();
-job.isActive = true;
-job._id = "pm";
-job.name = "Production Manager";
-job.type = "productionmanager";
+job._id = "vpm";
+job.name = "VP of Manufacturing";
+job.type = "vpmanufacturing";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
 job.payRange = "$30,000 to $40,000 per year + 0.5% to 2.0% equity";
@@ -98,12 +70,40 @@ jobs.push(job);
 
 job = new Job();
 job.isActive = true;
-job._id = "3po";
-job.name = "3D Printer Technician";
+job._id= "mt";
+job.name = "Manufacturing Technician - Electronics Specialist";
 job.type = "technician";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
-job.payRange = "$12 to $16 per hour";
+job.payRange = "$24,000 to $26,000 per year";
+job.description = "Slate Robotics is looking for an industrious Robot Manufacturing Technician to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can often require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
+job.duties.push("Performs functions assoicated with all manufacturing operations.");
+job.duties.push("Assembles robotic components such as arms, wheeled bases, electronics, etc.");
+job.duties.push("Operates 3D printers and filament extruder systems.");
+job.duties.push("Operates CNC machine.");
+job.duties.push("Solders electronics and electrical components.");
+job.duties.push("Builds complex mechanical structures, such as frames and chassis, from their raw materials.");
+job.duties.push("Performs quality assurance testing on finished goods.");
+job.duties.push("Closely follows manufacturing procedures and maintains rigorous performance-tracking records.");
+job.skills.push("Experience with 3D printing, soldering, or electronics is beneficial but not required.");
+job.questions.push({
+  type: "textarea",
+  name: "What would you do if you broke a part on a robot that is supposed to ship that day?",
+});
+job.questions.push({
+  type: "textarea",
+  name: "A machine is malfunctioning that you are attempting to utilize to manufacture a part. What do you do next?",
+});
+jobs.push(job);
+
+job = new Job();
+job.isActive = true;
+job._id = "3po";
+job.name = "Manufacturing Technician - 3D Printing Specialist";
+job.type = "technician";
+job.location = "Springfield, MO";
+job.employmentType = "Full Time";
+job.payRange = "$24,000 to $26,000 per year";
 job.description = "Slate Robotics is looking for a 3D Printer Operator to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can often require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
 job.duties.push("Performs functions associated with 3D printers, including printer maintenance, operation, and post-processing");
 job.duties.push("Uses slicer programs to turn 3D models into gcode, which is required of 3D printers.");

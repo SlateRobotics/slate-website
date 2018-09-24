@@ -361,6 +361,18 @@ var restFilter = new RestFilter({
   },
 	findManyToken: function (token, callback) { findManyPublic(callback); },
 	findManyUser: function (user, callback) { findManyPublic(callback); },
+  afterInsert: function (req, res, next) {
+    var html = EmailSender.Emails.NewQuestion;
+    var emailSender = new EmailSender({
+      from: "zach@slaterobots.com",
+      to: "zach@slaterobots.com",
+      bcc: "zach@slaterobots.com",
+      subject: "Q&A: " + req.body.title,
+      html: html,
+    });
+    emailSender.send();
+    next();
+  },
 	security: {
 		create: function (user, token) { return (user); },
 		read: function (user, token) { return true; },

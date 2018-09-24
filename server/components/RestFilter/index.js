@@ -38,7 +38,8 @@ module.exports = function (config) {
   };
   var POST = {
     method: 'post',
-    before: new ValidateRequestWithoutId(this.config).route
+    before: new ValidateRequestWithoutId(this.config).route,
+    after: this.config.afterInsert
   };
   var DELETE = {
     method: 'delete',

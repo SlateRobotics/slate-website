@@ -30,13 +30,12 @@ Service.signIn = function(options, callback) {
 }
 
 Service.requestUserSetup = function(options, callback) {
-  console.log(options);
   $.ajax({
     url: '/sign-up',
     type: 'POST',
     contentType: "application/json",
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('userName', options.userName);
+      xhr.setRequestHeader('username', options.userName);
       xhr.setRequestHeader('email', options.email);
       xhr.setRequestHeader('firstname', options.firstName);
       xhr.setRequestHeader('lastname', options.lastName);
