@@ -9,7 +9,14 @@ var mongoose = require('mongoose');
 
 var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
 var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
-var credentials = {key: privateKey, cert: certificate};
+var gd1  = fs.readFileSync('sslcert/gd1.crt', 'utf8');
+var gd2  = fs.readFileSync('sslcert/gd2.crt', 'utf8');
+var gd3  = fs.readFileSync('sslcert/gd3.crt', 'utf8');
+var credentials = {
+  key: privateKey,
+  cert: certificate,
+  ca: [gd1, gd2, gd3]
+};
 
 var app = express();
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, "config.json"), "utf8"));
