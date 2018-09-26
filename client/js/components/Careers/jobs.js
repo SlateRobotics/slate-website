@@ -76,7 +76,7 @@ job.type = "technician";
 job.location = "Springfield, MO";
 job.employmentType = "Full Time";
 job.payRange = "$24,000 to $26,000 per year";
-job.description = "Slate Robotics is looking for an industrious Robot Manufacturing Technician to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can often require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
+job.description = "Slate Robotics is looking for an industrious Manufacturing Associate to help pioneer the future of personal robots. You must be a focused, diligent worker who is excited about robots and has an eye for perfection. Must have incredibly high standards for one's work and take the initiative to improve processes where necessary. This is a demanding position, which can often require long hours. Expect talented, motivated and interesting co-workers. Must be willing to relocate to the Springfield area.";
 job.duties.push("Performs functions assoicated with all manufacturing operations.");
 job.duties.push("Assembles robotic components such as arms, wheeled bases, electronics, etc.");
 job.duties.push("Operates 3D printers and filament extruder systems.");
