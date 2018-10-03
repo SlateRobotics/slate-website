@@ -126,16 +126,6 @@ var Component = React.createClass({
                 <source src="/vid/tr1-overview.mp4" type="video/mp4"/>
             </video>
             </div>
-            {/*
-            <video id="backgroundVideo" style={{
-                minWidth: '100%',
-                minHeight:"700px",
-                filter: "brightness(70%)",
-                display:"block",
-                margin:"0 auto",
-              }}>
-              <source src="/vid/tr1-overview.mp4" type="video/mp4"/>
-            </video>*/}
           </div>
           <div
             className="col-lg-10 col-xs-12 col-centered"
