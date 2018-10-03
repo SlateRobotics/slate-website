@@ -50,6 +50,9 @@ var Component = React.createClass({
     $("#tr1-heading").delay(500).fadeIn(1000);
     $("#tr1-footer").delay(1000).fadeIn(1000);
     $("#tr1-footer-details").delay(2000).fadeIn(1000);
+    var backgroundVideo = document.getElementById("backgroundVideo");
+    backgroundVideo.loop = true;
+    backgroundVideo.play();
   },
 
   render: function() {
@@ -95,6 +98,46 @@ var Component = React.createClass({
             backgroundSize:"1204px 674px",
           }}>
           <div
+            style={{
+              width:"100%",
+              height:"700px",
+              float:"left",
+              position:"relative",
+              overflow:"hidden",
+            }}>
+            <div style={{
+              position:'absolute',
+              top:'-50%',
+              left:'-50%',
+              width:'200%',
+              height:'200%',
+            }}>
+              <video id="backgroundVideo" style={{
+                  position:'absolute',
+                  filter: "brightness(70%)",
+                  top:0,
+                  bottom:0,
+                  left:0,
+                  right:0,
+                  margin:'auto',
+                  minHeight:'50%',
+                  minWidth:'50%',
+                }}>
+                <source src="/vid/tr1-overview.mp4" type="video/mp4"/>
+            </video>
+            </div>
+            {/*
+            <video id="backgroundVideo" style={{
+                minWidth: '100%',
+                minHeight:"700px",
+                filter: "brightness(70%)",
+                display:"block",
+                margin:"0 auto",
+              }}>
+              <source src="/vid/tr1-overview.mp4" type="video/mp4"/>
+            </video>*/}
+          </div>
+          <div
             className="col-lg-10 col-xs-12 col-centered"
             style={{
               height:"700px",
@@ -113,10 +156,10 @@ var Component = React.createClass({
               <h1 style={{fontSize:"48px"}} className="hidden-lg hidden-md hidden-xs">
                 Slate TR1
               </h1>
-              <h3 className="hidden-sm hidden-xs" style={{backgroundColor:"rgba(34,34,34,0.7)"}}>
+              <h3 className="hidden-sm hidden-xs">
                 The preeminent machine learning playground
               </h3>
-              <h4 className="hidden-lg hidden-md hidden-xs" style={{backgroundColor:"rgba(34,34,34,0.7)"}}>
+              <h4 className="hidden-lg hidden-md hidden-xs">
                 The preeminent machine learning playground
               </h4>
               <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}}>

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.use('/favicon.ico', require('./favicon'));
+router.use('/vid', require('./vid'));
 router.use('/img', require('./img'));
 router.use('/pdf', require('./pdf'));
 router.use('/js', require('./js'));

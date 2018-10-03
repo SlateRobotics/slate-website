@@ -152,7 +152,6 @@ var Component = React.createClass({
                       fontStyle:"italic",
                       fontSize:"14px"
                     }}>
-                      <h4 style={{color:"#ff7600"}}>Pre-order Item</h4>
                       <div>
                         Orders take 8 to 12 weeks to ship
                       </div>

@@ -13,6 +13,7 @@ router.get('*', function (req, res, next) {
 	var fileName = path.join(__dirname, _root, '/' + req.originalUrl.replace('/img/',''));
 	fs.stat(fileName, function (err, stat) {
 		if (err == null) {
+			res.type('video/mp4');
 			res.sendFile(fileName);
 		} else {
 			fs.stat(fileName + '.png', function (err, stat) {
