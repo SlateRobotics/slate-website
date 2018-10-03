@@ -59,7 +59,7 @@ var Component = React.createClass({
     return (
       <div className="container-fluid" style={Style.container}>
         <div className="row" style={{textAlign:"left"}}>
-          <div className="col-md-8 col-xs-12 col-centered" style={{
+          <div className="col-md-10 col-xs-12 col-centered" style={{
               backgroundColor: "#fbfbfb",
               paddingTop: "15px",
               paddingBottom: "15px",
@@ -68,76 +68,108 @@ var Component = React.createClass({
               marginTop: "25px",
               marginBottom: "25px",
             }}>
-            <h3>Edit blog</h3>
             <div className="row">
-              <div className="col-xs-12">
-                <Form.Label label="Status" isRequired />
-                <Form.Select
-                  attribute="status"
-                  options={["Active","In Progress","Archive"]}
-                  value={this.state.blog.status}
-                  onChange={this.handleChange_Field} />
-                {this.getError("status")}
+              <div className="col-xs-6">
+                <h3>Edit blog</h3>
+                <div className="row">
+                  <div className="col-xs-12">
+                    <Form.Label label="Status" isRequired />
+                    <Form.Select
+                      attribute="status"
+                      options={["Active","In Progress","Archive"]}
+                      value={this.state.blog.status}
+                      onChange={this.handleChange_Field} />
+                    {this.getError("status")}
+                  </div>
+                  <div className="col-xs-12">
+                    <Form.Label label="Title" isRequired />
+                    <Form.Input
+                      attribute="title"
+                      value={this.state.blog.title}
+                      onChange={this.handleChange_Field} />
+                    {this.getError("title")}
+                  </div>
+                  <div className="col-xs-12">
+                    <Form.Label label="Subtitle" isRequired />
+                    <Form.Input
+                      attribute="subtitle"
+                      value={this.state.blog.subtitle}
+                      onChange={this.handleChange_Field} />
+                    {this.getError("subtitle")}
+                  </div>
+                  <div className="col-xs-12">
+                    <Form.Label label="By" isRequired />
+                    <Form.Input
+                      attribute="by"
+                      value={this.state.blog.by}
+                      onChange={this.handleChange_Field} />
+                    {this.getError("by")}
+                  </div>
+                  <div className="col-xs-12">
+                    <Form.Label label="Main Image" isRequired />
+                    <Form.Input
+                      attribute="img"
+                      value={this.state.blog.img}
+                      onChange={this.handleChange_Field} />
+                    {this.getError("img")}
+                  </div>
+                  <div className="col-xs-12">
+                    <Form.Label label="Published On" />
+                    <Form.Input
+                      attribute="publishedOn"
+                      value={this.state.blog.publishedOn}
+                      onChange={this.handleChange_Field} />
+                    {this.getError("publishedOn")}
+                  </div>
+                  <div className="col-xs-12">
+                    <Form.Label label="Body" isRequired />
+                    <Form.TextArea
+                      attribute="body"
+                      value={this.state.blog.body}
+                      onChange={this.handleChange_Field} />
+                    {this.getError("body")}
+                  </div>
+                </div>
+                <div style={{marginTop:"25px"}} />
+                <div className="row">
+                  <div className="col-xs-12">
+                    {this.getButton()}
+                  </div>
+                </div>
               </div>
-              <div className="col-xs-12">
-                <Form.Label label="Title" isRequired />
-                <Form.Input
-                  attribute="title"
-                  value={this.state.blog.title}
-                  onChange={this.handleChange_Field} />
-                {this.getError("title")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Subtitle" isRequired />
-                <Form.Input
-                  attribute="subtitle"
-                  value={this.state.blog.subtitle}
-                  onChange={this.handleChange_Field} />
-                {this.getError("subtitle")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="By" isRequired />
-                <Form.Input
-                  attribute="by"
-                  value={this.state.blog.by}
-                  onChange={this.handleChange_Field} />
-                {this.getError("by")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Main Image" isRequired />
-                <Form.Input
-                  attribute="img"
-                  value={this.state.blog.img}
-                  onChange={this.handleChange_Field} />
-                {this.getError("img")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Published On" />
-                <Form.Input
-                  attribute="publishedOn"
-                  value={this.state.blog.publishedOn}
-                  onChange={this.handleChange_Field} />
-                {this.getError("publishedOn")}
-              </div>
-              <div className="col-xs-12">
-                <Form.Label label="Body" isRequired />
-                <Form.TextArea
-                  attribute="body"
-                  value={this.state.blog.body}
-                  onChange={this.handleChange_Field} />
-                {this.getError("body")}
-              </div>
-            </div>
-            <div style={{marginTop:"25px"}} />
-            <div className="row">
-              <div className="col-xs-12">
-                {this.getButton()}
+              <div className="col-xs-6">
+                <h1>{this.state.blog.title}</h1>
+                {this.getBody()}
               </div>
             </div>
           </div>
         </div>
       </div>
     );
+  },
+
+  getBody: function () {
+    var body = "";
+    if (this.state.blog.body) body = this.state.blog.body;
+    var html = marked(body);
+    var options = {
+      allowedTags: ['h1','h2','h3','h4','h5','h6','blockquote','p','a','ul','ol',
+        'nl','li','b','i','strong','em','strike','code','hr','br','div',
+        'table','thead','caption','tbody','tr','th','td','pre','img','iframe'],
+      allowedAttributes: {
+        a: ['href','name','target' ],
+        iframe: ['src','height','width','frameborder','allow','style'],
+        img: ['src','height','width','style']
+      },
+      selfClosing: ['img','br','hr','area','base','basefont','input','link','meta'],
+      allowedSchemes: ['http','https','ftp','mailto'],
+      allowedSchemesByTag: {},
+      allowedSchemesAppliedToAttributes: ['href','src','cite'],
+      allowProtocolRelative: true,
+      allowedIframeHostnames: ['www.youtube.com','player.vimeo.com']
+    };
+    var cleanHtml = sanitizeHtml(html, options);
+    return (<div dangerouslySetInnerHTML={{__html: cleanHtml}} />)
   },
 
   getButton: function () {
