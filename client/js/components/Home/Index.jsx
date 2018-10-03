@@ -112,7 +112,13 @@ var Component = React.createClass({
               width:'200%',
               height:'200%',
             }}>
-              <video id="backgroundVideo" style={{
+              <video
+                id="backgroundVideo"
+                muted="muted"
+                autoplay="true"
+                webkit-playsinline="true"
+                playsinline="true"
+                style={{
                   position:'absolute',
                   filter: "brightness(70%)",
                   top:0,
