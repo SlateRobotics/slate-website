@@ -9,6 +9,22 @@ var Component = React.createClass({
         <div className="container-fluid" style={Style.detail1Container}>
           <div className="row" style={{paddingTop:"75px"}}>
             <div className="col-lg-10 col-xs-12 col-centered">
+              <div className="row" style={{marginBottom:"50px"}}>
+                <div className="col-md-8 col-xs-12 col-centered">
+                  <video
+                    id="backgroundVideo"
+                    muted="true"
+                    autoplay="true"
+                    controls="true"
+                    webkit-playsinline="true"
+                    playsinline="true"
+                    style={{
+                      width: "100%",
+                    }}>
+                    <source src="/vid/tr1-overview.mp4" type="video/mp4"/>
+                  </video>
+                </div>
+              </div>
               <div className="row" style={{borderTop:"1px solid #ccc",paddingTop:"75px"}} />
               <div className="row">
                 <div className="col-md-4 col-xs-12">
