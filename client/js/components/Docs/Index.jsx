@@ -319,6 +319,7 @@ var Component = React.createClass({
         BrowserHistory.push(url);
         var state = this.state;
         state.selectedDoc = doc;
+        state.mobileMenu = false;
         this.setState(state);
       }
 
