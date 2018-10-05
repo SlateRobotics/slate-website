@@ -3,6 +3,7 @@ var router = express.Router();
 
 router.use(require('./order'));
 router.use(require('./blog'));
+router.use(require('./doc'));
 router.use(require('./question'));
 router.use(require('./user'));
 router.use(require('./inventoryItem'));

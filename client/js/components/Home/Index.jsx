@@ -115,7 +115,7 @@ var Component = React.createClass({
               <video
                 id="backgroundVideo"
                 muted="muted"
-                autoplay="true"
+                autoPlay="true"
                 webkit-playsinline="true"
                 playsinline="true"
                 style={{

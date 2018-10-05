@@ -4,6 +4,7 @@ var Slave = require('./slave');
 var Service = {
   order: new Slave("order"),
   blog: new Slave("blog"),
+  doc: new Slave("doc"),
   question: new Slave("question"),
   user: new Slave("user"),
   reservation: new Slave("reservation"),

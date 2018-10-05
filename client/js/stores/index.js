@@ -1,19 +1,12 @@
-var CartStore = require('./CartStore');
-var OrderStore = require('./order');
-var BlogStore = require('./blog');
-var QuestionStore = require('./question');
-var UserStore = require('./user');
-var ReservationStore = require('./reservation');
-var InventoryItemStore = require('./inventoryItem');
-
 var Service = {
-	cart: CartStore,
-	order: OrderStore,
-	blog: BlogStore,
-	question: QuestionStore,
-	user: UserStore,
-	reservation: ReservationStore,
-	inventoryItem: InventoryItemStore,
+	cart: require('./cart'),
+	order: require('./order'),
+	blog: require('./blog'),
+	doc: require('./doc'),
+	question: require('./question'),
+	user: require('./user'),
+	reservation: require('./reservation'),
+	inventoryItem: require('./inventoryItem'),
 }
 
 module.exports = Service;

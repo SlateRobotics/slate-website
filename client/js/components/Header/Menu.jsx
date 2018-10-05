@@ -24,7 +24,8 @@ var Menu = React.createClass({
 			return (
 	  		<ul id="menu" style={Style.menu}>
 					<MenuListItem label={"TR1"} to={"/tr1"} farRight={false} />
-					{<MenuListItem label={"Q&A"} to={"/questions"} farRight={false} />}
+					<MenuListItem label={"Q&A"} to={"/questions"} farRight={false} />
+					<MenuListItem label={"Docs"} to={"/docs"} farRight={false} />
 					<MenuListItem label={"Blog"} to={"/blog"} farRight={false} />
 					<MenuListItem label={"Sign Out"} to={"/sign-out"} farRight={true} />
 					{/*<MenuListItem label={"Support"} to={"/support"} farRight={true} />*/}
@@ -35,7 +36,8 @@ var Menu = React.createClass({
 		return (
   		<ul id="menu" style={Style.menu}>
 				<MenuListItem label={"TR1"} to={"/tr1"} farRight={false} />
-				{<MenuListItem label={"Q&A"} to={"/questions"} farRight={false} />}
+				<MenuListItem label={"Q&A"} to={"/questions"} farRight={false} />
+				<MenuListItem label={"Docs"} to={"/docs"} farRight={false} />
 				<MenuListItem label={"Blog"} to={"/blog"} farRight={false} />
 				<MenuListItem label={"Sign In"} to={"/sign-in"} farRight={true} />
 				{/*<MenuListItem label={"Support"} to={"/support"} farRight={true} />*/}

@@ -3,7 +3,8 @@ module.exports = {
     fontFamily: "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
     backgroundColor: "#222",
     fontSize: "12px",
-    color: "#fff"
+    color: "#fff",
+    position:"relative",
   },
   link: {
     color:"#fff",

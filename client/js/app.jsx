@@ -48,6 +48,9 @@ var Apply = require('./components/Careers/Apply.jsx');
 var Blog = require('./components/Blog/Index.jsx');
 var BlogSingle = require('./components/Blog/Single.jsx');
 var BlogEdit = require('./components/Blog/Edit.jsx');
+var Docs = require('./components/Docs/Index.jsx');
+var DocsSingle = require('./components/Docs/Single.jsx');
+var DocsEdit = require('./components/Docs/Edit.jsx');
 var PrivacyPolicy = require('./components/PrivacyPolicy/Index.jsx');
 var TermsAndConditions = require('./components/TermsAndConditions/Index.jsx');
 var SalesPolicies = require('./components/SalesPolicies/Index.jsx');
@@ -97,6 +100,11 @@ var Routes = (
 		<Route path="/blog/:id" component={BlogSingle} />
 		<Route path="/blog/:id/edit" component={BlogEdit} />
 		<Route path="/blog/:id/*" component={BlogSingle} />
+		<Route path="/docs" component={Docs} />
+		<Route path="/docs/new" component={DocsEdit} />
+		<Route path="/docs/:id" component={Docs} />
+		<Route path="/docs/:id/edit" component={DocsEdit} />
+		<Route path="/docs/:id/*" component={Docs} />
 		<Route path="/sales-policies" component={SalesPolicies} />
 		<Route path="/privacy-policy" component={PrivacyPolicy} />
 		<Route path="/reservation/:id" component={Reservation} />

@@ -3,6 +3,12 @@ var $ = require('jquery');
 var Style = require('./Style.jsx');
 
 var Component = React.createClass({
+  componentDidMount: function () {
+    var backgroundVideo = document.getElementById("backgroundVideo");
+    backgroundVideo.loop = true;
+    backgroundVideo.play();
+  },
+
   render: function() {
     return (
       <div className="row">
@@ -14,7 +20,7 @@ var Component = React.createClass({
                   <video
                     id="backgroundVideo"
                     muted="true"
-                    autoplay="true"
+                    autoPlay="true"
                     controls="true"
                     webkit-playsinline="true"
                     playsinline="true"
