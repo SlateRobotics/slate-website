@@ -21,6 +21,7 @@ var Component = React.createClass({
       error: '',
       isLoading: true,
       docListHeight: window.innerHeight - 160,
+      mobileMenu: true,
     }
   },
 
@@ -81,28 +82,24 @@ var Component = React.createClass({
   },
 
   render: function() {
+    var menuContainerClass = "col-sm-3 col-xs-2";
+    var docContainerClass = "col-sm-9 col-xs-10";
+
+    if (this.state.mobileMenu) {
+      menuContainerClass = "col-sm-3 col-xs-10";
+      docContainerClass = "col-sm-9 col-xs-2";
+    }
+
     return (
       <div className="container-fluid" style={Style.container}>
         <div className="row">
           <div className="col-md-10 col-xs-12 col-centered" style={{textAlign:"left"}}>
-            <div className="row" style={{marginTop:"5px",position:"fixed",width:"inherit"}}>
-              <div className="col-md-3 col-xs-6">
-                <h2 style={{width:"100%",marginTop:"0px"}}>
-                  Documentation
-                </h2>
-                {this.getNewDocButton()}
-                {this.getTools()}
-                <div style={{paddingTop:"15px"}}>
-                  <div style={{border:"1px solid #ccc"}}/>
-                </div>
-                <div style={{overflowY:"scroll",maxHeight:this.state.docListHeight}}>
-                  {this.getDocs()}
-                </div>
-              </div>
+            <div className="row" style={{marginTop:"5px",position:"fixed",width:"inherit",minHeight:"calc(100% - 86px)"}}>
+              {this.getMenu()}
             </div>
             <div className="row" style={{marginTop:"5px"}}>
-              <div className="col-md-3 col-xs-6" />
-              <div className="col-md-9 col-xs-6" style={{borderLeft:"1px solid #ccc"}}>
+              <div className={menuContainerClass} />
+              <div className={docContainerClass} style={{borderLeft:"1px solid #ccc",wordBreak:"break-word"}}>
                 {this.getSelectedDoc()}
               </div>
             </div>
@@ -111,6 +108,42 @@ var Component = React.createClass({
         <div style={{marginTop:"25px"}} />
       </div>
     );
+  },
+
+  getMenu: function () {
+    var menuContainerClass = "col-sm-3 col-xs-2";
+    var docContainerClass = "col-sm-9 col-xs-10";
+
+    if (this.state.mobileMenu) {
+      menuContainerClass = "col-sm-3 col-xs-10";
+      docContainerClass = "col-sm-9 col-xs-2";
+    }
+
+    if (this.state.mobileMenu) {
+      return (
+        <div className={menuContainerClass}>
+          <h2 style={{width:"100%",marginTop:"0px"}}>
+            Documentation
+          </h2>
+          {this.getNewDocButton()}
+          {this.getTools()}
+          <div style={{paddingTop:"15px"}}>
+            <div style={{border:"1px solid #ccc"}}/>
+          </div>
+          <div style={{overflowY:"scroll",maxHeight:this.state.docListHeight}}>
+            {this.getDocs()}
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div className={menuContainerClass} style={{marginTop:"50%"}} onClick={this.handleClick_MobileMenuButton}>
+          <h1>
+            +
+          </h1>
+        </div>
+      )
+    }
   },
 
   getTools: function () {
@@ -185,6 +218,8 @@ var Component = React.createClass({
           border:"1px solid #ccc",
           marginBottom:"15px",
           paddingRight:"100px",
+          maxWidth:"100%",
+          wordBreak:"normal",
         }}>
           <b>Table of Contents</b>
           <ul>{tableOfContentsItems}</ul>
@@ -192,14 +227,33 @@ var Component = React.createClass({
       )
     }
 
-    return (
-      <div>
-        <h1 style={{marginTop:"0px"}}>{this.state.selectedDoc.title}</h1>
-        {docControls}
-        {tableOfContents}
-        <div dangerouslySetInnerHTML={{__html: cleanHtml}} />
-      </div>
+    if (this.state.mobileMenu) {
+      return (
+        <div>
+          <div className="hidden-lg hidden-md hidden-sm">
+            <h1 onClick={this.handleClick_MobileMenuButton}>
+              -
+            </h1>
+          </div>
+          <div className="hidden-xs">
+            <h1 style={{marginTop:"0px"}}>{this.state.selectedDoc.title}</h1>
+            {docControls}
+            {tableOfContents}
+            <div dangerouslySetInnerHTML={{__html: cleanHtml}} />
+            </div>
+        </div>
     )
+    } else {
+      return (
+        <div>
+          <h1 style={{marginTop:"0px"}}>{this.state.selectedDoc.title}</h1>
+          {docControls}
+          {tableOfContents}
+          <div dangerouslySetInnerHTML={{__html: cleanHtml}} />
+        </div>
+      )
+    }
+
   },
 
   getDocs: function () {
@@ -290,6 +344,13 @@ var Component = React.createClass({
         </div>
       )
     }.bind(this));
+  },
+
+  handleClick_MobileMenuButton: function () {
+    window.scrollTo(0,0);
+    var state = this.state;
+    state.mobileMenu = !state.mobileMenu;
+    this.setState(state);
   },
 
   handleChange_Field: function (attribute, value) {
