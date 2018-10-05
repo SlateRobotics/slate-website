@@ -14,7 +14,6 @@ var Component = React.createClass({
   getInitialState: function () {
     return {
       user: '',
-      status: 'Active',
       sort: 'Ascending By Ordinal',
       search: '',
       selectedDoc: {},
@@ -32,25 +31,6 @@ var Component = React.createClass({
       this.setState(state);
     }.bind(this));
 
-    if (this.props.params && this.props.params.id) {
-      DocStore.get({
-        id: this.props.params.id,
-        refresh: true,
-        error: function (error) {
-          var state = this.state;
-          state.errors.push({name:"load",message:error});
-          state.isLoading = false;
-          this.setState(state);
-        }.bind(this),
-        success: function (doc) {
-          var state = this.state;
-          state.selectedDoc = doc;
-          state.isLoading = false;
-          this.setState(state);
-        }.bind(this),
-      });
-    }
-
     DocStore.get({
       refresh: true,
       error: function (error) {
@@ -66,11 +46,22 @@ var Component = React.createClass({
 
         var state = this.state;
         state.docs = docs;
-        if (docs.length > 0) state.selectedDoc = docs.sort(sort[this.state.sort])[0];
+
+        if (!this.props.params.id) {
+          if (docs.length > 0) state.selectedDoc = docs.sort(sort[this.state.sort])[0];
+        }
+
+        for (var i = 0; i < docs.length; i++) {
+          if (docs[i]._id == this.props.params.id) {
+            state.selectedDoc = docs[i];
+          }
+        }
+
         state.isLoading = false;
         this.setState(state);
       }.bind(this),
     });
+
   },
 
   componentDidMount: function () {
@@ -217,12 +208,6 @@ var Component = React.createClass({
     sort["Descending By Ordinal"]=function(a,b){return b.ordinal - a.ordinal};
 
     var docs = this.state.docs;
-    if (this.state.status != "") {
-      docs = docs.filter(function (doc) {
-        return doc.status == this.state.status;
-      }.bind(this));
-    }
-
     if (this.state.search) {
       var search = this.state.search.toLowerCase();
       docs = docs.filter(function (doc) {
@@ -271,7 +256,6 @@ var Component = React.createClass({
 
       var getTitle = function () {
         var title = doc.title;
-        if (doc.status == "In Progress") title = "*" + title;
         if (this.state.user.isAdmin) title += " - " + doc.ordinal;
         return title;
       }.bind(this)
