@@ -57,7 +57,7 @@ var Component = React.createClass({
           <h4 style={{fontSize:"32px"}}>
             The preeminent machine learning playground
           </h4>
-          <h4 style={{paddingTop:"20px"}}>
+          <h4 style={{paddingTop:"20px",marginBottom:"25px"}}>
             {"At a price "}
             <a
               target="_blank"
@@ -66,6 +66,7 @@ var Component = React.createClass({
               no one thought possible
             </a>
           </h4>
+          <MenuButton to="/shop/tr1" label="Buy Yours" />
         </div>
       </div>
     );
