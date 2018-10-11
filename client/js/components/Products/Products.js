@@ -70,7 +70,7 @@ module.exports = [{
     }, {
       id: 1,
       label: "US Contenential LTL Shipping",
-      price: 300,
+      price: 400,
       enabled: true,
     }, {
       id: 4,
@@ -78,9 +78,14 @@ module.exports = [{
       price: 800,
       enabled: true,
     }, {
+      id: 5,
+      label: "France Air Freight Shipping",
+      price: 2100,
+      enabled: true,
+    }, {
       id: 2,
       label: "Other International Shipping",
-      price: 1000,
+      price: 2500,
       enabled: true,
     }, {
       id: 3,
