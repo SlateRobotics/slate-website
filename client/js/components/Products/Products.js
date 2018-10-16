@@ -1,7 +1,7 @@
 module.exports = [{
   id: "tr1",
   name: "Slate TR1",
-  basePrice: 3199,
+  basePrice: 4750,
   config: [{
     name: "arm",
     label: "Arms",
@@ -13,7 +13,7 @@ module.exports = [{
     }, {
       id: 1,
       label: "Two-armed TR1",
-      price: 1250,
+      price: 999,
       enabled: true,
     }]
   }, {
@@ -70,17 +70,17 @@ module.exports = [{
     }, {
       id: 1,
       label: "US Contenential LTL Shipping",
-      price: 400,
+      price: 500,
       enabled: true,
     }, {
       id: 4,
       label: "Canada LTL Shipping",
-      price: 800,
+      price: 850,
       enabled: true,
     }, {
       id: 5,
       label: "France Air Freight Shipping",
-      price: 2100,
+      price: 2250,
       enabled: true,
     }, {
       id: 2,
