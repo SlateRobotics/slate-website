@@ -12,13 +12,6 @@ module.exports = [{
   ],
 },{
   isActive: true,
-  name: "Sam Hall",
-  title: "Manufacturing Associate",
-  type: "team",
-  img: "/img/person-icon",
-  description: "Sam's main function is the assemble the components of our robots and ensure a high-quality, tested, final product. Sam also helps with our 3D printers, Soldering, CNC, and filament extrusion.",
-},{
-  isActive: true,
   name: "Isaac Feemster",
   title: "3D Printing Technician",
   type: "team",
