@@ -16,7 +16,7 @@ var Component = React.createClass({
         }}>
         <div className="hidden-lg hidden-md col-xs-12">
           <h1 style={{fontSize:"95px"}}>
-            Slate TR1
+            Slate TR2
           </h1>
           <h4 style={{fontSize:"32px"}}>
             The preeminent machine learning playground
@@ -24,7 +24,7 @@ var Component = React.createClass({
         </div>
         <div className="col-md-6 hidden-sm hidden-xs" style={{
             height:"800px",
-            backgroundImage:"url('/img/slate-tr1-1')",
+            backgroundImage:"url('/img/slate-tr2-1')",
             backgroundSize:"cover",
             backgroundPosition: "center top",
           }}>
@@ -35,7 +35,7 @@ var Component = React.createClass({
             height:"500px",
             position:"relative",
           }}>
-          <img src="/img/slate-tr1-1" style={{
+          <img src="/img/slate-tr2-1" style={{
               height:"500px",
               position:"absolute",
               top: "-9999px",
@@ -52,7 +52,7 @@ var Component = React.createClass({
             color:"#fff",
           }}>
           <h1 style={{fontSize:"95px"}}>
-            Slate TR1
+            Slate TR2
           </h1>
           <h4 style={{fontSize:"32px"}}>
             The preeminent machine learning playground
@@ -66,14 +66,14 @@ var Component = React.createClass({
               no one thought possible
             </a>
           </h4>
-          <MenuButton to="/shop/tr1" label="Buy Yours" />
+          <MenuButton to="/shop/tr2" label="Buy Yours" />
         </div>
       </div>
     );
   },
 
   handleClick_Buy: function () {
-    BrowserHistory.push("/shop/tr1");
+    BrowserHistory.push("/shop/tr2");
   },
 });
 

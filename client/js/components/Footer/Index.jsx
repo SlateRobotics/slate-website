@@ -10,14 +10,17 @@ var Footer = React.createClass({
 			user: ''
 		}
 	},
-  componentDidMount: function () {
-    $("#label-email-b950c68a-3845-476b-8a68-0b660e83f906").css("color","white");
 
+	componentWillMount: function () {
     UserStore.getMe(function (me) {
       var state = this.state;
       state.user = me;
       this.setState(state);
     }.bind(this));
+	},
+
+  componentDidMount: function () {
+    $("#label-email-b950c68a-3845-476b-8a68-0b660e83f906").css("color","white");
   },
 
   render: function() {
@@ -39,19 +42,22 @@ var Footer = React.createClass({
   				<div className="col-md-10 col-xs-12 col-centered">
             <div className="row">
       				<div className="col-md-3 col-sm-6 col-xs-12">
-                <h3>TR1</h3>
-                <Link to="/tr1" style={Style.link}>Overview</Link>
-                <Link to="/tr1/specs" style={Style.link}>Specs</Link>
-                <Link to="/shop/tr1" style={Style.link}>Buy</Link>
-                <div style={{marginTop:"10px"}} />
-                <h3>Other</h3>
-                <a href="https://teespring.com/stores/slate-robotics" style={Style.link}>T-Shirts</a>
+                <h3>TR2</h3>
+                <Link to="/tr2" style={Style.link}>Overview</Link>
+                <Link to="/tr2/specs" style={Style.link}>Specs</Link>
+                <Link to="/shop/tr2" style={Style.link}>Buy</Link>
+              </div>
+      				<div className="col-md-3 col-sm-6 col-xs-12">
+                <h3>SUPPORT</h3>
+                <Link to="/blog" style={Style.link}>Blog</Link>
+                <Link to="/docs" style={Style.link}>Documentation</Link>
+                <Link to="/questions" style={Style.link}>Q & A</Link>
               </div>
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>COMPANY</h3>
                 <Link to="/about" style={Style.link}>About Us</Link>
-                <Link to="/questions" style={Style.link}>Q&A</Link>
                 <Link to="/careers" style={Style.link}>Careers</Link>
+                <a href="https://teespring.com/stores/slate-robotics" style={Style.link}>T-Shirts</a>
                 <Link to="/blog" style={Style.link}>Blog</Link>
                 <Link to="/privacy-policy" style={Style.link}>Privacy Policy</Link>
                 <Link to="/terms-and-conditions" style={Style.link}>Terms & Conditions</Link>
@@ -66,6 +72,8 @@ var Footer = React.createClass({
                 <a href="https://www.instagram.com/SlateRobotics/" style={Style.link}>Instagram</a>
                 <a href="https://www.youtube.com/channel/UC1xko_FNwN6H8PL3MLtJ1UQ" style={Style.link}>YouTube</a>
               </div>
+						</div>
+						<div className="row">
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>CONTACT</h3>
                 <div>

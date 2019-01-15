@@ -57,7 +57,7 @@ var CameraImageSection = React.createClass({
         onMouseLeave={this.handleMouseLeave_Image1}>
         <img
           style={Style.imageCenter}
-          src="/img/slate-tr1-5"
+          src="/img/slate-tr2-5"
           height={this.props.imgHeight} />
         {/* learn more */}
         <div id="detail-3-learn-more-1" style={Style.learnMoreContainer}>

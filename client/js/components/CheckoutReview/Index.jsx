@@ -4,6 +4,7 @@ var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
 var Products = require('../Products/Products.js');
+var ProductUtilities = require('../Products/Utilities.js');
 var CartStore = require('../../stores').cart;
 var $ = require('jquery');
 
@@ -12,25 +13,26 @@ var Component = React.createClass({
     return {
       isLoading: false,
       error: '',
-      product: Products[0],
-      order: {
-        id: 0,
-        total: 0,
-        config: [],
+      cart: {
         shipping: {},
         billing: {},
         payment: {},
+        items: []
       }
     }
   },
 
   componentWillMount: function () {
-    CartStore.getOne(0, function (doc) {
-      if (!doc) {
-        return BrowserHistory.push("/shop/tr1");
+    CartStore.get(function (docs) {
+      if (!docs || docs.length <= 0) {
+        return BrowserHistory.push("/shop");
       }
-
-      this.setState({order: doc});
+      var state = this.state;
+      state.cart.shipping = CartStore.getShipping();
+      state.cart.billing = CartStore.getBilling();
+      state.cart.payment = CartStore.getPayment();
+      state.cart.items = docs;
+      this.setState(state);
     }.bind(this));
   },
 
@@ -46,7 +48,7 @@ var Component = React.createClass({
           <div className="col-md-10 col-xs-12 col-centered">
             <h1>Order Review</h1>
             <div style={{color:"#da383c"}}>
-              Your order has yet not been placed. Please review
+              Your order has not yet been placed. Please review
               the details below and click "Place Order".
             </div>
           </div>
@@ -58,10 +60,10 @@ var Component = React.createClass({
               <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
                 <h2 style={{marginTop:"0px"}}>Shipping Details</h2>
                 <div style={{lineHeight:"150%"}}>
-                  <div>{this.state.order.shipping.firstName + " " + this.state.order.shipping.lastName}</div>
-                  <div>{this.state.order.shipping.address1}</div>
-                  <div>{this.state.order.shipping.address2}</div>
-                  <div>{this.state.order.shipping.city + ", " + this.state.order.shipping.state + " " + this.state.order.shipping.zip}</div>
+                  <div>{this.state.cart.shipping.firstName + " " + this.state.cart.shipping.lastName}</div>
+                  <div>{this.state.cart.shipping.address1}</div>
+                  <div>{this.state.cart.shipping.address2}</div>
+                  <div>{this.state.cart.shipping.city + ", " + this.state.cart.shipping.state + " " + this.state.cart.shipping.zip}</div>
                 </div>
               </div>
                 <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
@@ -69,18 +71,31 @@ var Component = React.createClass({
                   {this.getBillingDetails()}
                 </div>
               <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
-                <h2 style={{marginTop:"0px"}}>TR1 Configuration</h2>
-                <div style={{lineHeight:"150%"}}>
-                  <div style={{color:"#aaa"}}>TR1 Base Price ({this.getBasePrice()})</div>
-                  {this.getProductConfig()}
-                  {this.getDiscountConfig()}
-                </div>
-              </div>
-              <div className="col-md-6 col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
                 <h2 style={{marginTop:"0px"}}>Payment Details</h2>
                 <div style={{lineHeight:"150%"}}>
                   <div>Credit/Debit Card: **** {this.getLast4()}</div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-10 col-xs-12 col-centered" style={{borderTop:"1px solid #ccc", paddingTop:"15px"}} >
+            <div className="row">
+              <div className="col-xs-12" style={{textAlign:"left",paddingBottom:"15px"}}>
+                <h2 style={{marginTop:"0px"}}>Your Order</h2>
+                <div className="row" style={{borderBottom:"1px solid #ccc",marginBottom:"10px"}}>
+                  <div className={"col-xs-2"} style={{textAlign:"center"}}>
+                    <h4>Quantity</h4>
+                  </div>
+                  <div className={"col-xs-7"}>
+                    <h4>Name</h4>
+                  </div>
+                  <div className={"col-xs-3"}>
+                    <h4>Total</h4>
+                  </div>
+                </div>
+                {this.getCartItems()}
               </div>
             </div>
           </div>
@@ -113,11 +128,11 @@ var Component = React.createClass({
                   <h3>{this.getTotalString()}</h3>
                 </div>
               </div>
-              <div className="row">
+              {/*<div className="row">
                 <div className="col-xs-12" style={{paddingBottom:"15px",fontStyle:"italic",fontSize:"14px"}}>
                   Estimated Shipment Date: {this.getExpectedShipDate()}
                 </div>
-              </div>
+              </div>*/}
               {this.getButtons()}
             </div>
           </div>
@@ -128,7 +143,7 @@ var Component = React.createClass({
   },
 
   handleClick_Edit: function () {
-    BrowserHistory.push("/checkout");
+    BrowserHistory.push("/shop/checkout");
   },
 
   handleClick_Place: function () {
@@ -137,35 +152,15 @@ var Component = React.createClass({
     state.error = '';
     this.setState(state);
 
-    var order = this.state.order;
-
-    if (order.billing.isSame) {
-      order.billing = order.shipping;
-    }
-
-    order.card = {
-      token: order.payment.token.id,
-      last4: order.payment.token.card.last4,
-    }
-
-    order.user = {
-      email: order.shipping.email,
-      phone: order.shipping.phone,
-    }
-
-    order.products = [{
-      productId: "tr1",
-      config: order.config,
-    }];
-
+    var cart = this.state.cart;
     $.ajax({
       type: "POST",
       url: "/placeOrder",
-      data: order,
+      data: cart,
       success: function (result) {
         if (result.success == true) {
           CartStore.clear();
-          BrowserHistory.push("/checkout/success");
+          BrowserHistory.push("/shop/checkout/success");
         } else {
           var state = this.state;
           state.isLoading = false;
@@ -184,30 +179,30 @@ var Component = React.createClass({
   },
 
   getLast4: function () {
-    if (this.state.order.payment.token) {
-      if (this.state.order.payment.token.card) {
-        return this.state.order.payment.token.card.last4;
+    if (this.state.cart.payment.token) {
+      if (this.state.cart.payment.token.card) {
+        return this.state.cart.payment.token.card.last4;
       }
     }
   },
 
   getBillingDetails: function () {
-    if (this.state.order.billing.isSame == true) {
+    if (this.state.cart.billing.isSame == true) {
       return (
         <div style={{lineHeight:"150%"}}>
-          <div>{this.state.order.shipping.firstName + " " + this.state.order.shipping.lastName}</div>
-          <div>{this.state.order.shipping.address1}</div>
-          <div>{this.state.order.shipping.address2}</div>
-          <div>{this.state.order.shipping.city + ", " + this.state.order.shipping.state + " " + this.state.order.shipping.zip}</div>
+          <div>{this.state.cart.shipping.firstName + " " + this.state.cart.shipping.lastName}</div>
+          <div>{this.state.cart.shipping.address1}</div>
+          <div>{this.state.cart.shipping.address2}</div>
+          <div>{this.state.cart.shipping.city + ", " + this.state.cart.shipping.state + " " + this.state.cart.shipping.zip}</div>
         </div>
       )
     } else {
       return (
         <div style={{lineHeight:"150%"}}>
-          <div>{this.state.order.billing.firstName + " " + this.state.order.billing.lastName}</div>
-          <div>{this.state.order.billing.address1}</div>
-          <div>{this.state.order.billing.address2}</div>
-          <div>{this.state.order.billing.city + ", " + this.state.order.billing.state + " " + this.state.order.billing.zip}</div>
+          <div>{this.state.cart.billing.firstName + " " + this.state.cart.billing.lastName}</div>
+          <div>{this.state.cart.billing.address1}</div>
+          <div>{this.state.cart.billing.address2}</div>
+          <div>{this.state.cart.billing.city + ", " + this.state.cart.billing.state + " " + this.state.cart.billing.zip}</div>
         </div>
       )
     }
@@ -219,6 +214,47 @@ var Component = React.createClass({
     var endDate = new Date();
     endDate.setDate(endDate.getDate() + (7*12));
     return beginDate.toLocaleDateString() + " - " + endDate.toLocaleDateString();
+  },
+
+  getCartItems: function () {
+    return this.state.cart.items.map(function (cartItem, i) {
+      var total = cartItem.quantity * ProductUtilities.CalculateTotal(cartItem.product, cartItem.config);
+      return (
+        <div key={i} className="row">
+          <div className={"col-xs-2"} style={{textAlign:"center"}}>
+            <h4>{cartItem.quantity}</h4>
+          </div>
+          <div className={"col-xs-7"}>
+            <h4>{cartItem.product.name + " - " + this.getConfigString(cartItem)}</h4>
+          </div>
+          <div className={"col-xs-3"}>
+            <h4>{"$" + total.toLocaleString()}</h4>
+          </div>
+        </div>
+      )
+    }.bind(this));
+  },
+
+  getConfigString: function (item) {
+    var result = "";
+
+    item.config.map(function (cartConfig, i) {
+      item.product.config.map(function (productConfig) {
+        if (productConfig.name == cartConfig.name) {
+          productConfig.items.map(function (configItem) {
+            if (configItem.id == cartConfig.value) {
+              result += configItem.label;
+              if (i + 1 < item.config.length) {
+                result += ", ";
+              }
+              return;
+            }
+          });
+        }
+      });
+    });
+
+    return result;
   },
 
   getButtons: function () {
@@ -273,11 +309,16 @@ var Component = React.createClass({
   },
 
   getSubtotalString: function () {
-    var subtotal = 0;
-    if (this.state.order && this.state.order.total) {
-      subtotal = this.state.order.total;
-    }
+    var subtotal = this.calculateSubtotal();
     return "$" + subtotal.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
+  },
+
+  calculateSubtotal: function () {
+    var subtotal = 0;
+    this.state.cart.items.map(function (cartItem, i) {
+      subtotal += cartItem.quantity * ProductUtilities.CalculateTotal(cartItem.product, cartItem.config);
+    });
+    return subtotal;
   },
 
   calculateTaxes: function () {
@@ -287,9 +328,9 @@ var Component = React.createClass({
     var springfieldSalesTax = 0.02125;
     var salesTax = moSalesTax + greeneCountySalesTax + springfieldSalesTax;
 
-    if (this.state.order.shipping.state) {
-      if (mo.indexOf(this.state.order.shipping.state.toUpperCase()) > -1) {
-        return (this.state.order.total * salesTax);
+    if (this.state.cart.shipping.state) {
+      if (mo.indexOf(this.state.cart.shipping.state.toUpperCase()) > -1) {
+        return (this.calculateSubtotal() * salesTax);
       } else {
         return 0;
       }
@@ -304,10 +345,8 @@ var Component = React.createClass({
   },
 
   getTotalString: function () {
-    var total = 0;
-    if (this.state.order && this.state.order.total) {
-      total = this.state.order.total + this.calculateTaxes();
-    }
+    var total = this.calculateSubtotal();
+    total += this.calculateTaxes();
     return "$" + total.toFixed(2).toLocaleString('en-US', { minimumFractionDigits: 2 });
   },
 

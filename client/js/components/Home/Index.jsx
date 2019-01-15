@@ -47,9 +47,9 @@ var Component = React.createClass({
   componentDidMount: function () {
     document.title = "Slate Robotics";
     window.scrollTo(0,0);
-    $("#tr1-heading").delay(500).fadeIn(1000);
-    $("#tr1-footer").delay(1000).fadeIn(1000);
-    $("#tr1-footer-details").delay(2000).fadeIn(1000);
+    $("#tr2-heading").delay(500).fadeIn(1000);
+    $("#tr2-footer").delay(1000).fadeIn(1000);
+    $("#tr2-footer-details").delay(2000).fadeIn(1000);
     var backgroundVideo = document.getElementById("backgroundVideo");
     backgroundVideo.loop = true;
     backgroundVideo.play();
@@ -60,7 +60,7 @@ var Component = React.createClass({
       <div className="container-fluid" style={Style.container}>
         <div className="row hidden-lg hidden-md hidden-sm" style={{
             color:"white",
-            backgroundImage:"url('/img/slate-tr1-1')",
+            backgroundImage:"url('/img/slate-tr2-1')",
             backgroundPosition:"center top",
             backgroundColor:"#222",
             backgroundRepeat:"no-repeat",
@@ -81,7 +81,7 @@ var Component = React.createClass({
               <h1>
                 Slate
                 <br />
-                TR1
+                TR2
               </h1>
               <ButtonPrimary
                 label={"Learn more >"}
@@ -91,7 +91,7 @@ var Component = React.createClass({
         </div>
         <div className="row hidden-xs" style={{
             color:"white",
-            backgroundImage:"url('/img/slate-tr1-1')",
+            backgroundImage:"url('/img/slate-tr2-1')",
             backgroundPosition:"center top",
             backgroundColor:"#222",
             backgroundRepeat:"no-repeat",
@@ -112,7 +112,7 @@ var Component = React.createClass({
               width:'200%',
               height:'200%',
             }}>
-              <video
+              {/*}<video
                 id="backgroundVideo"
                 muted="muted"
                 autoPlay="true"
@@ -129,8 +129,8 @@ var Component = React.createClass({
                   minHeight:'50%',
                   minWidth:'50%',
                 }}>
-                <source src="/vid/tr1-overview.mp4" type="video/mp4"/>
-            </video>
+                <source src="/vid/tr2-overview.mp4" type="video/mp4"/>
+            </video>*/}
             </div>
           </div>
           <div
@@ -139,7 +139,7 @@ var Component = React.createClass({
               height:"700px",
               position:"relative",
             }}>
-            <div id="tr1-heading" style={{
+            <div id="tr2-heading" style={{
                 display:"none",
                 position:"absolute",
                 top:"0",
@@ -147,10 +147,10 @@ var Component = React.createClass({
                 textAlign:"left"
               }}>
               <h1 style={{fontSize:"72px"}} className="hidden-sm hidden-xs">
-                Slate TR1
+                Slate TR2
               </h1>
               <h1 style={{fontSize:"48px"}} className="hidden-lg hidden-md hidden-xs">
-                Slate TR1
+                Slate TR2
               </h1>
               <h3 className="hidden-sm hidden-xs">
                 The preeminent machine learning playground
@@ -158,16 +158,16 @@ var Component = React.createClass({
               <h4 className="hidden-lg hidden-md hidden-xs">
                 The preeminent machine learning playground
               </h4>
-              <Link to="/tr1" style={{color:"#fff",marginRight:"25px"}}>
+              <Link to="/tr2" style={{color:"#fff",marginRight:"25px"}}>
                 Learn More {">"}
               </Link>
-              <Link to="/shop/tr1" style={{color:"#fff"}}>
+              <Link to="/shop/tr2" style={{color:"#fff"}}>
                 Buy {">"}
               </Link>
             </div>
           </div>
           <div
-            id="tr1-footer"
+            id="tr2-footer"
             className="col-lg-10 col-xs-12 col-centered"
             style={{
               display:"none",
@@ -176,7 +176,7 @@ var Component = React.createClass({
               left:"0",
               textAlign:"left"
             }}>
-            <div id="tr1-footer-details" style={{
+            <div id="tr2-footer-details" style={{
                 position:"absolute",
                 right:"6px",
                 display:"none",
@@ -186,7 +186,7 @@ var Component = React.createClass({
                 {/*"Starting at $3,199"*/}
               </span>
             </div>
-            <div id="tr1-control-toggle" style={{
+            <div id="tr2-control-toggle" style={{
                 position:"absolute",
                 left:"0",
                 bottom:"0"
@@ -253,7 +253,7 @@ var Component = React.createClass({
                     url="https://spectrum.ieee.org/automaton/robotics/robotics-hardware/video-friday-professor-ishiguro-new-robot-child-and-more"
                     img="/img/icon-ieee-spectrum"/>
                   <NewsLogo
-                    url="https://blog.hackster.io/humanoid-slate-tr1-robot-is-a-machine-learning-playground-6edd00ca3299"
+                    url="https://blog.hackster.io/humanoid-slate-tr2-robot-is-a-machine-learning-playground-6edd00ca3299"
                     img="/img/icon-hackster-io"/>
                   <div className="hidden-md hidden-sm col-xs-2"/>
                 </div>
@@ -270,7 +270,7 @@ var Component = React.createClass({
                     url="https://spectrum.ieee.org/automaton/robotics/robotics-hardware/video-friday-professor-ishiguro-new-robot-child-and-more"
                     img="/img/icon-ieee-spectrum"/>
                   <NewsLogo
-                    url="https://blog.hackster.io/humanoid-slate-tr1-robot-is-a-machine-learning-playground-6edd00ca3299"
+                    url="https://blog.hackster.io/humanoid-slate-tr2-robot-is-a-machine-learning-playground-6edd00ca3299"
                     img="/img/icon-hackster-io"/>
                 </div>
               </div>
@@ -281,14 +281,14 @@ var Component = React.createClass({
           <div className="col-xs-12 col-centered">
             <div className="row">
               <div className="col-md-6 hidden-sm hidden-xs" style={{
-                  backgroundImage: "url('/img/slate-tr1-5')",
+                  backgroundImage: "url('/img/slate-tr2-5')",
                   height:"445px",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "contain",
                   backgroundPositionY: "bottom",
                 }}/>
               <div className="hidden-lg hidden-md col-xs-12">
-                <img src="/img/slate-tr1-5" style={{width:"100%"}} />
+                <img src="/img/slate-tr2-5" style={{width:"100%"}} />
               </div>
               <div className="col-md-5 col-xs-12" style={{textAlign:"left"}}>
                 <h2 style={{marginBottom:"25px"}}>
@@ -322,11 +322,11 @@ var Component = React.createClass({
   },
 
   handleClick_LearnMore: function () {
-    BrowserHistory.push("/tr1");
+    BrowserHistory.push("/tr2");
   },
 
   handleClick_Buy: function () {
-    BrowserHistory.push("/shop/tr1");
+    BrowserHistory.push("/shop/tr2");
   },
 
   handleClick_AboutUs: function () {
@@ -334,8 +334,8 @@ var Component = React.createClass({
   },
 
   handleClick_ToggleText: function () {
-    $("#tr1-heading").fadeToggle(500);
-    $("#tr1-footer-details").fadeToggle(500);
+    $("#tr2-heading").fadeToggle(500);
+    $("#tr2-footer-details").fadeToggle(500);
   },
 });
 

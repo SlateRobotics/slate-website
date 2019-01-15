@@ -28,10 +28,16 @@ var Register = require('./components/Register/Index.jsx');
 var RegisterVerify = require('./components/Register/Verify.jsx');
 var ForgotPassword = require('./components/ForgotPassword/Index.jsx');
 var ForgotPasswordVerify = require('./components/ForgotPassword/Verify.jsx');
+var tr2 = require('./components/tr2/Index.jsx');
+var tr2Specs = require('./components/tr2-specs/Index.jsx');
 var tr1 = require('./components/tr1/Index.jsx');
 var tr1Specs = require('./components/tr1-specs/Index.jsx');
 var tr1Shop = require('./components/shop-tr1/Index.jsx');
+var tr2Shop = require('./components/shop-tr2/Index.jsx');
 var Printing = require('./components/Printing/Index.jsx');
+var Cart = require('./components/cart/Index.jsx');
+var Shop = require('./components/shop/Index.jsx');
+var ShopItem = require('./components/shop-item/Index.jsx');
 var Support = require('./components/Support/Index.jsx');
 var Checkout = require('./components/Checkout/Index.jsx');
 var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
@@ -108,18 +114,24 @@ var Routes = (
 		<Route path="/sales-policies" component={SalesPolicies} />
 		<Route path="/privacy-policy" component={PrivacyPolicy} />
 		<Route path="/reservation/:id" component={Reservation} />
+		<Route path="/shop/checkout" component={Checkout} />
+		<Route path="/shop/checkout/review" component={CheckoutReview} />
+		<Route path="/shop/checkout/success" component={CheckoutSuccess} />
+		<Route path="/shop/cart" component={Cart} />
+		<Route path="/shop/:id" component={ShopItem} />
+		<Route path="/shop" component={Shop} />
 		<Route path="/shop/tr1" component={tr1Shop} />
+		<Route path="/shop/tr2" component={tr2Shop} />
 		<Route path="/terms-and-conditions" component={TermsAndConditions} />
 		<Route path="/questions/new" component={newQuestion} />
 		<Route path="/questions/:id" component={question} />
 		<Route path="/questions/:id/*" component={question} />
 		<Route path="/questions" component={qa} />
+		<Route path="/tr2" component={tr2} />
+		<Route path="/tr2/specs" component={tr2Specs} />
 		<Route path="/tr1" component={tr1} />
 		<Route path="/tr1/specs" component={tr1Specs} />
 		<Route path="/support" component={Support} />
-		<Route path="/checkout" component={Checkout} />
-		<Route path="/checkout/review" component={CheckoutReview} />
-		<Route path="/checkout/success" component={CheckoutSuccess} />
 		<Route path="/order/:id" component={Order} />
 		<Route path="*" component={NotFound} />
   </Route>

@@ -9,6 +9,7 @@ var Payment = require('./Payment.jsx');
 var Form = require('../Form/Index.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
+var ProductUtilities = require('../Products/Utilities.js');
 var CartStore = require('../../stores').cart;
 
 var pages = [Shipping, Billing, Payment];
@@ -37,12 +38,15 @@ var Component = React.createClass({
     state.card = elements.create('card', {style: cardStyle});
     this.setState(state);
 
-    CartStore.getOne(0, function (doc) {
-      if (!doc) {
-        return BrowserHistory.push("/shop/tr1");
+    CartStore.get(function (docs) {
+      if (!docs || docs.length <= 0) {
+        return BrowserHistory.push("/shop");
       }
 
-      state.total = doc.total;
+      state.total = 0;
+      docs.map(function (item) {
+        state.total += item.quantity * ProductUtilities.CalculateTotal(item.product, item.config);
+      });
       this.setState(state);
     }.bind(this));
   },
@@ -215,7 +219,7 @@ var Component = React.createClass({
   },
 
   handleClick_Edit: function () {
-    BrowserHistory.push("/shop/tr1");
+    BrowserHistory.push("/shop/cart");
   },
 
   handleClick_Review: function () {
@@ -225,25 +229,23 @@ var Component = React.createClass({
 
     this.validateData(false, function (errors) {
       if (!errors || errors.length == 0) {
-        CartStore.getOne(0, function (doc) {
-          stripe.createToken(this.state.card).then(function(result) {
-            if (result.error) {
-              var state = this.state;
-              state.isLoading = false;
-              state.errors = [result.error.message];
-              this.setState(state);
-            } else {
-              doc.payment = {token: result.token};
-              CartStore.update(doc, function () {
-                BrowserHistory.push("/checkout/review");
-              });
-            }
-          }.bind(this)).catch(function (error) {
+        var payment = {};
+        stripe.createToken(this.state.card).then(function(result) {
+          if (result.error) {
             var state = this.state;
             state.isLoading = false;
-            state.errors = [error];
+            state.errors = [result.error.message];
             this.setState(state);
-          }.bind(this));
+          } else {
+            payment = {token: result.token};
+            CartStore.setPayment(payment);
+            BrowserHistory.push("/shop/checkout/review");
+          }
+        }.bind(this)).catch(function (error) {
+          var state = this.state;
+          state.isLoading = false;
+          state.errors = [error];
+          this.setState(state);
         }.bind(this));
       } else {
         var state = this.state;
@@ -255,47 +257,41 @@ var Component = React.createClass({
   },
 
   validateData: function (validateAllData, callback) {
-    CartStore.getOne(0, function (doc) {
-      errors = [];
-      if (!doc || !doc.total) {
-        errors.push("Oh no! There was an error saving your cart information. Please reload your browser, and try again.");
-        callback(errors);
-        return;
-      }
+    var shipping = CartStore.getShipping();
+    var billing = CartStore.getBilling();
 
-      if (this.state.page == 0 || validateAllData == true) {
-        if (!doc.shipping) {
-          errors.push("You must enter your shipping information to continue");
+    errors = [];
+    if (this.state.page == 0 || validateAllData == true) {
+      if (!shipping) {
+        errors.push("You must enter your shipping information to continue");
+      } else {
+        if (!shipping.firstName) errors.push("Shipping: First Name field left blank");
+        if (!shipping.lastName) errors.push("Shipping: Last Name field left blank");
+        if (!shipping.email) errors.push("Shipping: Email field left blank");
+        if (!shipping.phone) errors.push("Shipping: Phone field left blank");
+        if (!shipping.address1) errors.push("Shipping: Address Line 1 field left blank");
+        if (!shipping.city) errors.push("Shipping: City field left blank");
+        if (!shipping.state) errors.push("Shipping: State field left blank");
+        if (!shipping.zip) errors.push("Shipping: Zip/Postal Code field left blank");
+      }
+    }
+
+    if (this.state.page == 1 || validateAllData == true) {
+      if (billing.isSame == false) {
+        if (!billing) {
+          errors.push("You must enter your billing information to continue");
         } else {
-          if (!doc.shipping.firstName) errors.push("Shipping: First Name field left blank");
-          if (!doc.shipping.lastName) errors.push("Shipping: Last Name field left blank");
-          if (!doc.shipping.email) errors.push("Shipping: Email field left blank");
-          if (!doc.shipping.phone) errors.push("Shipping: Phone field left blank");
-          if (!doc.shipping.address1) errors.push("Shipping: Address Line 1 field left blank");
-          if (!doc.shipping.city) errors.push("Shipping: City field left blank");
-          if (!doc.shipping.state) errors.push("Shipping: State field left blank");
-          if (!doc.shipping.zip) errors.push("Shipping: Zip/Postal Code field left blank");
+          if (!billing.firstName) errors.push("Billing: First Name field left blank");
+          if (!billing.lastName) errors.push("Billing: Last Name field left blank");
+          if (!billing.address1) errors.push("Billing: Address Line 1 field left blank");
+          if (!billing.city) errors.push("Billing: City field left blank");
+          if (!billing.state) errors.push("Billing: State field left blank");
+          if (!billing.zip) errors.push("Billing: Zip/Postal Code field left blank");
         }
       }
+    }
 
-      if (this.state.page == 1 || validateAllData == true) {
-        if (doc.billing.isSame == false) {
-          if (!doc.billing) {
-            errors.push("You must enter your billing information to continue");
-          } else {
-            if (!doc.billing.firstName) errors.push("Billing: First Name field left blank");
-            if (!doc.billing.lastName) errors.push("Billing: Last Name field left blank");
-            if (!doc.billing.address1) errors.push("Billing: Address Line 1 field left blank");
-            if (!doc.billing.city) errors.push("Billing: City field left blank");
-            if (!doc.billing.state) errors.push("Billing: State field left blank");
-            if (!doc.billing.zip) errors.push("Billing: Zip/Postal Code field left blank");
-          }
-        }
-      }
-
-      callback(errors);
-
-    }.bind(this));
+    callback(errors);
   },
 
   getTotalString: function () {

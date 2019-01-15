@@ -8,6 +8,38 @@ var CHANGE_EVENT = 'change';
 
 var Store = assign({}, EventEmitter.prototype, {
   data: [],
+  shipping: {},
+  billing: {},
+  payment: {},
+
+  idIncrement: 0,
+
+  getShipping: function () {
+    return this.shipping;
+  },
+
+  getBilling: function () {
+    return this.billing;
+  },
+
+  getPayment: function () {
+    return this.payment;
+  },
+
+  setShipping: function (shipping) {
+    this.shipping = shipping;
+    this.emitChange();
+  },
+
+  setBilling: function (billing) {
+    this.billing = billing;
+    this.emitChange();
+  },
+
+  setPayment: function (payment) {
+    this.payment = payment;
+    this.emitChange();
+  },
 
   get: function (callback) {
     callback(this.data);
@@ -24,11 +56,15 @@ var Store = assign({}, EventEmitter.prototype, {
   },
 
   insert: function(doc, callback) {
+    doc.id = this.idIncrement;
     this.data.push(doc);
+    this.idIncrement++;
 
     if (callback) {
       callback();
     }
+
+    this.emitChange();
   },
 
   update: function(doc, callback) {
@@ -42,6 +78,8 @@ var Store = assign({}, EventEmitter.prototype, {
     if (callback) {
       callback();
     }
+
+    this.emitChange();
   },
 
   delete: function(doc, callback) {
@@ -59,6 +97,8 @@ var Store = assign({}, EventEmitter.prototype, {
     if (callback) {
       callback();
     }
+
+    this.emitChange();
   },
 
   clear: function () {

@@ -22,11 +22,8 @@ var Component = React.createClass({
   },
 
   componentWillMount: function () {
-    CartStore.getOne(0, function (doc) {
-      if (doc && doc.shipping) {
-        this.setState(doc.shipping);
-      }
-    }.bind(this));
+    var shipping = CartStore.getShipping();
+    this.setState(shipping);
   },
 
   render: function() {
@@ -108,10 +105,7 @@ var Component = React.createClass({
     state[attribute] = value;
     this.setState(state);
 
-    CartStore.getOne(0, function (doc) {
-      doc.shipping = this.state;
-      CartStore.update(doc);
-    }.bind(this));
+    CartStore.setShipping(this.state);
 
     if (this.props.onChange) {
       this.props.onChange(state);

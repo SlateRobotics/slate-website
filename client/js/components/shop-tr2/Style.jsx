@@ -1,0 +1,68 @@
+module.exports = {
+  container: {
+    color: "#3b3a36",
+    minHeight: "calc(100% - 86px)",
+    fontFamily: "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
+    textAlign: "center",
+    fontSize: "16px",
+    backgroundColor:"#fff",
+  },
+  buttonContainer: {
+    fontSize:"24px",
+    marginTop:"20px",
+    marginBottom:"40px"
+  },
+  text: {
+    fontFamily: "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
+  },
+  img: {
+    maxWidth: "100%",
+  },
+  menu: {
+    fontSize:"20px",
+    position:"fixed",
+    left:"0px",
+    zIndex:"1",
+    width:"100%",
+    backgroundColor:"rgba(255,255,255,0.8)",
+    height:"34px",
+    borderBottom:"1px solid #ccc",
+    margin:"0 auto",
+  },
+  menuMobile: {
+    fontSize:"20px",
+    position:"absolute",
+    top:"44px",
+    left:"0px",
+    zIndex:"1",
+    width:"100%",
+    backgroundColor:"rgba(255,255,255,0.8)",
+    height:"34px",
+    borderBottom:"1px solid #ccc",
+    margin:"0 auto",
+  },
+  configItem: {
+    padding:"15px",
+    margin:"15px 0px",
+    border:"2px solid #ccc",
+    cursor:"pointer",
+    fontWeight:"normal",
+    backgroundColor:"#fff",
+  },
+  configItemHovered: {
+    padding:"15px",
+    margin:"15px 0px",
+    border:"2px solid #a0a0a0",
+    cursor:"pointer",
+    fontWeight:"normal",
+    backgroundColor:"#fff",
+  },
+  configItemSelected: {
+    padding:"15px",
+    margin:"15px 0px",
+    border:"2px solid #45415E",
+    cursor:"default",
+    fontWeight:"900",
+    backgroundColor:"#f9f9f9",
+  },
+}

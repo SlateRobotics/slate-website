@@ -23,10 +23,9 @@ var Menu = React.createClass({
 		if (this.state.user._id) {
 			return (
 	  		<ul id="menu" style={Style.menu}>
-					<MenuListItem label={"TR1"} to={"/tr1"} farRight={false} />
+					<MenuListItem label={"TR2"} to={"/tr2"} farRight={false} />
+					<MenuListItem label={"Shop"} to={"/shop"} farRight={false} />
 					<MenuListItem label={"Q&A"} to={"/questions"} farRight={false} />
-					<MenuListItem label={"Docs"} to={"/docs"} farRight={false} />
-					<MenuListItem label={"Blog"} to={"/blog"} farRight={false} />
 					<MenuListItem label={"Sign Out"} to={"/sign-out"} farRight={true} />
 					{/*<MenuListItem label={"Support"} to={"/support"} farRight={true} />*/}
 	  		</ul>
@@ -35,10 +34,9 @@ var Menu = React.createClass({
 
 		return (
   		<ul id="menu" style={Style.menu}>
-				<MenuListItem label={"TR1"} to={"/tr1"} farRight={false} />
+				<MenuListItem label={"TR2"} to={"/tr2"} farRight={false} />
+				<MenuListItem label={"Shop"} to={"/shop"} farRight={false} />
 				<MenuListItem label={"Q&A"} to={"/questions"} farRight={false} />
-				<MenuListItem label={"Docs"} to={"/docs"} farRight={false} />
-				<MenuListItem label={"Blog"} to={"/blog"} farRight={false} />
 				<MenuListItem label={"Sign In"} to={"/sign-in"} farRight={true} />
 				{/*<MenuListItem label={"Support"} to={"/support"} farRight={true} />*/}
   		</ul>

@@ -22,14 +22,9 @@ var Component = React.createClass({
   },
 
   componentWillMount: function () {
-    CartStore.getOne(0, function (doc) {
-      if (doc && doc.billing) {
-        this.setState(doc.billing);
-      } else {
-        doc.billing = this.state;
-        CartStore.update(doc);
-      }
-    }.bind(this));
+    CartStore.setBilling(this.state);
+    var billing = CartStore.getBilling();
+    this.setState(billing);
   },
 
   render: function() {
@@ -131,10 +126,7 @@ var Component = React.createClass({
     state.isSame = !state.isSame;
     this.setState(state);
 
-    CartStore.getOne(0, function (doc) {
-      doc.billing = this.state;
-      CartStore.update(doc);
-    }.bind(this));
+    CartStore.setBilling(this.state);
 
     if (this.props.onChange) {
       this.props.onChange(state);
@@ -146,10 +138,7 @@ var Component = React.createClass({
     state[attribute] = value;
     this.setState(state);
 
-    CartStore.getOne(0, function (doc) {
-      doc.billing = this.state;
-      CartStore.update(doc);
-    }.bind(this));
+    CartStore.setBilling(this.state);
 
     if (this.props.onChange) {
       this.props.onChange(state);
