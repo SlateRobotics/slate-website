@@ -103,6 +103,7 @@ var Store = assign({}, EventEmitter.prototype, {
 
   clear: function () {
     this.data = [];
+    this.emitChange();
   },
 
   emitChange: function() {

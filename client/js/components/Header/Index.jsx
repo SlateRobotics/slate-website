@@ -34,7 +34,7 @@ var Header = React.createClass({
   handleChange_CartStore: function () {
     CartStore.get(function (docs) {
       this.setState({
-        items: docs
+        cartItems: docs
       });
     }.bind(this));
   },

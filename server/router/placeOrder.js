@@ -6,7 +6,7 @@ var Order = require('../models/order');
 var Reservation = require('../models/reservation');
 var EmailSender = require('../components/EmailSender');
 var Products = require('../../client/js/components/Products/Products.js');
-var ProductTr1 = Products[0];
+var ProductUtilities = require('../../client/js/components/Products/Utilities.js');
 
 var config = JSON.parse(fs.readFileSync(path.join(__dirname, "../../config.json"), "utf8"));
 var stripe = require('stripe')(config.stripe.secret);
@@ -57,9 +57,9 @@ function getProductDetailString (order) {
 
   for (var i = 0; i < order.products.length; i++) {
     if (i == 0) {
-      result = result + order.products[i].productId.toUpperCase();
+      result = result + order.products[i].quantity + " x " + order.products[i].productId.toUpperCase();
     } else {
-      result = result + "<br/>" + order.products[i].productId.toUpperCase();
+      result = result + "<br/>" + order.products[i].quantity + " x " + order.products[i].productId.toUpperCase();
     }
 
     result = result + ": ";
@@ -67,11 +67,17 @@ function getProductDetailString (order) {
     for (var j = 0; j < order.products[i].config.length; j++) {
       var config = order.products[i].config[j];
       var productConfig;
-      for (var k = 0; k < ProductTr1.config.length; k++) {
-        if (config.name == ProductTr1.config[k].name) {
-          productConfig = ProductTr1.config[k];
+
+      Products.map(function (p) {
+        if (p.id == order.products[i].productId) {
+          p.config.map(function (c) {
+            if (c.name == config.name) {
+              productConfig = c;
+            }
+          });
         }
-      }
+      });
+
       var configItem;
       for (var k = 0; k < productConfig.items.length; k++) {
         if (config.value == productConfig.items[k].id) {
@@ -118,79 +124,72 @@ function OrderSuccess (res, order) {
 
 function OrderError (res, message) {
   res.json({success: false, message: message});
+  return false;
 }
 
 function VerifyData (req, res) {
   if (!req.body) {
-    OrderError(res, "No order data in body of post request");
+    return OrderError(res, "No order data in body of post request");
   } else if (!req.body.products || req.body.products.length == 0) {
-    OrderError(res, "Invalid product data in body of post request");
+    return OrderError(res, "Invalid product data in body of post request");
   } else if (!req.body.shipping) {
-    OrderError(res, "Invalid shipping data in body of post request");
+    return OrderError(res, "Invalid shipping data in body of post request");
   } else if (!req.body.shipping.firstName) {
-    OrderError(res, "Invalid shipping data in body of post request: null firstName");
+    return OrderError(res, "Invalid shipping data in body of post request: null firstName");
   } else if (!req.body.shipping.lastName) {
-    OrderError(res, "Invalid shipping data in body of post request: null lastName");
+    return OrderError(res, "Invalid shipping data in body of post request: null lastName");
   } else if (!req.body.shipping.address1) {
-    OrderError(res, "Invalid shipping data in body of post request: null address1");
+    return OrderError(res, "Invalid shipping data in body of post request: null address1");
   } else if (!req.body.shipping.city) {
-    OrderError(res, "Invalid shipping data in body of post request: null city");
+    return OrderError(res, "Invalid shipping data in body of post request: null city");
   } else if (!req.body.shipping.state) {
-    OrderError(res, "Invalid shipping data in body of post request: null state");
+    return OrderError(res, "Invalid shipping data in body of post request: null state");
   } else if (!req.body.shipping.zip) {
-    OrderError(res, "Invalid shipping data in body of post request: null zip");
+    return OrderError(res, "Invalid shipping data in body of post request: null zip");
   } else if (!req.body.billing) {
-    OrderError(res, "Invalid billing data in body of post request");
+    return OrderError(res, "Invalid billing data in body of post request");
   } else if (!req.body.billing.firstName) {
-    OrderError(res, "Invalid billing data in body of post request: null firstName");
+    return OrderError(res, "Invalid billing data in body of post request: null firstName");
   } else if (!req.body.billing.lastName) {
-    OrderError(res, "Invalid billing data in body of post request: null lastName");
+    return OrderError(res, "Invalid billing data in body of post request: null lastName");
   } else if (!req.body.billing.address1) {
-    OrderError(res, "Invalid billing data in body of post request: null address1");
+    return OrderError(res, "Invalid billing data in body of post request: null address1");
   } else if (!req.body.billing.city) {
-    OrderError(res, "Invalid billing data in body of post request: null city");
+    return OrderError(res, "Invalid billing data in body of post request: null city");
   } else if (!req.body.billing.state) {
-    OrderError(res, "Invalid billing data in body of post request: null state");
+    return OrderError(res, "Invalid billing data in body of post request: null state");
   } else if (!req.body.billing.zip) {
-    OrderError(res, "Invalid billing data in body of post request: null zip");
+    return OrderError(res, "Invalid billing data in body of post request: null zip");
   } else if (!req.body.card) {
-    OrderError(res, "Invalid card data in body of post request");
+    return OrderError(res, "Invalid card data in body of post request");
   } else if (!req.body.card.token) {
-    OrderError(res, "Invalid card data in body of post request: null token");
+    return OrderError(res, "Invalid card data in body of post request: null token");
   } else if (!req.body.card.last4) {
-    OrderError(res, "Invalid card data in body of post request: null last4");
+    return OrderError(res, "Invalid card data in body of post request: null last4");
   } else if (!req.body.user) {
-    OrderError(res, "Invalid user data in body of post request");
+    return OrderError(res, "Invalid user data in body of post request");
   } else if (!req.body.user.email) {
-    OrderError(res, "Invalid user data in body of post request: null email");
+    return OrderError(res, "Invalid user data in body of post request: null email");
   } else if (!req.body.user.phone) {
-    OrderError(res, "Invalid user data in body of post request: null phone");
+    return OrderError(res, "Invalid user data in body of post request: null phone");
   }
 }
 
 function CalculateSubtotalProduct(product) {
-  var subtotal = ProductTr1.basePrice;
+  // don't trust the product obj that gets sent in req body
+  var dbProduct;
+  var config = product.config;
+  Products.map(function (p) {
+    if (p.name == product.product.name) {
+      dbProduct = p;
+    }
+  });
 
-  for (var j = 0; j < product.config.length; j++) {
-    var config = product.config[j];
-    var productConfig;
-    for (var k = 0; k < ProductTr1.config.length; k++) {
-      if (config.name == ProductTr1.config[k].name) {
-        productConfig = ProductTr1.config[k];
-      }
-    }
-    var configItem;
-    for (var k = 0; k < productConfig.items.length; k++) {
-      if (config.value == productConfig.items[k].id) {
-        configItem = productConfig.items[k];
-      }
-    }
-
-    if (configItem) {
-      subtotal += configItem.price;
-    }
+  if (!dbProduct) {
+    return null;
   }
 
+  var subtotal = ProductUtilities.CalculateTotal(dbProduct, config);
   return subtotal;
 }
 
@@ -208,12 +207,67 @@ function CalculateTaxes (order) {
 }
 
 router.post('/', function (req, res) {
-  VerifyData(req, res);
+  req.body.products = req.body.items;
+  req.body.card = {};
+  req.body.card.token = req.body.payment.token.id;
+  req.body.card.last4 = req.body.payment.token.card.last4;
+  req.body.user = {
+    email: req.body.shipping.email,
+    phone: req.body.shipping.phone,
+  }
+
+  if (req.body.billing.isSame == 'true') {
+    req.body.billing = req.body.shipping;
+    req.body.billing.isSame = true;
+  }
+
+  delete req.body.payment;
+  delete req.body.items;
+
+  if (VerifyData(req, res) == false) {
+    return;
+  }
+
   var order = req.body;
   order.subtotal = 0;
   for (var i = 0; i < order.products.length; i++) {
-    order.products[i].subtotal = CalculateSubtotalProduct(order.products[i]);
+    var st = CalculateSubtotalProduct(order.products[i]);
+    if (!st) { //an err occurred
+      return OrderError(res, "An unexpected error occurred");
+    }
+    order.products[i].quantity = Number(order.products[i].quantity);
+    if (order.products[i].quantity < 1) {
+      return OrderError(res, "Error: you cannot order a quantity less than 1.");
+    }
+
+    order.products[i].subtotal = st * order.products[i].quantity;
     order.subtotal = order.subtotal + order.products[i].subtotal;
+    order.products[i].productId = order.products[i].product.id;
+
+    // add price, label to each config item
+    for (var j = 0; j < order.products[i].config.length; j++) {
+      var product = order.products[i].product;
+      var config = order.products[i].config;
+      Products.map(function (p) {
+        if (p.name == product.name) {
+          order.products[i].basePrice = p.basePrice;
+          p.config.map(function (c1) {
+            config.map(function (c2, c2_idx) {
+              if (c1.name == c2.name) {
+                c1.items.map(function (c1i) {
+                  if (c1i.id == Number(c2.value)) {
+                    order.products[i].config[c2_idx].categoryLabel = c1.label;
+                    order.products[i].config[c2_idx].label = c1i.label;
+                    order.products[i].config[c2_idx].price = c1i.price;
+                  }
+                });
+              }
+            });
+          });
+        }
+      });
+      order.products[i].config
+    }
   }
 
   order.subtotal = order.subtotal;
@@ -234,60 +288,27 @@ router.post('/', function (req, res) {
     }
   }
 
-  if (order.reservationToken) {
-    ValidateReservationToken(req.body, function (isValidReservation) {
-      if (!isValidReservation) {
-        OrderError(res, "Invalid reservation token.");
-      } else {
-        order.subtotal = order.subtotal - 1549;
-        order.discount = 1549;
-        order.tax = CalculateTaxes(order);
-        order.total = order.subtotal + order.tax;
-
-        stripe.charges.create({
-          amount: Math.round(order.total * 100),
-          currency: "usd",
-          description: "Slate Robotics, Inc. - TR1",
-          metadata: metadata,
-          source: order.card.token,
-        }, function (err, charge) {
+  stripe.charges.create({
+    amount: Math.round(order.total * 100),
+    currency: "usd",
+    description: "Slate Robotics, Inc. - TR1",
+    metadata: metadata,
+    source: order.card.token,
+  }, function (err, charge) {
+    if (err) {
+      return OrderError(res, "An error occurred while processing your payment:" + err.message);
+    } else {
+        var orderDoc = new Order(order);
+        orderDoc.save(function (err, savedDoc) {
+          console.log(err);
           if (err) {
-            OrderError(res, "An error occurred while processing your payment:" + err.message);
+            return OrderError(res, "An error occurred while saving the order details to our system:" + err);
           } else {
-              var orderDoc = new Order(order);
-              orderDoc.save(function (err, savedDoc) {
-                if (err) {
-                  OrderError(res, "An error occurred while saving the order details to our system:" + err);
-                } else {
-                  OrderSuccess(res, savedDoc);
-                }
-              });
+            OrderSuccess(res, savedDoc);
           }
         });
-      }
-    });
-  } else {
-    stripe.charges.create({
-      amount: Math.round(order.total * 100),
-      currency: "usd",
-      description: "Slate Robotics, Inc. - TR1",
-      metadata: metadata,
-      source: order.card.token,
-    }, function (err, charge) {
-      if (err) {
-        OrderError(res, "An error occurred while processing your payment:" + err.message);
-      } else {
-          var orderDoc = new Order(order);
-          orderDoc.save(function (err, savedDoc) {
-            if (err) {
-              OrderError(res, "An error occurred while saving the order details to our system:" + err);
-            } else {
-              OrderSuccess(res, savedDoc);
-            }
-          });
-      }
-    });
-  }
+    }
+  });
 });
 
 module.exports = router;

@@ -3,11 +3,16 @@ var mongoose = restful.mongoose;
 
 var configSchema = new mongoose.Schema({
   name: String, // computer
+  categoryLabel: String, // Computer
+  label: String, // Nvidia TX2
   value: Number, // 0, 1, 2
+  price: Number, // $300
 });
 
 var productSchema = new mongoose.Schema({
   productId: String, // tr1
+  quantity: Number, // 1
+  basePrice: Number, // 654.00
   subtotal: Number, //2624.00
   config: [], //[{name:'computer',value:0},{name:'shipping',value:1}]
 });
