@@ -39,8 +39,7 @@ var Component = React.createClass({
                   <img src="/img/icon-open-source" style={{height:"75px",width:"75px"}} />
                   <h3>Open Platform</h3>
                   <p>
-                    All code is open source, and CAD files are freely
-                    available under a Creative Commons license.
+                    All code is open source and available on GitHub.
                   </p>
                   <a href="https://github.com/slaterobotics" target="_blank" style={{color:"#fff"}}>
                     {"View GitHub >"}

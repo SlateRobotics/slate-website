@@ -4,6 +4,7 @@ var Link = require('react-router').Link;
 var Style = require('./Style.jsx');
 var ButtonPrimary = require('../Button/Index.jsx').Primary;
 var ButtonSecondary = require('../Button/Index.jsx').Secondary;
+var Form = require('../Form/Index.jsx');
 var ConfigItem = require('./ConfigItem.jsx');
 var Products = require('../Products/Products.js');
 var ProductUtilities = require('../Products/Utilities.js');
@@ -21,7 +22,12 @@ function gup( name, url ) {
 var Component = React.createClass({
   getInitialState: function () {
     return {
-      product: Products[0],
+      product: {
+        config: [],
+        links: [],
+        imgs: [],
+      },
+      quantity: 1,
       discount: 0,
       order: {
         config: []
@@ -107,6 +113,13 @@ var Component = React.createClass({
                   </div>
                   <div style={{paddingTop:"15px"}}>
                     <h4>{this.getTotalString()}</h4>
+                    <div style={{width:"75px",marginBottom:"15px"}}>
+                      <Form.Input
+                        attribute="attribute"
+                        type="number"
+                        value={this.state.quantity}
+                        onChange={this.handleChange_Quantity} />
+                    </div>
                     {this.getAddToCartButton()}
                   </div>
                   {this.getWarning()}
@@ -120,11 +133,18 @@ var Component = React.createClass({
     );
   },
 
+  handleChange_Quantity: function (attribute, value) {
+    if (value < 1) value = 1;
+    var state = this.state;
+    state.quantity = value;
+    this.setState(state);
+  },
+
   handleClick_AddToCart: function () {
     CartStore.insert({
       config: this.state.order.config,
       product: this.state.product,
-      quantity: 1,
+      quantity: this.state.quantity,
     });
     BrowserHistory.push("/shop/cart");
   },
@@ -150,7 +170,7 @@ var Component = React.createClass({
     if (this.state.product.links) links = this.state.product.links;
     return links.map(function (link, i) {
       return (
-        <Link key={i} to={link.url} style={{lineHeight:"34px",color:"#222",marginRight:"25px"}}>
+        <Link key={i} to={link.url} style={{lineHeight:"34px",color:"#222",marginRight:"25px",border:"1px solid #ccc",borderRadius:"5px",padding:"5px",backgroundColor:"#f1f1f1"}}>
           {link.label}
         </Link>
       )

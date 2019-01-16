@@ -1,9 +1,8 @@
 module.exports = {
   id: "gripper",
-  discontinued: true,
   name: "TR2 Gripper",
   warning: "Made-to-order: Orders take 5-10 business days to ship",
-  imgs: ["/img/slate-tr2-1","/img/slate-tr2-2","/img/slate-tr2-3","/img/slate-tr2-5"],
+  imgs: ["/img/tr2-gripper"],
   basePrice: 199,
   config: [{
     name: "shipping",

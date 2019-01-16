@@ -123,16 +123,7 @@ var Component = React.createClass({
                   <div className="row" style={{textAlign:"justify"}}>
                     <div className="col-xs-12">
                       <p>
-                        The omni-drive base is capable of translating across both
-                        the x and y axis, and as a result, it can drive side-to-side
-                        and diagonally.
-                      </p>
-                      <p>
-                        The major benefit of working with the omni-drive base is
-                        that the robot can very easily work along multiple areas
-                        of a counter-top or table. A two-wheel differential-drive
-                        robot would require several extra maneuvers to accomplish the
-                        same task.
+                        The diff-drive base of the TR2 is faster than its predecessor. At 4.57km per hour (2.84mi per hour), the TR2 approaches walking speed. The larger, 200mm-diameter wheels also allow the TR2 to more easily go over bumps and inconsistencies in its path. Further, the wheel placement allows for a near-zero degree turn radius, which permits the TR2 to turn in-place for easy, simple navigation.
                       </p>
                     </div>
                   </div>
