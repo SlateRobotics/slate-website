@@ -153,14 +153,14 @@ var ChargerImageSection = React.createClass({
         onMouseLeave={this.handleMouseLeave_Image2}>
         <img
           style={Style.imageCenter}
-          src="/img/slate-tr1-7"
+          src="/img/slate-tr2-6"
           height={this.props.imgHeight} />
         {/* learn more */}
         <div id="detail-3-learn-more-2" style={Style.learnMoreContainer}>
           <div style={Style.learnMoreText}>
             <h3>Integrated Charging</h3>
             <p>
-              The Slate TR1 comes equiped with a built-in charger and
+              The Slate TR2 comes equiped with a built-in charger and
               maintainer for its 12V deep cycle battery, which is capable
               of delivering power in an instant when required of any of
               the robot's actuators. To charge, simply plug in the included 25ft power cord

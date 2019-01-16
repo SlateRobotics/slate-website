@@ -294,6 +294,20 @@ var Component = React.createClass({
   },
 
   getAddToCartButton: function () {
+    if (this.state.product.discontinued) {
+      return (
+        <div style={{color:"red"}}>
+          <p>
+            This item has been discontinued. If you are still interested in ordering one, you might be able to special order. Please check contact us for availablity and pricing.
+          </p>
+          <p>
+            {"You can return to the store to view our other products "}
+            <Link to="/shop">here</Link>.
+          </p>
+        </div>
+      )
+    }
+
     return (
       <ButtonPrimary
         label={"Add to cart"}

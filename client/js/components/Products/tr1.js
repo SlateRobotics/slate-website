@@ -3,6 +3,7 @@ module.exports = {
   discontinued: true,
   name: "Slate TR1",
   basePrice: 4750,
+  imgs: ["/img/slate-tr1-4"],
   config: [{
     name: "arm",
     label: "Arms",

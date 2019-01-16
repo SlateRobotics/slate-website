@@ -22,7 +22,7 @@ var Component = React.createClass({
                     <div className="col-xs-4">
                       <img src="/img/icon-weights" height="50" width="50" />
                       <div style={{marginTop:"5px"}}></div>
-                      <p>3kg Payload</p>
+                      <p>2kg Payload</p>
                     </div>
                     <div className="col-xs-4">
                       <img src="/img/icon-range" height="50" width="50" />
@@ -48,7 +48,7 @@ var Component = React.createClass({
                       <p>5 Degrees of Freedom</p>
                     </div>
                     <div className="col-sm-4">
-                      <p>4kg Payload</p>
+                      <p>2kg Payload</p>
                     </div>
                     <div className="col-sm-4">
                       <p>850mm Range</p>
