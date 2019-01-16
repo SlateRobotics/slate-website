@@ -68,11 +68,11 @@ var Component = React.createClass({
                   </div>
                   <div className="row" style={{padding:"5px"}}>
                     <div className="col-md-6 col-xs-6"><b>Base footprint</b></div>
-                    <div className="col-md-6 col-xs-6">500x500mm (20x20in)</div>
+                    <div className="col-md-6 col-xs-6">660x610mm (26x24in)</div>
                   </div>
                   <div className="row" style={{padding:"5px"}}>
                     <div className="col-md-6 col-xs-6"><b>Max speed</b></div>
-                    <div className="col-md-6 col-xs-6">100mm/s (4in/s)</div>
+                    <div className="col-md-6 col-xs-6">4.57km/hr (2.84mi/hr)</div>
                   </div>
                   <div className="row" style={{padding:"5px"}}>
                     <div className="col-md-6 col-xs-6"><b>Environment</b></div>
@@ -141,7 +141,7 @@ var Component = React.createClass({
               </div>
               <div className="col-md-6 col-xs-12">
                 <div style={{backgroundColor:"#f1f1f1",padding:"15px",border:"1px solid #ccc",borderRadius:"15px",margin:"5px"}}>
-                  <h3>7-DOF Arm</h3>
+                  <h3>5-DOF Arm</h3>
                   <div className="row" style={{padding:"5px"}}>
                     <div className="col-md-6 col-xs-6"><b>Assembly Weight</b></div>
                     <div className="col-md-6 col-xs-6">8kg (17.6lbs)</div>
@@ -156,7 +156,7 @@ var Component = React.createClass({
                   </div>
                   <div className="row" style={{padding:"5px"}}>
                     <div className="col-md-6 col-xs-6"><b>Maximum Gripper Width</b></div>
-                    <div className="col-md-6 col-xs-6">100mm (4in)</div>
+                    <div className="col-md-6 col-xs-6">75mm (3in)</div>
                   </div>
                   <div className="row" style={{padding:"5px"}}>
                     <div className="col-md-6 col-xs-6"><b>Angle Feedback Resolution</b></div>
