@@ -247,8 +247,8 @@ var Component = React.createClass({
                     url="https://www.news-leader.com/story/news/business/2018/07/19/springfield-company-hopes-life-sized-robots-start-robot-revolution/764322002/"
                     img="/img/icon-news-leader"/>
                   <NewsLogo
-                    url="https://bouncy.news/21612"
-                    img="/img/icon-bouncy"/>
+                    url="https://softwareengineeringdaily.com/2019/01/16/human-sized-robots-with-zach-allen/"
+                    img="/img/icon-sedaily"/>
                   <NewsLogo
                     url="https://spectrum.ieee.org/automaton/robotics/robotics-hardware/video-friday-professor-ishiguro-new-robot-child-and-more"
                     img="/img/icon-ieee-spectrum"/>
