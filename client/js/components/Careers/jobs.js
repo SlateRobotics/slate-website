@@ -8,7 +8,7 @@ function Job () {
 }
 
 job = new Job();
-job.isActive = true;
+job.isActive = false;
 job._id= "se";
 job.name = "Software Engineer";
 job.type = "software-engineer";
@@ -35,7 +35,7 @@ job.questions.push({
 jobs.push(job);
 
 job = new Job();
-job.isActive = true;
+job.isActive = false;
 job._id = "vpm";
 job.name = "VP of Manufacturing";
 job.type = "vpmanufacturing";
@@ -69,7 +69,7 @@ job.questions.push({
 jobs.push(job);
 
 job = new Job();
-job.isActive = true;
+job.isActive = false;
 job._id= "mt";
 job.name = "Manufacturing Associate - General";
 job.type = "technician";
@@ -97,7 +97,7 @@ job.questions.push({
 jobs.push(job);
 
 job = new Job();
-job.isActive = true;
+job.isActive = false;
 job._id = "3po";
 job.name = "Manufacturing Associate - 3D Printing";
 job.type = "technician";

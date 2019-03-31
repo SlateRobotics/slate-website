@@ -24,8 +24,8 @@ var SubMenu = React.createClass({
 			return (
 	  		<ul id="menu-sub" style={Style.subMenu} className="hidden-lg hidden-md hidden-sm">
 		  		<SubMenuListItem label={"TR2"} to={"/tr2"} onClick={this.handleClick_SubMenuListItem} />
+					<SubMenuListItem label={"Shop"} to={"/shop"} onClick={this.handleClick_SubMenuListItem} />
 			  	<SubMenuListItem label={"Q&A"} to={"/questions"} onClick={this.handleClick_SubMenuListItem} />
-			  	<SubMenuListItem label={"Docs"} to={"/docs"} onClick={this.handleClick_SubMenuListItem} />
 			  	<SubMenuListItem label={"Blog"} to={"/blog"} onClick={this.handleClick_SubMenuListItem} />
 			  	<SubMenuListItem label={"Sign Out"} to={"/sign-out"} onClick={this.handleClick_SubMenuListItem} />
 			  	{/*<SubMenuListItem label={"Support"} to="/support" onClick={this.handleClick_SubMenuListItem} />*/}
@@ -36,8 +36,8 @@ var SubMenu = React.createClass({
 		return (
   		<ul id="menu-sub" style={Style.subMenu} className="hidden-lg hidden-md hidden-sm">
 	  		<SubMenuListItem label={"TR2"} to={"/tr2"} onClick={this.handleClick_SubMenuListItem} />
+				<SubMenuListItem label={"Shop"} to={"/shop"} onClick={this.handleClick_SubMenuListItem} />
 				<SubMenuListItem label={"Q&A"} to={"/questions"} onClick={this.handleClick_SubMenuListItem} />
-				<SubMenuListItem label={"Docs"} to={"/docs"} onClick={this.handleClick_SubMenuListItem} />
 		  	<SubMenuListItem label={"Blog"} to={"/blog"} onClick={this.handleClick_SubMenuListItem} />
 		  	<SubMenuListItem label={"Sign In"} to={"/sign-in"} onClick={this.handleClick_SubMenuListItem} />
 		  	{/*<SubMenuListItem label={"Support"} to="/support" onClick={this.handleClick_SubMenuListItem} />*/}

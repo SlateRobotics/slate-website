@@ -27,8 +27,8 @@ var Component = React.createClass({
                   <img src="/img/icon-support" style={{height:"75px",width:"75px"}} />
                   <h3>Technical Support</h3>
                   <p>
-                    Free technical support is available everyday from
-                    7:30 AM to midnight CST.
+                    Free technical support is available Monday through Saturday
+                    from 8:00 AM to 6:00 PM CST.
                   </p>
                   <Link to="/support" style={{color:"#fff"}}>
                     {"Learn more >"}

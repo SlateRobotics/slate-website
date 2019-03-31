@@ -4,9 +4,9 @@ var Style = require('./Style.jsx');
 
 var Component = React.createClass({
   componentDidMount: function () {
-    var backgroundVideo = document.getElementById("backgroundVideo");
-    backgroundVideo.loop = true;
-    backgroundVideo.play();
+    //var backgroundVideo = document.getElementById("backgroundVideo");
+    //backgroundVideo.loop = true;
+    //backgroundVideo.play();
   },
 
   render: function() {

@@ -40,13 +40,7 @@ var Component = React.createClass({
         </div>
         <div style={{marginTop:"25px"}} />
         <div className="row">
-          <div className="col-md-8 col-xs-12 col-centered" style={{marginBottom:"25px"}}>
-            <Form.Input
-              attribute="search"
-              placeholder="Search..."
-              value={this.state.search}
-              onChange={this.handleChange_Field} />
-          </div>
+          {this.getSearchBar()}
           <div className="col-md-8 col-xs-12 col-centered">
             <div className="row">
               {this.getJobs()}
@@ -63,6 +57,24 @@ var Component = React.createClass({
     this.setState(state);
   },
 
+  getSearchBar: function () {
+    var activeJobs = this.state.jobs.filter(function (job) {
+      return job.isActive;
+    }.bind(this));
+
+    if (activeJobs.length > 0) {
+      return (
+        <div className="col-md-8 col-xs-12 col-centered" style={{marginBottom:"25px"}}>
+          <Form.Input
+            attribute="search"
+            placeholder="Search..."
+            value={this.state.search}
+            onChange={this.handleChange_Field} />
+        </div>
+      )
+    }
+  },
+
   getJobs: function () {
     var activeJobs = this.state.jobs.filter(function (job) {
       return job.isActive;
@@ -72,7 +84,7 @@ var Component = React.createClass({
       return (
         <div className="col-xs-12">
           <span>
-            {"We are always looking for the best talent. Send your resume to"}
+            {"There are no active job posting at the moment, but we are always looking for the best talent. Send your resume to "}
             <a href="mailto:zach@slaterobots.com">zach@slaterobots.com</a>
             {" if you're interested in joining us to help pioneer the future "}
             of personal robots.

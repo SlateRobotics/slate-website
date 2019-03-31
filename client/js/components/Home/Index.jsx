@@ -50,9 +50,9 @@ var Component = React.createClass({
     $("#tr2-heading").delay(500).fadeIn(1000);
     $("#tr2-footer").delay(1000).fadeIn(1000);
     $("#tr2-footer-details").delay(2000).fadeIn(1000);
-    var backgroundVideo = document.getElementById("backgroundVideo");
-    backgroundVideo.loop = true;
-    backgroundVideo.play();
+    //var backgroundVideo = document.getElementById("backgroundVideo");
+    //backgroundVideo.loop = true;
+    //backgroundVideo.play();
   },
 
   render: function() {

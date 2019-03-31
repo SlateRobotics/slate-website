@@ -26,6 +26,7 @@ var Menu = React.createClass({
 					<MenuListItem label={"TR2"} to={"/tr2"} farRight={false} />
 					<MenuListItem label={"Shop"} to={"/shop"} farRight={false} />
 					<MenuListItem label={"Q&A"} to={"/questions"} farRight={false} />
+					<MenuListItem label={"Blog"} to={"/blog"} farRight={false} />
 					<MenuListItem label={"Sign Out"} to={"/sign-out"} farRight={true} />
 					{/*<MenuListItem label={"Support"} to={"/support"} farRight={true} />*/}
 	  		</ul>
@@ -37,6 +38,7 @@ var Menu = React.createClass({
 				<MenuListItem label={"TR2"} to={"/tr2"} farRight={false} />
 				<MenuListItem label={"Shop"} to={"/shop"} farRight={false} />
 				<MenuListItem label={"Q&A"} to={"/questions"} farRight={false} />
+				<MenuListItem label={"Blog"} to={"/blog"} farRight={false} />
 				<MenuListItem label={"Sign In"} to={"/sign-in"} farRight={true} />
 				{/*<MenuListItem label={"Support"} to={"/support"} farRight={true} />*/}
   		</ul>

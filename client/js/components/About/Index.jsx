@@ -101,7 +101,7 @@ var Component = React.createClass({
         </div>
         <div className="row" style={{paddingTop:"50px",paddingBottom:"50px"}}>
           <div className="col-md-8 col-xs-12 col-centered">
-            <h1>Financial backing</h1>
+            <h1>Investors</h1>
             <div style={{marginTop:"25px"}} />
             <div className="row">
               {this.getMembers("investor")}

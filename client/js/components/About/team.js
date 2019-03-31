@@ -1,7 +1,7 @@
 module.exports = [{
   isActive: true,
   name: "Zachary Allen",
-  title: "CEO",
+  title: "Founder & CEO",
   type: "team",
   img: "/img/zach",
   description: "Zach founded Slate Robotics in August 2017 with the mission to make general purpose robots more affordable. He continues to oversee the company's product strategy -- including the design, engineering and manufacturing of these robots. Zach has been fascinated by personal robots for years. He designed and built the ground-breaking TR1 in his garage over the course of a year after trying to find an affordable robot development platform. Zach's background is in Software Engineering. He worked as a developer for 3 years after graduating from Drury University with a BA in Spanish.",
@@ -20,6 +20,22 @@ module.exports = [{
   socials: [
     "https://www.youtube.com/channel/UCmPSNJwp1B0MSinUBkZWeXg/featured"
   ]
+},{
+  isActive: true,
+  name: "Tavian Riebold",
+  title: "Electronics Engineering Intern",
+  type: "team",
+  img: "/img/person-icon",
+  description: "",
+  socials: []
+},{
+  isActive: true,
+  name: "Jacob Woods",
+  title: "Manufacturing Associate",
+  type: "team",
+  img: "/img/person-icon",
+  description: "",
+  socials: []
 },{
   isActive: true,
   name: "Brian Allen",
