@@ -69,7 +69,7 @@ var Header = React.createClass({
 						</div>
 					</div>
 				</div>
-				<div className="row" style={Style.navigationMobile}>
+				<div className="row hidden-lg hidden-md hidden-sm" style={Style.navigationMobile}>
 					<div className="col-xs-12 col-centered">
 						<Link to="/" style={{
 								height:"44px",

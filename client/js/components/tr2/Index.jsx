@@ -8,12 +8,15 @@ var Detail2 = require('./Detail2.jsx');
 var Detail3 = require('./Detail3.jsx');
 var Detail4 = require('./Detail4.jsx');
 var Detail5 = require('./Detail5.jsx');
+var Detail6 = require('./Detail6.jsx');
 var BottomMenu = require('./BottomMenu.jsx');
 
 var Component = React.createClass({
   componentDidMount: function () {
     document.title = "TR2 - Slate Robotics";
-    window.scrollTo(0,0);
+    if(!window.location.hash) {
+      window.scrollTo(0,0);
+    }
   },
 
   render: function() {
@@ -24,6 +27,7 @@ var Component = React.createClass({
         <InfoRibbon />
         <Detail1 />
         <Detail2 />
+        <Detail6 />
         <Detail3 />
         <Detail4 />
         <Detail5 />

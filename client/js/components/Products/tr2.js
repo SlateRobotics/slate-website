@@ -2,7 +2,7 @@ module.exports = {
   id: "tr2",
   name: "TR2",
   warning: "Made-to-order: Orders take 8-12 weeks to ship",
-  imgs: ["/img/slate-tr2-1","/img/slate-tr2-2","/img/slate-tr2-3","/img/slate-tr2-4","/img/slate-tr2-5"],
+  imgs: ["/img/slate-tr2-4"],
   links:[{url:"/tr2",label:"Overview"},{url:"/tr2/specs",label:"Specs"}],
   basePrice: 4499,
   config: [{
@@ -52,6 +52,11 @@ module.exports = {
       id: 2,
       label: "Canada Shipping",
       price: 350,
+      enabled: true,
+    }, {
+      id: 3,
+      label: "Europe Shipping",
+      price: 1250,
       enabled: true,
     }]
   }],

@@ -4,7 +4,7 @@ var Style = require('./Style.jsx');
 var Component = React.createClass({
   render: function() {
     var s1 = {
-      heading: "Life-Sized",
+      heading: "1kg Payload",
       img: "/img/slate-tr2-7",
       iconImgs: ["/img/icon-weights","/img/icon-range","/img/icon-engine"],
       iconLbls: ["47\" Tall", "26\" Wide", "2.8 mi/hr"],
@@ -12,7 +12,7 @@ var Component = React.createClass({
     }
 
     var s2 = {
-      heading: "Back-Drivable Arm",
+      heading: "CPU + GPU",
       img: "/img/slate-tr2-8",
       iconImgs: ["/img/icon-weights","/img/icon-range","/img/icon-engine"],
       iconLbls: ["47\" Tall", "26\" Wide", "2.8 mi/hr"],

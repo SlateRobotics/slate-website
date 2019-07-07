@@ -55,18 +55,9 @@ var Component = React.createClass({
             Slate TR2
           </h1>
           <h4 style={{fontSize:"32px"}}>
-            The preeminent machine learning playground
+            The ultimate development platform
           </h4>
-          <h4 style={{paddingTop:"20px",marginBottom:"25px"}}>
-            {"At a price "}
-            <a
-              target="_blank"
-              href="https://www.reddit.com/r/robotics/comments/6hmn35/are_there_any_robots_like_the_pr2but_for/"
-              style={{color:"white"}}>
-              no one thought possible
-            </a>
-          </h4>
-          <MenuButton to="/shop/tr2" label="Buy Yours" />
+          <MenuButton to="/shop/tr2" label="Order Yours" />
         </div>
       </div>
     );

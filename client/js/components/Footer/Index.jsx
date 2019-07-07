@@ -34,7 +34,7 @@ var Footer = React.createClass({
             </Link>
             <div style={{float:"left",padding:"0px 5px"}}>
               <Link to="/" style={Style.title}>{"Slate Robotics"}</Link>
-              <span style={{display:"block",fontSize:"22px"}}>Human-sized robots for hackers</span>
+              <span style={{display:"block",fontSize:"22px"}}>The future is not an accident</span>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ module.exports = {
   id: "arm",
   name: "TR2 Arm",
   warning: "Made-to-order: Orders take 4-8 weeks to ship",
-  imgs: ["/img/slate-tr2-2"],
+  imgs: ["/img/slate-tr2-9"],
   basePrice: 1999,
   config: [{
     name: "shipping",

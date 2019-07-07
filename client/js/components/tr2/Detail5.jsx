@@ -15,7 +15,7 @@ var Component = React.createClass({
                   <img src="/img/icon-warranty" style={{height:"75px",width:"75px"}} />
                   <h3>1 Year Warranty</h3>
                   <p>
-                    The TR1 is backed by a 1 year warranty to give you peace of
+                    The TR2 is backed by a 1 year warranty to give you peace of
                     mind about your purchase.
                   </p>
                   <Link to="/sales-policies" style={{color:"#fff"}}>

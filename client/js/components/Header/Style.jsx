@@ -4,7 +4,7 @@ module.exports = {
     height: "44px",
   },
   navigation: {
-    backgroundColor: "white",
+    backgroundColor:"rgba(255,255,255,0.9)",
     color: "#222",
     width: "100%",
     height:"44px",
@@ -13,7 +13,7 @@ module.exports = {
     borderBottom: "1px solid #ccc",
   },
   navigationMobile: {
-    backgroundColor: "white",
+    backgroundColor:"rgba(255,255,255,0.9)",
     color: "#222",
     height:"44px",
     borderBottom: "1px solid #ccc",
