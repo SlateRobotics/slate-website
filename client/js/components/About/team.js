@@ -30,14 +30,6 @@ module.exports = [{
   socials: []
 },{
   isActive: true,
-  name: "Jacob Woods",
-  title: "Manufacturing Associate",
-  type: "team",
-  img: "/img/person-icon",
-  description: "",
-  socials: []
-},{
-  isActive: true,
   name: "Brian Allen",
   title: "Investor & Board Member",
   type: "investor",
