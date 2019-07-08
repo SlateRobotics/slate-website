@@ -19,7 +19,7 @@ var Component = React.createClass({
             Slate TR2
           </h1>
           <h4 style={{fontSize:"32px"}}>
-            The preeminent machine learning playground
+            The ultimate development platform
           </h4>
         </div>
         <div className="col-md-6 hidden-sm hidden-xs" style={{

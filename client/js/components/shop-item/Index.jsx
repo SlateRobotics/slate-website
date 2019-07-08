@@ -245,7 +245,7 @@ var Component = React.createClass({
           <div className="hidden-lg hidden-md" style={{paddingBottom:"15px"}} />
         </div>
         <div className="hidden-lg hidden-md hidden-sm col-xs-12">
-          <img src={img} style={{minHeight:"300px",maxHeight:"400px",maxWidth:"100%"}} />
+          <img src={img} style={{maxHeight:"400px",maxWidth:"100%"}} />
           <div style={{paddingBottom:"15px"}} />
         </div>
       </div>
