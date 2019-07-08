@@ -247,7 +247,6 @@ var Component = React.createClass({
             backgroundColor:"#fff",
             backgroundRepeat:"no-repeat",
             backgroundSize:"auto 100%",
-            textShadow:"0px 0px 5px #fff",
           }}>
           <div
             className="col-lg-10 col-xs-12 col-centered"
@@ -258,8 +257,9 @@ var Component = React.createClass({
             <div style={{
                 textAlign:"left",
                 bottom:"40px",
-                left:"0",
+                left:"10px",
                 position:"absolute",
+                backgroundColor:"rgba(255,255,255,0.5)",
               }}>
               <h1 style={{fontSize:"72px"}}>
                 1kg Payload
@@ -283,7 +283,6 @@ var Component = React.createClass({
             backgroundColor:"#fff",
             backgroundRepeat:"no-repeat",
             backgroundSize:"auto 100%",
-            textShadow:"0px 0px 5px #fff",
           }}>
           <div
             className="col-lg-10 col-xs-12 col-centered"
@@ -292,8 +291,11 @@ var Component = React.createClass({
               position:"relative",
             }}>
             <div style={{
-                marginTop:"40px",
+                top:"40px",
+                right:"10px",
+                position:"absolute",
                 textAlign:"right",
+                backgroundColor:"rgba(255,255,255,0.5)",
               }}>
               <h1 style={{fontSize:"72px"}}>
                 CPU + GPU
