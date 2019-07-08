@@ -8,15 +8,15 @@ var Component = React.createClass({
       img: "/img/slate-tr2-7",
       iconImgs: ["/img/icon-weights","/img/icon-range","/img/icon-engine"],
       iconLbls: ["47\" Tall", "26\" Wide", "2.8 mi/hr"],
-      text: "Built for the human world. The TR2 is capable of maneuvering rooms, buildings, and houses. The arm is installed high enough to easily work off of most tables and work areas, and the base is narrow enough to easily fit through doors and passageways. Big enough to get work done -- small enough to be practical."
+      text: "Built for the human world. The TR2 is capable of maneuvering rooms, buildings, and houses. The arm is installed high enough to easily work off of most tables and work areas, and the base is narrow enough to easily fit through doors and passageways. Large enough to get work done -- small enough to be practical."
     }
 
     var s2 = {
       heading: "Back-Drivable Arm",
       img: "/img/slate-tr2-8",
-      iconImgs: ["/img/icon-weights","/img/icon-range","/img/icon-engine"],
-      iconLbls: ["47\" Tall", "26\" Wide", "2.8 mi/hr"],
-      text: "Built for the human world. The TR2 is capable of maneuvering rooms, buildings, and houses. The arm is installed high enough to easily work off of most tables and work areas, and the base is narrow enough to easily fit through doors and passageways. Big enough to get work done -- small enough to be practical."
+      iconImgs: ["/img/icon-hand","/img/icon-record","/img/icon-play"],
+      iconLbls: ["Physical Positioning", "Waypoint Recording", "Waypoint Playback"],
+      text: "Intuitive control and positioning. The TR2 was designed for backdriveability, which allows the user to physically move and position the arm into location. This is abundantly valuable when teaching the robot how to perform tasks and recording waypoints for playback."
     }
 
     return (
@@ -78,8 +78,7 @@ var Component = React.createClass({
                 </div>
                 <div className="col-sm-8 col-xs-12" style={{height:"600px",padding:"0"}}>
                   <div style={Style.imageContainer}>
-                    <img style={Style.imageCenter} className="hidden-sm hidden-xs" src={s1.img} height="600" />
-                    <img style={Style.imageCenter} className="hidden-lg hidden-md" src={s1.img} width="100%" />
+                    <img style={Style.imageCenter} src={s1.img} height="600" />
                   </div>
                 </div>
               </div>
@@ -142,8 +141,7 @@ var Component = React.createClass({
                 </div>
                 <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{height:"600px",padding:"0"}}>
                   <div style={Style.imageContainer}>
-                    <img style={Style.imageCenter} className="hidden-sm hidden-xs" src={s2.img} height="600" />
-                    <img style={Style.imageCenter} className="hidden-lg hidden-md" src={s2.img} height="500" />
+                    <img style={Style.imageCenter} src={s2.img} height="600" />
                   </div>
                 </div>
               </div>

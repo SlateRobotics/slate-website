@@ -46,12 +46,8 @@ var NewsLogo = React.createClass({
 
 var Component = React.createClass({
   componentDidMount: function () {
-    document.title = "Slate Robotics | The future is not an accident";
+    document.title = "The Ultimate Development Platform | Slate Robotics";
     window.scrollTo(0,0);
-
-    /*var backgroundVideo = document.getElementById("backgroundVideo");
-    backgroundVideo.loop = true;
-    backgroundVideo.play();*/
   },
 
   render: function() {
@@ -101,7 +97,7 @@ var Component = React.createClass({
               </div>
               <div className="col-xs-12 col-centered">
                 <div className="row">
-                  <div className="hidden-md hidden-sm col-xs-2"/>
+                  <div className="col-lg-2 hidden-md hidden-sm hidden-xs"/>
                   <div className="col-lg-2 col-sm-3 col-xs-6">
                     <a href="#tr2-size" style={{color:"white"}}>
                       <img src="/img/icon-weights" height="60" />
@@ -126,7 +122,7 @@ var Component = React.createClass({
                       <h4>CPU + GPU</h4>
                     </a>
                   </div>
-                  <div className="hidden-md hidden-sm col-xs-2"/>
+                  <div className="col-lg-2 hidden-md hidden-sm hidden-xs"/>
                 </div>
               </div>
             </div>
@@ -159,7 +155,7 @@ var Component = React.createClass({
                 For deployment in human environments
               </h4>
               <Link to="/tr2" style={{color:"#fff"}}>
-                Learn More About TR2 Dimensions {">"}
+                Learn More {">"}
               </Link>
             </div>
           </div>
@@ -192,7 +188,7 @@ var Component = React.createClass({
                 For intuitive control and positioning
               </h4>
               <Link to="/tr2" style={{color:"#fff"}}>
-                Learn More About TR2 Back-Driving {">"}
+                Learn More {">"}
               </Link>
             </div>
           </div>
@@ -251,6 +247,7 @@ var Component = React.createClass({
             backgroundColor:"#fff",
             backgroundRepeat:"no-repeat",
             backgroundSize:"auto 100%",
+            textShadow:"0px 0px 5px #fff",
           }}>
           <div
             className="col-lg-10 col-xs-12 col-centered"
@@ -271,7 +268,7 @@ var Component = React.createClass({
                 For working with a variety of tools and objects
               </h4>
               <Link to="/tr2" style={{color:"#222"}}>
-                Learn More About TR2 Payload {">"}
+                Learn More {">"}
               </Link>
             </div>
           </div>
@@ -286,6 +283,7 @@ var Component = React.createClass({
             backgroundColor:"#fff",
             backgroundRepeat:"no-repeat",
             backgroundSize:"auto 100%",
+            textShadow:"0px 0px 5px #fff",
           }}>
           <div
             className="col-lg-10 col-xs-12 col-centered"
@@ -304,7 +302,7 @@ var Component = React.createClass({
                 For fast image and ML processing
               </h4>
               <Link to="/tr2" style={{color:"#222"}}>
-                Learn More About TR2 Computing {">"}
+                Learn More {">"}
               </Link>
             </div>
           </div>

@@ -5,18 +5,18 @@ var Component = React.createClass({
   render: function() {
     var s1 = {
       heading: "1kg Payload",
-      img: "/img/slate-tr2-7",
-      iconImgs: ["/img/icon-weights","/img/icon-range","/img/icon-engine"],
-      iconLbls: ["47\" Tall", "26\" Wide", "2.8 mi/hr"],
-      text: "Built for the human world. The TR2 is capable of maneuvering rooms, buildings, and houses. The arm is installed high enough to easily work off of most tables and work areas, and the base is narrow enough to easily fit through doors and passageways. Big enough to get work done -- small enough to be practical."
+      img: "/img/slate-tr2-10",
+      iconImgs: ["/img/icon-range","/img/icon-motor","/img/icon-range"],
+      iconLbls: ["850mm Reach", "Continuous Rotation", "75mm Gripper Opening"],
+      text: "Strength for real-world application. The TR2 is capable of picking up and manipulating objects up to 1kg (2.2 lbs) in weight. This allows users to develop applications that work with a wide variety of tools and objects. The TR2 also features up to 24 hrs of gripper hold duration. Domestic chores are no match for this superior machine."
     }
 
     var s2 = {
       heading: "CPU + GPU",
-      img: "/img/slate-tr2-8",
-      iconImgs: ["/img/icon-weights","/img/icon-range","/img/icon-engine"],
-      iconLbls: ["47\" Tall", "26\" Wide", "2.8 mi/hr"],
-      text: "Built for the human world. The TR2 is capable of maneuvering rooms, buildings, and houses. The arm is installed high enough to easily work off of most tables and work areas, and the base is narrow enough to easily fit through doors and passageways. Big enough to get work done -- small enough to be practical."
+      img: "/img/slate-tr2-11",
+      iconImgs: ["/img/icon-app","/img/icon-gaussian","/img/icon-neural-net"],
+      iconLbls: ["Application Development", "Image Pocessing", "Machine Learning Deployment"],
+      text: "GPU for image processing and machine learning. The TR2 is equipped with NVIDIA's Jetson platform that gives the robot on-board computation and GPU processing. This makes the TR2 the ideal platform for machine learning professionals and engineers. You can develop applications straight on the computer through the Ubuntu desktop environment or SSH into the machine remotely. You'll love the development experience."
     }
 
     return (
@@ -78,8 +78,7 @@ var Component = React.createClass({
                 </div>
                 <div className="col-sm-8 col-xs-12" style={{height:"600px",padding:"0"}}>
                   <div style={Style.imageContainer}>
-                    <img style={Style.imageCenter} className="hidden-sm hidden-xs" src={s1.img} height="600" />
-                    <img style={Style.imageCenter} className="hidden-lg hidden-md" src={s1.img} width="100%" />
+                    <img style={Style.imageCenter} src={s1.img} height="600" />
                   </div>
                 </div>
               </div>
@@ -142,8 +141,7 @@ var Component = React.createClass({
                 </div>
                 <div className="hidden-lg hidden-md hidden-sm col-xs-12" style={{height:"600px",padding:"0"}}>
                   <div style={Style.imageContainer}>
-                    <img style={Style.imageCenter} className="hidden-sm hidden-xs" src={s2.img} height="600" />
-                    <img style={Style.imageCenter} className="hidden-lg hidden-md" src={s2.img} height="500" />
+                    <img style={Style.imageCenter} src={s2.img} height="600" />
                   </div>
                 </div>
               </div>

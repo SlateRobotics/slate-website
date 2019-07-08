@@ -57,39 +57,8 @@ var CameraImageSection = React.createClass({
         onMouseLeave={this.handleMouseLeave_Image1}>
         <img
           style={Style.imageCenter}
-          src="/img/slate-tr2-5"
+          src="/img/slate-tr2-12"
           height={this.props.imgHeight} />
-        {/* learn more */}
-        <div id="detail-3-learn-more-1" style={Style.learnMoreContainer}>
-          <div style={Style.learnMoreText}>
-            <h3>Orbbec Astra</h3>
-            <p>
-              The Astra Series was designed to further improve on the attributes
-              that set Orbbec 3D cameras apart from existing 3D cameras on the
-              market. Astra 3D cameras provide computer vision that enables
-              dozens of functions such as face recognition, gesture recognition,
-              human body tracking, three-dimensional measurement, environment
-              perception, and three-dimensional map reconstruction.
-            </p>
-            <p>
-              Orbbec Astra shares the same appearance, size, and weight as
-              Orbbec Astra S. The difference is that Astra is optimized for
-              long-range use cases, which makes it great for interactive systems,
-              entertainment, retail, and robotics. Astra was developed to be
-              highly compatible with existing OpenNI applications making both
-              the Astra and Astra S ideal cameras for pre-existing apps that
-              were built with OpenNI.
-            </p>
-          </div>
-        </div>
-        {/* learn more button */}
-        <div style={Style.learnMoreButtonContainer}>
-          <div id="detail-3-learn-more-button-1"
-            style={Style.learnMoreButton}
-            onClick={this.handleClick_LearnMore1}>
-            {"+"}
-          </div>
-        </div>
       </div>
     )
   },
@@ -155,33 +124,6 @@ var ChargerImageSection = React.createClass({
           style={Style.imageCenter}
           src="/img/slate-tr2-6"
           height={this.props.imgHeight} />
-        {/* learn more */}
-        <div id="detail-3-learn-more-2" style={Style.learnMoreContainer}>
-          <div style={Style.learnMoreText}>
-            <h3>Integrated Charging</h3>
-            <p>
-              The Slate TR2 comes equiped with a built-in charger and
-              maintainer for its 12V deep cycle battery, which is capable
-              of delivering power in an instant when required of any of
-              the robot's actuators. To charge, simply plug in the included 25ft power cord
-              into the back of the robot when power is low.
-            </p>
-            <i>
-              * For non-standard, upgradable 100 AH battery option.
-              Battery life can vary greatly and is entirely dependent upon
-              use. Proper maintenance and care must be taken to ensure the
-              optimal life of the battery.
-            </i>
-          </div>
-        </div>
-        {/* learn more button */}
-        <div style={Style.learnMoreButtonContainer}>
-          <div id="detail-3-learn-more-button-2"
-            style={Style.learnMoreButton}
-            onClick={this.handleClick_LearnMore2}>
-            {"+"}
-          </div>
-        </div>
       </div>
     )
   },
@@ -214,7 +156,7 @@ var ChargerIconDescriptions = React.createClass({
     return (
       <div>
         <div className="col-sm-2 col-xs-4">
-          <p>Up to 8 Hour Battery Life*</p>
+          <p>Up to 6 Hour Battery Life</p>
         </div>
         <div className="col-sm-2 col-xs-4">
           <p>12V Power Source</p>

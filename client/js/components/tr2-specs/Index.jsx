@@ -7,7 +7,7 @@ var MenuButton = require('./MenuButton.jsx');
 
 var Component = React.createClass({
   componentDidMount: function () {
-    document.title = "TR2 - Technical Specifications - Slate Robotics";
+    document.title = "TR2 Specificaitons | Slate Robotics";
     window.scrollTo(0,0);
   },
 
@@ -152,7 +152,7 @@ var Component = React.createClass({
                   </div>
                   <div className="row" style={{padding:"5px"}}>
                     <div className="col-md-6 col-xs-6"><b>Maximum Payload</b></div>
-                    <div className="col-md-6 col-xs-6">1kg (4.4lbs)</div>
+                    <div className="col-md-6 col-xs-6">1kg (2.2lbs)</div>
                   </div>
                   <div className="row" style={{padding:"5px"}}>
                     <div className="col-md-6 col-xs-6"><b>Maximum Operating Distance Range</b></div>

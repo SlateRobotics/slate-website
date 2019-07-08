@@ -13,7 +13,7 @@ var BottomMenu = require('./BottomMenu.jsx');
 
 var Component = React.createClass({
   componentDidMount: function () {
-    document.title = "TR2 - Slate Robotics";
+    document.title = "The Ultimate Development Platform | Slate Robotics";
     if(!window.location.hash) {
       window.scrollTo(0,0);
     }
