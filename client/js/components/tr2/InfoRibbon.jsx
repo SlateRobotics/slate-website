@@ -20,7 +20,7 @@ var Component = React.createClass({
               <div className="row" style={{borderTop:"1px solid #ccc",paddingTop:"75px"}} />
               <div className="row">
                 <div className="col-xs-12">
-                  <iframe style={{maxWidth:"100%"}} width={vWidth} height={vHeight} src="https://www.youtube.com/embed/CV2m97zmid0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                  <iframe style={{maxWidth:"100%"}} width={vWidth} height={vHeight} src="https://www.youtube.com/embed/sWvwDx3w0iA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
               </div>
               <div className="row" style={{borderBottom:"1px solid #ccc",paddingBottom:"75px"}} />
