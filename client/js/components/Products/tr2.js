@@ -45,7 +45,7 @@ module.exports = {
       enabled: true,
     }, {
       id: 1,
-      label: "US Contenential Shipping",
+      label: "US Continental Shipping",
       price: 175,
       enabled: true,
     }, {
