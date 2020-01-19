@@ -108,19 +108,6 @@ var Component = React.createClass({
             </div>
           </div>
         </div>
-        <div className="row" style={{borderTop:"3px solid #ccc",borderBottom:"3px solid #ccc"}}>
-          <div className="col-xs-12 col-centered">
-            <div className="row">
-              <div className="col-md-2 hidden-sm hidden-xs" />
-              <div className="col-md-4 col-xs-12" style={{marginTop:"50px",marginBottom:"50px"}}>
-                <h1>Stop by and see us!</h1>
-                <div>We're located at 210 W Sunshine St, Suite C in Springfield Missouri</div>
-              </div>
-              <div className="hidden-lg hidden-md col-xs-12" style={{height:"400px"}} dangerouslySetInnerHTML={{__html:'<iframe width="100%" height="100%" frameborder="0" style="border:0"src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCLZXbFbjUh2W7-GM6Pz6bBuuGohqHUtxo&q=210+W+Sunshine+St.,+Suite+C,+Springfield+MO+65807" allowfullscreen></iframe>'}} />
-              <div className="col-md-6 hidden-sm hidden-xs" style={{height:"800px"}} dangerouslySetInnerHTML={{__html:'<iframe width="100%" height="100%" frameborder="0" style="border:0"src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCLZXbFbjUh2W7-GM6Pz6bBuuGohqHUtxo&q=210+W+Sunshine+St.,+Suite+C,+Springfield+MO+65807" allowfullscreen></iframe>'}} />
-            </div>
-          </div>
-        </div>
       </div>
     );
   },
