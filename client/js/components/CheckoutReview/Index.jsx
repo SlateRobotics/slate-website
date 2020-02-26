@@ -158,6 +158,7 @@ var Component = React.createClass({
       url: "/placeOrder",
       data: cart,
       success: function (result) {
+        console.log(result);
         if (result.success == true) {
           CartStore.clear();
           BrowserHistory.push("/shop/checkout/success");

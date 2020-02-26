@@ -57,7 +57,6 @@ var Footer = React.createClass({
                 <h3>COMPANY</h3>
                 <Link to="/about" style={Style.link}>About Us</Link>
                 <Link to="/careers" style={Style.link}>Careers</Link>
-                <a href="https://teespring.com/stores/slate-robotics" style={Style.link}>T-Shirts</a>
                 <Link to="/blog" style={Style.link}>Blog</Link>
                 <Link to="/privacy-policy" style={Style.link}>Privacy Policy</Link>
                 <Link to="/terms-and-conditions" style={Style.link}>Terms & Conditions</Link>
@@ -74,6 +73,12 @@ var Footer = React.createClass({
               </div>
 						</div>
 						<div className="row">
+							<div className="col-md-3 col-sm-6 col-xs-12">
+								<h3>SERVICES</h3>
+								<Link to="/custom-robot-builds" style={Style.link}>Custom Robot Builds</Link>
+								<Link to="/prototyping" style={Style.link}>Prototyping</Link>
+								<Link to="/fabrication" style={Style.link}>Fabrication</Link>
+							</div>
       				<div className="col-md-3 col-sm-6 col-xs-12">
                 <h3>CONTACT</h3>
                 <div>
