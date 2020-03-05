@@ -1,17 +1,17 @@
 module.exports = [{
   isActive: true,
   name: "Zachary Allen",
-  title: "Founder & CEO",
+  title: "CEO & Chief Robotics Engineer",
   type: "team",
   img: "/img/zach",
-  description: "Zach founded Slate Robotics in August 2017 with the mission to make general purpose robots more affordable. He continues to oversee the company's product strategy -- including the design, engineering and manufacturing of these robots. Zach has been fascinated by personal robots for years. He designed and built the ground-breaking TR1 in his garage over the course of a year after trying to find an affordable robot development platform. Zach's background is in Software Engineering. He worked as a developer for 3 years after graduating from Drury University with a BA in Spanish.",
+  description: "Zach founded Slate Robotics in 2017 and heads the company as its CEO and Chief Robotics Engineer. He designs and implements the technology that enables our robots to be affordable, reliable, and highly capable. Zach is dedicated to building a future of robot butlers, and in that pursuit, he has made several, key innovations in reducing the costs of these complex machines – including designs for low-cost torque sensing and low-cost, high-payload actuators.",
   socials: [
     "https://www.linkedin.com/in/zachary-allen-674ab8a9/",
     "https://twitter.com/ZachAllen417",
     "https://www.facebook.com/zach.allen.566"
   ],
 },{
-  isActive: true,
+  isActive: false,
   name: "Isaac Feemster",
   title: "3D Printing Technician",
   type: "team",
@@ -23,10 +23,10 @@ module.exports = [{
 },{
   isActive: true,
   name: "Tavian Riebold",
-  title: "Electronics Engineering Intern",
+  title: "Electronics Engineer",
   type: "team",
   img: "/img/person-icon",
-  description: "",
+  description: "Tavian is responsible for designing and implementing much of the electronics in our robots. Through his work, we are able to greatly reduce the overall complexity of our robots while introducing key features and capabilities. Tavian also enjoys software development and mechanical design, and he will help out in other areas frequently. Tavian hosts a Minecraft server in his spare time and goes mountain biking when the weather's nice.",
   socials: []
 },{
   isActive: true,
