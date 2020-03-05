@@ -225,7 +225,7 @@ router.post('/', function (req, res) {
   delete req.body.items;
 
   if (VerifyData(req, res) == false) {
-    return;
+    return OrderError(res, "An unexpected error occurred");
   }
 
   var order = req.body;

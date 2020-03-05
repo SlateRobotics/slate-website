@@ -28,6 +28,8 @@ var Register = require('./components/Register/Index.jsx');
 var RegisterVerify = require('./components/Register/Verify.jsx');
 var ForgotPassword = require('./components/ForgotPassword/Index.jsx');
 var ForgotPasswordVerify = require('./components/ForgotPassword/Verify.jsx');
+var Fabrication = require('./components/Fabrication/Index.jsx');
+var Prototyping = require('./components/Prototyping/Index.jsx');
 var tr2 = require('./components/tr2/Index.jsx');
 var tr2Specs = require('./components/tr2-specs/Index.jsx');
 var tr1 = require('./components/tr1/Index.jsx');
@@ -42,6 +44,7 @@ var Support = require('./components/Support/Index.jsx');
 var Checkout = require('./components/Checkout/Index.jsx');
 var CheckoutReview = require('./components/CheckoutReview/Index.jsx');
 var CheckoutSuccess = require('./components/CheckoutSuccess/Index.jsx');
+var CustomRobotBuilds = require('./components/CustomRobotBuilds/Index.jsx');
 var Reservation = require('./components/Reservation/Index.jsx');
 var qa = require('./components/Q&A/Index.jsx');
 var question = require('./components/Q&A/Question.jsx');
@@ -95,12 +98,15 @@ var Routes = (
 		<Route path="/careers" component={Careers} />
 		<Route path="/careers/:id" component={Careers} />
 		<Route path="/careers/:id/apply" component={Apply} />
+		<Route path="/custom-robot-builds" component={CustomRobotBuilds} />
 		<Route path="/sign-in" component={SignIn} />
 		<Route path="/sign-out" component={SignOut} />
 		<Route path="/register" component={Register} />
 		<Route path="/register/:id" component={RegisterVerify} />
 		<Route path="/forgot-password" component={ForgotPassword} />
     <Route path="/forgot-password/:id" component={ForgotPasswordVerify} />
+		<Route path="/fabrication" component={Fabrication} />
+		<Route path="/prototyping" component={Prototyping} />
 		<Route path="/blog" component={Blog} />
 		<Route path="/blog/new" component={BlogEdit} />
 		<Route path="/blog/:id" component={BlogSingle} />
