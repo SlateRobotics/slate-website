@@ -30,7 +30,7 @@
     "express-session": "^1.13.0",
     "flux": "^2.1.1",
     "griddle-react": "^0.4.1",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "keymirror": "^0.1.1",
     "marked": "^0.3.19",
     "moment": "^2.12.0",
